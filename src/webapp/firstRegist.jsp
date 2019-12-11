@@ -13,7 +13,7 @@
 			<input type="text" style="height: 50px;font-size: 16px" name="email" placeholder="请输入邮箱" class="form-first-email form-control" >
 		</div>
 		<div class="form-item">
-			<button type="submit" id="J_BtnEmailForm" class="btn btn-large tsl" data-phase-id="r_p_next">下一步</button>
+			<button type="submit" id="J_BtnEmailForm" class="btn btn-large tsl" data-phase-id="r_p_next">点击验证</button>
 		</div>
 	</form>
 
