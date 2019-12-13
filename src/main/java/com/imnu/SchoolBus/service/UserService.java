@@ -20,4 +20,6 @@ public interface UserService {
 	
 	public User selectUserById(int id);
 
+	User selectByUserName(String userName);
+
 }

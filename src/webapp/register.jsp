@@ -16,71 +16,142 @@
     /* path就是项目名字的前边有 "/" ，例如你的项目名字叫做 Apple ，那么 path = /Apple
     *	basePath就是项目的完整路径，basePath = http://localhost:8080/Apple */
 %>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<form role="form" id="res" action="./loginres/res" enctype="multipart/form-data" method="post" class="registration-form">
-			                    	<div class="form-group">
-			                    		<label class="sr-only" " for="form-first-name">账号</label>
-			                        	<input type="text" onblur="validate();" onfocus="resetname();" name="username" placeholder="请输入账号..." class="form-first-name form-control" id="user_name">
-			                        </div>
-			                        <p style="color: red;font-size: 12px;width: 100px;clear: both" id="showname"></p>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-last-name">密码</label>
-			                        	<input type="password" style="height: 50px;font-size: 16px" name="password" placeholder="请输入密码..." class="form-last-name form-control" id="u_pasd">
-			                        </div>
-			                        <div class="form-group">
-			                    		<label class="sr-only" for="form-first-name">姓名</label>
-			                        	<input type="text" style="height: 50px;font-size: 16px" name="name" placeholder="请输入姓名..." class="form-first-name form-control" >
-			                        </div>
-			                        <div class="form-group">
-			                    		<label class="sr-only" for="form-first-name">性别</label>
-			                        	<input type="text" style="height: 50px;font-size: 16px" name="sex" placeholder="请输入性别..." class="form-first-name form-control">
-			                        </div>
-			                        <div class="form-group">
-			                    		<label class="sr-only" for="form-first-name">生日</label>
-			                        	<input type="text" style="height: 50px;font-size: 16px" name="birthday" placeholder="请输入生日..." class="form-first-name form-control" >
-			                        </div>
-			                        <div class="form-group">
-				                        <select style="padding: 7px" id="s_province" name="s_province">
-				                        <option>省、自治区级</option>
-				                        </select>
-				                        <select style="padding: 7px" id="s_city" name="s_city">
-				                        <option>市级</option>
-				                        </select>
-				                        <select style="padding: 7px" id="s_county" name="s_county">
-				                        <option>区、县级</option>
-				                        </select>
-				                       <!--  <script class="resources library" src="area.js" type="text/javascript"></script>
-    									<script type="text/javascript">_init_area();</script> -->
-			                        </div>
-			                        <input type="hidden" id="addr" name="addr">
-			                        <div id="show"></div>
-			                        <div class="form-group">
-			                    		<label class="sr-only" for="form-first-name">微信</label>
-			                        	<input type="text" style="height: 50px;font-size: 16px" name="wechat" placeholder="请输入微信 ..." class="form-first-name form-control" id="">
-			                        </div>
-			                        <div class="form-group">
-			                    		<label class="sr-only" for="form-first-name">e-mail</label>
-			                        	<input type="text" style="height: 50px;font-size: 16px" name="email" placeholder="输输入email..." class="form-first-name form-control" id="">
-			                        </div>
-			                        <div class="form-group">
-			                    		<label class="sr-only" for="form-first-name">电话</label>
-			                        	<input type="text" style="height: 50px;font-size: 16px" name="phone" placeholder="请输入电话..." class="form-first-name form-control" id="">
-			                        </div>
-			                        <div class="form-group">
-			                    		<input type="file" id="img" name="img" style="height: 50px;font-size: 16px" title="上传头像" >
-			                    		<img alt="" style="height: 70px;font-size: 70px" id="photo" src="">
-			                    		<input type="button" value="上传" id="upload" >
-			                        </div>
-			                         <div class="form-group">
-			                        <!-- <input type="button" onclick="validate();" value="注册" style="border:1px ;border-radius:5px; width: 100px;color:#68838B;height: 50px;background-color: #00B2EE;"></input> -->
-			                        <input type="submit" value="注册" style="border:1px ;border-radius:5px; width: 100px;color:#68838B;height: 50px;background-color: #00B2EE;"></input>
-			                        <a style="font-size: 10px; float: right" id="iforget" href="Login.jsp">返回登录</a>
-			                        </div>
-			                    </form>
 
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+</head>
+<body style="width: 100%;height: 100%;">
+    <div style="margin-top: 15%;">
+        <div class="layui-main" style="width: 700px;">
+            <h1 style="text-align: center">请输入注册信息</h1>
+            <form class="layui-form layui-form-pane" enctype="multipart/form-data" action="./loginres/res" method="post">
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名：</label>
+                    <div class="layui-input-block">
+                        <input id="username" type="text" name="username" class="layui-input" lay-verify="required"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">密码：</label>
+                    <div class="layui-input-block">
+                        <input id="password" type="password" name="password" class="layui-input" lay-verify="required"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">真实姓名：</label>
+                    <div class="layui-input-block">
+                        <input id="name" type="text" name="name" class="layui-input" lay-verify="required"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱：</label>
+                    <div class="layui-input-block">
+                        <input id="email" type="email" name="email" class="layui-input" lay-verify="required"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱验证码：</label>
+                    <div class="layui-input-block">
+                        <input id="checkCode" type="text" name="checkCode" class="layui-input" lay-verify="required"/>
+                        <button id="sendCheckCode" type="button" class="layui-btn layui-btn-normal">获取验证码</button>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号：</label>
+                    <div class="layui-input-block">
+                        <input id="phone" type="text" name="phone" class="layui-input" lay-verify="required"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="register">确认</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        layui.use("form",function () {
+            var form = layui.form;
+            var $ = layui.$;
+            
+            form.on("submit(register)",function (data) {
+                var inputCheckCode = $("#checkCode").val();
+                if (inputCheckCode == checkCode){
+                    $.ajax({
+                        url:"/loginres/res",
+                        type:"POST",
+                        data:data.field,
+                        async:false,
+                        success:function (text) {
+                            if ("ok" == text){
+                                layer.alert("注册成功",function () {
+                                    window.location.href = "index.jsp";
+                                });
+                            }else{
+                                layer.alert("注册失败");
+                            }
+                        }
+                    });
+                } else{
+                    layer.msg("验证码输入错误");
+                }
+                return false;
+            });
+ 
+            //验证码
+            var checkCode = "";
+ 
+            $("#sendCheckCode").click(function () {
+                var email = $("#email").val();
+                if (email == null || email == ""){
+                    layer.msg("请输入邮箱！！！");
+                    return;
+                }
+                var index = layer.open({
+                    type:3,
+                    content:"邮件发送中..."
+                });
+ 
+                $.ajax({
+                    url:"/getCheckCode?email="+email,
+                    type:"get",
+                    success:function (text) {
+                        if (text != null && text != ""){
+                            layer.close(index);
+                            layer.msg("已发送");
+                            checkCode = text;
+                            countDown();
+                        } else{
+                            layer.alert("获取失败，请重新获取")
+                        }
+                    }
+                });
+            });
+ 
+            var maxTime = 60;
+            function countDown(){
+                if (maxTime == 0){
+                    checkCode = "";
+                    $("#sendCheckCode").removeClass("layui-btn-disabled");
+                    $("#sendCheckCode").removeAttr("disabled")
+                    $("#sendCheckCode").html("获取验证码");
+                    maxTime = 60;
+                }else{
+                    $("#sendCheckCode").attr("disabled","disabled");
+                    $("#sendCheckCode").addClass("layui-btn-disabled");
+                    form.render();
+                    $("#sendCheckCode").html(maxTime+"秒后重新获取");
+                    maxTime--;
+                    setTimeout(countDown,1000);
+                }
+            }
+ 
+        });
+    </script>
 </body>
 </html>
