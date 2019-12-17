@@ -77,6 +77,12 @@ public class UserServiceImp implements UserService{
 		User user = userMapper.selectByPrimaryKey(id);
 		return user;
 	}
+
+	@Override
+	public User selectByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 		
 }

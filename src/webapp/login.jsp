@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>内蒙古师范大学管理系统用户登录</title>
+<title>内蒙古师范大学通勤车管理系统用户登录</title>
 <link href="css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="js/jQuery1.7.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
@@ -277,6 +277,9 @@ $(function(){
         </div>
         <div id="login">
           <button type="submit">登录</button>
+        </div>
+        <div>
+        	<a href="register.jsp">还未注册？点此注册</a>
         </div>
       </form>
     </div>

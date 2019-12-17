@@ -4,16 +4,11 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
-import javax.naming.AuthenticationException;
-import javax.security.auth.Subject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.UserService;
-import com.imnu.SchoolBus.util.VerifyUtil;
 
 
 
@@ -37,44 +31,6 @@ public class LogResController {
 	 */	@Value("${web-upload-path}")
 	private String path;
 	 
-	 @RequestMapping(value = "/getVerify")
-	 public void getVerify(HttpServletRequest request, HttpServletResponse response){
-	    response.setContentType("image/jpeg");//设置相应类型,告诉浏览器输出的内容为图片
-	    response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
-	    response.setHeader("Cache-Control", "no-cache");
-	    response.setDateHeader("Expire", 0);
-	    VerifyUtil verifyUtil = new VerifyUtil();
-	    //RandomValidateCode randomValidateCode = new RandomValidateCode();
-	    try {
-	    	verifyUtil.getRandcode(request, response);//输出验证码图片方法
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
-	@RequestMapping(value="/login",method=RequestMethod.POST)    //拦截post提交方法
-    public String login(Model model, String userName, String password,String inputStr, HttpSession session) {
-        //从session中获取随机数
-        String random = (String) session.getAttribute("RANDOMVALIDATECODEKEY");
-        User user=userService.selectByUserName(userName);
- 
-        Subject subject = SecurityUtils.getSubject() ;
-        UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
-        try {
-            if(random.equals(inputStr)){
-                subject.login(token);
-                model.addAttribute("user", user);
-                return  "user/login" ;
-            }else {
-                model.addAttribute("error","验证码错误");
-                return "redirect:/";
-            }
- 
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-            model.addAttribute("error","用户名或密码错误");
-            return "redirect:/";
-        }
-    }
 
 	/*
 	 * public ModelAndView LoginUser(User user,String checkbox,HttpServletRequest
