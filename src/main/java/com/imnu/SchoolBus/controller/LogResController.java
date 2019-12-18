@@ -28,7 +28,8 @@ public class LogResController {
 	private UserService userService; //登录注册service
 	/*
 	 * @Autowired private ProCCouService proCCouService; //城市三级联动
-	 */	@Value("${web-upload-path}")
+	 */	
+	@Value("${web-upload-path}")
 	private String path;
 	 
 
@@ -63,7 +64,7 @@ public class LogResController {
 		 ModelAndView view = new ModelAndView(); 
 		 boolean result = userService.ResUser(user); 
 		 if(result) {
-			 view.setViewName("redirect:/Login.jsp"); //默认是请求转发 forward(请求转发)redirect(重定向) 
+			 view.setViewName("redirect:/login.jsp"); //默认是请求转发 forward(请求转发)redirect(重定向) 
 		 }else {
 			 view.setViewName("redirect:/register.jsp"); 
 			 } 

@@ -3,11 +3,14 @@ package com.imnu.SchoolBus.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.imnu.SchoolBus.mapper.UserMapper;
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.pojo.UserExample;
-
+@Service
+@Transactional
 public class UserServiceImp implements UserService{
 	@Autowired
 	private UserMapper userMapper;
