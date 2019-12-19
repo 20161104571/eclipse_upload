@@ -13,7 +13,7 @@ public class IndexConfig {
     void applicationReadyEvent() {
         System.out.println("项目部署完毕........启动浏览器");
         // 启动后访问地址
-        String url = "http://localhost:8000/springboot/register.jsp";
+        String url = "http://localhost:8080/schoolbus/register.jsp";
         Runtime runtime = Runtime.getRuntime();
         try {
             runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);

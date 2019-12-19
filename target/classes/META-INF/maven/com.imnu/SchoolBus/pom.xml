@@ -26,12 +26,12 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-web</artifactId>
 	</dependency>
-  <dependency>
+  <!-- <dependency>
   	<groupId>org.springframework.boot</groupId>
   	<artifactId>spring-boot-maven-plugin</artifactId>
   	<version>2.2.0.RELEASE</version>
   	<type>maven-plugin</type>
-  </dependency>
+  </dependency> -->
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-test</artifactId>
@@ -93,23 +93,14 @@
 		<artifactId>druid-spring-boot-starter</artifactId>
 		<version>1.1.10</version>
 	</dependency>
-	<!-- mybatis 与springboot的整合依赖 -->
-	<!-- <dependency>
-		<groupId>org.mybatis.spring.boot</groupId>
-		<artifactId>mybatis-spring-boot-starter</artifactId>
-		<version>1.2.0</version>
-	</dependency> -->
+	
+	
 	<dependency>  
 	    <groupId>com.alibaba</groupId>  
 	    <artifactId>fastjson</artifactId>  
 	    <version>1.2.41</version>  
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.apache.ibatis/ibatis-core -->
-	<!-- <dependency>
-	    <groupId>org.apache.ibatis</groupId>
-	    <artifactId>ibatis-core</artifactId>
-	    <version>3.0</version>
-	</dependency> -->
+	<!-- mybatis 与springboot的整合依赖 -->
 	<dependency>
           <groupId>org.mybatis.spring.boot</groupId>
           <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -145,14 +136,7 @@
                     <artifactId>maven-jar-plugin</artifactId>
              </plugin>
 		</plugins>
-		<!-- <resources>
-			<resource>
-				<directory>src/main/java</directory>
-					<includes>
-						<include>**/*.xml</include>
-					</includes>
-			</resource>
-		</resources> -->
+		
 	</build>
 
 </project>

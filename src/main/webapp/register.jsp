@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%
+<%-- <%
     String path = request.getContextPath();
     
     String basePath = request.getScheme() 
@@ -16,7 +16,7 @@
     /* path就是项目名字的前边有 "/" ，例如你的项目名字叫做 Apple ，那么 path = /Apple
     *	basePath就是项目的完整路径，basePath = http://localhost:8080/Apple */
 %>
-
+ --%>
 <head>
     <meta charset="UTF-8">
     <title>注册</title>

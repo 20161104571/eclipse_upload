@@ -1,6 +1,5 @@
 package com.imnu.SchoolBus;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
