@@ -27,7 +27,7 @@
     <div style="margin-top: 15%;">
         <div class="layui-main" style="width: 700px;">
             <h1 style="text-align: center">请输入注册信息</h1>
-            <form class="layui-form layui-form-pane" enctype="multipart/form-data" action="./loginres/res" method="post">
+            <form class="layui-form layui-form-pane" enctype="multipart/form-data"  method="post"> <!-- action="./loginres/res" -->
                 
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名：</label>
@@ -57,7 +57,7 @@
                     <label class="layui-form-label">邮箱验证码：</label>
                     <div class="layui-input-block">
                         <input id="checkCode" type="text" name="checkCode" class="layui-input" lay-verify="required"/>
-                        <button id="sendCheckCode" type="button" class="layui-btn layui-btn-normal">获取验证码</button>
+                        <button id="sendCheckCode" type="button" class="layui-btn layui-btn-normal" >获取验证码</button>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -83,7 +83,7 @@
                 var inputCheckCode = $("#checkCode").val();
                 if (inputCheckCode == checkCode){
                     $.ajax({
-                        url:"/loginres/res",
+                        url:"./loginres/res",
                         type:"POST",
                         data:data.field,
                         async:false,

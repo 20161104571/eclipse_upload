@@ -15,29 +15,26 @@ public class UserServiceImp implements UserService{
 	@Autowired
 	private UserMapper userMapper;
 	
+	/*
+	 * @Override public User LoginUser(String username, String password) {
+	 * UserExample userExample = new UserExample();
+	 * userExample.createCriteria().andUsernameEqualTo(username).andPasswordEqualTo(
+	 * password); List<User> userList = userMapper.selectByExample(userExample);
+	 * return userList.isEmpty()?null:userList.get(0); }
+	 */
+	
 	@Override
-	public User LoginUser(String username, String password) {
-		UserExample userExample = new UserExample();
-		userExample.createCriteria().andUsernameEqualTo(username).andPasswordEqualTo(password);
-		List<User> userList = userMapper.selectByExample(userExample);
-		return userList.isEmpty()?null:userList.get(0);
+	public User login(User user) {
+		UserExample example = new UserExample();
+		example.createCriteria().andUsernameEqualTo(user.getUsername()).andPasswordEqualTo(user.getPassword());
+		List<User> list = userMapper.selectByExample(example);
+		return list.isEmpty()?null:list.get(0);
 	}
 
 	@Override
 	public boolean ResUser(User user) {
-//		int result = 0;
+//		user.setId(UUID.randomUUID().toString());
 		int ResUser = userMapper.insertSelective(user);
-//		if(ResUser>0) {
-//			UserExample userExample = new UserExample();
-//			userExample.createCriteria().andUsernameEqualTo(user.getUsername()).andPasswordEqualTo(user.getPassword());
-//			List<User> userList = userMapper.selectByExample(userExample);
-//			Integer userid = userList.get(0).getId();
-//			Shopcar shopcar = new Shopcar();
-//			shopcar.setUserId(userid);
-//			result = shopcarMapper.insertSelective(shopcar);
-//		}else {
-//			return false;
-//		}
 		return ResUser>0?true:false;
 	}
 
@@ -82,10 +79,14 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public User selectByUserName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean findUserByUserName(String username) {
+		UserExample example = new UserExample();
+		example.createCriteria().andUsernameEqualTo(username);
+		List<User> list = userMapper.selectByExample(example);
+		return list.size()==0?false:true;
 	}
+
+	
 		
 		
 }

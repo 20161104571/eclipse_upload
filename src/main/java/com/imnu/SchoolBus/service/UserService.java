@@ -6,7 +6,7 @@ import com.imnu.SchoolBus.pojo.User;
 
 public interface UserService {
 
-	User LoginUser(String username, String password);
+	//User LoginUser(String username, String password);
 
 	boolean ResUser(User user);
 
@@ -20,7 +20,9 @@ public interface UserService {
 	
 	public User selectUserById(int id);
 
-	User selectByUserName(String userName);
+	public boolean findUserByUserName(String username);
+
+	User login(User user);
 
 
 }

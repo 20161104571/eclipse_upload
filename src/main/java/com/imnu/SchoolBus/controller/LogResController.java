@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,25 +27,33 @@ import com.imnu.SchoolBus.service.UserService;
 public class LogResController {
 	@Autowired   //依赖注入
 	private UserService userService; //登录注册service
-	/*
-	 * @Autowired private ProCCouService proCCouService; //城市三级联动
-	 */	
+	
 	@Value("${web-upload-path}")
 	private String path;
 	 
 
 	/*
-	 * public ModelAndView LoginUser(User user,String checkbox,HttpServletRequest
-	 * request) { HttpSession session = request.getSession(true); ModelAndView view
-	 * = new ModelAndView(); User loginUser =
-	 * userService.LoginUser(user.getUsername(), user.getPassword());
-	 * if("on".equals(checkbox)) { if(loginUser==null) {
-	 * view.setViewName("redirect:/Login.jsp"); }else {
+	 * public ModelAndView LoginUser(User user,String checkbox,HttpServletRequestrequest) { 
+	 * HttpSession session = request.getSession(true); 
+	 * ModelAndView view = new ModelAndView(); 
+	 * User loginUser = userService.LoginUser(user.getUsername(), user.getPassword());
+	 * if("on".equals(checkbox)) { 
+	 * if(loginUser==null) {
+	 * view.setViewName("redirect:/Login.jsp"); 
+	 * }else {
 	 * session.setAttribute("admin", loginUser); //发送到前端数据
-	 * view.setViewName("redirect:/center.jsp"); //重定向 } }else { if(loginUser==null)
-	 * { view.setViewName("redirect:/Login.jsp"); }else {
+	 * view.setViewName("redirect:/center.jsp"); //重定向 
+	 * } 
+	 * }else {
+	 *  if(loginUser==null){ 
+	 *  view.setViewName("redirect:/Login.jsp");
+	 *   }else {
 	 * session.setAttribute("user", loginUser); //发送到前端数据
-	 * view.setViewName("redirect:/center.jsp"); } } return view; }
+	 * view.setViewName("redirect:/center.jsp"); 
+	 * } 
+	 * } 
+	 * return view; 
+	 * }
 	 */
 	
 	/*
@@ -56,20 +65,42 @@ public class LogResController {
 	 * if(result!="error") { userService.verEmail(user); } else {
 	 * mv.addObject("result",result); } return mv; }
 	 */
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public ModelAndView longin(User user, HttpSession session) {
+		User u = userService.login(user); 
+		ModelAndView mv = new ModelAndView();
+		if(u==null) {
+			mv.setViewName("login");
+		}else {
+			session.setAttribute("sessionuser", u);
+			mv.addObject("user",u);
+			mv.setViewName("index");
+		}
+		return mv;
+	} 
 
+	@RequestMapping(value="/res",method=RequestMethod.POST)
+	public ModelAndView regist(User user,MultipartFile img1,HttpSession sesssion) {
+		//uploadMultipartFile(img1);
+		ModelAndView mv = new ModelAndView();
+		boolean result = userService.ResUser(user);
+		mv.setViewName("login");
+		if(result) {
+			mv.setViewName("login");  
+		}else {
+			mv.setViewName("register");
+		}
+		return mv; 
+	}
 	
-	 @RequestMapping(value="/res",method=RequestMethod.POST) 
-	 public ModelAndView ResUser(User user,MultipartFile file) {
-		//user.setImg(uploadMultipartFile(file)); //上传图片 
-		 ModelAndView view = new ModelAndView(); 
-		 boolean result = userService.ResUser(user); 
-		 if(result) {
-			 view.setViewName("redirect:/login.jsp"); //默认是请求转发 forward(请求转发)redirect(重定向) 
-		 }else {
-			 view.setViewName("redirect:/register.jsp"); 
-			 } 
-		 return view; 
-	 }
+	/*
+	 * @RequestMapping(value="/res",method=RequestMethod.POST) public ModelAndView
+	 * ResUser(User user,MultipartFile file) {
+	 * //user.setImg(uploadMultipartFile(file)); //上传图片 ModelAndView view = new
+	 * ModelAndView(); boolean result = userService.ResUser(user); if(result) {
+	 * view.setViewName("redirect:/login.jsp"); //默认是请求转发 forward(请求转发)redirect(重定向)
+	 * }else { view.setViewName("redirect:/register.jsp"); } return view; }
+	 */
 	 
 	//produces属性可以设置返回数据的类型以及编码，可以是json或者xml
 	@RequestMapping(value="/validate",method=RequestMethod.POST,produces = {"text/html;charset=utf-8"})
@@ -89,32 +120,7 @@ public class LogResController {
 		String jsonString = JSONUtils.toJSONString(map);  //需要导入Fastjson依赖 将map数据转换为json数据
 		return jsonString;
 	}
-	/*
-	 * //加载省
-	 * 
-	 * @RequestMapping(value="/province",method=RequestMethod.POST,produces =
-	 * {"application/json;charset=UTF-8"})
-	 * 
-	 * @ResponseBody public String getProvince() { List<Province> province =
-	 * proCCouService.getProvince(); String jsonString =
-	 * JSON.toJSONString(province); return jsonString; } //加载市
-	 * 
-	 * @RequestMapping(value = "/city", method = RequestMethod.POST, produces = {
-	 * "application/json;charset=UTF-8" })
-	 * 
-	 * @ResponseBody public String getCity(String provincecode) { List<City>
-	 * cityList = proCCouService.getCity(provincecode); String jsonString =
-	 * JSON.toJSONString(cityList); return jsonString; }
-	 * 
-	 * // 加载区、县
-	 * 
-	 * @RequestMapping(value = "/county", method = RequestMethod.POST, produces = {
-	 * "application/json;charset=UTF-8" })
-	 * 
-	 * @ResponseBody public String getCounty(String city) { List<Area> areaList =
-	 * proCCouService.getArea(city); String jsonString =
-	 * JSON.toJSONString(areaList); return jsonString; }
-	 */
+	
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
