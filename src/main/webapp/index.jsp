@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>hello</title>
+<title>欢迎来到内蒙古师范大学校园通勤车管理系统</title>
 </head>
 <body>
-
+	
 </body>
 </html>
