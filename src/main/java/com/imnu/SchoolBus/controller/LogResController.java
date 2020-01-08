@@ -71,13 +71,18 @@ public class LogResController {
 		ModelAndView mv = new ModelAndView();
 		if(u==null) {
 			mv.setViewName("login");
-		}else {
-			session.setAttribute("sessionuser", u);
-			mv.addObject("user",u);
-			mv.setViewName("index");
+		}else if(user.getUsername().equals("admin")) {
+ 			mv.setViewName("admin/index");	
+ 		}else {
+ 			mv.setViewName("index");
+ 		}
+ 		return mv;
 		}
-		return mv;
-	} 
+
+	/*
+	 * else { session.setAttribute("sessionuser", u); mv.addObject("user",u);
+	 * mv.setViewName("index"); return mv;
+	 */
 
 	@RequestMapping(value="/res",method=RequestMethod.POST)
 	public ModelAndView regist(User user,MultipartFile img1,HttpSession sesssion) {

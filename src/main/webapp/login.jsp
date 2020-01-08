@@ -23,143 +23,7 @@ $(document).ready(function(){
 });
 </script>
 <script type="text/javascript">
-$(function(){
- /*学生登录信息验证*/
-/* $("#stu_username_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入学号'){
- $(this).val('');
- }
-});
-$("#stu_username_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入学号');
- }
-});
-$("#stu_password_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入密码'){
- $(this).val('');
- }
-});
-$("#stu_password_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入密码');
- }
-});
-$("#stu_code_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入验证码'){
- $(this).val('');
- }
-});
-$("#stu_code_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入验证码');
- }
-});
-$(".stu_login_error").Validform({
-	tiptype:function(msg,o,cssctl){
-		var objtip=$(".stu_error_box");
-		cssctl(objtip,o.type);
-		objtip.text(msg);
-	},
-	ajaxPost:true
-}); */
-/*导师登录信息验证*/
-$("#tea_username_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入教工号'){
- $(this).val('');
- }
-});
-$("#tea_username_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入教工号');
- }
-});
-$("#tea_password_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入密码'){
- $(this).val('');
- }
-});
-$("#tea_password_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入密码');
- }
-});
-$("#tea_code_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入验证码'){
- $(this).val('');
- }
-});
-$("#tea_code_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入验证码');
- }
-});
-$(".tea_login_error").Validform({
-	tiptype:function(msg,o,cssctl){
-		var objtip=$(".tea_error_box");
-		cssctl(objtip,o.type);
-		objtip.text(msg);
-	},
-	ajaxPost:true
-});
- /*教务登录信息验证*/
-/*$("#sec_username_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入教务号'){
- $(this).val('');
- }
-});
-$("#sec_username_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入教务号');
- }
-});
-$("#sec_password_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入密码'){
- $(this).val('');
- }
-});
-$("#sec_password_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入密码');
- }
-});
-$("#sec_code_hide").focus(function(){
- var username = $(this).val();
- if(username=='输入验证码'){
- $(this).val('');
- }
-});
-$("#sec_code_hide").focusout(function(){
- var username = $(this).val();
- if(username==''){
- $(this).val('输入验证码');
- }
-});
-$(".sec_login_error").Validform({
-	tiptype:function(msg,o,cssctl){
-		var objtip=$(".sec_error_box");
-		cssctl(objtip,o.type);
-		objtip.text(msg);
-	},
-	ajaxPost:true
-}); */
-});
+
 </script>
 <script type="text/javascript">
 $(function(){
@@ -196,36 +60,31 @@ $(function(){
 <body>
 <div id="tab">
   <ul class="tab_menu">
-    <!-- <li class="selected">学生登录</li> -->
+    <li class="selected">学生登录</li>
     <li>导师登录</li>
     <li>教务登录</li>
   </ul>
   <div class="tab_box"> 
     <!-- <!-- 学生登录开始 -->
-    <!-- <div>
+    <div>
       <div class="stu_error_box"></div>
       <form action="./loginres/login" method="post" class="stu_login_error">
         <div id="username">
           <label>学&nbsp;&nbsp;&nbsp;号：</label>
-          <input type="text" id="stu_username_hide" name="username" value="输入学号" nullmsg="学号不能为空！" datatype="s6-18" errormsg="学号范围在6~18个字符之间！" sucmsg="学号验证通过！"/>
+          <input type="text" id="stu_username" name="username"/>
         </div>
         <div id="password">
           <label>密&nbsp;&nbsp;&nbsp;码：</label>
-          <input type="password" id="stu_password_hide" name="password" value="输入密码" nullmsg="密码不能为空！" datatype="*6-16" errormsg="密码范围在6~16位之间！" sucmsg="密码验证通过！"/>
+          <input type="password" id="stu_password" name="password" />
         </div>
-        <div id="code">
-          <label>验证码：</label>
-          <input type="text" id="stu_code_hide" name="code"  value="输入验证码" nullmsg="验证码不能为空！" datatype="*4-4" errormsg="验证码有4位数！" sucmsg="验证码验证通过！"/>
-          <img src="images/captcha.jpg" title="点击更换" alt="验证码占位图"/> </div>
-        <div id="remember">
-          <input type="checkbox" name="remember">
-          <label>记住密码</label>
-        </div>
+        <div class="form-group">
+			<p>Not registered? <a href="register.jsp">加入我们</a> | <a href="#">忘记密码</a></p>
+		</div>
         <div id="login">
           <button type="submit">登录</button>
         </div>
       </form>
-    </div> -->
+    </div>
   <!--  学生登录结束  -->
    <!-- 导师登录开始-->
     <div class="hide">
@@ -233,21 +92,16 @@ $(function(){
       <form action="./loginres/login" method="post" class="tea_login_error">
         <div id="username">
           <label>教工号：</label>
-          <input type="text" id="tea_username_hide" name="username" value="输入教工号" nullmsg="教工号不能为空！" datatype="s6-18" errormsg="教工号范围在6~18个字符之间！" sucmsg="教工号验证通过！"/>
+          <input type="text" id="tea_username" name="username" />
           <!--ajaxurl="demo/valid.jsp"--> 
         </div>
         <div id="password">
           <label>密&nbsp;&nbsp;&nbsp;码：</label>
-          <input type="password" id="tea_password_hide" name="password" value="输入密码" nullmsg="密码不能为空！" datatype="*6-16" errormsg="密码范围在6~16位之间！" sucmsg="密码验证通过！"/>
+          <input type="password" id="tea_password" name="password" />
         </div>
-        <div id="code">
-          <label>验证码：</label>
-          <input type="text" id="tea_code_hide" name="code"  value="输入验证码" nullmsg="验证码不能为空！" datatype="*4-4" errormsg="验证码有4位数！" sucmsg="验证码验证通过！"/>
-          <img src="images/captcha.jpg" title="点击更换" alt="验证码占位图"/> </div>
-        <div id="remember">
-          <input type="checkbox" name="remember">
-          <label>记住密码</label>
-        </div>
+        <div class="form-group">
+			<p>Not registered? <a href="register.jsp">加入我们</a> | <a href="#">忘记密码</a></p>
+		</div>
         <div id="login">
           <button type="submit">登录</button>
         </div>
@@ -260,12 +114,12 @@ $(function(){
       <form action="./loginres/login" method="post" class="sec_login_error">
         <div id="username">
           <label>用户名：</label>
-          <input type="text" id="sec_username_hide" name="username" value="输入管理用户名" nullmsg="用户名不能为空！" datatype="s6-18" errormsg="教务号范围在6~18个字符之间！" sucmsg="教务号验证通过！"/>
+          <input type="text" id="sec_username" name="username"/>
           <!--ajaxurl="demo/valid.jsp"--> 
         </div>
         <div id="password">
           <label>密&nbsp;&nbsp;&nbsp;码：</label>
-          <input type="password" id="sec_password_hide" name="password" value="输入密码" nullmsg="密码不能为空！" datatype="*6-16" errormsg="密码范围在6~16位之间！" sucmsg="密码验证通过！"/>
+          <input type="password" id="sec_password" name="password"/>
         </div>
         
         <div id="login">

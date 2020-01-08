@@ -1,11 +1,21 @@
 package com.imnu.SchoolBus.service;
 
-import java.io.File;
-import java.util.List;
 
 public interface MailService {
 
-	void sendSimpleMail(String to, String title, String content);
-	
-	void sendAttachmentsMail(String to, String title, String cotent, List<File> fileList);
+	/**
+     * 发送文本邮件
+     * @param to
+     * @param subject
+     * @param content
+     */
+    //void sendSimpleMail(String to, String subject, String content);
+
+    /**
+     * 发送HTML邮件，方便用户点击附带的code用来验证激活账户
+     * @param to
+     * @param content
+     */
+    void sendHtmlMail(String to, String subject, String content);
+
 }

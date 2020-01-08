@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +16,7 @@ import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Drivers;
 import com.imnu.SchoolBus.service.DriversService;
 
-@Service
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired

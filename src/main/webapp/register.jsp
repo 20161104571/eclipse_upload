@@ -48,19 +48,6 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">邮箱：</label>
-                    <div class="layui-input-block">
-                        <input id="email" type="email" name="email" class="layui-input" lay-verify="required"/>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">邮箱验证码：</label>
-                    <div class="layui-input-block">
-                        <input id="checkCode" type="text" name="checkCode" class="layui-input" lay-verify="required"/>
-                        <button id="sendCheckCode" type="button" class="layui-btn layui-btn-normal" >获取验证码</button>
-                    </div>
-                </div>
-                <div class="layui-form-item">
                     <label class="layui-form-label">手机号：</label>
                     <div class="layui-input-block">
                         <input id="phone" type="text" name="phone" class="layui-input" lay-verify="required"/>

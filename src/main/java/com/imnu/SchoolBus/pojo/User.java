@@ -9,15 +9,13 @@ public class User {
 
     private String name;
 
+    private String number;
+
     private String email;
 
     private String phone;
 
-    private Integer state;
-
-    private String code;
-
-    private String flag;
+    private Integer code;
 
     public Integer getId() {
         return id;
@@ -51,6 +49,14 @@ public class User {
         this.name = name;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -67,27 +73,15 @@ public class User {
         this.phone = phone;
     }
 
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
 
-    public String getFlag() {
-        return flag;
-    }
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", number="
+				+ number + ", email=" + email + ", phone=" + phone + ", code=" + code + "]";
+	}
 
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
 }

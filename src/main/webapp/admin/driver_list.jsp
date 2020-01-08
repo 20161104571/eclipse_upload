@@ -295,11 +295,11 @@
                 	<table class="table table-bordered">
                     <thead>
                       <tr>
-                        <!-- <th>
+                        <th>
                           <label class="lyear-checkbox checkbox-primary">
                             <input type="checkbox" id="check-all"><span></span>
                           </label>
-                        </th> -->
+                        </th>
                         <th>编号</th>
                         <th>司机姓名</th>
                         <th>工号</th>
@@ -309,7 +309,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                    	<c:forEach items="${pageInfo.list }" var="driver">
+                    	<c:forEach items="${pageInfo.list }" var="drivers">
                     		<td>
                           <label class="lyear-checkbox checkbox-primary">
                             <input type="checkbox" name="ids[]" value="1"><span></span>
@@ -343,7 +343,7 @@
 					|<a
 					href="${ pageContext.request.contextPath }/admin/findDrivertByPage.action?page=${pageInfo.pages}">尾页</a></td>
 	
-			</tr> 
+						</tr> 
                     </tbody>
                   </table>
                 </form>
