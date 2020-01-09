@@ -91,7 +91,8 @@ public class LogResController {
 		boolean result = userService.ResUser(user);
 		mv.setViewName("login");
 		if(result) {
-			mv.setViewName("login");  
+			//mv.setViewName("login");  
+			mv.setViewName("mailvalidation");
 		}else {
 			mv.setViewName("register");
 		}
