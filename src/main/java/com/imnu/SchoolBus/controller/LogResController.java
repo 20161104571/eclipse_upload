@@ -79,10 +79,6 @@ public class LogResController {
  		return mv;
 		}
 
-	/*
-	 * else { session.setAttribute("sessionuser", u); mv.addObject("user",u);
-	 * mv.setViewName("index"); return mv;
-	 */
 
 	@RequestMapping(value="/res",method=RequestMethod.POST)
 	public ModelAndView regist(User user,MultipartFile img1,HttpSession sesssion) {
@@ -92,7 +88,7 @@ public class LogResController {
 		mv.setViewName("login");
 		if(result) {
 			//mv.setViewName("login");  
-			mv.setViewName("mailvalidation");
+			mv.setViewName("forward:/mailvalidation");
 		}else {
 			mv.setViewName("register");
 		}

@@ -43,54 +43,49 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>Bootstrap</strong> Login Form</h1>
-                            <div class="description">
-                            	<p>
-	                            	This is a free responsive login form made with Bootstrap. 
-	                            	Download it on <a href="#"><strong>AZMIND</strong></a>, customize and use it as you like!
-                            	</p>
-                            </div>
+                            <h1><strong>注册</strong></h1>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Login to our site</h3>
-                            		<p>Enter your username and password to log on:</p>
-                        		</div>
-                        		<div class="form-top-right">
-                        			<i class="fa fa-lock"></i>
+                        			<h3> </h3>
+                            		<p>填入你的基本信息来加入我们:</p>
                         		</div>
                             </div>
                             <div class="form-bottom">
 			                    <form role="form" action="./loginres/res" method="post" class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">用户名</label>
-			                        	<input type="text" name="username" placeholder="Username..." class="form-username form-control" id="username">
+			                    		<label class="sr-only" for="form-username">用户名:</label>
+			                        	<input type="text" name="username" placeholder="用户名..." class="form-username form-control" id="username">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">密码</label>
-			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="password">
+			                        	<label class="sr-only" for="form-password">密码:</label>
+			                        	<input type="password" name="password" placeholder="密码..." class="form-password form-control" id="password">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">真实姓名</label>
-			                        	<input type="text" name="name" placeholder="RealName..." class="form-realname form-control" id="name">
+			                        	<label class="sr-only" for="form-password">真实姓名:</label>
+			                        	<input type="text" name="name" placeholder="真实姓名..." class="form-realname form-control" id="name">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">手机号</label>
-			                        	<input type="text" name="phone" placeholder="phone" class="form-phone form-control" id="phone">
+			                        	<label class="sr-only" for="form-password">学号（工号）:</label>
+			                        	<input type="text" name="number" placeholder="学工号..." class="form-number form-control" id="number">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">密码</label>
-			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="password">
+			                        	<label class="sr-only" for="form-password">手机号:</label>
+			                        	<input type="text" name="phone" placeholder="手机号..." class="form-phone form-control" id="phone">
 			                        </div>
-			                        <button type="submit" class="btn">Sign in!</button>
+			                        
+			                        <button class="btn">下一步</button>
+			                        <div class="form-group">
+										<p>Already registered? <a href="login.jsp">登 录</a></p>
+									</div>
 			                    </form>
 		                    </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 social-login">
                         	<h3>...or login with:</h3>
                         	<div class="social-login-buttons">
@@ -105,7 +100,7 @@
 	                        	</a>
                         	</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             

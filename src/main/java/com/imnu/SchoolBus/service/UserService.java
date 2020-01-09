@@ -8,7 +8,7 @@ public interface UserService {
 
 	//User LoginUser(String username, String password);
 
-	boolean ResUser(User user);
+	public boolean ResUser(User user);
 
 	boolean ValidateUser(User user);
 
@@ -22,7 +22,7 @@ public interface UserService {
 
 	public boolean findUserByUserName(String username);
 
-	User login(User user);
+	public User login(User user);
 
 
 

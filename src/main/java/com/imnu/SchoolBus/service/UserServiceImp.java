@@ -37,6 +37,7 @@ public class UserServiceImp implements UserService{
 //		user.setId(UUID.randomUUID().toString());
 		int ResUser = userMapper.insertSelective(user);
 		return ResUser>0?true:false;
+		//userMapper.insertSelective(user);
 	}
 
 	//通过账号检查用户是否存在
