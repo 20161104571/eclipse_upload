@@ -35,6 +35,7 @@ public class UserServiceImp implements UserService{
 	@Override
 	public boolean ResUser(User user) {
 //		user.setId(UUID.randomUUID().toString());
+		
 		int ResUser = userMapper.insertSelective(user);
 		return ResUser>0?true:false;
 		//userMapper.insertSelective(user);

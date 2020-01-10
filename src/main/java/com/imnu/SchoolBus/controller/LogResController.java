@@ -31,40 +31,6 @@ public class LogResController {
 	@Value("${web-upload-path}")
 	private String path;
 	 
-
-	/*
-	 * public ModelAndView LoginUser(User user,String checkbox,HttpServletRequestrequest) { 
-	 * HttpSession session = request.getSession(true); 
-	 * ModelAndView view = new ModelAndView(); 
-	 * User loginUser = userService.LoginUser(user.getUsername(), user.getPassword());
-	 * if("on".equals(checkbox)) { 
-	 * if(loginUser==null) {
-	 * view.setViewName("redirect:/Login.jsp"); 
-	 * }else {
-	 * session.setAttribute("admin", loginUser); //发送到前端数据
-	 * view.setViewName("redirect:/center.jsp"); //重定向 
-	 * } 
-	 * }else {
-	 *  if(loginUser==null){ 
-	 *  view.setViewName("redirect:/Login.jsp");
-	 *   }else {
-	 * session.setAttribute("user", loginUser); //发送到前端数据
-	 * view.setViewName("redirect:/center.jsp"); 
-	 * } 
-	 * } 
-	 * return view; 
-	 * }
-	 */
-	
-	/*
-	 * @RequestMapping("/verEmail",method=RequestMethod.POST) public ModelAndView
-	 * verEmail(User user ,MultipartFile img1,HttpSession session) {
-	 * 
-	 * String result=uploadMultipartFile(img1); System.out.println(result);
-	 * ModelAndView mv = new ModelAndView(); mv.setViewName("login");
-	 * if(result!="error") { userService.verEmail(user); } else {
-	 * mv.addObject("result",result); } return mv; }
-	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView longin(User user, HttpSession session) {
 		User u = userService.login(user); 

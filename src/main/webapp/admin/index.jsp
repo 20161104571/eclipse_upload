@@ -11,9 +11,9 @@
 <meta name="keywords" content="schoolbus后台管理系统">
 <meta name="description" content="一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
 <meta name="author" content="yinqi">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/materialdesignicons.min.css" rel="stylesheet">
-<link href="css/style.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/admin/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/admin/css/style.min.css" rel="stylesheet">
 </head>
   
 <body>
@@ -39,7 +39,7 @@
                   <a href="#">用户信息管理</a>
                   <ul class="nav nav-subnav">
                     <li> <a href="lyear_pages_doc.html">教师信息管理</a> </li>
-                    <li> <a href="driver_list.jsp">司机信息管理</a> </li>
+                    <li> <a href="${pageContext.request.contextPath }/admin/driver_list.jsp">司机信息管理</a> </li>
                       <!-- <ul class="nav nav-subnav">
                         <li> <a href="#!">三级菜单</a> </li>
                         <li> <a href="#!">三级菜单</a> </li>
@@ -348,13 +348,13 @@
   </div>
 </div>
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="js/main.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/admin/js/main.min.js"></script>
 
 <!--图表插件-->
-<script type="text/javascript" src="js/Chart.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/admin/js/Chart.js"></script>
 <script type="text/javascript">
 /* $(document).ready(function(e) {
     var $dashChartBarsCnt  = jQuery( '.js-chartjs-bars' )[0].getContext( '2d' ),
