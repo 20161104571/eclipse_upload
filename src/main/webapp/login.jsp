@@ -57,15 +57,16 @@ $(function(){
 </script>
 </head>
 
-<body>
+<body >
 <div id="tab">
-  <ul class="tab_menu">
+   <ul class="tab_menu">
     <li class="selected">学生登录</li>
     <li>导师登录</li>
     <li>教务登录</li>
   </ul>
+  
   <div class="tab_box"> 
-    <!-- <!-- 学生登录开始 -->
+ 
     <div>
       <div class="stu_error_box"></div>
       <form action="./loginres/login" method="post" class="stu_login_error">
@@ -78,22 +79,21 @@ $(function(){
           <input type="password" id="stu_password" name="password" />
         </div>
         <div class="form-group">
-			<p>Not registered? <a href="register.jsp">加入我们</a> | <a href="#">忘记密码</a></p>
+			<p>Not registered? <a href="register.html">加入我们</a> | <a href="#">忘记密码</a></p>
 		</div>
         <div id="login">
           <button type="submit">登录</button>
         </div>
       </form>
     </div>
-  <!--  学生登录结束  -->
-   <!-- 导师登录开始-->
+
     <div class="hide">
      <div class="tea_error_box"></div>
       <form action="./loginres/login" method="post" class="tea_login_error">
         <div id="username">
           <label>教工号：</label>
           <input type="text" id="tea_username" name="username" />
-          <!--ajaxurl="demo/valid.jsp"--> 
+          ajaxurl="demo/valid.jsp" 
         </div>
         <div id="password">
           <label>密&nbsp;&nbsp;&nbsp;码：</label>
@@ -107,15 +107,14 @@ $(function(){
         </div>
       </form>
     </div>
-     <!-- 导师登录结束-->
-     <!-- 后台登录开始-->
+
     <div class="hide">
     <div class="sec_error_box"></div>
       <form action="./loginres/login" method="post" class="sec_login_error">
         <div id="username">
           <label>用户名：</label>
           <input type="text" id="sec_username" name="username"/>
-          <!--ajaxurl="demo/valid.jsp"--> 
+          
         </div>
         <div id="password">
           <label>密&nbsp;&nbsp;&nbsp;码：</label>
@@ -128,7 +127,7 @@ $(function(){
         
       </form>
     </div>
-     <!-- 后台登录结束-->
+   
   </div>
 </div>
 <div class="bottom">©2014 Leting <a href="javascript:;" target="_blank">关于</a> <span>京ICP证030173号</span>  More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <img width="13" height="16" src="images/copy_rignt_24.png" /></div>

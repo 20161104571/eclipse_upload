@@ -24,6 +24,10 @@ public interface UserService {
 
 	public User login(User user);
 
+	public List<User> getUserList();
+
+	public List<User> findUserByPage(int page);
+
 
 
 }

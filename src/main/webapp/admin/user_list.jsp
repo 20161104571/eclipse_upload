@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>司机信息</title>
+<title>用户信息</title>
 <link rel="icon" href="favicon.ico" type="image/ico">
 <meta name="keywords" content="">
 <meta name="description" content="">
@@ -298,7 +298,7 @@
                 
                 <div class="table-responsive">
                 
-                <form method="post" action="./admin/driverlist.action">
+                <form action="${pageContext.request.contextPath }/admin/userlist.action" method="post">
                 	<table class="table table-bordered">
                     <thead>
                       <tr>
@@ -308,25 +308,27 @@
                           </label>
                         </th>
                         <th>编号</th>
-                        <th>司机姓名</th>
+                        <th>用户名</th>
+                        <th>姓名</th>
                         <th>工号</th>
+                        <th>邮箱</th>
                         <th>电话</th>
-                        <th>驾龄</th>
                         <th>操作</th>
                       </tr>
                     </thead>
                     <tbody>
-                    	<c:forEach items="${pageInfo.list }" var="drivers">
+                    	<c:forEach items="${pageInfo.list }" var="user">
                     		<td>
                           <label class="lyear-checkbox checkbox-primary">
                             <input type="checkbox" name="ids[]" value="1"><span></span>
                           </label>
                         </td>
-                        <td>${drivers.d_id }</td>
-                        <td>${drivers.dname }</td>
-                        <td>${drivers.dnumber }</td>
-                        <td>${drivers.dphone }</td>
-                        <td>${drivers.diver_time }</td>
+                        <td>${user.id }</td>
+                        <td>${user.username }</td>
+                        <td>${user.name }</td>
+                        <td>${user.number }</td>
+                        <td>${user.email }</td>
+                        <td>${user.phone }</td>
                         <td>
                           <div class="btn-group">
                             <a class="btn btn-xs btn-default" href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
@@ -342,13 +344,13 @@
               	共${pageInfo.pages}页,
                              共${pageInfo.total}条记录
 				<a
-					href="${ pageContext.request.contextPath }/admin/findDriverByPage.action?page=1">首页</a>
+					href="./admin/findUserByPage.action?page=1">首页</a>
 					|<a
-					href="${ pageContext.request.contextPath }/admin/findDriverByPage.action?page=${pageInfo.pageNum==1?1:pageInfo.pageNum-1}">上一页</a>
+					href="${ pageContext.request.contextPath }/admin/findUserByPage.action?page=${pageInfo.pageNum==1?1:pageInfo.pageNum-1}">上一页</a>
 					| <a
-					href="${ pageContext.request.contextPath }/admin/findDriverByPage.action?page=${pageInfo.pageNum==pageInfo.pages?pageInfo.pages:pageInfo.pageNum+1}">下一页</a>
+					href="${ pageContext.request.contextPath }/admin/findUserByPage.action?page=${pageInfo.pageNum==pageInfo.pages?pageInfo.pages:pageInfo.pageNum+1}">下一页</a>
 					|<a
-					href="${ pageContext.request.contextPath }/admin/findDrivertByPage.action?page=${pageInfo.pages}">尾页</a></td>
+					href="${ pageContext.request.contextPath }/admin/findUserByPage.action?page=${pageInfo.pages}">尾页</a></td>
 	
 						</tr> 
                     </tbody>

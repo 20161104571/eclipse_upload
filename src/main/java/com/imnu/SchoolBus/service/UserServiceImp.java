@@ -50,12 +50,7 @@ public class UserServiceImp implements UserService{
 		return userList.isEmpty()?true:false;
 	}
 	
-	//管理员显示用户
-	@Override
-	public List<User> getUserList(Integer pageNum) {
-		List<User> userList = userMapper.selectByExample(null);
-		return userList.isEmpty()?null:userList;
-	}
+	
 	//通过账号、姓名、电话查找用户（模糊）
 	@Override
 	public List<User> getUserByData(User user) {
@@ -87,6 +82,25 @@ public class UserServiceImp implements UserService{
 		example.createCriteria().andUsernameEqualTo(username);
 		List<User> list = userMapper.selectByExample(example);
 		return list.size()==0?false:true;
+	}
+	
+	//管理员显示用户
+		@Override
+		public List<User> getUserList(Integer pageNum) {
+			List<User> userList = userMapper.selectByExample(null);
+			return userList.isEmpty()?null:userList;
+		}
+		
+	@Override
+	public List<User> getUserList() {
+		UserExample example = new UserExample();
+		List<User> list = userMapper.selectByExample(example);
+		return list;
+	}
+
+	@Override
+	public List<User> findUserByPage(int page) {
+		return userMapper.selectByExample(new UserExample());
 	}
 
 	
