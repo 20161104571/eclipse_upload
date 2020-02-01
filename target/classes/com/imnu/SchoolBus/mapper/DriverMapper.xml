@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.imnu.SchoolBus.mapper.DriversMapper">
-  <resultMap id="BaseResultMap" type="com.imnu.SchoolBus.pojo.Drivers">
+<mapper namespace="com.imnu.SchoolBus.mapper.DriverMapper">
+  <resultMap id="BaseResultMap" type="com.imnu.SchoolBus.pojo.Driver">
     <id column="d_id" jdbcType="INTEGER" property="dId" />
     <result column="dname" jdbcType="VARCHAR" property="dname" />
     <result column="dnumber" jdbcType="VARCHAR" property="dnumber" />
@@ -69,13 +69,13 @@
   <sql id="Base_Column_List">
     d_id, dname, dnumber, dphone, diver_time
   </sql>
-  <select id="selectByExample" parameterType="com.imnu.SchoolBus.pojo.DriversExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.imnu.SchoolBus.pojo.DriverExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from drivers
+    from driver
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,27 +86,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from drivers
+    from driver
     where d_id = #{dId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from drivers
+    delete from driver
     where d_id = #{dId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.imnu.SchoolBus.pojo.DriversExample">
-    delete from drivers
+  <delete id="deleteByExample" parameterType="com.imnu.SchoolBus.pojo.DriverExample">
+    delete from driver
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.imnu.SchoolBus.pojo.Drivers">
-    insert into drivers (d_id, dname, dnumber, 
+  <insert id="insert" parameterType="com.imnu.SchoolBus.pojo.Driver">
+    insert into driver (d_id, dname, dnumber, 
       dphone, diver_time)
     values (#{dId,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{dnumber,jdbcType=VARCHAR}, 
       #{dphone,jdbcType=VARCHAR}, #{diverTime,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.imnu.SchoolBus.pojo.Drivers">
-    insert into drivers
+  <insert id="insertSelective" parameterType="com.imnu.SchoolBus.pojo.Driver">
+    insert into driver
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dId != null">
         d_id,
@@ -142,14 +142,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.imnu.SchoolBus.pojo.DriversExample" resultType="java.lang.Long">
-    select count(*) from drivers
+  <select id="countByExample" parameterType="com.imnu.SchoolBus.pojo.DriverExample" resultType="java.lang.Long">
+    select count(*) from driver
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update drivers
+    update driver
     <set>
       <if test="record.dId != null">
         d_id = #{record.dId,jdbcType=INTEGER},
@@ -172,7 +172,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update drivers
+    update driver
     set d_id = #{record.dId,jdbcType=INTEGER},
       dname = #{record.dname,jdbcType=VARCHAR},
       dnumber = #{record.dnumber,jdbcType=VARCHAR},
@@ -182,8 +182,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.imnu.SchoolBus.pojo.Drivers">
-    update drivers
+  <update id="updateByPrimaryKeySelective" parameterType="com.imnu.SchoolBus.pojo.Driver">
+    update driver
     <set>
       <if test="dname != null">
         dname = #{dname,jdbcType=VARCHAR},
@@ -200,8 +200,8 @@
     </set>
     where d_id = #{dId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.imnu.SchoolBus.pojo.Drivers">
-    update drivers
+  <update id="updateByPrimaryKey" parameterType="com.imnu.SchoolBus.pojo.Driver">
+    update driver
     set dname = #{dname,jdbcType=VARCHAR},
       dnumber = #{dnumber,jdbcType=VARCHAR},
       dphone = #{dphone,jdbcType=VARCHAR},

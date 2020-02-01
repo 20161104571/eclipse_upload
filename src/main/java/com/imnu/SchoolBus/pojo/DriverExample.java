@@ -3,14 +3,14 @@ package com.imnu.SchoolBus.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DriversExample {
+public class DriverExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DriversExample() {
+    public DriverExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

@@ -1,6 +1,6 @@
 package com.imnu.SchoolBus.pojo;
 
-public class Drivers {
+public class Driver {
     private Integer dId;
 
     private String dname;

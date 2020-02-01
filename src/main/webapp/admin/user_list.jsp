@@ -38,8 +38,8 @@
               	<li class="nav-item nav-item-has-subnav"> 
                   <a href="#">用户信息管理</a>
                   <ul class="nav nav-subnav">
-                    <li> <a href="${pageContext.request.contextPath }/admin/userlist.action">教师信息管理</a> </li>
-                    <li> <a href="${pageContext.request.contextPath }/admin/driverlist.action">司机信息管理</a> </li>
+                    <li> <a href="${pageContext.request.contextPath }/admin/user_list.jsp">教师信息管理</a> </li>
+                    <li> <a href="${pageContext.request.contextPath }/admin/driver_list.jsp">司机信息管理</a> </li>
                       <!-- <ul class="nav nav-subnav">
                         <li> <a href="#!">三级菜单</a> </li>
                         <li> <a href="#!">三级菜单</a> </li>
