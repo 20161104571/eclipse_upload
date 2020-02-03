@@ -121,7 +121,7 @@
           <ul class="topbar-right">
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
-                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" />
+                <!-- <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" /> -->
                 <span>admin <span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
@@ -165,8 +165,8 @@
                   </div>
                 </form>
                 <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
-                  <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                  <a class="btn btn-primary m-r-5" href="driver_list.jsp"><i class="mdi mdi-plus"></i> 新增</a>
+                  <!-- <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a> -->
                 </div>
               </div>
               <div class="card-body">
@@ -177,11 +177,11 @@
                 	<table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>
+                        <!-- <th>
                           <label class="lyear-checkbox checkbox-primary">
                             <input type="checkbox" id="check-all"><span></span>
                           </label>
-                        </th>
+                        </th> -->
                         <th width="80">编号</th>
 			            <th width="80">司机姓名</th>
 			            <th width="90">工号</th>
@@ -192,11 +192,11 @@
                     </thead>
                     <tbody name="s">
                     	<c:forEach items="${dl }" var="driver">
-                    		<td>
+                    		<!-- <td>
                           <label class="lyear-checkbox checkbox-primary">
                             <input type="checkbox" name="ids[]" value="1"><span></span>
                           </label>
-                        	</td>
+                        	</td> -->
                         <td>${driver.dId }</td>
                         <td>${driver.dname }</td>
                         <td>${driver.dnumber }</td>
@@ -264,7 +264,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="js/main.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 
 <script type="text/javascript">
 /* $(function(){
@@ -274,42 +274,21 @@
         $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
     });
 }); */
+
 $(function(){
 	$.post("${pageContext.request.contextPath}/admins/driverlist",
 		function(result){
 		console.log(result);
-			/* var pselect=$("tbody[name='s']");
-			var pchild="";
-			for(var i=0;i<result.length;i++){
-				pchild+="<td>"+
-				"<label class='lyear-checkbox checkbox-primary'>"+
-				 " <input type='checkbox' name='ids[]' value='1'><span></span>"+
-				"</label>"+
-				"</td>"+
-				"<td>"+result[i].dId+"</td>"+
-				"<td>"+result[i].dname+"</td>"+
-				"<td>"+result[i].dnumber+"</td>"+
-				"<td>"+result[i].dphone+"</td>"+
-				"<td>"+result[i].diver_time+"</td>"+
-				"<td>"+
-				"<div class='btn-group'>"+
-				 " <a class='btn btn-xs btn-default' href='#!' title='编辑' data-toggle='tooltip'><i class='mdi mdi-pencil'></i></a>"+
-				  "<a class='btn btn-xs btn-default' href=''#!' title='删除' data-toggle='tooltip'><i class='mdi mdi-window-close'></i></a>"+
-				"</div>"+
-				"</td>"
-			}
-			pselect.html(pchild); */
-			
-		},
+	
 		"json"
-	);
+	});
 });
-
-/* <td>${dl.dname }</td>
-<td>${dl.dnumber }</td>
-<td>${dl.dphone }</td>
-<td>${dl.diver_time }</td>
-href=javascript:void(0); value='"+result[i].fId+"' onclick=showkindgoods('"+result[i].fId+"')>"+result[i].fName+" */
 </script>
 </body>
 </html>
+ <%-- <td>${dl.dname }</td>
+<td>${dl.dnumber }</td>
+<td>${dl.dphone }</td>
+<td>${dl.diver_time }</td>
+href=javascript:void(0); value='"+result[i].fId+"' onclick=showkindgoods('"+result[i].fId+"')>"+result[i].fName+" 
+ --%>

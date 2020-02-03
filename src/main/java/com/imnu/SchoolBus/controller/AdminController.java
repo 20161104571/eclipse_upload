@@ -30,7 +30,7 @@ public class AdminController {
 	private UserService userService;
 	
 	@RequestMapping(value="/driverlist",method=RequestMethod.POST)
-	@ResponseBody
+	//@ResponseBody
 	public List<Driver> getDriverList(HttpServletRequest request) {
 		//public ModelAndView getDriverList(Driver driver, ) {
 		HttpSession session = request.getSession(true);
@@ -44,6 +44,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/findDriverByPage")
+	@ResponseBody
 	public ModelAndView findDriverByPage(@RequestParam(required = true, defaultValue = "1") int page) {
 		// PageHelper插件 select * from product limit 6,10;
 		PageHelper.startPage(page, 3);
@@ -59,6 +60,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/userlist",method=RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView getUserList(User user,HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
 		List<User> userlist = userService.getUserList();
@@ -69,6 +71,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/findUserByPage")
+	@ResponseBody
 	public ModelAndView findUserByPage(@RequestParam(required = true, defaultValue = "1") int page) {
 		// PageHelper插件 select * from product limit 6,10;
 		PageHelper.startPage(page, 3);

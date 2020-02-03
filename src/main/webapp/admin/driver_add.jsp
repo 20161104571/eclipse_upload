@@ -1,9 +1,12 @@
+<%@ page language="java" contentType="text/html; charset= utf-8"
+    pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>新增文档 - 光年(Light Year Admin)后台管理系统模板</title>
+<title>新增司机信息</title>
 <link rel="icon" href="favicon.ico" type="image/ico">
 <meta name="author" content="yinqi">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,60 +30,67 @@
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item"> <a href="index.html"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li class="nav-item active"> <a href="index.jsp"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            
             <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> UI 元素</a>
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="lyear_ui_buttons.html">按钮</a> </li>
-                <li> <a href="lyear_ui_cards.html">卡片</a> </li>
-                <li> <a href="lyear_ui_grid.html">格栅</a> </li>
-                <li> <a href="lyear_ui_icons.html">图标</a> </li>
-                <li> <a href="lyear_ui_tables.html">表格</a> </li>
-                <li> <a href="lyear_ui_modals.html">模态框</a> </li>
-                <li> <a href="lyear_ui_tooltips_popover.html">提示 / 弹出框</a> </li>
-                <li> <a href="lyear_ui_alerts.html">警告框</a> </li>
-                <li> <a href="lyear_ui_pagination.html">分页</a> </li>
-                <li> <a href="lyear_ui_progress.html">进度条</a> </li>
-                <li> <a href="lyear_ui_tabs.html">标签页</a> </li>
-                <li> <a href="lyear_ui_typography.html">排版</a> </li>
-                <li> <a href="lyear_ui_step.html">步骤</a> </li>
-                <li> <a href="lyear_ui_other.html">其他</a> </li>
+              	<li class="nav-item nav-item-has-subnav"> 
+                  <a href="#">用户信息管理</a>
+                  <ul class="nav nav-subnav">
+                    <li> <a href="${pageContext.request.contextPath }/admin/user_list.jsp">教师信息管理</a> </li>
+                    <li> <a href="${pageContext.request.contextPath }/admin/driver_list.jsp">司机信息管理</a> </li>
+                      <!-- <ul class="nav nav-subnav">
+                        <li> <a href="#!">三级菜单</a> </li>
+                        <li> <a href="#!">三级菜单</a> </li>
+                      </ul> -->
+                    
+                  </ul>
+                </li>
+                <!-- <li> <a href="lyear_pages_doc.html">用户信息管理</a> </li> -->
+                
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 表单</a>
-              <ul class="nav nav-subnav">
-                <li> <a href="lyear_forms_elements.html">基本元素</a> </li>
-                <li> <a href="lyear_forms_radio.html">单选框</a> </li>
-                <li> <a href="lyear_forms_checkbox.html">复选框</a> </li>
-                <li> <a href="lyear_forms_switch.html">开关</a> </li>
-              </ul>
-            </li>
-            <li class="nav-item nav-item-has-subnav active open">
-              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 示例页面</a>
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 车辆管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
                 <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
                 <li> <a href="lyear_pages_config.html">网站配置</a> </li>
                 <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
-                <li class="active"> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
+                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
                 <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
                 <li> <a href="lyear_pages_login.html">登录页面</a> </li>
                 <li> <a href="lyear_pages_error.html">错误页面</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)"><i class="mdi mdi-language-javascript"></i> JS 插件</a>
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 预约管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="lyear_js_datepicker.html">日期选取器</a> </li>
-                <li> <a href="lyear_js_sliders.html">滑块</a> </li>
-                <li> <a href="lyear_js_colorpicker.html">选色器</a> </li>
-                <li> <a href="lyear_js_chartjs.html">Chart.js</a> </li>
-                <li> <a href="lyear_js_jconfirm.html">对话框</a> </li>
-                <li> <a href="lyear_js_tags_input.html">标签插件</a> </li>
-                <li> <a href="lyear_js_notify.html">通知消息</a> </li>
+                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
+                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
+                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
+                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
+                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
+                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
+                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
+                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
               </ul>
             </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 留言管理</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
+                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
+                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
+                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
+                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
+                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
+                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
+                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
+              </ul>
+            </li>
+           
           </ul>
         </nav>
         
