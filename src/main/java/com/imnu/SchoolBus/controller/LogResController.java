@@ -62,7 +62,7 @@ public class LogResController {
     @RequestMapping(value = "/loginPage")
     @ResponseBody
     public String login(){
-        return "user/login";
+        return "thymeleaf/user/login";
     }
 
     /**
