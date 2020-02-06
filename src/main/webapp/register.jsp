@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
 
@@ -47,7 +47,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="./loginres/res" method="post" class="login-form">
+			                    <form role="form" action="./loginres/registerUser" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">用户名:</label>
 			                        	<input type="text" name="username" placeholder="用户名..." class="form-username form-control" id="username">
@@ -57,21 +57,25 @@
 			                        	<input type="password" name="password" placeholder="密码..." class="form-password form-control" id="password">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">真实姓名:</label>
+			                        	<label class="sr-only" for="form-realname">真实姓名:</label>
 			                        	<input type="text" name="name" placeholder="真实姓名..." class="form-realname form-control" id="name">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">学号（工号）:</label>
+			                        	<label class="sr-only" for="form-number">学号（工号）:</label>
 			                        	<input type="text" name="number" placeholder="学工号..." class="form-number form-control" id="number">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">手机号:</label>
+			                        	<label class="sr-only" for="form-email">电子邮箱:</label>
+			                        	<input type="text" name="email" placeholder="电子邮箱..." class="form-email form-control" id="email">
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-phone">手机号:</label>
 			                        	<input type="text" name="phone" placeholder="手机号..." class="form-phone form-control" id="phone">
 			                        </div>
 			                        
-			                        <button class="btn">下一步</button>
+			                        <button class="btn">注册</button>
 			                        <div class="form-group">
-										<p>Already registered? <a href="login.jsp">登 录</a></p>
+										<p>Already registered? <a href="login.html">登 录</a></p>
 									</div>
 			                    </form>
 		                    </div>

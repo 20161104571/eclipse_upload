@@ -33,4 +33,6 @@ public interface DriverMapper {
     int updateByPrimaryKeySelective(Driver record);
 
     int updateByPrimaryKey(Driver record);
+
+	String addDriver(Driver driver);
 }

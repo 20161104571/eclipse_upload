@@ -11,4 +11,6 @@ public interface DriverService {
 
 	List<Driver> getDriverList();
 
+	boolean addDriver(Driver driver);
+
 }

@@ -3,7 +3,7 @@ package com.imnu.SchoolBus.service;
 
 public interface MailService {
 
-	/**
+    /**
      * 发送文本邮件
      * @param to
      * @param subject
@@ -17,5 +17,6 @@ public interface MailService {
      * @param content
      */
     void sendHtmlMail(String to, String subject, String content);
+
 
 }

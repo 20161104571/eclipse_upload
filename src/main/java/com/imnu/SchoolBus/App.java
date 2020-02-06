@@ -16,11 +16,12 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.imnu.SchoolBus"})
-@MapperScan("com.imnu.SchoolBus.mapper")
+@MapperScan(basePackages = "com.imnu.SchoolBus.mapper")
 public class App 
 {
 	 public static void main( String[] args ) {
 	    	SpringApplication.run(App.class, args);
 	    	//print();
+	    	
 	    }
 }

@@ -1,37 +1,68 @@
 package com.imnu.SchoolBus.mapper;
 
 import com.imnu.SchoolBus.pojo.User;
-import com.imnu.SchoolBus.pojo.UserExample;
-import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
-@Repository
 @Mapper
-@Component("userMapper")
 public interface UserMapper {
-    long countByExample(UserExample example);
+//    long countByExample(UserExample example);
+//
+//    int deleteByExample(UserExample example);
+//
+//    int deleteByPrimaryKey(Integer id);
+//
+//    int insert(User record);
+//
+//    int insertSelective(User record);
+//
+//    List<User> selectByExample(UserExample example);
+//
+//    User selectByPrimaryKey(Integer id);
+//
+//    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+//
+//    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+//
+//    int updateByPrimaryKeySelective(User record);
+//
+//    int updateByPrimaryKey(User record);
+//
+//	User checkCode(String code);
+//
+//	void updateUserStatus(User user);
+//
+//	void ResUser(User user);
+//
+//	User login(User user);
+	
+	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status,code) values(#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status},#{code})")
+    void register(User user);
 
-    int deleteByExample(UserExample example);
+    /**
+     * 根据激活码查询用户，之后再进行修改用户状态
+     * @param code
+     * @return
+     */
+	@Select(value = "select * from user where code = #{code}")
+    User checkCode(String code);
 
-    int deleteByPrimaryKey(Integer id);
+    /**
+     * 激活账户，修改用户状态为"1"
+     * @param user
+     */
+	@Update(value = "update user set status=1,code=null where id=#{id}")
+    void updateUserStatus(User user);
 
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    List<User> selectByExample(UserExample example);
-
-    User selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
-
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
+	@Select(value = "select * from user where username=#{username} and password=#{password} and status=1")
+    User loginUser(User user);
+    
 }

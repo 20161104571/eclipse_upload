@@ -115,23 +115,22 @@
               <span class="lyear-toggler-bar"></span>
               <span class="lyear-toggler-bar"></span>
             </div>
-            <span class="navbar-page-title"> 示例页面 - 文档列表 </span>
+            <span class="navbar-page-title"> 司机信息 </span>
           </div>
           
-          <ul class="topbar-right">
+          <%-- <ul class="topbar-right">
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
-                <!-- <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" /> -->
-                <span>admin <span class="caret"></span></span>
+                <span>欢迎${user.username }<span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li> <a href="lyear_pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
+                <li> <a href="admin_edit_pwd.jsp"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
                 <li class="divider"></li>
                 <li> <a href="lyear_pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
               </ul>
             </li>
             
-          </ul>
+          </ul> --%>
           
         </div>
       </nav>
@@ -165,7 +164,7 @@
                   </div>
                 </form>
                 <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="driver_list.jsp"><i class="mdi mdi-plus"></i> 新增</a>
+                  <a class="btn btn-primary m-r-5" href="driver_add.jsp"><i class="mdi mdi-plus"></i> 新增</a>
                   <!-- <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a> -->
                 </div>
               </div>

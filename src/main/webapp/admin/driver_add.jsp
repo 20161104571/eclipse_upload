@@ -114,11 +114,11 @@
               <span class="lyear-toggler-bar"></span>
               <span class="lyear-toggler-bar"></span>
             </div>
-            <span class="navbar-page-title"> 示例页面 - 新增文档 </span>
+            <span class="navbar-page-title"> 新增司机信息 </span>
           </div>
           
           <ul class="topbar-right">
-            <li class="dropdown dropdown-profile">
+            <!-- <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
                 <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" />
                 <span>笔下光年 <span class="caret"></span></span>
@@ -130,7 +130,7 @@
                 <li class="divider"></li>
                 <li> <a href="lyear_pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
               </ul>
-            </li>
+            </li> -->
             
           </ul>
           
@@ -142,39 +142,26 @@
     
     <!--页面主要内容-->
     <main class="lyear-layout-content">
-      
       <div class="container-fluid">
-        
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
                 
-                <form action="#!" method="post" class="row">
-                  <div class="form-group col-md-12">
-                    <label for="type">栏目</label>
-                    <div class="form-controls">
-                      <select name="type" class="form-control" id="type">
-                        <option value="1">小说</option>
-                        <option value="2">古籍</option>
-                        <option value="3">专辑</option>
-                        <option value="4">自传</option>
-                      </select>
-                    </div>
+                <form action="${pageContext.request.contextPath }/admins/adddriver.action" method="post" class="row">
+                	<div class="form-group col-md-12">
+                    <label for="drivername">司机姓名</label>
+                    <input type="text" class="form-control" id="drivername" name="drivername" value="" placeholder="请输入司机姓名" />
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="title">标题</label>
-                    <input type="text" class="form-control" id="title" name="title" value="" placeholder="请输入标题" />
+                    <label for="drivernum">工号</label>
+                    <input type="text" class="form-control" id="drivernum" name="drivernum" value="" placeholder="输入司机工号" />
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="seo_keywords">关键词</label>
-                    <input type="text" class="form-control" id="seo_keywords" name="seo_keywords" value="" placeholder="关键词" />
+                    <label for="driverphone">电话</label>
+                    <input type="text" class="form-control" id="driverphone" name="driverphone" value="" placeholder="输入司机电话" />
                   </div>
-                  <div class="form-group col-md-12">
-                    <label for="seo_description">描述</label>
-                    <textarea class="form-control" id="seo_description" name="seo_description" rows="5" value="" placeholder="描述"></textarea>
-                  </div>
-                  <div class="form-group col-md-12">
+                  <!-- <div class="form-group col-md-12">
                     <label>多图上传</label>
                     <div class="form-controls">
                       
@@ -211,49 +198,47 @@
                         </li>
                       </ul>
                     </div>
+                  </div> -->
+                  <div class="form-group col-md-12">
+                    <label for="drivertime">驾龄</label>
+                    <input class="form-control" type="text" id="drivertime" name="drivertime" value="" placeholder="输入司机驾龄"/>
+                  </div>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="content">内容</label>
-                    <p>HTML编辑器这里就不做演示了</p>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="tags">标签</label>
-                    <input class="js-tags-input form-control" type="text" id="tags" name="tags" value="" />
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="sort">排序</label>
-                    <input type="text" class="form-control" id="sort" name="sort" value="0" />
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="status">状态</label>
-                    <div class="clearfix">
-                      <label class="lyear-radio radio-inline radio-primary">
-                        <input type="radio" name="status" value="0"><span>禁用</span>
-                      </label>
-                      <label class="lyear-radio radio-inline radio-primary">
-                        <input type="radio" name="status" value="1" checked><span>启用</span>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                    <button type="submit" class="btn btn-primary ajax-post" target-form="add">确 定</button>
                     <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                   </div>
                 </form>
-       
-              </div>
+                  
+				</div>
+             </div>
             </div>
           </div>
-          
-        </div>
-        
-      </div>
-      
-    </main>
-    <!--End 页面主要内容-->
-  </div>
+       </main>
+   </div>
 </div>
-
+<script type="text/javascript">
+$(function(){
+	$.post("${pageContext.request.contextPath}/admins/adddriver",
+		function(result){
+		console.add(result);
+	
+		"json"
+	});
+});
+//监听提交
+form.on('submit(add)', function(data){
+  console.log(data);
+  //发异步，把数据提交给php
+  layer.alert("增加成功", {icon: 4},function () {
+      // 获得frame索引
+      var index = parent.layer.getFrameIndex(window.name);
+      //关闭当前frame
+      parent.layer.close(index);
+  });
+  return false;
+});
+</script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>

@@ -15,7 +15,9 @@ public class User {
 
     private String phone;
 
-    private Integer code;
+    private Integer status;
+
+    private String code;
 
     public Integer getId() {
         return id;
@@ -73,15 +75,27 @@ public class User {
         this.phone = phone;
     }
 
-    public Integer getCode() {
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getCode() {
         return code;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", number="
-				+ number + ", email=" + email + ", phone=" + phone + ", code=" + code + "]";
+				+ number + ", email=" + email + ", phone=" + phone + ", status=" + status + ", code=" + code + "]";
 	}
-
+    
+    
 }

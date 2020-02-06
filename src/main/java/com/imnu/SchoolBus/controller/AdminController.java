@@ -29,62 +29,86 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/driverlist",method=RequestMethod.POST)
-	//@ResponseBody
-	public List<Driver> getDriverList(HttpServletRequest request) {
-		//public ModelAndView getDriverList(Driver driver, ) {
-		HttpSession session = request.getSession(true);
-		List<Driver> driverlist=driverService.getDriverList();
- 		ModelAndView mv = new ModelAndView();
- 		session.setAttribute("dl", driverlist);
- 		System.out.println(driverlist.size());
- 		mv.addObject("dl",driverlist);
- 		mv.setViewName("admin/driver_list.jsp");	
-		return driverlist;
-	}
-	
-	@RequestMapping("/findDriverByPage")
-	@ResponseBody
-	public ModelAndView findDriverByPage(@RequestParam(required = true, defaultValue = "1") int page) {
-		// PageHelper插件 select * from product limit 6,10;
-		PageHelper.startPage(page, 3);
-		List<Driver> list = driverService.findDiverByPage(page);
-		System.out.println("45");
-
-		PageInfo<Driver> pageInfo = new PageInfo<Driver>(list);
-//		new JsonResult(pageInfo);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("pageInfo", pageInfo);
-		mv.setViewName("admin/dirver_list");
-		return mv;
-	}
-	
-	@RequestMapping(value="/userlist",method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView getUserList(User user,HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
-		List<User> userlist = userService.getUserList();
-		ModelAndView mv = new ModelAndView();
- 		session.setAttribute("dl", userlist);
- 			mv.setViewName("admin/user_list");	
-		return mv;
-	}
-	
-	@RequestMapping("/findUserByPage")
-	@ResponseBody
-	public ModelAndView findUserByPage(@RequestParam(required = true, defaultValue = "1") int page) {
-		// PageHelper插件 select * from product limit 6,10;
-		PageHelper.startPage(page, 3);
-		List<User> list = userService.findUserByPage(page);
-		System.out.println("45");
-
-		PageInfo<User> pageInfo = new PageInfo<User>(list);
-		//new JsonResult(pageInfo);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("pageInfo", pageInfo);
-		mv.setViewName("admin/user_list");
-		return mv;
-	}
-	
-	
+//	@RequestMapping(value="/driverlist",method=RequestMethod.POST)
+//	//@ResponseBody
+//	public List<Driver> getDriverList(HttpServletRequest request) {
+//		//public ModelAndView getDriverList(Driver driver, ) {
+//		HttpSession session = request.getSession(true);
+//		List<Driver> driverlist=driverService.getDriverList();
+// 		ModelAndView mv = new ModelAndView();
+// 		session.setAttribute("dl", driverlist);
+// 		System.out.println(driverlist.size());
+// 		mv.addObject("dl",driverlist);
+// 		mv.setViewName("admin/driver_list.jsp");	
+//		return driverlist;
+//	}
+//	
+//	@RequestMapping("/findDriverByPage")
+//	@ResponseBody
+//	public ModelAndView findDriverByPage(@RequestParam(required = true, defaultValue = "1") int page) {
+//		// PageHelper插件 select * from product limit 6,10;
+//		PageHelper.startPage(page, 3);
+//		List<Driver> list = driverService.findDiverByPage(page);
+//		System.out.println("45");
+//
+//		PageInfo<Driver> pageInfo = new PageInfo<Driver>(list);
+////		new JsonResult(pageInfo);
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("pageInfo", pageInfo);
+//		mv.setViewName("admin/dirver_list");
+//		return mv;
+//	}
+//	
+//	@RequestMapping(value="/userlist",method=RequestMethod.POST)
+//	@ResponseBody
+//	public ModelAndView getUserList(User user,HttpServletRequest request) {
+//		HttpSession session = request.getSession(true);
+//		List<User> userlist = userService.getUserList();
+//		ModelAndView mv = new ModelAndView();
+// 		session.setAttribute("dl", userlist);
+// 			mv.setViewName("admin/user_list");	
+//		return mv;
+//	}
+//	
+//	@RequestMapping("/findUserByPage")
+//	@ResponseBody
+//	public ModelAndView findUserByPage(@RequestParam(required = true, defaultValue = "1") int page) {
+//		// PageHelper插件 select * from product limit 6,10;
+//		PageHelper.startPage(page, 3);
+//		List<User> list = userService.findUserByPage(page);
+//		System.out.println("45");
+//
+//		PageInfo<User> pageInfo = new PageInfo<User>(list);
+//		//new JsonResult(pageInfo);
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("pageInfo", pageInfo);
+//		mv.setViewName("admin/user_list");
+//		return mv;
+//	}
+//	
+//	/*
+//	 * @RequestMapping("/insert")
+//	 * 
+//	 * @ResponseBody public String addDriver(Driver driver){
+//	 * driverService.addDriver(driver); return "redirect:/admin/driver_list"; }
+//	 */
+//	
+//	@RequestMapping(value="/adddriver",method=RequestMethod.POST)
+//	@ResponseBody
+//	public ModelAndView addDriver(Driver driver,HttpSession session) {
+//		boolean result=driverService.addDriver(driver);
+//		System.out.println("1111");
+//		ModelAndView mv = new ModelAndView(); 
+//		mv.setViewName("admin/index");
+//		if(result) {
+//			//product.setImage(result);
+//			/*Location loc=user.getLoc();
+//			user.setLocation(loc.toString());*/
+//			driverService.addDriver(driver);
+//			session.setAttribute("driver", driver);
+//		}else {
+//			mv.addObject("result",result);
+//		}
+//		return mv;
+//	}
 }
