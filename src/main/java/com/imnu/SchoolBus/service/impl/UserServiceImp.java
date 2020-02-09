@@ -32,6 +32,15 @@ public class UserServiceImp implements UserService{
      */
     @Override
     public void register(User user) {
+    	String code = user.getCode();
+        System.out.println("code:"+code);
+        String email = user.getEmail();
+        System.out.println("email:"+email);
+        String subject = "来自校车预约中心的激活邮件";
+        //user/checkCode?code=xxx即是我们点击邮件链接之后进行更改状态的
+        String context = "<a href=\"http://localhost:8080/schoolbus/loginres/checkCode?code="+code+"\">激活请点击:"+code+"</a>";
+        //发送激活邮件
+        mailService.sendHtmlMail (user.getEmail(),subject,context);
     	userMapper.register(user);
         
     }
@@ -70,18 +79,19 @@ public class UserServiceImp implements UserService{
         return null;
     }
 
-	@Override
-	public void email(User user) {
-		String code = user.getCode();
-        System.out.println("code:"+code);
-        String email = user.getEmail();
-        System.out.println("email:"+email);
-        String subject = "来自校车预约中心的激活邮件";
-        //user/checkCode?code=xxx即是我们点击邮件链接之后进行更改状态的
-        String context = "<a href=\"http://localhost:8080/schoolbus/loginres/checkCode?code="+code+"\">激活请点击:"+code+"</a>";
-        //发送激活邮件
-        mailService.sendHtmlMail (user.getEmail(),subject,context);
-	}
+
+//	@Override
+//	public void email(User user) {
+//		String code = user.getCode();
+//        System.out.println("code:"+code);
+//        String email = user.getEmail();
+//        System.out.println("email:"+email);
+//        String subject = "来自校车预约中心的激活邮件";
+//        //user/checkCode?code=xxx即是我们点击邮件链接之后进行更改状态的
+//        String context = "<a href=\"http://localhost:8080/schoolbus/loginres/checkCode?code="+code+"\">激活请点击:"+code+"</a>";
+//        //发送激活邮件
+//        mailService.sendHtmlMail (user.getEmail(),subject,context);
+//	}
 	
 //	@Override
 //	public User login(User user) {

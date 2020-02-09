@@ -13,8 +13,7 @@ public interface UserService {
 
 	User loginUser(User user);
 	
-	void email(User user);
-
+	
 	//User LoginUser(String username, String password);
 
 //	public boolean ResUser(User user);

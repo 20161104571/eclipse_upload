@@ -30,22 +30,13 @@ public class LogResController {
     
     public String register(User user){
         user.setStatus(0);
-        //String code = UUIDUtils.getUUID() + UUIDUtils.getUUID();
+        String code = UUIDUtils.getUUID() + UUIDUtils.getUUID();
         //String code = VerCodeGenerateUtil.generateVerCode();
-        //user.setCode(code);
+        user.setCode(code);
         userService.register(user);
         return "user/success";
     }
     
-    @RequestMapping(value = "/sendCode")
-    public User send(User user) {
-    	String code = VerCodeGenerateUtil.generateVerCode();
-        user.setCode(code);
-        userService.email(user);
-		return user;
-		
-    	
-    }
 
     /**
      *校验邮箱中的code激活账户

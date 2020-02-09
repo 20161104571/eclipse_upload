@@ -62,11 +62,6 @@
 		                        		<label class="sr-only" for="form-email">电子邮箱:</label>
 		                        		<input type="text" name="email" placeholder="电子邮箱..." class="form-email form-control" id="email">
 		                        	</div>
-		                        	<div class="form-group">
-		                        		<label class="sr-only" for="form-code">邮箱验证码:</label>
-		                        		<input type="text" name="code" placeholder="邮箱验证码..." class="form-code form-control" id="checkCode">
-		                        		<button id="sendCheckCode" type="button" class="form-code form-control">获取验证码</button>
-		                        	</div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-phone">手机号:</label>
 			                        	<input type="text" name="phone" placeholder="手机号..." class="form-phone form-control" id="phone">
@@ -90,37 +85,7 @@
         <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="static/assets/js/jquery.backstretch.min.js"></script>
         <script src="static/assets/js/scripts.js"></script>
-        <script type="text/javascript">
-        var checkCode = "";
         
-        $("#sendCheckCode").click(function () {
-            var email = $("#email").val();
-            if (email == null || email == ""){
-                layer.msg("请输入邮箱！！！");
-                return;
-            }
-            var index = layer.open({
-                type:3,
-                content:"邮件发送中..."
-            });
-
-            $.ajax({
-                url:"/getCheckCode?email="+email,
-                type:"get",
-                success:function (text) {
-                    if (text != null && text != ""){
-                        layer.close(index);
-                        //layer.msg("已发送");
-                        checkCode = text;
-                        countDown();
-                    } else{
-                        layer.alert("获取失败，请重新获取")
-                    }
-                }
-            });
-        });
-
-        </script>
        
     </body>
 
