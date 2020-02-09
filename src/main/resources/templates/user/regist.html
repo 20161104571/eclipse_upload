@@ -8,24 +8,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>欢迎注册校园通勤车管理系统</title>
 
-        <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="http://localhost:8080/schoolbus/assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://localhost:8080/schoolbus/assets/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="http://localhost:8080/schoolbus/assets/css/form-elements.css">
-        <link rel="stylesheet" href="http://localhost:8080/schoolbus/assets/css/style.css">
+        <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="static/assets/css/form-elements.css">
+        <link rel="stylesheet" href="static/assets/css/style.css">
 
-        <link rel="shortcut icon" href="assets/ico/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:8080/schoolbus/assets/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:8080/schoolbus/assets/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:8080/schoolbus/assets/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="http://localhost:8080/schoolbus/assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="static/assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="static/assets/ico/apple-touch-icon-57-precomposed.png">
 
     </head>
 
     <body>
-
-        <!-- Top content -->
         <div class="top-content">
         	
             <div class="inner-bg">
@@ -61,18 +58,22 @@
 			                        	<label class="sr-only" for="form-number">学号（工号）:</label>
 			                        	<input type="text" name="number" placeholder="学工号..." class="form-number form-control" id="number">
 			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-email">电子邮箱:</label>
-			                        	<input type="text" name="email" placeholder="电子邮箱..." class="form-email form-control" id="email">
-			                        </div>
+		                        	<div class="form-group">
+		                        		<label class="sr-only" for="form-email">电子邮箱:</label>
+		                        		<input type="text" name="email" placeholder="电子邮箱..." class="form-email form-control" id="email">
+		                        	</div>
+		                        	<div class="form-group">
+		                        		<label class="sr-only" for="form-code">邮箱验证码:</label>
+		                        		<input type="text" name="code" placeholder="邮箱验证码..." class="form-code form-control" id="checkCode">
+		                        		<button id="sendCheckCode" type="button" class="form-code form-control">获取验证码</button>
+		                        	</div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-phone">手机号:</label>
 			                        	<input type="text" name="phone" placeholder="手机号..." class="form-phone form-control" id="phone">
 			                        </div>
-			                        
 			                        <button class="btn">注册</button>
 			                        <div class="form-group">
-										<p>Already registered? <a href="./loginres/loginPage">登 录</a></p>
+										<p>Already registered? <a href="login">登 录</a></p>
 									</div>
 			                    </form>
 		                    </div>
@@ -85,11 +86,41 @@
         </div>
 
 
-        <script src="http://localhost:8080/schoolbus/assets/js/jquery-1.11.1.min.js"></script>
-        <script src="http://localhost:8080/schoolbus/assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="http://localhost:8080/schoolbus/assets/js/jquery.backstretch.min.js"></script>
-        <script src="http://localhost:8080/schoolbus/assets/js/scripts.js"></script>
+        <script src="static/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="static/assets/js/jquery.backstretch.min.js"></script>
+        <script src="static/assets/js/scripts.js"></script>
+        <script type="text/javascript">
+        var checkCode = "";
         
+        $("#sendCheckCode").click(function () {
+            var email = $("#email").val();
+            if (email == null || email == ""){
+                layer.msg("请输入邮箱！！！");
+                return;
+            }
+            var index = layer.open({
+                type:3,
+                content:"邮件发送中..."
+            });
+
+            $.ajax({
+                url:"/getCheckCode?email="+email,
+                type:"get",
+                success:function (text) {
+                    if (text != null && text != ""){
+                        layer.close(index);
+                        //layer.msg("已发送");
+                        checkCode = text;
+                        countDown();
+                    } else{
+                        layer.alert("获取失败，请重新获取")
+                    }
+                }
+            });
+        });
+
+        </script>
        
     </body>
 

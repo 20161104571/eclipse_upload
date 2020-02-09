@@ -12,6 +12,8 @@ public interface UserService {
 	void updateUserStatus(User user);
 
 	User loginUser(User user);
+	
+	void email(User user);
 
 	//User LoginUser(String username, String password);
 

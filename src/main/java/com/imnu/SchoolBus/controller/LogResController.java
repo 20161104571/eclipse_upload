@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.UserService;
 import com.imnu.SchoolBus.util.UUIDUtils;
+import com.imnu.SchoolBus.util.VerCodeGenerateUtil;
 
 @Controller
-@RequestMapping(value="/thymeleaf/loginres")
+@RequestMapping(value="/loginres")
 public class LogResController {
 
 	@Autowired
@@ -29,10 +30,21 @@ public class LogResController {
     
     public String register(User user){
         user.setStatus(0);
-        String code = UUIDUtils.getUUID()+ UUIDUtils.getUUID();
-        user.setCode(code);
+        //String code = UUIDUtils.getUUID() + UUIDUtils.getUUID();
+        //String code = VerCodeGenerateUtil.generateVerCode();
+        //user.setCode(code);
         userService.register(user);
         return "user/success";
+    }
+    
+    @RequestMapping(value = "/sendCode")
+    public User send(User user) {
+    	String code = VerCodeGenerateUtil.generateVerCode();
+        user.setCode(code);
+        userService.email(user);
+		return user;
+		
+    	
     }
 
     /**
@@ -62,7 +74,7 @@ public class LogResController {
     @RequestMapping(value = "/loginPage")
     @ResponseBody
     public String login(){
-        return "thymeleaf/user/login";
+        return "user/login";
     }
 
     /**
