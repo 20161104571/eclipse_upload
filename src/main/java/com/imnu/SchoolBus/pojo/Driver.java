@@ -50,4 +50,13 @@ public class Driver {
     public void setDiverTime(String diverTime) {
         this.diverTime = diverTime;
     }
+
+	@Override
+	public String toString() {
+		return "Driver [dId=" + dId + ", dname=" + dname + ", dnumber=" + dnumber + ", dphone=" + dphone
+				+ ", diverTime=" + diverTime + "]";
+	}
+    
+    
+    
 }

@@ -9,35 +9,6 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
-//    long countByExample(UserExample example);
-//
-//    int deleteByExample(UserExample example);
-//
-//    int deleteByPrimaryKey(Integer id);
-//
-//    int insert(User record);
-//
-//    int insertSelective(User record);
-//
-//    List<User> selectByExample(UserExample example);
-//
-//    User selectByPrimaryKey(Integer id);
-//
-//    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
-//
-//    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
-//
-//    int updateByPrimaryKeySelective(User record);
-//
-//    int updateByPrimaryKey(User record);
-//
-//	User checkCode(String code);
-//
-//	void updateUserStatus(User user);
-//
-//	void ResUser(User user);
-//
-//	User login(User user);
 	
 	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status,code) values(#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status},#{code})")
     void register(User user);

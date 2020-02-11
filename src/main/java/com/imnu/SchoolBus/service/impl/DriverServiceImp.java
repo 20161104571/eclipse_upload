@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.imnu.SchoolBus.mapper.DriverMapper;
 import com.imnu.SchoolBus.pojo.Driver;
-import com.imnu.SchoolBus.pojo.DriverExample;
 import com.imnu.SchoolBus.service.DriverService;
 
 @Service
@@ -16,24 +15,52 @@ import com.imnu.SchoolBus.service.DriverService;
 public class DriverServiceImp implements DriverService{
 	@Autowired
 	private DriverMapper driverMapper;
-	@Override
-	public List<Driver> findDiverByPage(int page) {
-		return driverMapper.selectByExample(new DriverExample());
-	}
+//	@Override
+//	public List<Driver> findDiverByPage(int page) {
+//		return driverMapper.selectByExample(new DriverExample());
+//	}
 
 	@Override
 	public List<Driver> getDriverList() {
-		DriverExample example = new DriverExample();
-		List<Driver> list = driverMapper.selectByExample(example);
+		List<Driver> list = driverMapper.getDriverList();
 		return list;
 	}
 
 	@Override
-	public boolean addDriver(Driver driver) {
-		int addDriver = driverMapper.insertSelective(driver);
-		return addDriver>0?true:false;
-		
+	public void createDriver(Driver driver) {
+		//int addDriver = driverMapper.createDriver(driver);
+		//return addDriver>0?true:false;
+		driverMapper.createDriver(driver);
 	}
+
+	@Override
+	public int updateDriver(Driver driver) {
+		return driverMapper.updateDriver(driver);
+	}
+
+	@Override
+	public int deleteDriver(Integer dId) {
+		return driverMapper.deleteDriver(dId);
+	}
+
+	@Override
+	public Driver findDriverById(int dId) {
+		return driverMapper.findDriverById(dId);
+	}
+
+//	@Override
+//	public List<Driver> getDriverList() {
+//		DriverExample example = new DriverExample();
+//		List<Driver> list = driverMapper.selectByExample(example);
+//		return list;
+//	}
+//
+//	@Override
+//	public boolean addDriver(Driver driver) {
+//		int addDriver = driverMapper.createDriver(driver);
+//		return addDriver>0?true:false;
+//		
+//	}
 	
 	
 }

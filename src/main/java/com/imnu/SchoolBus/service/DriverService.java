@@ -7,10 +7,16 @@ import com.imnu.SchoolBus.pojo.Driver;
 
 public interface DriverService {
 
-	List<Driver> findDiverByPage(int page);
+	//List<Driver> findDiverByPage(int page);
 
 	List<Driver> getDriverList();
 
-	boolean addDriver(Driver driver);
+	void createDriver(Driver driver);
+	
+	int updateDriver(Driver driver);
+	
+	int deleteDriver(Integer dId);
+	
+	Driver findDriverById(int dId);
 
 }

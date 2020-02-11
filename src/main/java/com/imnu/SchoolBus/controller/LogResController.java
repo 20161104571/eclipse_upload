@@ -1,10 +1,14 @@
 package com.imnu.SchoolBus.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.UserService;
@@ -43,7 +47,7 @@ public class LogResController {
      * 首先根据激活码code查询用户，之后再把状态修改为"1"
      */
     @RequestMapping(value = "/checkCode")
-    @ResponseBody
+    
     public String checkCode(String code){
         User user = userService.checkCode(code);
         System.out.println(user);
@@ -63,7 +67,7 @@ public class LogResController {
      * @return login
      */
     @RequestMapping(value = "/loginPage")
-    @ResponseBody
+   
     public String login(){
         return "user/login";
     }
@@ -72,7 +76,7 @@ public class LogResController {
      * 登录
      */
     @RequestMapping(value = "/loginUser")
-    @ResponseBody
+    //@ResponseBody
     public String login(User user, Model model){
         User u = userService.loginUser(user);
         if (u !=null){
@@ -80,6 +84,18 @@ public class LogResController {
         }
         return "user/login";
     }
+//    public ModelAndView login(User user, HttpSession session) {
+//    	User u = userService.loginUser(user);
+//    	ModelAndView mv = new ModelAndView();
+//    	if(u==null) {
+//			mv.setViewName("login");
+//		}else if(user.getUsername().equals("admin")) {
+// 			mv.setViewName("forward:admin/index");	
+// 		}else {
+// 			mv.setViewName("user/welcome");
+// 		}
+//    	return mv;
+//    }
 	
 //	@RequestMapping(value="/login",method=RequestMethod.POST)
 //	public ModelAndView longin(User user, HttpSession session) {
