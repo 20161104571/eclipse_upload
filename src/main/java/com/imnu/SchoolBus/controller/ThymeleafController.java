@@ -28,12 +28,17 @@ public class ThymeleafController {
 	}
 	
 	@RequestMapping("driver-list")
-	public String memberlist() {
+	public String driverlist() {
 		return "admin/driver-list";
 	}
 	
 	@RequestMapping("driver-add")
-	public String memberadd() {
+	public String driveradd() {
 		return "admin/driver-add";
+	}
+	
+	@RequestMapping("driver-edit")
+	public String driveredit() {
+		return "admin/driver-edit";
 	}
 }

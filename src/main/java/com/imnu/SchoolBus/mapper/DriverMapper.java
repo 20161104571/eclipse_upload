@@ -16,19 +16,19 @@ import com.imnu.SchoolBus.pojo.Driver;
 //@Component("driverMapper")
 public interface DriverMapper {
 
-	@Insert(value = "insert into driver (d_id,dname,dnumber,dphone,diver_time) values (#{dId},#{dname},#{dnumber},#{dphone},#{diverTime})")
+	@Insert(value = "insert into driver (dId,dname,dnumber,dphone,driverTime) values (#{dId},#{dname},#{dnumber},#{dphone},#{driverTime})")
 	void createDriver(Driver driver);
 	
-	@Update(value = "update driver set dname = #{dname},dnumber = #{dnumber},dphone = #{dphone},diver_time = #{diverTime} where d_id = #{dId}")
+	@Update(value = "update driver set dname = #{dname},dnumber = #{dnumber},dphone = #{dphone},driverTime = #{driverTime} where dId = #{dId}")
 	int updateDriver(Driver driver);
 	
-	@Delete(value = "delete from driver where d_id = #{dId}")
+	@Delete(value = "delete from driver where dId = #{dId}")
 	int deleteDriver(Integer dId);
 	
 	@Select(value = "select * from driver")
 	List<Driver> getDriverList();
 	
-	@Select(value = "select * from driver where d_id = #{dId}")
+	@Select(value = "select * from driver where dId = #{dId}")
 	Driver findDriverById(int dId);
 	
 }

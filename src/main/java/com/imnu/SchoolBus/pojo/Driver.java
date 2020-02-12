@@ -9,7 +9,7 @@ public class Driver {
 
     private String dphone;
 
-    private String diverTime;
+    private String driverTime;
 
     public Integer getdId() {
         return dId;
@@ -43,18 +43,18 @@ public class Driver {
         this.dphone = dphone;
     }
 
-    public String getDiverTime() {
-        return diverTime;
+    public String getDriverTime() {
+        return driverTime;
     }
 
-    public void setDiverTime(String diverTime) {
-        this.diverTime = diverTime;
+    public void setDriverTime(String driverTime) {
+        this.driverTime = driverTime;
     }
 
 	@Override
 	public String toString() {
 		return "Driver [dId=" + dId + ", dname=" + dname + ", dnumber=" + dnumber + ", dphone=" + dphone
-				+ ", diverTime=" + diverTime + "]";
+				+ ", driverTime=" + driverTime + "]";
 	}
     
     

@@ -15,10 +15,6 @@ import com.imnu.SchoolBus.service.DriverService;
 public class DriverServiceImp implements DriverService{
 	@Autowired
 	private DriverMapper driverMapper;
-//	@Override
-//	public List<Driver> findDiverByPage(int page) {
-//		return driverMapper.selectByExample(new DriverExample());
-//	}
 
 	@Override
 	public List<Driver> getDriverList() {
