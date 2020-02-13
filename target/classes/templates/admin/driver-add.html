@@ -22,7 +22,7 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form">
+        <form class="layui-form" >
           <div class="layui-form-item">
               <label for="dname" class="layui-form-label">
                   <span class="x-red">*</span>司机姓名
@@ -63,7 +63,7 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="add">
+              <button  class="layui-btn" lay-filter="add" lay-submit="add" onclick="add()">
                   增加
               </button>
           </div>
@@ -105,21 +105,23 @@
             return false;
           });   */
 	
-           form.on('submit(add)', function(data){
-        	  console.log(data);
+            form.on('submit(add)', function(result){
+        	  console.log(result);
               //发异步，把数据提交给php
               $.ajax({
-            	  type:'get',
+            	  type:'post',
                	  url:'./saveDriver',
                	  data:{'dId':dId},
                	  dataType:'text',
-               	  success:function(data){
-               		  if(data=="1"){
-               			layer.alert("增加成功", {icon: 4},function (){
+               	  success:function(result){
+               		  if(result=="true"){
+               			layer.alert("增加成功",function (){
                        		//关闭当前frame
-            	                x_admin_close();
+            	                /* x_admin_close(index);
             	                // 可以对父窗口进行刷新 
-            	                x_admin_father_reload();
+            	                x_admin_father_reload(); */
+            	                window.parent.loaction.reload();
+            	                parent.layer.close(index);
                			}
                		  }else{
                  			window.location.href="http://localhost:8080/shop/admin/error.jsp";
@@ -129,11 +131,32 @@
                		window.console.log('失败回调函数')
                	  }
               });
-          } 
+          }  
+          
+          
           
           
         });
     </script>
+    <!-- <script type="text/javascript">
+	    function add(button){
+	  	  var dId = $(button).val();
+	  	  $.ajax({
+	  		  url:"saveDriver",
+	  		  type:"get",
+	  		  data:"dId="+dId,
+	  		  dataType:"text",
+	  		  success:function(responseContent){
+	  			  if(responseContent=='true'){
+	  				  alert("增加成功")
+	                  return;
+	  			  }else{
+	  				  layer.alert("错误");
+	  			  }
+	  		  }
+	  	  });
+	    }
+    </script> -->
     <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";

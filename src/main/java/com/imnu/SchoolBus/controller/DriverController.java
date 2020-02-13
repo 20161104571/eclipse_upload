@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.imnu.SchoolBus.pojo.Driver;
@@ -22,7 +23,7 @@ public class DriverController {
 	public String driverList(Model model) {
 		List<Driver> drivers = driverService.getDriverList();
 		model.addAttribute("drivers", drivers);
-		System.out.println(drivers);
+		//System.out.println(drivers);
 		return "admin/driver-list";
 	}
 	
@@ -30,6 +31,12 @@ public class DriverController {
 	public String createDriver(Driver driver) {
 		driverService.createDriver(driver);
 		return "redirect:index";
+	}
+	
+	@RequestMapping(value="delete/{dId}")
+	public String deleteDriver(@PathVariable Integer dId) {
+		driverService.deleteDriver(dId);
+		return null;
 	}
 	
 	@RequestMapping(value="editDriver")
