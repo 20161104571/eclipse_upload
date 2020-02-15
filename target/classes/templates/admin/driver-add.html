@@ -22,7 +22,8 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form" >
+        <form class="layui-form" action="saveDriver" method="post">
+        <input type="hidden" name="dId"  id="dId" th:value="${dId}">
           <div class="layui-form-item">
               <label for="dname" class="layui-form-label">
                   <span class="x-red">*</span>司机姓名
@@ -63,7 +64,7 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="add" onclick="add()">
+              <button  class="layui-btn" lay-filter="add" lay-submit="add" id="save">
                   增加
               </button>
           </div>
@@ -75,23 +76,8 @@
           var form = layui.form
           ,layer = layui.layer;
         
-          //自定义验证规则
-          /* form.verify({
-            nikename: function(value){
-              if(value.length < 5){
-                return '昵称至少得5个字符啊';
-              }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
-            }
-          }); */
-
           //监听提交
-         /* form.on('submit(add)', function(data){
+          /* form.on('submit(add)', function(data){
             console.log(data);
             //发异步，把数据提交给php
             
@@ -103,66 +89,132 @@
                 x_admin_father_reload();
             });
             return false;
-          });   */
-	
-            form.on('submit(add)', function(result){
-        	  console.log(result);
+          });  */
+          /* form.on('submit(add)', function(data){
+        	  console.log(data);
+        	  var serialStr = $("#driver-add").serialize();
               //发异步，把数据提交给php
               $.ajax({
             	  type:'post',
-               	  url:'./saveDriver',
-               	  data:{'dId':dId},
+               	  url:'saveDriver',
+               	  data:serialStr,
                	  dataType:'text',
-               	  success:function(result){
-               		  if(result=="true"){
-               			layer.alert("增加成功",function (){
+               	  success:function(data){
+               		  if(data=="1"){
+               			layer.alert("增加成功", {icon: 4},function (){
                        		//关闭当前frame
-            	                /* x_admin_close(index);
+            	                x_admin_close();
             	                // 可以对父窗口进行刷新 
-            	                x_admin_father_reload(); */
-            	                window.parent.loaction.reload();
-            	                parent.layer.close(index);
-               			}
+            	                x_admin_father_reload();
+               			});
                		  }else{
-                 			window.location.href="http://localhost:8080/shop/admin/error.jsp";
+                 			//window.location.href="http://localhost:8080/shop/admin/error.jsp";
                			}
                	  },
                	  error:function(){
                		window.console.log('失败回调函数')
                	  }
               });
-          }  
-          
-          
-          
-          
+          });  */
+	
+          $(function(){
+        	    //var serialStr = $("#driveradd").serialize();//序列化表单
+        	    var dId = $("#dId").val();
+        	    $.ajax({  
+        	        type:'post',
+        	        url:'saveDriver',
+        	        data:{"dId":dId},
+        	        dataType:'json',
+        	        success:function(code){  
+        	            	$("#dname").val(code.dname);
+        	            	$("#dnumber").val(code.dnumber);
+        	            	$("#dphone").val(code.dphone);
+        	            	$("#driverTime").val(code.driverTime);
+        	            	if(code=="1"){
+                       			layer.alert("增加成功", {icon: 4},function (){
+                               		//关闭当前frame
+                    	                x_admin_close();
+                    	                // 可以对父窗口进行刷新 
+                    	                x_admin_father_reload();
+                       			});
+        	            	//if  (code ==0) {
+        	                //layer.msg('添加成功!',{icon:1,time:1000});
+        	            //}//else{  
+        	                //layer.msg('添加失败!',{icon:2,time:1000});
+        	            //}
+        	            //parent.$('.btn-refresh').click();
+        	        },error:function(){
+        	        	//layer.msg('添加失败!',{icon:2,time:1000});
+                    }
+        	    });
+        	    //var index=parent.layer.getFrameIndex(window.name);//获取当前弹出层的层级
+//        	    parent.$('.btn-refresh').click();//刷新父页面
+        	    //parent.layer.close(index);//关闭弹出层
+        	    //window.parent.location.reload();//刷新父页面
+        	})
+        	form.on('submit(add)', function(code) {
+                //var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
+                var d = code.field;
+                var url = "saveDriver";
+                
+                $.ajax({
+                    url: url,
+                    data:d,
+                    dataType:"text",
+                    success: function(code){
+                        layer.close(index);
+                        if(code == 0){
+                            layer.msg("保存成功！");
+                            /* parent.queryTea();
+                            parent.close(); */
+                            var index=parent.layer.getFrameIndex(window.name);//获取当前弹出层的层级
+//                    	    parent.$('.btn-refresh').click();//刷新父页面
+                    	    parent.layer.close(index);//关闭弹出层
+                    	    window.parent.location.reload();//刷新父页面
+                        }else{
+                            layer.msg("保存失败！");
+                        }
+                    },error:function(){
+                        layer.close(index);
+                        layer.msg("保存失败！");
+                    }
+                });
+                return false;
+            });
         });
-    </script>
-    <!-- <script type="text/javascript">
-	    function add(button){
-	  	  var dId = $(button).val();
-	  	  $.ajax({
-	  		  url:"saveDriver",
-	  		  type:"get",
-	  		  data:"dId="+dId,
-	  		  dataType:"text",
-	  		  success:function(responseContent){
-	  			  if(responseContent=='true'){
-	  				  alert("增加成功")
-	                  return;
-	  			  }else{
-	  				  layer.alert("错误");
-	  			  }
-	  		  }
-	  	  });
-	    }
-    </script> -->
-    <script>var _hmt = _hmt || []; (function() {
+
+          /* $(function(){
+              var dId = $("#dId").val();
+              var serialStr = $("#driver-add").serialize();//序列化表单
+              if(dId != ""){
+                  $.ajax({
+                      url: "saveDriver",
+                      data:serialStr,{"dId":dId},
+                      dataType:"json",
+                      success: function(data){
+                    	  $("#dname").val(code.dname);
+      	            	$("#dnumber").val(code.dnumber);
+      	            	$("#dphone").val(code.dphone);
+      	            	$("#driverTime").val(code.driverTime);
+      	            	
+                      },error:function(){
+                      }
+                  });
+                  
+              }
+          }) */
+
+          
+          });
+          </script>
+          
+          <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();</script>
+    
   </body>
 
 </html>

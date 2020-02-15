@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.imnu.SchoolBus.pojo.Driver;
 import com.imnu.SchoolBus.service.DriverService;
@@ -30,13 +31,14 @@ public class DriverController {
 	@RequestMapping(value="saveDriver")
 	public String createDriver(Driver driver) {
 		driverService.createDriver(driver);
-		return "redirect:index";
+		System.out.println(driver);
+		return "admin/driver-list";
 	}
 	
-	@RequestMapping(value="delete/{dId}")
+	@RequestMapping(value="delete")
 	public String deleteDriver(@PathVariable Integer dId) {
 		driverService.deleteDriver(dId);
-		return null;
+		return "admin/driver-list";
 	}
 	
 	@RequestMapping(value="editDriver")
