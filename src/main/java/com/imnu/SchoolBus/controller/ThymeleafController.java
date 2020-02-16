@@ -19,7 +19,7 @@ public class ThymeleafController {
 	
 	@RequestMapping("index")
 	public String index() {
-		return "admin/index";
+		return "admin/aindex";
 	}
 	
 	@RequestMapping("welcome")
@@ -37,8 +37,8 @@ public class ThymeleafController {
 		return "admin/driver-add";
 	}
 	
-	@RequestMapping("driver-edit")
+	@RequestMapping("driverEdit")
 	public String driveredit() {
-		return "admin/driver-edit";
+		return "admin/driverEdit";
 	}
 }
