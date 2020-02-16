@@ -17,14 +17,9 @@ public class ThymeleafController {
 		return "user/login";
 	}
 	
-	@RequestMapping("index")
+	@RequestMapping("aindex")
 	public String index() {
 		return "admin/aindex";
-	}
-	
-	@RequestMapping("welcome")
-	public String welcome() {
-		return "admin/welcome";
 	}
 	
 	@RequestMapping("driver-list")

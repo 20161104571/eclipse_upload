@@ -44,26 +44,18 @@ public class DriverController {
 		return "redirect:/getDriverList";
 	}
 	
-	@GetMapping("/driverEdit/{dId}")
-    public String updatePage(Model model,@PathVariable int dId){
-        Driver driver = driverService.findDriverById(dId);
-        model.addAttribute("driver",driver);
-        System.out.println(driver);
+    @RequestMapping("/toEdit")
+    public String toEdit(Model model,int dId) {
+        Driver driver=driverService.findDriverById(dId);
+        model.addAttribute("driver", driver);
         return "admin/driverEdit";
     }
-
-    @PostMapping("/update")
-    public String updateUser(Model model,Driver driver,HttpServletRequest request){
-        String dId = request.getParameter("dId");
-        Driver driverById = driverService.findDriverById(Integer.parseInt(dId));
-        driverService.updateDriver(driver);
-        System.out.println(driver);
+ 
+    @RequestMapping("/edit")
+    public String edit(Driver driver) {
+    	driverService.updateDriver(driver);
         return "redirect:/getDriverList";
     }
 
-	/*
-	 * @RequestMapping(value="editDriver") public String updateDriver(Driver driver)
-	 * { driverService.updateDriver(driver); return "redirect:getDriverList"; }
-	 */
 	
 }
