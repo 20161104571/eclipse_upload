@@ -136,6 +136,7 @@
               <div class="card-body">
                 
                 <form th:action="@{/edit}" method="post" class="row" >
+                <input type="hidden" name="dId" id="dId" th:value="${driver.dId}">
                   <div class="form-group col-md-12">
                     <label for="dname">司机姓名</label>
                     <input type="text" id="dname" name="dname" th:value="${driver.dname}" class="form-control" >

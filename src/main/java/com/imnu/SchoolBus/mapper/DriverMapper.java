@@ -1,4 +1,4 @@
-package com.imnu.SchoolBus.mapper;
+ package com.imnu.SchoolBus.mapper;
 
 import java.util.List;
 
@@ -9,9 +9,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.imnu.SchoolBus.pojo.Driver;
-//@Repository
+
 @Mapper
-//@Component("driverMapper")
 public interface DriverMapper {
 
 	@Insert(value = "insert into driver (dId,dname,dnumber,dphone,driverTime) values (#{dId},#{dname},#{dnumber},#{dphone},#{driverTime})")

@@ -25,14 +25,12 @@ public class DriverServiceImp implements DriverService{
 
 	@Override
 	public void createDriver(Driver driver) {
-		//int addDriver = driverMapper.createDriver(driver);
-		//return addDriver>0?true:false;
 		driverMapper.createDriver(driver);
 	}
 
 	@Override
-	public int updateDriver(Driver driver) {
-		return driverMapper.updateDriver(driver);
+	public void updateDriver(Driver driver) {
+		driverMapper.updateDriver(driver);
 	}
 
 	@Override
@@ -44,20 +42,5 @@ public class DriverServiceImp implements DriverService{
 	public Driver findDriverById(int dId) {
 		return driverMapper.findDriverById(dId);
 	}
-
-//	@Override
-//	public List<Driver> getDriverList() {
-//		DriverExample example = new DriverExample();
-//		List<Driver> list = driverMapper.selectByExample(example);
-//		return list;
-//	}
-//
-//	@Override
-//	public boolean addDriver(Driver driver) {
-//		int addDriver = driverMapper.createDriver(driver);
-//		return addDriver>0?true:false;
-//		
-//	}
-	
 	
 }

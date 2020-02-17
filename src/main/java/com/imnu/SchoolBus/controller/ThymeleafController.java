@@ -36,4 +36,14 @@ public class ThymeleafController {
 	public String driveredit() {
 		return "admin/driverEdit";
 	}
+	
+	@RequestMapping("user-list")
+	public String userlist() {
+		return "admin/user-list";
+	}
+	
+	@RequestMapping("user-add")
+	public String useradd() {
+		return "admin/user-add";
+	}
 }

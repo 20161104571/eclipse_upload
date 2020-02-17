@@ -13,7 +13,7 @@ public interface DriverService {
 
 	void createDriver(Driver driver);
 	
-	int updateDriver(Driver driver);
+	void updateDriver(Driver driver);
 	
 	int deleteDriver(Integer dId);
 	

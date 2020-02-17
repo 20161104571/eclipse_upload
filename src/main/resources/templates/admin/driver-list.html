@@ -30,7 +30,7 @@
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
-                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
+                <li> <a href="./getUserList">用户信息管理</a> </li>
                 <li> <a href="lyear_pages_config.html">网站配置</a> </li>
                 <!-- <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
                 <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
@@ -192,8 +192,8 @@
                         <td>
                           <div class="btn-group">
                             <a class="btn btn-xs btn-default" th:href="@{/toEdit(dId=${driver.dId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                            <a class="btn btn-xs btn-default" th:href="@{'/delete/'+${driver.dId}}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
-                          </div>
+                            <a class="btn btn-xs btn-default" th:href="@{/delete(dId=${driver.dId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          </div><!-- '/delete/'+${driver.dId} -->
                         </td>
                       </tr>
                     </tbody>
