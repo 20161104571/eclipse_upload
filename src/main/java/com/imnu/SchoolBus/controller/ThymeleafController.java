@@ -46,4 +46,9 @@ public class ThymeleafController {
 	public String useradd() {
 		return "admin/user-add";
 	}
+	
+	@RequestMapping("notice-list")
+	public String noticelist() {
+		return "admin/notice-list";
+	}
 }

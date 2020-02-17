@@ -1,4 +1,4 @@
- package com.imnu.SchoolBus.mapper;
+package com.imnu.SchoolBus.mapper;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface DriverMapper {
 	void createDriver(Driver driver);
 	
 	@Update(value = "update driver set dname = #{dname},dnumber = #{dnumber},dphone = #{dphone},driverTime = #{driverTime} where dId = #{dId}")
-	int updateDriver(Driver driver);
+	void updateDriver(Driver driver);
 	
 	@Delete(value = "delete from driver where dId = #{dId}")
 	int deleteDriver(Integer dId);
