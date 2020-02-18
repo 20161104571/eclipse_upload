@@ -2,11 +2,15 @@ package com.imnu.SchoolBus.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class Notice {
 	private Integer nId;
 	
 	private String title;
 	
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date releaseTime;
 	
 	private String noticeText;
