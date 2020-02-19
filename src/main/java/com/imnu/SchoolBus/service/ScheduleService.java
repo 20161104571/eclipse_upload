@@ -14,7 +14,5 @@ public interface ScheduleService {
 	
 	Schedule findScheduleById(int sId);
 	
-	void updateSchedule(Schedule schedule);
-	
-	//List<Schedule> querySchedule();
+	List<Schedule> querySchedule();
 }

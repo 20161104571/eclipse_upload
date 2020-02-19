@@ -40,15 +40,9 @@ public class ScheduleServiceImp implements ScheduleService{
 	}
 
 	@Override
-	public void updateSchedule(Schedule schedule) {
-		scheduleMapper.updateSchedule(schedule);
-		
+	public List<Schedule> querySchedule() {
+		List<Schedule> list1 = scheduleMapper.querySchedule();
+		return list1;
 	}
-
-//	@Override
-//	public List<Schedule> querySchedule() {
-//		List<Schedule> list1 = scheduleMapper.querySchedule();
-//		return list1;
-//	}
 
 }

@@ -22,11 +22,6 @@ public class ThymeleafController {
 		return "admin/aindex";
 	}
 	
-	@RequestMapping("driver-list")
-	public String driverList() {
-		return "admin/driver-list";
-	}
-	
 	@RequestMapping("driver-add")
 	public String driverAdd() {
 		return "admin/driver-add";
@@ -37,19 +32,9 @@ public class ThymeleafController {
 		return "admin/driverEdit";
 	}
 	
-	@RequestMapping("user-list")
-	public String userList() {
-		return "admin/user-list";
-	}
-	
 	@RequestMapping("user-add")
 	public String userAdd() {
 		return "admin/user-add";
-	}
-	
-	@RequestMapping("notice-list")
-	public String noticeList() {
-		return "admin/notice-list";
 	}
 	
 	@RequestMapping("notice-add")
@@ -62,11 +47,6 @@ public class ThymeleafController {
 		return "admin/notice-edit";
 	}
 	
-	@RequestMapping("schedule-list")
-	public String scheduleList() {
-		return "admin/schedule-list";
-	}
-	
 	@RequestMapping("schedule-edit")
 	public String scheduleEdit() {
 		return "admin/schedule-edit";
@@ -75,5 +55,15 @@ public class ThymeleafController {
 	@RequestMapping("schedule-add")
 	public String scheduleAdd() {
 		return "admin/schedule-add";
+	}
+	
+	@RequestMapping("vehicle-add")
+	public String vehicleAdd() {
+		return "admin/vehicle-add";
+	}
+	
+	@RequestMapping("trip-add")
+	public String tripAdd() {
+		return "admin/trip-add";
 	}
 }

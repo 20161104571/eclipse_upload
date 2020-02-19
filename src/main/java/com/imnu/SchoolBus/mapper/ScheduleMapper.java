@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import com.imnu.SchoolBus.pojo.Schedule;
 
@@ -24,10 +23,7 @@ public interface ScheduleMapper {
 	
 	@Select(value = "select * from schedule where sId = #{sId}")
 	Schedule findScheduleById(int sId);
-
-	@Update(value = "update schedule set startTime = #{startTime},startPlace = #{startPlace}")
-	void updateSchedule(Schedule schedule);
 	
-//	@Select(value = "select * from schedule where startPlace like '%#{startPlace}%'")
-//	List<Schedule> querySchedule();
+	@Select(value = "select * from schedule where startPlace like '%#{startPlace}%'")
+	List<Schedule> querySchedule();
 }

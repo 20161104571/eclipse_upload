@@ -43,11 +43,9 @@ public class ScheduleController {
 		return "admin/schedule-edit";
 	}
 	
-	@RequestMapping(value="editSchedule")
-	public String edit(Schedule schedule) {
-		scheduleService.updateSchedule(schedule);
-		return "redirect:/getScheduleList";
+	@RequestMapping(value="getQuerySchedule")
+	public String querySchedule(Model model) {
+		
+		return null;
 	}
-
-	
 }
