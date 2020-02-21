@@ -15,6 +15,8 @@ public class Trip {
 	
 	private String start;
 	
+	private String reqTime;
+	
 	public Integer gettId() {
 		return tId;
 	}
@@ -46,10 +48,20 @@ public class Trip {
 	public void setStart(String start) {
 		this.start = start;
 	}
+	
+	public String getReqTime() {
+		return reqTime;
+	}
+
+	public void setReqTime(String reqTime) {
+		this.reqTime = reqTime;
+	}
 
 	@Override
 	public String toString() {
-		return "Trip [tId=" + tId + ", ccard=" + ccard + ", ctime=" + ctime + ", start=" + start + "]";
+		return "Trip [tId=" + tId + ", ccard=" + ccard + ", ctime=" + ctime + ", start=" + start + ", reqTime="
+				+ reqTime + "]";
 	}
 
+	
 }

@@ -40,4 +40,5 @@ public interface UserMapper {
 	@Select(value = "select * from user where id = #{id}")
 	User findUserById(int id);
 	
+	
 }

@@ -17,8 +17,13 @@ public class ThymeleafController {
 		return "user/login";
 	}
 	
-	@RequestMapping("aindex")
+	@RequestMapping("index")
 	public String index() {
+		return "user/index";
+	}
+	
+	@RequestMapping("aindex")
+	public String adminIndex() {
 		return "admin/aindex";
 	}
 	
@@ -65,5 +70,15 @@ public class ThymeleafController {
 	@RequestMapping("trip-add")
 	public String tripAdd() {
 		return "admin/trip-add";
+	}
+	
+	@RequestMapping("notice")
+	public String Notice() {
+		return "user/notice";
+	}
+	
+	@RequestMapping("content")
+	public String Content() {
+		return "user/content";
 	}
 }

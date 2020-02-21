@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<link rel="stylesheet" type="text/css" href="user/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="user/css/style.css" />
+</head>
+<body class="bodyBg">
+	<!--头部 Start!-->
+	<div id="hd" class="wp clearfix">
+		<a href="index" class="hdLogo fl">
+			<img src="user/images/logo.png">
+		</a>
+		<form class="hdSearch fr" action="getSearchList" method="post">
+			<button type="submit"></button>
+			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
+		</form>
+	</div>
+	<!--头部 End!-->
+	
+	<!--导航 Start!-->
+	<ul id="nav" class="clearfix wp">
+		<li class="first active"><a href="index" class="navItem">首页</a></li>
+		<li>
+			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
+			<div class="dropdown">
+				<a href="2gaikuang-jianjie.html">中心简介</a>
+			</div>
+		</li>
+		<li>
+			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
+			<div class="dropdown">
+				<a href="3xinwen-dongtai.html">最新动态</a>
+				<a href="./shownotice">通知公告</a>
+			</div>
+		</li>
+		<li>
+			<a href="4shebei.html" class="navItem">仪器设备</a>
+		</li>
+		<!-- <li>
+			<a href="5shizi-zhuanzhi.html" class="navItem">师资力量<i></i></a>
+			<div class="dropdown">
+				<a href="5shizi-zhuanzhi.html">专职教师</a>
+				<a href="5shizi-jianzhi.html">兼职教师</a>
+			</div>
+		</li> -->
+		<li>
+			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
+			<div class="dropdown">
+				<a href="6jiaoxue-tixi.html">课程体系</a>
+				<a href="6jiaoxue-xiangmu.html">教学项目</a>
+				<a href="6jiaoxue-huojiang.html">教学获奖</a>
+			</div>
+		</li>
+		<li>
+			<a href="7duiwai-xueshu.html" class="navItem">对外交流<i></i></a>
+			<div class="dropdown">
+				<a href="7duiwai-xueshu.html">学术交流</a>
+				<a href="7duiwai-rongyu.html">中心荣誉</a>
+			</div>
+		</li>
+		<li>
+			<a href="8dangjian.html" class="navItem">党建专栏</a>
+		</li>
+		<li>
+			<a href="9xiazai-wendang.html" class="navItem">文档下载<i></i></a>
+			<div class="dropdown">
+				<a href="9xiazai-wendang.html">文档下载</a>
+				<a href="9xiazai-guizhang.html">规章制度</a>
+			</div>
+		</li>
+		<li>
+			<a class="navItem">登入网站<i></i></a>
+			<div class="dropdown">
+				<a href="login">登录</a>
+				<a href="regist">注册</a>
+			</div>
+		</li>
+	</ul>
+	<!--导航 End!-->
+
+	<!--main Start!-->
+	<div id="main" class="wp">
+		<div class="container clearfix">
+			<!--新闻动态-->
+			<div class="item col4">
+				<div class="itemTit">
+					<h3>新闻动态</h3>
+					<a href="#" class="itemMore">MORE+</a>
+				</div>
+				<div class="itemCon indexNews clearfix">
+					<div class="focus fl">
+						<ul>
+							<li>
+								<img src="user/images/focus1.jpg">
+								<div class="focusText">
+									<a href="#">2017年上海市无线电测向锦标赛在我校举办1</a>
+								</div>
+							</li>
+							<li>
+								<img src="images/focus1.jpg">
+								<div class="focusText">
+									<a href="#">2017年上海市无线电测向锦标赛在我校举办2</a>
+								</div>
+							</li>
+							<li>
+								<img src="images/focus1.jpg">
+								<div class="focusText">
+									<a href="#">2017年上海市无线电测向锦标赛在我校举办3</a>
+								</div>
+							</li>
+						</ul>
+						<div class="dots"></div>
+					</div>
+					<div class="textNews fr">
+						<div class="headline">
+							<h3>2017年上海市无线电测向锦标赛在我校举办</h3>
+							<p>12月17日，由上海市体育局主办的2017年上海市无线电测向锦标赛在我校举办,本次比赛由体育休闲…<a href="#" class="dc">[详细]</a></p>
+						</div>
+						<ul>
+							<li class="clearfix">
+								<a href="#">我校迎接“人才30条”实施情况专项督查…</a>
+								<span>06-18</span>
+							</li>
+							<li class="clearfix">
+								<a href="#">我校迎接2016-2017年度上海市安全文明校园</a>
+								<span>06-18</span>
+							</li>
+							<li class="clearfix">
+								<a href="#">章忠民教授应邀来我校做形势与政策专题报告 </a>
+								<span>06-18</span>
+							</li>
+							<li class="clearfix">
+								<a href="#">武术学院举行第十届研究生武艺展示大会</a>
+								<span>06-18</span>
+							</li>
+							<li class="clearfix">
+								<a href="#">我校召开2017年巡查反馈与整改会议</a>
+								<span>06-18</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!--通知公告-->
+			<div class="item col2">
+				<div class="itemTit">
+					<h3>通知公告</h3>
+					<a href="#" class="itemMore">MORE+</a>
+				</div>
+				<div class="itemCon notice">
+					<ul class="listStyle">
+						<li class="clearfix">
+							<a href="#">关于上报2017年工作总结和2018年工作…</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于开展学习钟扬同志先进事迹的通知</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于进行2017-2018学年第一学期期终校…</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">两学一做工作提示二十四</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于表彰上海体育学院2016—2017学年…</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于表彰上海体育学院2016—2017学年…</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于申报2017年校级精品课程的通知</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于申报2017年校级示范性全英语…</a>
+							<span>06-18</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="container clearfix">
+			<!--中心介绍-->
+			<div class="item col2">
+				<div class="itemTit icoIntro">
+					<h3>中心介绍</h3>
+					<a href="#" class="itemMore">MORE+</a>
+				</div>
+				<div class="itemCon indexIntro">
+					<div class="itemImg">
+						<img src="user/images/indexIntro.jpg">
+					</div>
+					<p>上海体育学院成立于1952年</p>
+				</div>
+			</div>
+
+			<div class="item col2">
+				<div class="itemTit">
+					<h3>规章制度</h3>
+					<a href="#" class="itemMore">MORE+</a>
+				</div>
+				<div class="itemCon rules">
+					<ul class="listStyle">
+						<li class="clearfix">
+							<a href="#">教学科研实验中心开放管理办法</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">教科中心设备设施有偿使用管理办法</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">教学科研实验中心仪器设备使用管理办法</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">教学科研中心档案管理工作办法</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">教学科研实验中心化学试剂管理办法</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">教学科研中心档案管理工作办法</a>
+							<span>06-18</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="item col2">
+				<div class="itemTit">
+					<h3>学术交流</h3>
+					<a href="#" class="itemMore">MORE+</a>
+				</div>
+				<div class="itemCon exchange">
+					<ul class="listStyle">
+						<li class="clearfix">
+							<a href="#">关于上报2017年工作总结和2018年工作</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于开展学习钟扬同志先进事迹的通知</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于进行2017-2018学年第一学期期终校</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">两学一做工作提示二十四</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于校园无线系统升级调试的通知</a>
+							<span>06-18</span>
+						</li>
+						<li class="clearfix">
+							<a href="#">关于表彰上海体育学院2016—2017学年</a>
+							<span>06-18</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container clearfix">
+			<!-- <!--友情链接
+			<div class="item col6">
+				<div class="itemTit">
+					<h3>友情链接</h3>
+					<a href="#" class="itemMore">MORE+</a>
+				</div>
+				<div class="itemCon link clearfix">
+					<a href="http://www.bootstrapmb.com/"><img src="images/linklogo1.png"></a>
+					<a href="#"><img src="images/linklogo2.png"></a>
+					<a href="#"><img src="images/linklogo3.png"></a>
+					<a href="#"><img src="images/linklogo4.png"></a>
+					<a href="#"><img src="images/linklogo5.png"></a>
+					<a href="#"><img src="images/linklogo6.png"></a>
+				</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<!--main End!-->
+
+	<!--底部 Start!-->
+	<div id="ft">
+		<div class="wp">
+			<p>Copyright © 上海体育学院 运动科学学院</p>
+		</div>
+	</div>
+	<!--底部 End!-->
+</body>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript">
+	$(function(){
+
+		//动态新闻焦点图片
+		var focus = $('.focus');
+		var focusLi = $('.focus').find('li');
+		var fCount = focusLi.length;
+		var fNum = 0;
+		var timer = null;
+
+		for(var i=0;i<fCount;i++){
+			var dot = '<span></span>';
+			$('.dots').append(dot);
+		}
+		function focusMove(){
+			focusLi.eq(fNum).fadeIn().siblings().fadeOut();
+			$('.dots').find('span').eq(fNum).addClass('active').siblings().removeClass('active');
+		}
+		focusMove();
+		$('.dots').on('click','span',function(){
+			fNum = $(this).index();
+			focusMove();
+		});
+		timer = setInterval(function(){
+			fNum++;
+			fNum%= fCount;
+			focusMove();
+		},5000);
+
+
+		//仪器设备图片切换
+		var equ = $('.equipment');
+		var equUl = equ.find('ul');
+		var equLi = equUl.find('li');
+		var equCount = equLi.length;
+		var equPrev = $('.equPrev');
+		var equNext = $('.equNext');
+		var equMax = 5;
+		var space = 236;
+		var equNum = 0;
+
+		equUl.width(space*equCount);
+		if(equCount>equMax){
+			equNext.show();
+		}
+		function equMove(){
+			if(!equUl.is(':animated')){
+				equUl.animate({left:-space*equNum},400);
+			}
+		}
+		equNext.on('click',function(){
+			if(equNum==equCount-equMax){
+				equNext.hide();
+				return false;
+			}else{
+				equNum++;
+			}
+			equMove();
+			equPrev.show();
+		});
+		equPrev.on('click',function(){
+			if(equNum==0){
+				equPrev.hide();
+				return false;
+			}else{
+				equNum--;
+			}
+			equMove();
+			equNext.show();
+		});
+	});
+</script>
+</html>

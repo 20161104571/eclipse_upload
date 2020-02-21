@@ -27,4 +27,6 @@ public interface NoticeMapper {
 	
 	@Select(value = "select * from notice where nId = #{nId}")
 	Notice findNoticeById(int nId);
+	
+	
 }

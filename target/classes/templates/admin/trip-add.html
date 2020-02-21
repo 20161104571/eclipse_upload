@@ -150,6 +150,10 @@
                     </div>
                   </div>
                   <div class="form-group col-md-12">
+                    <label for="reqTime">所需时间</label>
+                    <input type="text" class="form-control" id="reqTime" name="reqTime" th:value="${reqTime}" placeholder="输入所需时间" />
+                  </div>
+                  <div class="form-group col-md-12">
                     <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
                     <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                   </div>

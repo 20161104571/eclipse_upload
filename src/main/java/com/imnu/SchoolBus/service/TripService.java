@@ -12,4 +12,6 @@ public interface TripService {
 	int deleteTrip(Integer tId);
 	
 	List<Trip> getTripList();
+	
+	List<Trip> searchList(String search_input);
 }

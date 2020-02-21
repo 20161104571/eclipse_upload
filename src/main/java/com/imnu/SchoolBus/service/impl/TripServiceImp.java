@@ -34,4 +34,10 @@ public class TripServiceImp implements TripService{
 		return list;
 	}
 
+	@Override
+	public List<Trip> searchList(String search_input) {
+		return tripMapper.searchList(search_input);
+	}
+
+	
 }
