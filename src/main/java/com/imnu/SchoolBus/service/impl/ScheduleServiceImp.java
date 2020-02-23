@@ -39,10 +39,4 @@ public class ScheduleServiceImp implements ScheduleService{
 		return scheduleMapper.findScheduleById(sId);
 	}
 
-	@Override
-	public List<Schedule> querySchedule() {
-		List<Schedule> list1 = scheduleMapper.querySchedule();
-		return list1;
-	}
-
 }

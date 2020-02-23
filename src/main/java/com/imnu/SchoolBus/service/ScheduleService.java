@@ -14,5 +14,4 @@ public interface ScheduleService {
 	
 	Schedule findScheduleById(int sId);
 	
-	List<Schedule> querySchedule();
 }

@@ -81,4 +81,9 @@ public class ThymeleafController {
 	public String Content() {
 		return "user/content";
 	}
+	
+	@RequestMapping("forum")
+	public String Forum() {
+		return "user/forum";
+	}
 }

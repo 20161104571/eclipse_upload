@@ -11,7 +11,7 @@ public class Schedule {
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date startTime;
 	
-	private String startPlace;
+	private Integer startPlace;
 
 	public Integer getsId() {
 		return sId;
@@ -29,12 +29,11 @@ public class Schedule {
 		this.startTime = startTime;
 	}
 
-
-	public String getStartPlace() {
+	public Integer getStartPlace() {
 		return startPlace;
 	}
 
-	public void setStartPlace(String startPlace) {
+	public void setStartPlace(Integer startPlace) {
 		this.startPlace = startPlace;
 	}
 
@@ -42,9 +41,5 @@ public class Schedule {
 	public String toString() {
 		return "Schedule [sId=" + sId + ", startTime=" + startTime + ", startPlace=" + startPlace + "]";
 	}
-
-
-	
-	
 	
 }

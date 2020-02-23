@@ -10,7 +10,7 @@ public class Notice {
 	
 	private String title;
 	
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releaseTime;
 	
 	private String noticeText;

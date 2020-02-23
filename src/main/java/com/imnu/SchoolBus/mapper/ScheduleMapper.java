@@ -12,7 +12,7 @@ import com.imnu.SchoolBus.pojo.Schedule;
 @Mapper
 public interface ScheduleMapper {
 	
-	@Select(value = "select * from schedule")
+	@Select(value = "select * from schedule ORDER BY startTime")
 	List<Schedule> getScheduleList();
 	
 	@Insert(value = "insert into schedule (sId,startTime,startPlace) values (#{sId},#{startTime},#{startPlace})")
@@ -24,6 +24,4 @@ public interface ScheduleMapper {
 	@Select(value = "select * from schedule where sId = #{sId}")
 	Schedule findScheduleById(int sId);
 	
-	@Select(value = "select * from schedule where startPlace like '%#{startPlace}%'")
-	List<Schedule> querySchedule();
 }

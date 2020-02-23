@@ -12,8 +12,8 @@
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
-		<form class="hdSearch fr" action="getSearchList" method="post">
-			<button type="submit"></button>
+		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
+			<button type="submit" onclick="return search()"></button>
 			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
 		</form>
 	</div>
@@ -61,7 +61,7 @@
 			</div>
 		</li>
 		<li>
-			<a href="8dangjian.html" class="navItem">党建专栏</a>
+			<a href="forum" class="navItem">论坛</a>
 		</li>
 		<li>
 			<a href="9xiazai-wendang.html" class="navItem">文档下载<i></i></a>
@@ -148,7 +148,7 @@
 			<div class="item col2">
 				<div class="itemTit">
 					<h3>通知公告</h3>
-					<a href="#" class="itemMore">MORE+</a>
+					<a href="notice" class="itemMore">MORE+</a>
 				</div>
 				<div class="itemCon notice">
 					<ul class="listStyle">
@@ -299,12 +299,23 @@
 	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
-			<p>Copyright © 上海体育学院 运动科学学院</p>
+			<p>Copyright © 2020</p>
 		</div>
 	</div>
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+function search() {
+	if (document.form1.index_none_header_sysc.value==null){
+		window.alert("请填写要搜索的内容.")
+		return false;
+	}
+}
+/*]]>*/
+
+</script>
 <script type="text/javascript">
 	$(function(){
 
@@ -333,48 +344,8 @@
 			fNum%= fCount;
 			focusMove();
 		},5000);
-
-
-		//仪器设备图片切换
-		var equ = $('.equipment');
-		var equUl = equ.find('ul');
-		var equLi = equUl.find('li');
-		var equCount = equLi.length;
-		var equPrev = $('.equPrev');
-		var equNext = $('.equNext');
-		var equMax = 5;
-		var space = 236;
-		var equNum = 0;
-
-		equUl.width(space*equCount);
-		if(equCount>equMax){
-			equNext.show();
-		}
-		function equMove(){
-			if(!equUl.is(':animated')){
-				equUl.animate({left:-space*equNum},400);
-			}
-		}
-		equNext.on('click',function(){
-			if(equNum==equCount-equMax){
-				equNext.hide();
-				return false;
-			}else{
-				equNum++;
-			}
-			equMove();
-			equPrev.show();
-		});
-		equPrev.on('click',function(){
-			if(equNum==0){
-				equPrev.hide();
-				return false;
-			}else{
-				equNum--;
-			}
-			equMove();
-			equNext.show();
-		});
 	});
+	
 </script>
+
 </html>

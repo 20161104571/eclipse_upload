@@ -43,9 +43,4 @@ public class ScheduleController {
 		return "admin/schedule-edit";
 	}
 	
-	@RequestMapping(value="getQuerySchedule")
-	public String querySchedule(Model model) {
-		
-		return null;
-	}
 }
