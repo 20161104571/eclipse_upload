@@ -5,6 +5,12 @@
 <title>正文</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
+<script th:inline="javascript">
+        function load(){
+            var count = [[${count}]];
+            document.getElementById("visit").innerHTML = count.toString();
+        }
+    </script>
 </head>
 <body class="bodyBg">
 	<!--头部 Start!-->
@@ -103,13 +109,13 @@
 					<span>课程体系</span>
 				</div>
 			</div>
-			<div class="conMain">
+			<div class="conMain" onload="load()">
 				<div class="textInner">
 					<h2 th:text="${notice.title}"></h2>
 					<div class="textInfo">
 						<p>发布时间：<span th:text="${#dates.format(notice.releaseTime, 'yyyy-MM-dd')}"></span>
 						<i>|</i>
-						<span>浏览次数：171次</span>
+						浏览次数：<span id="visit"></span>
 						</p>
 					</div>
 					<p th:text="${notice.noticeText}"></p>

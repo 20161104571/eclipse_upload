@@ -17,6 +17,11 @@ public class ThymeleafController {
 		return "user/login";
 	}
 	
+	@RequestMapping("adminLogin")
+	public String alogin() {
+		return "admin/adminLogin";
+	}
+	
 	@RequestMapping("index")
 	public String index() {
 		return "user/index";

@@ -44,14 +44,11 @@ public class TripController {
 	public String seachList(HttpServletRequest request, HttpSession httpSession, Model model) {
 		String search_input = request.getParameter("index_none_header_sysc");//获取搜索框输入
 		List<Trip> list = tripService.searchList(search_input);
-		System.out.println(list);
 		if(list != null) {
 			/*将搜索结果集合、集合元素个数(结果商品个数)、搜索关键字添加到model的属性中返回前端页面*/
 			model.addAttribute("search_result", list);
 			model.addAttribute("result_num", list.size());
-			System.out.println(list.size());
 			model.addAttribute("search_key", search_input);
-			System.out.println(search_input);
 			return "user/searchResult";
 		}
 		else {

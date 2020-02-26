@@ -16,6 +16,9 @@ public class LogResController {
 	@Autowired
 	private UserService userService; 
 	
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+	
 //	@Value("${web-upload-path}")
 //	private String path;
 	 
@@ -31,6 +34,8 @@ public class LogResController {
         //String code = VerCodeGenerateUtil.generateVerCode();
         user.setCode(code);
         userService.register(user);
+        //String password = passwordEncoder.encode(user.getPassword());
+        //System.out.println("验证后密码是："+password);
         return "user/success";
     }
     

@@ -95,13 +95,14 @@ public class UserServiceImp implements UserService{
 		
 	}
 
-	
+	@Override
+	public User loginAdmin(User user) {
+		User user1 = userMapper.loginUser(user);
+        if (user1 !=null){
+            return user1;
+        }
+		return null;
+	}
 
-
-
-	
-
-	
-		
 		
 }

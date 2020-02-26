@@ -23,4 +23,6 @@ public interface UserService {
 	
 	User findUserById(int id);
 
+	User loginAdmin(User user);
+
 }

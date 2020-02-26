@@ -1,82 +1,88 @@
 package com.imnu.SchoolBus.pojo;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Comment {
 	
-	private Long commentId;
+	private Integer c_id;
+	
+	private String c_userid;
+	
+	private Integer c_contentid;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date c_createtime;
+	
+	private String c_content;
+	
+	private String c_otherid;
+	
+	private Integer c_state;
 
-    private Long userId;
-
-    private Long blogId;
-
-    private Long replyUserId;
-
-    private Long pid;
-
-    private String commentMeg;
-
-    private String creatTime;
-
-	public Long getCommentId() {
-		return commentId;
+	public Integer getC_id() {
+		return c_id;
 	}
 
-	public void setCommentId(Long commentId) {
-		this.commentId = commentId;
+	public void setC_id(Integer c_id) {
+		this.c_id = c_id;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public String getC_userid() {
+		return c_userid;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setC_userid(String c_userid) {
+		this.c_userid = c_userid;
 	}
 
-	public Long getBlogId() {
-		return blogId;
+	public Integer getC_contentid() {
+		return c_contentid;
 	}
 
-	public void setBlogId(Long blogId) {
-		this.blogId = blogId;
+	public void setC_contentid(Integer c_contentid) {
+		this.c_contentid = c_contentid;
 	}
 
-	public Long getReplyUserId() {
-		return replyUserId;
+	public Date getC_createtime() {
+		return c_createtime;
 	}
 
-	public void setReplyUserId(Long replyUserId) {
-		this.replyUserId = replyUserId;
+	public void setC_createtime(Date c_createtime) {
+		this.c_createtime = c_createtime;
 	}
 
-	public Long getPid() {
-		return pid;
+	public String getC_content() {
+		return c_content;
 	}
 
-	public void setPid(Long pid) {
-		this.pid = pid;
+	public void setC_content(String c_content) {
+		this.c_content = c_content;
 	}
 
-	public String getCommentMeg() {
-		return commentMeg;
+	public String getC_otherid() {
+		return c_otherid;
 	}
 
-	public void setCommentMeg(String commentMeg) {
-		this.commentMeg = commentMeg;
+	public void setC_otherid(String c_otherid) {
+		this.c_otherid = c_otherid;
 	}
 
-	public String getCreatTime() {
-		return creatTime;
+	public Integer getC_state() {
+		return c_state;
 	}
 
-	public void setCreatTime(String creatTime) {
-		this.creatTime = creatTime;
+	public void setC_state(Integer c_state) {
+		this.c_state = c_state;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [commentId=" + commentId + ", userId=" + userId + ", blogId=" + blogId + ", replyUserId="
-				+ replyUserId + ", pid=" + pid + ", commentMeg=" + commentMeg + ", creatTime=" + creatTime + "]";
+		return "Comment [c_id=" + c_id + ", c_userid=" + c_userid + ", c_contentid=" + c_contentid + ", c_createtime="
+				+ c_createtime + ", c_content=" + c_content + ", c_otherid=" + c_otherid + ", c_state=" + c_state + "]";
 	}
+	
     
     
 }
