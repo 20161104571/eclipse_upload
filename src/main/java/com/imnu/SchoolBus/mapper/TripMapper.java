@@ -13,7 +13,7 @@ import com.imnu.SchoolBus.pojo.Trip;
 @Mapper
 public interface TripMapper {
 	
-	@Insert(value = "insert into trip (tId,ccard,ctime,start,reqTime) values (#{tId},#{ccard},#{ctime},#{start},#{reqTime})")
+	@Insert(value = "insert into trip (tId,ccard,ctime,start,reqTime,seats,remain_seats) values (#{tId},#{ccard},#{ctime},#{start},#{reqTime},#{seats},#{remain_seats})")
 	void createTrip(Trip trip);
 	
 	@Delete(value = "delete from trip where tId = #{tId}")

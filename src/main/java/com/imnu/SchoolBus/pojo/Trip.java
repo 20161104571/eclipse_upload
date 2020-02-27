@@ -17,6 +17,10 @@ public class Trip {
 	
 	private String reqTime;
 	
+	private Integer seats;
+	
+	private Integer remain_seats;
+	
 	public Integer gettId() {
 		return tId;
 	}
@@ -57,11 +61,29 @@ public class Trip {
 		this.reqTime = reqTime;
 	}
 
+	public Integer getSeats() {
+		return seats;
+	}
+
+	public void setSeats(Integer seats) {
+		this.seats = seats;
+	}
+
+	public Integer getRemain_seats() {
+		return remain_seats;
+	}
+
+	public void setRemain_seats(Integer remain_seats) {
+		this.remain_seats = remain_seats;
+	}
+
 	@Override
 	public String toString() {
 		return "Trip [tId=" + tId + ", ccard=" + ccard + ", ctime=" + ctime + ", start=" + start + ", reqTime="
-				+ reqTime + "]";
+				+ reqTime + ", seats=" + seats + ", remain_seats=" + remain_seats + "]";
 	}
+
+	
 
 	
 }

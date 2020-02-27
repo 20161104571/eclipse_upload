@@ -161,8 +161,8 @@
                         <td th:text="${subs.name}"></td>
                         <td th:text="${subs.phone}"></td>
 			            <td th:text="${#dates.format(subs.time, 'HH:mm')}"></td>
-			            <td th:if = "${subs.place==1}">sh</td>
-			            <td th:if = "${subs.place==2}">sl</td>
+			            <td th:if = "${subs.place==1}">赛罕</td>
+			            <td th:if = "${subs.place==2}">盛乐</td>
 			            <td th:text="${subs.trainNum"></td>
 			            <td th:if = "${subs.flag==1}">已预约</td>
 			            <td th:if = "${subs.flag==0}">已过期</td>

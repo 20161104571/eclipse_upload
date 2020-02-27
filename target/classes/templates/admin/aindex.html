@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>首页 - 通勤车后台管理系统</title>
+<title>通勤车后台管理系统</title>
 <link rel="icon" href="favicon.ico" type="image/ico">
 <meta name="author" content="yinqi">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
       
       <!-- logo -->
       <div id="logo" class="sidebar-header">
-        <a href="index.html"></a><!-- <img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /> -->
+        <a href="aindex"></a><!-- <img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /> -->
       </div>
       <div class="lyear-layout-sidebar-scroll"> 
         
@@ -93,7 +93,7 @@
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
                 <!-- <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" /> -->
-                <span><span class="caret"></span></span>
+                <span th:text="${getUsername}"><span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li> <a href="lyear_pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a> </li>

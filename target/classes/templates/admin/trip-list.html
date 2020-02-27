@@ -157,8 +157,11 @@
                       	<td th:text="${trip.tId}"></td>
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
-			            <td th:text="${trip.start}"></td>
+			            <td th:if = "${trip.start==1}">赛罕</td>
+			            <td th:if = "${trip.start==2}">盛乐</td>
 			            <td th:text="${trip.reqTime} + '小时'"></td>
+			            <td th:text="${trip.seats}"></td>
+			            <td th:text="${trip.remain_seats}"></td>
                         <td>
                           <div class="btn-group">
                             <a class="btn btn-xs btn-default" th:href="@{/deleteTrip(tId=${trip.tId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
