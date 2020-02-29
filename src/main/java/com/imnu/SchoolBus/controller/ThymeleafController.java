@@ -91,4 +91,5 @@ public class ThymeleafController {
 	public String Forum() {
 		return "user/forum";
 	}
+	
 }
