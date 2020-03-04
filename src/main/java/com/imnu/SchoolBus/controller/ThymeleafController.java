@@ -92,4 +92,19 @@ public class ThymeleafController {
 		return "user/forum";
 	}
 	
+	@RequestMapping("contact")
+	public String contact() {
+		return "user/contact";
+	}
+	
+	@RequestMapping("index2")
+	public String Index2() {
+		return "user/index2";
+	}
+	
+	@RequestMapping("blog")
+	public String blog() {
+		return "user/blog";
+	}
+	
 }

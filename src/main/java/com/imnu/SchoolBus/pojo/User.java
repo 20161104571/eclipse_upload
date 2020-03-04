@@ -94,7 +94,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", number="
-				+ number + ", email=" + email + ", phone=" + phone + ", status=" + status + ", code=" + code + "]";
+				+ number + ", email=" + email + ", phone=" + phone + ", status=" + status + ", code=" + code
+				+ ", getId()=" + getId() + ", getUsername()=" + getUsername() + ", getPassword()=" + getPassword()
+				+ ", getName()=" + getName() + ", getNumber()=" + getNumber() + ", getEmail()=" + getEmail()
+				+ ", getPhone()=" + getPhone() + ", getStatus()=" + getStatus() + ", getCode()=" + getCode() + "]";
 	}
     
     

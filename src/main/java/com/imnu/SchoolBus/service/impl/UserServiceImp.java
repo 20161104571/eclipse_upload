@@ -104,5 +104,12 @@ public class UserServiceImp implements UserService{
 		return null;
 	}
 
+	@Override
+	public void registAdmin(User user) {
+		userMapper.registAdmin(user);
+		
+	}
+
+
 		
 }

@@ -27,6 +27,12 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	@RequestMapping(value = "addAdmin")
+	public String registAdmin(User user) {
+		userService.registAdmin(user);
+		return "redirect:/getAdminList";
+	}
+	
 	@RequestMapping(value = "loginAdmin")
     public String login(User user, Model model, HttpServletRequest request, HttpSession session){
         User u = userService.loginAdmin(user);

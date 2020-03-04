@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Notice;
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.NoticeService;
@@ -22,10 +25,34 @@ public class UserController {
 	private NoticeService noticeService;
 	
 	@RequestMapping(value="getUserList")
-	public String userList(Model model) {
-		List<User> users = userService.getUserList();
-		model.addAttribute("users", users);
-		System.out.print(users);
+//	public String userList(Model model) {
+//		List<User> users = userService.getUserList();
+//		model.addAttribute("users", users);
+//		System.out.print(users);
+//		return "admin/user-list";
+//	}
+	public String UserList(Model model, 
+			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
+			@RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize) {
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		System.out.println("当前页是:"+pageNum+"显示的条数是:"+pageSize);
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<User> users = userService.getUserList();
+			System.out.println("分页数据:"+users);
+			PageInfo<User> pageInfo = new PageInfo<User>(users, pageSize);
+			model.addAttribute("pageInfo", pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
 		return "admin/user-list";
 	}
 	
@@ -54,4 +81,6 @@ public class UserController {
 		model.addAttribute("notice", notice);
 		return "user/content";
 	}
+	
+	
 }

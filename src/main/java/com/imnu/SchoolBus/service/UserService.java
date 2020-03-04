@@ -24,5 +24,7 @@ public interface UserService {
 	User findUserById(int id);
 
 	User loginAdmin(User user);
+	
+	void registAdmin(User user);
 
 }
