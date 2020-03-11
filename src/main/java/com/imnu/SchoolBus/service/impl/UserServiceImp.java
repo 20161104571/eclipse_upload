@@ -110,6 +110,15 @@ public class UserServiceImp implements UserService{
 		
 	}
 
+	@Override
+	public int adminLogin(String username, String password) {
+		int u = userMapper.adminLogin(username, password);
+		if(u == 1) {
+			return u;
+		}
+		return 0;
+	}
+
 
 		
 }

@@ -162,8 +162,8 @@
                           </label>
                         </td>
 			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}"></td>
-			            <td th:if = "${schedule.startPlace==1}">sh</td>
-			            <td th:if = "${schedule.startPlace==2}">sl</td>
+			            <td th:if = "${schedule.startPlace==1}">赛罕</td>
+			            <td th:if = "${schedule.startPlace==2}">盛乐</td>
                         <td>
                           <div class="btn-group">
                             <a class="btn btn-xs btn-default" th:href="@{/deleteSchedule(sId=${schedule.sId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>

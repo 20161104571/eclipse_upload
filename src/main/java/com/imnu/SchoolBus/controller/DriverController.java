@@ -46,7 +46,6 @@ public class DriverController {
     @RequestMapping("edit")
     public String edit(Driver driver) {
     	driverService.updateDriver(driver);
-    	//System.out.println(driver);
         return "redirect:/getDriverList";
     }
 

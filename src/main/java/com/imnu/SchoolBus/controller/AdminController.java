@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,21 +35,28 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "loginAdmin")
-    public String login(User user, Model model, HttpServletRequest request, HttpSession session){
-        User u = userService.loginAdmin(user);
-        //HttpSession session = request.getSession(true);
-        //session.setAttribute("user", u);
-        //request.setAttribute("user", u);
-        //request.getSession().setAttribute("user",u);
-        //model.addAttribute("user", u);
-        //User sessionu = (User) request.getSession().getAttribute("user");
-        //request.setAttribute("sessionu", sessionu);
-        if (u !=null){
-            return "admin/aindex";
-        }
-        session.setAttribute("sessionUser", u);
-        return "admin/adminLogin";
-    }
+//    public String login(User user, Model model, HttpServletRequest request, HttpSession session){
+//        User u = userService.loginAdmin(user);
+//        request.getSession().setAttribute("sessionUser", u);
+//        if (u !=null){
+//            return "admin/aindex";
+//        }
+//        return "admin/adminLogin";
+//    }
+	public String userLogin(@RequestParam("username")String username,@RequestParam("password")String password,HttpServletRequest request,HttpSession session) {
+		int n=userService.adminLogin(username, password);
+		if(n==1) {
+			//获取session并将userName存入session对象
+			request.getSession().setAttribute("username", username);
+			System.out.println(username);
+			return "admin/aindex";
+		}
+		
+		return "admin/adminLogin";
+	}
+
+	
+	
 	
 
 	

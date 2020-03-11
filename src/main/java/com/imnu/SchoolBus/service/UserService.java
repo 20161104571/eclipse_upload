@@ -27,4 +27,6 @@ public interface UserService {
 	
 	void registAdmin(User user);
 
+	int adminLogin(String username, String password);
+
 }

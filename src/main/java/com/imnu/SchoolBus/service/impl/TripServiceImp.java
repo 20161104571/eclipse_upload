@@ -39,5 +39,20 @@ public class TripServiceImp implements TripService{
 		return tripMapper.searchList(search_input);
 	}
 
+	@Override
+	public Trip findSubsTripById(int tId) {
+		return tripMapper.findSubsTripById(tId);
+	}
+
+	@Override
+	public void updateSeats(Trip trip) { //预约减少1座位
+		tripMapper.updateSeats(trip);
+	}
+
+	@Override
+	public void addSeats(Trip trip) {  //取消增加1座位
+		tripMapper.addSeats(trip);
+	}
+
 	
 }

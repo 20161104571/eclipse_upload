@@ -28,6 +28,13 @@ public class TripController {
 		return "admin/trip-list";
 	}
 	
+	@RequestMapping(value="getUserTripList")
+	public String userTripList(Model model) {
+		List<Trip> trips = tripService.getTripList();
+		model.addAttribute("trips", trips);
+		return "user/orders";
+	}
+	
 	@RequestMapping(value="saveTrip")
 	public String createSchedules(Trip trip) {
 		tripService.createTrip(trip);
@@ -49,7 +56,7 @@ public class TripController {
 			model.addAttribute("search_result", list);
 			model.addAttribute("result_num", list.size());
 			model.addAttribute("search_key", search_input);
-			return "user/searchResult";
+			return "user/search_result";
 		}
 		else {
 			model.addAttribute("error_search_fail", "没有找到搜索的内容");

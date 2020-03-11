@@ -148,7 +148,9 @@
                        	<th>车次号</th>
                        	<th>始发时间</th>
 			            <th>始发地</th>
-			            <th>所需时间</th>
+			            <th>所需时间(h)</th>
+			            <th>座位总量</th>
+			            <th>余座</th>
                         <th>操作</th>
                       </tr>
                     </thead>
@@ -157,9 +159,9 @@
                       	<td th:text="${trip.tId}"></td>
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
-			            <td th:if = "${trip.start==1}">赛罕</td>
-			            <td th:if = "${trip.start==2}">盛乐</td>
-			            <td th:text="${trip.reqTime} + '小时'"></td>
+			            <td th:if = "${trip.start=='1'}">赛罕</td>
+			            <td th:if = "${trip.start=='2'}">盛乐</td>
+			            <td th:text="${trip.reqTime}"></td>
 			            <td th:text="${trip.seats}"></td>
 			            <td th:text="${trip.remain_seats}"></td>
                         <td>

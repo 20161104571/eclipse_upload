@@ -14,4 +14,10 @@ public interface TripService {
 	List<Trip> getTripList();
 	
 	List<Trip> searchList(String search_input);
+	
+	Trip findSubsTripById(int tId);
+	
+	void updateSeats(Trip trip);
+
+	void addSeats(Trip trip);
 }

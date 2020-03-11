@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.imnu.SchoolBus.pojo.Trip;
 
@@ -13,7 +14,7 @@ import com.imnu.SchoolBus.pojo.Trip;
 @Mapper
 public interface TripMapper {
 	
-	@Insert(value = "insert into trip (tId,ccard,ctime,start,reqTime,seats,remain_seats) values (#{tId},#{ccard},#{ctime},#{start},#{reqTime},#{seats},#{remain_seats})")
+	@Insert(value = "insert into trip (tId,ccard,ctime,start,reqTime,seats,remain_seats) values (#{tId},#{ccard},#{ctime},#{start},#{reqTime},#{seats},#{seats})")
 	void createTrip(Trip trip);
 	
 	@Delete(value = "delete from trip where tId = #{tId}")
@@ -24,5 +25,14 @@ public interface TripMapper {
 	
 	@Select(value = "select * from trip where ccard REGEXP #{arg0}")
 	List<Trip> searchList(String search_input);
+	
+	@Select(value = "select * from trip where tId = #{tId}")
+	Trip findSubsTripById(int tId);
+	
+	@Update(value = "update trip set remain_seats = remain_seats - 1")
+	void updateSeats(Trip trip);
+	
+	@Update(value = "update trip set remain_seats = remain_seats + 1")
+	void addSeats(Trip trip);
 	
 }

@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>对外交流-学术交流</title>
+<link rel="stylesheet" type="text/css" href="user/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="user/css/style.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.min.css" rel="stylesheet">
+</head>
+<body class="bodyBg">
+	<!--头部 Start!-->
+	<div id="hd" class="wp clearfix">
+		<a href="index.html" class="hdLogo fl">
+			<img src="images/logo.png">
+		</a>
+		<form class="hdSearch fr">
+			<button></button>
+			<input type="text" name="" placeholder="搜索">
+		</form>
+	</div>
+	<!--头部 End!-->
+	
+	<!--导航 Start!-->
+	<ul id="nav" class="clearfix wp">
+		<li class="first"><a href="index.html" class="navItem">首页</a></li>
+		<li>
+			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
+			<div class="dropdown">
+				<a href="2gaikuang-jianjie.html">中心简介</a>
+				<a href="2gaikuang-shezhi.html">机构设置</a>
+				<a href="2gaikuang-zhuren.html">中心主任</a>
+			</div>
+		</li>
+		<li>
+			<a href="3xinwen-dongtai.html" class="navItem">新闻公告<i></i></a>
+			<div class="dropdown">
+				<a href="3xinwen-dongtai.html">新闻动态</a>
+				<a href="3xinwen-tongzhi.html">通知公告</a>
+			</div>
+		</li>
+		<li>
+			<a href="4shebei.html" class="navItem">仪器设备</a>
+		</li>
+		<li>
+			<a href="5shizi-zhuanzhi.html" class="navItem">师资力量<i></i></a>
+			<div class="dropdown">
+				<a href="5shizi-zhuanzhi.html">专职教师</a>
+				<a href="5shizi-jianzhi.html">兼职教师</a>
+			</div>
+		</li>
+		<li>
+			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
+			<div class="dropdown">
+				<a href="6jiaoxue-tixi.html">课程体系</a>
+				<a href="6jiaoxue-xiangmu.html">教学项目</a>
+				<a href="6jiaoxue-huojiang.html">教学获奖</a>
+			</div>
+		</li>
+		<li class="active">
+			<a href="7duiwai-xueshu.html" class="navItem">对外交流<i></i></a>
+			<div class="dropdown">
+				<a href="7duiwai-xueshu.html">学术交流</a>
+				<a href="7duiwai-rongyu.html">中心荣誉</a>
+			</div>
+		</li>
+		<li>
+			<a href="8dangjian.html" class="navItem">党建专栏</a>
+		</li>
+		<li>
+			<a href="9xiazai-wendang.html" class="navItem">文档下载<i></i></a>
+			<div class="dropdown">
+				<a href="9xiazai-wendang.html">文档下载</a>
+				<a href="9xiazai-guizhang.html">规章制度</a>
+			</div>
+		</li>
+	</ul>
+	<!--导航 End!-->
+
+	<!--main Start!-->
+	<div id="main" class="wp clearfix">
+		<div class="leftMenu fl">
+			<dl>
+				<dt>
+					<span>
+						<h4>预约</h4>
+					</span>
+				</dt>
+			</dl>
+		</div>
+		<div class="rightCon fr">
+			<div class="conTop clearfix">
+				<div class="crumbs">
+					<a href="index">首页</a>
+					<i>-</i>
+					<span>预约车次</span>
+				</div>
+				
+			</div>
+			<div class="conMain">
+				<table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th width="150px">编号</th>
+                       	<th width="150px">车次号</th>
+                       	<th width="150px">始发时间</th>
+			            <th width="150px">始发地</th>
+			            <th width="150px">所需时间</th>
+			            <th width="150px">余座</th>
+                        <th width="150px">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="trip:${trips}">
+                      	<td th:text="${trip.tId}"></td>
+                      	<td th:text="${trip.ccard}"></td>
+			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
+			            <td th:if = "${trip.start=='1'}">赛罕</td>
+			            <td th:if = "${trip.start=='2'}">盛乐</td>
+			            <td th:text="${trip.reqTime} + '小时'"></td>
+			            <td th:text="${trip.remain_seats}"></td>
+                        <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip"><i ><img src="user/images/subs.png"></i></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    </tbody>
+                  </table>
+				
+				<!-- <ul class="newsList">
+					<li class="clearfix">
+						<a href="6jiaoxue-tixi.html">运动科学学院“卓越论坛”讲座信息（施祥荣 教授）</a>
+						<span><button>预约</button></span>
+					</li>
+					
+				</ul> -->
+				<div class="pageNum">
+					<span>共14条</span>
+					<span>每页1页</span>
+					<a href="#" class="pagePrev disabled">&lt;</a>
+					<a href="#" class="active">1</a>
+					<a href="#">2</a>
+					<a href="#">3</a>
+					<span>...</span>
+					<a href="#">14</a>
+					<a href="#" class="pageNext">&gt;</a>
+					<form>
+						<span>转到第</span>
+						<input type="text" name="">
+						<span>页</span>
+						<button>GO</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--main End!-->
+
+	<!--底部 Start!-->
+	<div id="ft">
+		<div class="wp">
+			<p>Copyright © 2020</p>
+		</div>
+	</div>
+	<!--底部 End!-->
+</body>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+</html>
