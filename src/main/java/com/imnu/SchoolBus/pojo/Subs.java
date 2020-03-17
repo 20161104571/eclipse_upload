@@ -8,6 +8,10 @@ public class Subs {
 	
 	private Integer oId;
 	
+	private Integer uId;
+	
+	private Integer tId;
+	
 	private String phone;
 	
 	@DateTimeFormat(pattern = "HH:mm")
@@ -18,6 +22,23 @@ public class Subs {
 	private String trainNum;
 	
 	private String flag;
+	
+
+	public Integer getuId() {
+		return uId;
+	}
+
+	public void setuId(Integer uId) {
+		this.uId = uId;
+	}
+
+	public Integer gettId() {
+		return tId;
+	}
+
+	public void settId(Integer tId) {
+		this.tId = tId;
+	}
 
 	public Integer getoId() {
 		return oId;
@@ -69,9 +90,10 @@ public class Subs {
 
 	@Override
 	public String toString() {
-		return "Order [oId=" + oId + ", phone=" + phone + ", time=" + time + ", place=" + place + ", trainNum="
-				+ trainNum + ", flag=" + flag + "]";
+		return "Subs [oId=" + oId + ", uId=" + uId + ", tId=" + tId + ", phone=" + phone + ", time=" + time + ", place="
+				+ place + ", trainNum=" + trainNum + ", flag=" + flag + "]";
 	}
+
 
 
 }

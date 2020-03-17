@@ -13,31 +13,28 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface UserMapper {
 	
-	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status,code) values(#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status},#{code})")
+	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status) values(#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status})")
     void register(User user);
 	
-	@Insert(value = "insert into user(id,username,password,name,number,email,phone,status,code) values(#{id},#{username},#{password},null,null,null,null,2,null)")
+	@Insert(value = "insert into user(id,username,password,name,number,email,phone,status) values(#{id},#{username},#{password},null,null,null,null,2)")
 	void registAdmin(User user);
 
 	@Select(value = "select * from user where code = #{code}")
     User checkCode(String code);
    
-	@Update(value = "update user set status=1,code=null where id=#{id}")
+	@Update(value = "update user set status=1 where id=#{id}")
     void updateUserStatus(User user);
 
 	@Select(value = "select * from user where username=#{username} and password=#{password} and status=1")
     User loginUser(User user);
     
 	@Select(value = "select * from user where username=#{username} and password=#{password} and status=2")
-    User loginAdmin(User user);
+	User adminLogin(String username, String password);
 	
-	@Select(value = "select * from user where username=#{username} and password=#{password} and status=2")
-	int adminLogin(String username, String password);
-	
-	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status,code) values(#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status},#{code})")
+	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status) values(#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status})")
 	User email(User user);
 	
-	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status,code) values(#{id},#{username},123456,#{name},#{number},#{email},#{phone},1,null)")
+	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status) values(#{id},#{username},123456,#{name},#{number},#{email},#{phone},1)")
     void createUser(User user);
 	
 	@Delete(value = "delete from user where id = #{id}")
@@ -49,5 +46,13 @@ public interface UserMapper {
 	@Select(value = "select * from user where id = #{id}")
 	User findUserById(int id);
 	
+	@Update(value = "update user set username = #{username},password = #{password},number = #{number},email = #{email},phone = #{phone} where id=#{id}")
+	void updateMsg(User user);
+	
+	@Update(value = "update user set password = #{newPassword} where username = #{username}")
+	User changePwd(String username, String password);
+	
+	@Select(value = "select * from user where username = #{username} and password = #{password}")
+	User findUserByUsernameAndPwd(String username, String password);
 	
 }

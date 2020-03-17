@@ -9,16 +9,16 @@
         <title>欢迎注册校园通勤车管理系统</title>
 
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="static/assets/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="static/assets/css/form-elements.css">
-        <link rel="stylesheet" href="static/assets/css/style.css">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
 
-        <link rel="shortcut icon" href="static/assets/ico/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/assets/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/assets/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/assets/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="static/assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
     </head>
 
@@ -61,6 +61,14 @@
 		                        	<div class="form-group">
 		                        		<label class="sr-only" for="form-email">电子邮箱:</label>
 		                        		<input type="text" name="email" placeholder="电子邮箱..." class="form-email form-control" id="email">
+		                        		<!-- <input type="button" name="emailCode" placeholder="获取邮箱验证码" class="form-email form-control" id="emailCode"> -->
+		                        	</div>
+		                        	<div class="form-group">
+		                        		<button name="emailCode" id="emailCode" onclick="Code();">获取邮箱验证码</button>
+		                        	</div>
+		                        	<div class="form-group">
+		                        		<label class="sr-only" for="form-email">邮箱验证码:</label>
+		                        		<input type="text" name="code" placeholder="邮箱验证码..." class="form-email" id="code">
 		                        	</div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-phone">手机号:</label>
@@ -81,11 +89,56 @@
         </div>
 
 
-        <script src="static/assets/js/jquery-1.11.1.min.js"></script>
-        <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="static/assets/js/jquery.backstretch.min.js"></script>
-        <script src="static/assets/js/scripts.js"></script>
-        
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.backstretch.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+<script type="text/javascript">
+	var emailCode = true;
+	function sendCode(Code) {
+		var time = 120;
+		var eamil = $("#email").val();
+		if($("#email").val() == ""){
+			Tip1('*请输入邮箱');
+			return false;
+		}
+		else{
+			var code = $(sender);
+			$.ajax({
+				url:"sendEmailCode",
+				type:"post",
+				data:"email="+email,
+				dataType:"text",
+				success:function(responseContent){
+					if(responseContent=='false'){
+						Tip1('*邮箱已被占用');
+						return false;
+					}
+					else{
+						if(emailCode){
+							emailCode=false;
+							code.addClass("msgs1").attr("disabled",true);;
+							var t=setInterval(function (){
+								time--;
+								code.val(time+"秒后获取");
+								if(time==0){
+									clearInterval(t);
+									code.val("重新获取");
+									emailCode=true;
+									code.removeClass("msgs1").attr("disabled",false);
+								}
+							},1000);
+						}
+						Tip1('');Tip5('*验证码已发送，请注意查收');
+						return;
+					}
+				}
+			});
+		}
+		
+	}
+
+</script>
        
     </body>
 

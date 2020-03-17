@@ -26,13 +26,14 @@ public class UserServiceImp implements UserService{
      */
     @Override
     public void register(User user) {
-    	String code = user.getCode();
-        System.out.println("code:"+code);
+    	//String code = user.getCode();
+        //System.out.println("code:"+code);
+    	String code = "";
         String email = user.getEmail();
         System.out.println("email:"+email);
         String subject = "来自校车预约中心的激活邮件";
         //user/checkCode?code=xxx即是我们点击邮件链接之后进行更改状态的
-        String context = "<a href=\"http://localhost:8080/schoolbus/loginres/checkCode?code="+code+"\">激活请点击:"+code+"</a>";
+        String context = "您的验证码是："+code+"请及时输入";
         //发送激活邮件
         mailService.sendHtmlMail (user.getEmail(),subject,context);
     	userMapper.register(user);
@@ -96,29 +97,49 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public User loginAdmin(User user) {
-		User user1 = userMapper.loginUser(user);
-        if (user1 !=null){
-            return user1;
-        }
-		return null;
-	}
-
-	@Override
 	public void registAdmin(User user) {
 		userMapper.registAdmin(user);
 		
 	}
 
 	@Override
-	public int adminLogin(String username, String password) {
-		int u = userMapper.adminLogin(username, password);
-		if(u == 1) {
+	public User adminLogin(String username, String password) {
+		User u = userMapper.adminLogin(username, password);
+		if(u != null) {
 			return u;
 		}
-		return 0;
+		return null;
 	}
 
+	@Override
+	public void updateMsg(User user) {
+		userMapper.updateMsg(user);
+	}
+	
+	@Override
+	public User findUserByUsernameAndPwd(String username, String password) {
+		return userMapper.findUserByUsernameAndPwd(username, password);
+	}
+
+	@Override
+	public User changePwd(String username, String password, String newPassword) {
+		User user = userMapper.findUserByUsernameAndPwd(username, newPassword);
+		Integer id = user.getId();
+		System.out.println(id);
+		String oldpwd = user.getPassword();
+		System.out.println(oldpwd);
+		if(oldpwd.equals(password)) {
+			User u = new User();
+			u.setId(id);
+			u.setPassword(newPassword);
+			return userMapper.changePwd(username, newPassword);
+		}
+//		if(user != null) {
+//			return user;
+//		}
+		return null;
+		
+	}
 
 		
 }

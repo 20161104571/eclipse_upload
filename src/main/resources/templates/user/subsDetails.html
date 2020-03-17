@@ -106,7 +106,6 @@
 			            <th width="150px">始发地</th>
 			            <th width="150px">所需时间</th>
 			            <th width="150px">余座</th>
-                        <th width="150px">操作</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -117,15 +116,15 @@
 			            <td th:if = "${trip.start=='2'}">盛乐</td>
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
-                        <td>
-                          <div class="btn-group">
-                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip"><i ><img src="user/images/subs.png"></i></a>
-                          </div>
-                        </td>
                       </tr>
                     </tbody>
                     </tbody>
                   </table>
+                  <form action="getSubsPhoneText" method="post" class="hdSearch fr">
+					<span>输入预约手机号，以便接收预约成功短信</span>
+					<input type="text" name="phone" id="phone">
+					<button>确认提交</button>
+                  </form>
 				
 			</div>
 		</div>

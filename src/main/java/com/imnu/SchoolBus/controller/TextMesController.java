@@ -25,9 +25,9 @@ public class TextMesController {
 	    String url = "https://open.ucpaas.com/ol/sms/sendsms";
 	    JSONObject jsonObject = new JSONObject();
 	    //基础配置，在开发平台认证后获取
-	    jsonObject.put("sid","ad024f8****************05d1614");
-	    jsonObject.put("token","5ddbf62d4d****************e27402c");
-	    jsonObject.put("appid","0ceaca4708****************76ec45f");
+	    jsonObject.put("sid","1034cfd4657a92a95d57c7d9db992756");
+	    jsonObject.put("token","82a73011c5235c45fdf0678039149bb8");
+	    jsonObject.put("appid","6ad8a3cbf73b436586e0f8fc7024e47b");
 	    //模板ID，在开发平台创建模板对应的模板ID
 	    jsonObject.put("templateid", "432116");
 	    //模板对应的参数，参数之间拼接用逗号作为间隔符

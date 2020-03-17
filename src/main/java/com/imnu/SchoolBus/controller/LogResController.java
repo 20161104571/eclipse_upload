@@ -1,17 +1,19 @@
 package com.imnu.SchoolBus.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.UserService;
-import com.imnu.SchoolBus.util.UUIDUtils;
+import com.imnu.SchoolBus.util.VerCodeGenerateUtil;
 
 @Controller
-@RequestMapping(value="/loginres")
+@RequestMapping(value="/")
 public class LogResController {
 
 	@Autowired
@@ -22,7 +24,14 @@ public class LogResController {
 	
 //	@Value("${web-upload-path}")
 //	private String path;
-	 
+	
+	@RequestMapping(value="/sendEmailCode")
+	public String sendCode(String email, HttpSession session) {
+		String code = VerCodeGenerateUtil.generateVerCode();
+		System.out.println(code);
+		session.setAttribute("code", code);
+		return code;
+	}
 	/**
      * 注册
      * @param user
@@ -30,10 +39,10 @@ public class LogResController {
      */
     @RequestMapping(value = "/registerUser")
     public String register(User user){
-        user.setStatus(0);
-        String code = UUIDUtils.getUUID() + UUIDUtils.getUUID();
+        //user.setStatus(0);
+        //String code = UUIDUtils.getUUID() + UUIDUtils.getUUID();
         //String code = VerCodeGenerateUtil.generateVerCode();
-        user.setCode(code);
+        //user.setCode(code);
         userService.register(user);
         //String password = passwordEncoder.encode(user.getPassword());
         //System.out.println("验证后密码是："+password);
@@ -51,9 +60,9 @@ public class LogResController {
         System.out.println(user);
         //如果用户不等于null，把用户状态修改status=1
        if (user !=null){
-           user.setStatus(1);
+           //user.setStatus(1);
            //把code验证码清空，已经不需要了
-           user.setCode("");
+           //user.setCode("");
            System.out.println(user);
            userService.updateUserStatus(user);
        }
@@ -72,11 +81,14 @@ public class LogResController {
     /**
      * 登录
      */
-    @RequestMapping(value = "/loginUser")
-    public String login(User user, Model model){
+    @RequestMapping(value = "loginUser")
+    public String login(User user, HttpServletRequest request){
         User u = userService.loginUser(user);
         if (u !=null){
-            return "user/welcome";
+        	request.getSession().setAttribute("users", u);
+        	//String uid = userService.findUserById(id);
+        	u.setId(u.getId());
+            return "user/index";
         }
         return "user/login";
     }

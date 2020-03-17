@@ -16,9 +16,7 @@
 			<button type="submit" onclick="return search()"></button>
 			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
 		</form>
-		<div class="hdSearch fr">
-			<a href="login">登录</a>
-		</div>
+		
 	</div>
 	<!--头部 End!-->
 	
@@ -70,13 +68,18 @@
 				<a href="9xiazai-guizhang.html">规章制度</a>
 			</div>
 		</li>
-		<li>
-			<a class="navItem">登入网站<i></i></a>
+		<li th:if="${session.users}==null">
+			<a class="navItem"  href="login">登录</a>
+		</li>
+		<li th:if="${session.users}!=null">
+			<a class="navItem"  th:text="${session.users.username}"><i></i></a>
 			<div class="dropdown">
-				<a href="login">登录</a>
-				<a href="regist">注册</a>
+				<!-- <a th:href="@{/toEditUser(id=${user.id})}">个人中心</a> -->
+				<a href="personcenter">个人中心</a>
+				<a href="#">退出</a>
 			</div>
 		</li>
+		
 	</ul>
 	<!--导航 End!-->
 

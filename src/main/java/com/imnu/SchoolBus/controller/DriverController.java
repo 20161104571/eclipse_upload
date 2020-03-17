@@ -26,7 +26,6 @@ public class DriverController {
 	@RequestMapping(value="saveDriver")
 	public String createDriver(Driver driver) {
 		driverService.createDriver(driver);
-		//System.out.println(driver);
 		return "redirect:/getDriverList";
 	}
 	

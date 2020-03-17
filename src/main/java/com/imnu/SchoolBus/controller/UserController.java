@@ -2,6 +2,8 @@ package com.imnu.SchoolBus.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,6 +82,13 @@ public class UserController {
 		Notice notice = noticeService.findNoticeById(nId);
 		model.addAttribute("notice", notice);
 		return "user/content";
+	}
+	
+	@RequestMapping(value="editUser")
+	public String updateMsg(User user, HttpServletRequest request) {
+		User user1 = (User)request.getSession().getAttribute("users");
+		userService.updateMsg(user1);
+		return "user/index";
 	}
 	
 	

@@ -87,14 +87,9 @@ public class ThymeleafController {
 		return "user/content";
 	}
 	
-	@RequestMapping("forum")
-	public String Forum() {
-		return "user/forum";
-	}
-	
-	@RequestMapping("index2")
-	public String Index2() {
-		return "user/index2";
+	@RequestMapping("personcenter")
+	public String person() {
+		return "user/personcenter";
 	}
 	
 	@RequestMapping("admin-edit-pwd")

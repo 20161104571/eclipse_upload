@@ -23,10 +23,14 @@ public interface UserService {
 	
 	User findUserById(int id);
 
-	User loginAdmin(User user);
-	
 	void registAdmin(User user);
 
-	int adminLogin(String username, String password);
+	User adminLogin(String username, String password);
+	
+	User changePwd(String username, String password, String newPassword);
+	
+	void updateMsg(User user);
+	
+	User findUserByUsernameAndPwd(String username, String password);
 
 }

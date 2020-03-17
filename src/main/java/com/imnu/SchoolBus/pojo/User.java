@@ -14,10 +14,8 @@ public class User {
     private String email;
 
     private String phone;
-
+    
     private Integer status;
-
-    private String code;
 
     public Integer getId() {
         return id;
@@ -74,31 +72,22 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
+	public Integer getStatus() {
+		return status;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", number="
-				+ number + ", email=" + email + ", phone=" + phone + ", status=" + status + ", code=" + code
-				+ ", getId()=" + getId() + ", getUsername()=" + getUsername() + ", getPassword()=" + getPassword()
-				+ ", getName()=" + getName() + ", getNumber()=" + getNumber() + ", getEmail()=" + getEmail()
-				+ ", getPhone()=" + getPhone() + ", getStatus()=" + getStatus() + ", getCode()=" + getCode() + "]";
+				+ number + ", email=" + email + ", phone=" + phone + ", status=" + status + "]";
 	}
-    
+
+
+
     
 }

@@ -2,7 +2,7 @@
 <html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>预约详情</title>
+<title>个人中心</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -83,7 +83,7 @@
 			<dl>
 				<dt>
 					<span>
-						<h4>预约详情</h4>
+						<h4>个人中心</h4>
 					</span>
 				</dt>
 			</dl>
@@ -93,38 +93,35 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<span>预约详情</span>
+					<span>个人中心</span>
 				</div>
 				
 			</div>
 			<div class="conMain">
-				<table class="table table-bordered">
-                    <thead>
-                      <tr>
-                       	<th width="150px">车次号</th>
-                       	<th width="150px">始发时间</th>
-			            <th width="150px">始发地</th>
-			            <th width="150px">所需时间</th>
-			            <th width="150px">余座</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr th:each="trip:${trip}">
-                      	<td th:text="${trip.ccard}"></td>
-			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
-			            <td th:if = "${trip.start=='1'}">赛罕</td>
-			            <td th:if = "${trip.start=='2'}">盛乐</td>
-			            <td th:text="${trip.reqTime} + '小时'"></td>
-			            <td th:text="${trip.remain_seats}"></td>
-                      </tr>
-                    </tbody>
-                    </tbody>
-                  </table>
-                  <form action="getSubsPhoneText" method="post" class="hdSearch fr">
-					<span>输入预约手机号，以便接收预约成功短信</span>
-					<input type="text" name="phone" id="phone">
-					<button>确认提交</button>
-                  </form>
+				<form th:action="@{/editUser}" method="post" class="row" >
+                <input type="hidden" name="id" id="id" th:value="${u.id}">
+                  <div class="form-group col-md-12">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" th:value="${session.users.username}" class="form-control" >
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="name">真实姓名</label>
+                    <input type="text" class="form-control" id="name" name="name" th:value="${session.users.name}"/>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="email">电子邮箱</label>
+                    <input type="text" class="form-control" id="email" name="email" th:value="${session.users.email}"/>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="phone">电话号码</label>
+                    <input type="text" class="form-control" id="phone" name="phone" th:value="${session.users.phone}"/>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                    <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                  </div>
+                </form>
+                  
 				
 			</div>
 		</div>
