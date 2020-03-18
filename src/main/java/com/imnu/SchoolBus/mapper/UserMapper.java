@@ -46,6 +46,9 @@ public interface UserMapper {
 	@Select(value = "select * from user where id = #{id}")
 	User findUserById(int id);
 	
+	@Select(value = "select count(id) from user where status = 1")
+	void countUser(int count);
+	
 	@Update(value = "update user set username = #{username},password = #{password},number = #{number},email = #{email},phone = #{phone} where id=#{id}")
 	void updateMsg(User user);
 	

@@ -41,7 +41,7 @@
                 <li> <a href="./getScheduleList">发车时刻表</a> </li>
                 <li> <a href="./getVehicleList">显示车辆信息</a> </li>
                 <li> <a href="./getTripList">车次信息</a> </li>
-                <li> <a href="lyear_pages_rabc.html">查询车次</a> </li>
+                <li> <a href="searchtrip">查询车次</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -120,9 +120,9 @@
           <div class="col-sm-6 col-lg-3">
             <div class="card bg-danger">
               <div class="card-body clearfix">
-                <div class="pull-right">
+                <div class="pull-right" onload="sendRequest()">
                   <p class="h6 text-white m-t-0">用户总数</p>
-                  <p class="h3 text-white m-b-0">920,000</p>
+                  <p class="h3 text-white m-b-0" id="count"></p>
                 </div>
                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-account fa-1-5x"></i></span> </div>
               </div>
@@ -154,34 +154,6 @@
           </div>
         </div>
         
-        <div class="row">
-          
-          <div class="col-lg-6"> 
-            <div class="card">
-              <div class="card-header">
-                <h4>每周用户</h4>
-              </div>
-              <div class="card-body">
-                <canvas class="js-chartjs-bars"></canvas>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-6"> 
-            <div class="card">
-              <div class="card-header">
-                <h4>交易历史记录</h4>
-              </div>
-              <div class="card-body">
-                <canvas class="js-chartjs-lines"></canvas>
-              </div>
-            </div>
-          </div>
-           
-        </div>
-        
-        
-        
       </div>
       
     </main>
@@ -197,6 +169,47 @@
 <!--图表插件-->
 <script type="text/javascript" src="js/Chart.js"></script>
 <script type="text/javascript">
+var XMLHttpReq;
+
+function createXMLRequest() {
+    if (window.XMLHttpRequest) {// Mozilla 浏览器
+        XMLHttpReq = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { // IE 浏览器
+        try {
+            XMLHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+                XMLHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+            }
+        }
+    }
+}
+
+function sendRequest() {
+    createXMLRequest();
+    var url = "getCountUsers";
+    XMLHttpReq.open("GET", url, true);
+    XMLHttpReq.onreadystatechange = processResponse;// 指定响应函数
+    XMLHttpReq.send(null);
+}
+// 处理返回信息函数
+function processResponse() {
+    if (XMLHttpReq.readyState == 4) {// 判断对象状态，4则说明服务器响应已完成，可以访问了
+        if (XMLHttpReq.status == 200) {// 信息已经成功返回，开始处理信息
+            DisplayHot();
+            setTimeout("sendRequest()", 1000);// 每隔1秒自动访问服务器
+        } else {
+            window.alert("您所请求的页面有异常！");
+        }
+    }
+}
+function DisplayHot() {
+    var num = XMLHttpReq.responseXML.getElementsByTagName("num")[0].firstChild.nodeValue;
+   /*  document.getElementById("name").innerHTML = "你的新信息数目为："; */
+    document.getElementById("count").innerHTML = count;
+}
+
 /* $(document).ready(function(e) {
     var $dashChartBarsCnt  = jQuery( '.js-chartjs-bars' )[0].getContext( '2d' ),
         $dashChartLinesCnt = jQuery( '.js-chartjs-lines' )[0].getContext( '2d' );

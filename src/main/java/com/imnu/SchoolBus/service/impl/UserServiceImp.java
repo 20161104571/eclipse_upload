@@ -141,5 +141,10 @@ public class UserServiceImp implements UserService{
 		
 	}
 
+	@Override
+	public void countUser(int count) {
+		userMapper.countUser(count);
+	}
+
 		
 }

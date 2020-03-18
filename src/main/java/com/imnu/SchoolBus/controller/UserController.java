@@ -84,6 +84,12 @@ public class UserController {
 		return "user/content";
 	}
 	
+	@RequestMapping(value="getCountUsers")
+	public String countUser(Model model, int count) {
+		userService.countUser(count);
+		return "admin/aindex";
+	}
+	
 	@RequestMapping(value="editUser")
 	public String updateMsg(User user, HttpServletRequest request) {
 		User user1 = (User)request.getSession().getAttribute("users");

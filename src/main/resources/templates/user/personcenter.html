@@ -97,9 +97,14 @@
 				</div>
 				
 			</div>
+			  <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                  <li class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab">修改个人信息</a></li>
+                  <li><a href="#profile" role="tab" id="profile" data-toggle="tab">修改密码</a></li>
+              </ul>
 			<div class="conMain">
+			<div class="tab-pane fade active in" id="home">
 				<form th:action="@{/editUser}" method="post" class="row" >
-                <input type="hidden" name="id" id="id" th:value="${u.id}">
+                <!-- <input type="hidden" name="id" id="id" th:value="${u.id}"> -->
                   <div class="form-group col-md-12">
                     <label for="username">用户名</label>
                     <input type="text" id="username" name="username" th:value="${session.users.username}" class="form-control" >
@@ -121,6 +126,29 @@
                     <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                   </div>
                 </form>
+                </div>
+                
+                <div class="tab-pane fade active in" id="home" th:if="${profile}">
+                <form th:action="@{/}" method="post" class="row" >
+                <!-- <input type="hidden" name="id" id="id" th:value="${u.id}"> -->
+                  <div class="form-group col-md-12">
+                    <label for="username">原密码</label>
+                    <input type="text" id="username" name="username" class="form-control" >
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="name">新密码</label>
+                    <input type="text" class="form-control" id="name" name="name"/>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="email">确认密码</label>
+                    <input type="text" class="form-control" id="email" name="email"/>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                    <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                  </div>
+                </form>
+                </div>
                   
 				
 			</div>

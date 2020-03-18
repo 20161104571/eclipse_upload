@@ -24,6 +24,8 @@ public interface UserService {
 	User findUserById(int id);
 
 	void registAdmin(User user);
+	
+	void countUser(int count);
 
 	User adminLogin(String username, String password);
 	

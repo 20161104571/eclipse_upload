@@ -1,0 +1,224 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>搜索车站车次信息</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="author" content="yinqi">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/materialdesignicons.min.css" rel="stylesheet">
+<link href="css/style.min.css" rel="stylesheet">
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    <aside class="lyear-layout-sidebar">
+       
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+        <a href="index.html"><img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
+      </div>
+      <div class="lyear-layout-sidebar-scroll">
+        
+        <nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+            <li class="nav-item active"> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="./getDriverList">司机信息管理</a> </li>
+                <li> <a href="./getUserList">用户信息管理</a> </li>
+                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
+                <!-- <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
+                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
+                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
+                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
+                <li> <a href="lyear_pages_error.html">错误页面</a> </li> -->
+              </ul>
+            </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 车辆管理</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
+                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
+                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
+                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
+                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
+                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
+                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
+                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
+              </ul>
+            </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 预约管理</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
+                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
+                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
+                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
+                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
+                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
+                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
+                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
+              </ul>
+            </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 留言管理</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
+                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
+                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
+                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
+                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
+                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
+                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
+                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
+              </ul>
+            </li>
+           
+          </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+          <p class="copyright">@2020届毕业设计</p>
+        </div>
+      </div>
+      
+    </aside>
+    <!--End 左侧导航-->
+    
+    <!--头部信息-->
+    <header class="lyear-layout-header">
+      
+      <nav class="navbar navbar-default">
+        <div class="topbar">
+          
+          <div class="topbar-left">
+            <div class="lyear-aside-toggler">
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+            </div>
+          </div>
+          
+          <ul class="topbar-right">
+            <li class="dropdown dropdown-profile">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" />
+                <span>笔下光年 <span class="caret"></span></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li> <a href="lyear_pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
+                <li> <a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
+                <li class="divider"></li>
+                <li> <a href="lyear_pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+              </ul>
+            </li>
+          </ul>
+          
+        </div>
+      </nav>
+      
+    </header>
+    <!--End 头部信息-->
+    
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-toolbar clearfix">
+                <form class="pull-right search-bar" method="get" action="#!" role="form">
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <input type="hidden" name="search_field" id="search-field" value="title">
+                      <button class="btn btn-default dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                      标题 <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="title">标题</a> </li>
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name">栏目</a> </li>
+                      </ul>
+                    </div>
+                    <input type="text" class="form-control" value="" name="keyword" placeholder="请输入名称">
+                  </div>
+                </form>
+              </div>
+              <div class="card-body">
+                
+                <!-- <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>
+                          <label class="lyear-checkbox checkbox-primary">
+                            <input type="checkbox" id="check-all"><span></span>
+                          </label>
+                        </th>
+                        <th>编号</th>
+                       	<th>司机姓名</th>
+			            <th>工号</th>
+			            <th>手机</th>
+			            <th>司机驾龄</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="driver:${drivers}">
+                        <td>
+                          <label class="lyear-checkbox checkbox-primary">
+                            <input type="checkbox" name="ids[]" value="1"><span></span>
+                          </label>
+                        </td>
+                        <td th:text="${driver.dId}"></td>
+			            <td th:text="${driver.dname}"></td>
+			            <td th:text="${driver.dnumber}"></td>
+			            <td th:text="${driver.dphone}"></td>
+			            <td th:text="${driver.driverTime}"></td>
+                        <td><font class="text-success">正常</font></td>
+                        <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:href="@{/toEdit(dId=${driver.dId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                            <a class="btn btn-xs btn-default" th:href="@{/delete(dId=${driver.dId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          </div>'/delete/'+${driver.dId}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> -->
+       
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="js/main.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+</script>
+</body>
+</html>
