@@ -29,10 +29,8 @@ public interface UserService {
 
 	User adminLogin(String username, String password);
 	
-	User changePwd(String username, String password, String newPassword);
+	int changePwd(int id, String newpassword);
 	
 	void updateMsg(User user);
 	
-	User findUserByUsernameAndPwd(String username, String password);
-
 }

@@ -116,29 +116,15 @@ public class UserServiceImp implements UserService{
 		userMapper.updateMsg(user);
 	}
 	
-	@Override
-	public User findUserByUsernameAndPwd(String username, String password) {
-		return userMapper.findUserByUsernameAndPwd(username, password);
-	}
 
 	@Override
-	public User changePwd(String username, String password, String newPassword) {
-		User user = userMapper.findUserByUsernameAndPwd(username, newPassword);
-		Integer id = user.getId();
+	public int changePwd(int id, String newpassword) {
+		User user = new User();
+		user = userMapper.findUserById(id);
 		System.out.println(id);
-		String oldpwd = user.getPassword();
-		System.out.println(oldpwd);
-		if(oldpwd.equals(password)) {
-			User u = new User();
-			u.setId(id);
-			u.setPassword(newPassword);
-			return userMapper.changePwd(username, newPassword);
-		}
-//		if(user != null) {
-//			return user;
-//		}
-		return null;
-		
+		user.setPassword(newpassword);
+		int result = userMapper.changePwd(id, newpassword);
+		return result;
 	}
 
 	@Override

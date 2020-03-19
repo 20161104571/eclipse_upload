@@ -49,13 +49,11 @@ public interface UserMapper {
 	@Select(value = "select count(id) from user where status = 1")
 	void countUser(int count);
 	
-	@Update(value = "update user set username = #{username},password = #{password},number = #{number},email = #{email},phone = #{phone} where id=#{id}")
+	@Update(value = "update user set username = #{username},password = #{password},name,number = #{number},email = #{email},phone = #{phone},status where id=#{id}")
 	void updateMsg(User user);
 	
-	@Update(value = "update user set password = #{newPassword} where username = #{username}")
-	User changePwd(String username, String password);
+	@Update(value = "update user set password = #{newpassword} where id = #{id}")
+	int changePwd(int id, String newpassword);
 	
-	@Select(value = "select * from user where username = #{username} and password = #{password}")
-	User findUserByUsernameAndPwd(String username, String password);
 	
 }

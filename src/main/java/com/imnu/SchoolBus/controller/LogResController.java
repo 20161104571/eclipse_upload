@@ -25,7 +25,7 @@ public class LogResController {
 //	@Value("${web-upload-path}")
 //	private String path;
 	
-	@RequestMapping(value="/sendEmailCode")
+	@RequestMapping(value="sendEmailCode")
 	public String sendCode(String email, HttpSession session) {
 		String code = VerCodeGenerateUtil.generateVerCode();
 		System.out.println(code);
@@ -37,7 +37,7 @@ public class LogResController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/registerUser")
+    @RequestMapping(value = "registerUser")
     public String register(User user){
         //user.setStatus(0);
         //String code = UUIDUtils.getUUID() + UUIDUtils.getUUID();
@@ -54,7 +54,7 @@ public class LogResController {
      *校验邮箱中的code激活账户
      * 首先根据激活码code查询用户，之后再把状态修改为"1"
      */
-    @RequestMapping(value = "/checkCode")
+    @RequestMapping(value = "checkCode")
     public String checkCode(String code){
         User user = userService.checkCode(code);
         System.out.println(user);
@@ -70,15 +70,6 @@ public class LogResController {
     }
 
     /**
-     * 跳转到登录页面
-     * @return login
-     */
-    @RequestMapping(value = "/loginPage")
-    public String login(){
-        return "user/login";
-    }
-
-    /**
      * 登录
      */
     @RequestMapping(value = "loginUser")
@@ -86,6 +77,7 @@ public class LogResController {
         User u = userService.loginUser(user);
         if (u !=null){
         	request.getSession().setAttribute("users", u);
+        	System.out.println("登录的信息是"+u);
         	//String uid = userService.findUserById(id);
         	u.setId(u.getId());
             return "user/index";

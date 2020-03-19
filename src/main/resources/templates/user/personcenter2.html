@@ -99,28 +99,24 @@
 			</div>
 			<div class="card">
               <ul class="nav nav-tabs page-tabs">
-                <li class="active"> <a href="#!">修改个人信息</a> </li>
-                <li> <a href="personcenter2">修改密码</a> </li>
+                <li> <a href="personcenter">修改个人信息</a> </li>
+                <li class="active"> <a href="personcenter2">修改密码</a> </li>
               </ul>
 			<div class="conMain">
-			<div class="tab-pane fade active in" id="home">
-				<form th:action="@{/editUser}" method="post" class="row" >
+                <div class="tab-pane fade active in" id="home" >
+                <form th:action="@{/updatepwd}" method="post" class="row" >
                 <input type="hidden" name="id" id="id" th:value="${session.users.id}">
                   <div class="form-group col-md-12">
-                    <label for="username">用户名</label>
-                    <input type="text" id="username" name="username" th:value="${session.users.username}" class="form-control" >
+                    <label for="oldpwd">原密码</label>
+                    <input type="password" id="password" name="password" class="form-control" >
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="name">真实姓名</label>
-                    <input type="text" class="form-control" id="name" name="name" th:value="${session.users.name}"/>
+                    <label for="newpwd">新密码</label>
+                    <input type="password" class="form-control" id="newpassword" name="newpassword"/>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="email">电子邮箱</label>
-                    <input type="text" class="form-control" id="email" name="email" th:value="${session.users.email}"/>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="phone">电话号码</label>
-                    <input type="text" class="form-control" id="phone" name="phone" th:value="${session.users.phone}"/>
+                    <label for="repwd">确认密码</label>
+                    <input type="password" class="form-control" id="repassword" name="repassword"/>
                   </div>
                   <div class="form-group col-md-12">
                     <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
@@ -128,8 +124,7 @@
                   </div>
                 </form>
                 </div>
-				
-			</div>
+                </div>
 			</div>
 		</div>
 	</div>

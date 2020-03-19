@@ -136,7 +136,7 @@
             <div class="card">
               <div class="card-body">
                 
-                <form method="post" action="updatePwd" class="site-form">
+                <form method="post" action="" class="site-form">
                 <input type="hidden" name="id" id="id" th:value="${session.user.id}">
                   <div class="form-group">
                     <label for="old-password">旧密码</label>
@@ -144,7 +144,7 @@
                   </div>
                   <div class="form-group">
                     <label for="new-password">新密码</label>
-                    <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="输入新的密码">
+                    <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="输入新的密码">
                   </div>
                   <div class="form-group">
                     <label for="confirm-password">确认新密码</label>
@@ -176,10 +176,10 @@ var fristpwdBool = false;
 var newpwdBool = false;
 	$(function(){
 		$("input[name='confirmpwd']").blur(function(){
-			var newpwd = $("input[name='newPassword']").val();
+			var newpwd = $("input[name='newpassword']").val();
 			var repwd = $("input[name='confirmpwd']").val();
 			$("#password").empty();
-			if(newpwd==repwd && newpwd != null && newpwd != ""){
+			if(newpwd != repwd || newpwd != null || newpwd != ""){
 				$("#password").append("<font color = 'green'>密码一致</font>");
 			}else{
 				$("#password").append("<font color = 'red'>密码不一致</font>");
@@ -188,12 +188,12 @@ var newpwdBool = false;
 		});
 	});
 	$(function(){
-		$("input[name='newPassword']").blur(function(){
+		$("input[name='newpassword']").blur(function(){
 			$.ajax({
-				url:"/updatePwd",
+				url:"/updateAdminPwd",
 				type:"post",
 				data:{
-					"newpwd":$("input[name='newPassword']").val(),
+					"newpwd":$("input[name='newpassword']").val(),
 					"userid":id,
 				},
 				dataType:"json",

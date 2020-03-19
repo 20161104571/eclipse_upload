@@ -92,6 +92,11 @@ public class ThymeleafController {
 		return "user/personcenter";
 	}
 	
+	@RequestMapping("personcenter2")
+	public String personpwd() {
+		return "user/personcenter2";
+	}
+	
 	@RequestMapping("searchtrip")
 	public String sreach() {
 		return "admin/searchtrip";

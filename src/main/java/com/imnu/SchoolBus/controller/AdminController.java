@@ -1,6 +1,7 @@
 package com.imnu.SchoolBus.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,15 +36,14 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping(value = "updatePwd")
-	public boolean changePwd(String username, String password, String newPassword, HttpServletRequest request) {
-		
-		User u = userService.changePwd(username, password, newPassword);
-		if(u != null) {
-			request.getSession().setAttribute("user", u);
-			return true;
+	@RequestMapping(value = "updateAdminPwd")
+	public String updateAdmPwd(int id, String newpassword, HttpSession session) {
+		int u = userService.changePwd(id, newpassword);
+		if(u>0) {
+			return "admin/aindex";
+		}else {
+			return "admin/admin-edit-pwd";
 		}
-		return false;
 	}
 	
 	

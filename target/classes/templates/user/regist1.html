@@ -8,6 +8,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>欢迎注册校园通勤车管理系统</title>
 
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
     </head>
 
@@ -29,9 +40,9 @@
                             		<p>填入你的基本信息来加入我们:</p>
                         		</div>
                             </div>
-                            <div>
-			                    <form role="form" action="./registerUser" method="post" class="login-form">
-			                    	<div>
+                            <div class="form-bottom">
+			                    <form role="form" action="./loginres/registerUser" method="post" class="login-form">
+			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">用户名:</label>
 			                        	<input type="text" name="username" placeholder="用户名..." class="form-username form-control" id="username">
 			                        </div>
@@ -78,6 +89,9 @@
         </div>
 
 
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/scripts.js"></script>
 <script th:inline="javascript">
 var username = $("input[name='username']").val();
 
@@ -98,7 +112,7 @@ function Code() {
 			dataType:"text",
 			success:function(responseContent){
 				if(responseContent=='false'){
-					window.alert('*邮箱已被占用');
+					Tip1('*邮箱已被占用');
 					return false;
 				}
 				else{

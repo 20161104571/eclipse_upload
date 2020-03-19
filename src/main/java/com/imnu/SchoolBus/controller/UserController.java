@@ -3,6 +3,7 @@ package com.imnu.SchoolBus.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,9 +91,21 @@ public class UserController {
 		return "admin/aindex";
 	}
 	
+	@RequestMapping(value="updatepwd")
+	public String updatePwd(int id, String newpassword, HttpSession session) {
+		int u = userService.changePwd(id, newpassword);
+		if(u>0) {
+			return "user/index";
+		}else {
+			return "user/personcenter2";
+		}
+	}
+	
 	@RequestMapping(value="editUser")
 	public String updateMsg(User user, HttpServletRequest request) {
 		User user1 = (User)request.getSession().getAttribute("users");
+		System.out.println("user1"+user1);
+		System.out.println("user是"+user);
 		userService.updateMsg(user1);
 		return "user/index";
 	}
