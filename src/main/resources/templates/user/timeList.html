@@ -2,7 +2,7 @@
 <html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>个人中心</title>
+<title>发车时刻表</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -83,13 +83,9 @@
 			<dl>
 				<dt>
 					<span>
-						<h4>个人中心</h4>
+						<h4>预约</h4>
 					</span>
 				</dt>
-				<dd><a href="personcenter">个人资料</a></dd>
-				<dd><a href="personcenter1">修改个人信息</a></dd>
-				<dd class="on"><a href="personcenter2">修改密码</a></dd>
-				<dd><a href="personcenter2">我的预约</a></dd>
 			</dl>
 		</div>
 		<div class="rightCon fr">
@@ -97,37 +93,60 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<a href="personcenter">个人中心</a>
-					<i>-</i>
-					<span>修改密码</span>
+					<span>预约车次</span>
 				</div>
-				<div class="conTit clearfix">
-					<span>修改密码</span>
-				</div>
+				
 			</div>
 			<div class="conMain">
-                <div class="tab-pane fade active in" id="home" >
-                <form th:action="@{/updatepwd}" method="post" class="row" >
-                <input type="hidden" name="id" id="id" th:value="${session.users.id}">
-                  <div class="form-group col-md-12">
-                    <label for="oldpwd">原密码</label>
-                    <input type="password" id="password" name="password" class="form-control" >
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="newpwd">新密码</label>
-                    <input type="password" class="form-control" id="newpassword" name="newpassword"/>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="repwd">确认密码</label>
-                    <input type="password" class="form-control" id="repassword" name="repassword"/>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
-                    <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
-                  </div>
-                </form>
-                </div>
-                </div>
+				<table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th width="150px">编号</th>
+                       	<th width="150px">车次号</th>
+                       	<th width="150px">始发时间</th>
+			            <th width="150px">始发地</th>
+			            <th width="150px">所需时间</th>
+			            <th width="150px">余座</th>
+                        <th width="150px">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="trip:${trips}">
+                      	<td th:text="${trip.tId}"></td>
+                      	<td th:text="${trip.ccard}"></td>
+			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
+			            <td th:if = "${trip.start=='1'}">赛罕</td>
+			            <td th:if = "${trip.start=='2'}">盛乐</td>
+			            <td th:text="${trip.reqTime} + '小时'"></td>
+			            <td th:text="${trip.remain_seats}"></td>
+                        <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip"><i ><img src="user/images/subs.png"></i></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    </tbody>
+                  </table>
+				
+				<div class="pageNum">
+					<span>共14条</span>
+					<span>每页1页</span>
+					<a href="#" class="pagePrev disabled">&lt;</a>
+					<a href="#" class="active">1</a>
+					<a href="#">2</a>
+					<a href="#">3</a>
+					<span>...</span>
+					<a href="#">14</a>
+					<a href="#" class="pageNext">&gt;</a>
+					<form>
+						<span>转到第</span>
+						<input type="text" name="">
+						<span>页</span>
+						<button>GO</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!--main End!-->

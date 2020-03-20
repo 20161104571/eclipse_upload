@@ -112,16 +112,9 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public void updateMsg(User user) {
-		userMapper.updateMsg(user);
-	}
-	
-
-	@Override
 	public int changePwd(int id, String newpassword) {
 		User user = new User();
 		user = userMapper.findUserById(id);
-		System.out.println(id);
 		user.setPassword(newpassword);
 		int result = userMapper.changePwd(id, newpassword);
 		return result;
@@ -130,6 +123,22 @@ public class UserServiceImp implements UserService{
 	@Override
 	public void countUser(int count) {
 		userMapper.countUser(count);
+	}
+
+	@Override
+	public User updateMsg(int id, String username, String name, String email, String phone) {
+		User user = new User();
+		user = userMapper.findUserById(id);
+		user.setUsername(username);
+		user.setName(name);
+		user.setEmail(email);
+		user.setPhone(phone);
+		int result = userMapper.updateMsg(id, username, name, email, phone);
+		if(result > 0) {
+			return user;
+		}else {
+			return null;
+		}
 	}
 
 		

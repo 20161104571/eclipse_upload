@@ -102,12 +102,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="editUser")
-	public String updateMsg(User user, HttpServletRequest request) {
-		User user1 = (User)request.getSession().getAttribute("users");
-		System.out.println("user1"+user1);
-		System.out.println("user是"+user);
-		userService.updateMsg(user1);
-		return "user/index";
+	public String updateMsg(int id, String username, String name, String email, String phone, HttpServletRequest request) {
+		User user = userService.updateMsg(id, username, name, email, phone);
+		System.out.println("修改的用户信息是："+user);
+		if(user != null) {
+			request.getSession().setAttribute("users", user);
+			return "user/index";
+		}else {
+			return "user/personcenter";
+		}
+		
 	}
 	
 	

@@ -86,6 +86,10 @@
 						<h4>个人中心</h4>
 					</span>
 				</dt>
+				<dd><a href="personcenter">个人资料</a></dd>
+				<dd><a href="personcenter1">修改个人信息</a></dd>
+				<dd class="on"><a href="personcenter2">修改密码</a></dd>
+				<dd><a href="personcenter2">我的预约</a></dd>
 			</dl>
 		</div>
 		<div class="rightCon fr">
@@ -93,15 +97,14 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<span>个人中心</span>
+					<a href="personcenter">个人中心</a>
+					<i>-</i>
+					<span>修改密码</span>
 				</div>
-				
+				<div class="conTit clearfix">
+					<span>修改密码</span>
+				</div>
 			</div>
-			<div class="card">
-              <ul class="nav nav-tabs page-tabs">
-                <li> <a href="personcenter">修改个人信息</a> </li>
-                <li class="active"> <a href="personcenter2">修改密码</a> </li>
-              </ul>
 			<div class="conMain">
                 <div class="tab-pane fade active in" id="home" >
                 <form th:action="@{/updatepwd}" method="post" class="row" >
@@ -125,7 +128,6 @@
                 </form>
                 </div>
                 </div>
-			</div>
 		</div>
 	</div>
 	<!--main End!-->

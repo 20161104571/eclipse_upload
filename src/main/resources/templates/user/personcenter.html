@@ -86,6 +86,10 @@
 						<h4>个人中心</h4>
 					</span>
 				</dt>
+				<dd class="on"><a href="personcenter">个人资料</a></dd>
+				<dd><a href="personcenter1">修改个人信息</a></dd>
+				<dd><a href="personcenter2">修改密码</a></dd>
+				<dd><a href="personcenter2">我的预约</a></dd>
 			</dl>
 		</div>
 		<div class="rightCon fr">
@@ -95,16 +99,19 @@
 					<i>-</i>
 					<span>个人中心</span>
 				</div>
-				
+				<div class="conTit clearfix">
+					<span>个人资料</span>
+				</div>
 			</div>
-			<div class="card">
-              <ul class="nav nav-tabs page-tabs">
-                <li class="active"> <a href="#!">修改个人信息</a> </li>
-                <li> <a href="personcenter2">修改密码</a> </li>
-              </ul>
 			<div class="conMain">
 			<div class="tab-pane fade active in" id="home">
-				<form th:action="@{/editUser}" method="post" class="row" >
+				<ul class="newsList">
+					<li class="clearfix">用户名:<span id="username" th:text="${session.users.username}"></span></li>
+					<li class="clearfix">真实姓名:<span id="name" th:text="${session.users.name}"></span></li>
+					<li class="clearfix">电子邮件:<span id="email" th:text="${session.users.email}"></span></li>
+					<li class="clearfix">电话号码:<span id="phone" th:text="${session.users.phone}"></span></li>
+				</ul>
+				<!-- <form th:action="@{/editUser}" method="post" class="row" >
                 <input type="hidden" name="id" id="id" th:value="${session.users.id}">
                   <div class="form-group col-md-12">
                     <label for="username">用户名</label>
@@ -126,10 +133,9 @@
                     <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
                     <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
                   </div>
-                </form>
+                </form> -->
                 </div>
 				
-			</div>
 			</div>
 		</div>
 	</div>
