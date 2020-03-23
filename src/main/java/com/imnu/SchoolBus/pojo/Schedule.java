@@ -11,6 +11,9 @@ public class Schedule {
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date startTime;
 	
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date endTime;
+	
 	private Integer startPlace;
 
 	public Integer getsId() {
@@ -29,6 +32,14 @@ public class Schedule {
 		this.startTime = startTime;
 	}
 
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
 	public Integer getStartPlace() {
 		return startPlace;
 	}
@@ -39,7 +50,9 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return "Schedule [sId=" + sId + ", startTime=" + startTime + ", startPlace=" + startPlace + "]";
+		return "Schedule [sId=" + sId + ", startTime=" + startTime + ", endTime=" + endTime + ", startPlace="
+				+ startPlace + "]";
 	}
+
 	
 }

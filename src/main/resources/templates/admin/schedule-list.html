@@ -15,12 +15,12 @@
   <div class="lyear-layout-container">
     <!--左侧导航-->
     <aside class="lyear-layout-sidebar">
-       
+      
       <!-- logo -->
       <div id="logo" class="sidebar-header">
-        <a href="index.html"><img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
+        <a href="aindex"></a><!-- <img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /> -->
       </div>
-      <div class="lyear-layout-sidebar-scroll">
+      <div class="lyear-layout-sidebar-scroll"> 
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
@@ -31,51 +31,35 @@
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
                 <li> <a href="./getUserList">用户信息管理</a> </li>
-                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
-                <!-- <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
-                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
-                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
-                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
-                <li> <a href="lyear_pages_error.html">错误页面</a> </li> -->
+                <li> <a href="./getUserList">新增管理员</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 车辆管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
-                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
-                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
-                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
-                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
-                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
-                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
-                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
+                <li> <a href="./getScheduleList">发车时刻表</a> </li>
+                <li> <a href="./getVehicleList">显示车辆信息</a> </li>
+                <li> <a href="./getTripList">车次信息</a> </li>
+                <li> <a href="searchtrip">查询车次</a> </li>
+              </ul>
+            </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 公告信息管理</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="./getNoticeList">公告管理</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 预约管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
-                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
-                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
-                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
-                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
-                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
-                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
-                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
+                <li> <a href="./getOrderList">查看预约信息</a> </li>
+                
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 留言管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="lyear_pages_doc.html">文档列表</a> </li>
-                <li> <a href="lyear_pages_gallery.html">图库列表</a> </li>
-                <li> <a href="lyear_pages_config.html">网站配置</a> </li>
-                <li> <a href="lyear_pages_rabc.html">设置权限</a> </li>
-                <li> <a href="lyear_pages_add_doc.html">新增文档</a> </li>
-                <li> <a href="lyear_pages_guide.html">表单向导</a> </li>
-                <li> <a href="lyear_pages_login.html">登录页面</a> </li>
-                <li> <a href="lyear_pages_error.html">错误页面</a> </li>
+                <li> <a href="./getCommentList">论坛</a> </li>
               </ul>
             </li>
            
@@ -83,7 +67,7 @@
         </nav>
         
         <div class="sidebar-footer">
-          <p class="copyright">@2020届毕业设计</p>
+          <p class="copyright">@2020</p>
         </div>
       </div>
       
@@ -102,21 +86,21 @@
               <span class="lyear-toggler-bar"></span>
               <span class="lyear-toggler-bar"></span>
             </div>
+            <span class="navbar-page-title"> 时刻表 </span>
           </div>
           
           <ul class="topbar-right">
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
-                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" />
-                <span>笔下光年 <span class="caret"></span></span>
+                <span><span th:text="${session.user.username}"></span><span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li> <a href="lyear_pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
-                <li> <a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
+                <li> <a href="admin-edit-pwd"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
                 <li class="divider"></li>
-                <li> <a href="lyear_pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+                <li> <a href="./logOut"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
               </ul>
             </li>
+            
           </ul>
           
         </div>
@@ -144,26 +128,18 @@
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>
-                          <label class="lyear-checkbox checkbox-primary">
-                            <!-- <input type="checkbox" id="check-all"><span></span> -->
-                          </label>
-                        </th>
+                      	<th>出发地</th>
                        	<th>出发时间</th>
-			            <th>出发地</th>
+			            <th>到达时间</th>
                         <th>操作</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr th:each="schedule:${schedules}">
-                        <td>
-                          <label class="lyear-checkbox checkbox-primary">
-                            <!-- <input type="checkbox" name="ids[]" value="1"><span></span> -->
-                          </label>
-                        </td>
-			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}"></td>
-			            <td th:if = "${schedule.startPlace==1}">赛罕</td>
+                      	<td th:if = "${schedule.startPlace==1}">赛罕</td>
 			            <td th:if = "${schedule.startPlace==2}">盛乐</td>
+			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}"></td>
+			            <td th:text="${#dates.format(schedule.endTime, 'HH:mm')}"></td>
                         <td>
                           <div class="btn-group">
                             <a class="btn btn-xs btn-default" th:href="@{/deleteSchedule(sId=${schedule.sId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>

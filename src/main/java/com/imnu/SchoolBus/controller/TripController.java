@@ -60,10 +60,17 @@ public class TripController {
 			return "user/search_result";
 		}
 		else {
-			model.addAttribute("error_search_fail", "没有找到搜索的内容");
+			//model.addAttribute("error_search_fail", "没有找到搜索的内容");
 			System.out.println("没有找到搜索的内容");
 			return "user/index";
 		}
+	}
+	
+	@RequestMapping(value="getTimeList")
+	public String getTimeTripList(Model model) {
+		List<Trip> trip = tripService.getTimeTripList();
+		model.addAttribute("trip", trip);
+		return "user/timeList2";
 	}
 	
 }

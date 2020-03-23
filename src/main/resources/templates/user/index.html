@@ -37,7 +37,7 @@
 			</div>
 		</li>
 		<li>
-			<a href="forum" class="navItem">显示时刻表</a>
+			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
 		<li>
 			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
@@ -61,10 +61,10 @@
 			<a class="navItem"  href="login">登录</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎 +  ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
-				<a href="#">退出</a>
+				<a href="./logout">退出</a>
 			</div>
 		</li>
 		

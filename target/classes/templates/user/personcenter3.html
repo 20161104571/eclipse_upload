@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改登录密码</title>
+<link rel="stylesheet" type="text/css" href="user/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="user/css/style.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.min.css" rel="stylesheet">
+</head>
+<body class="bodyBg">
+	<!--头部 Start!-->
+	<div id="hd" class="wp clearfix">
+		<a href="index" class="hdLogo fl">
+			<img src="user/images/logo.png">
+		</a>
+		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
+			<button type="submit" onclick="search()"></button>
+			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
+		</form>
+		
+	</div>
+	<!--头部 End!-->
+	
+	<!--导航 Start!-->
+	<ul id="nav" class="clearfix wp">
+		<li class="first active"><a href="index" class="navItem">首页</a></li>
+		<li>
+			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
+			<div class="dropdown">
+				<a href="2gaikuang-jianjie.html">中心简介</a>
+			</div>
+		</li>
+		<li>
+			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
+			<div class="dropdown">
+				<a href="3xinwen-dongtai.html">最新动态</a>
+				<a href="./shownotice">通知公告</a>
+			</div>
+		</li>
+		<li>
+			<a href="./getSchedule" class="navItem">显示时刻表</a>
+		</li>
+		<li>
+			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
+			<div class="dropdown">
+				<a href="6jiaoxue-tixi.html">课程体系</a>
+				<a href="6jiaoxue-xiangmu.html">教学项目</a>
+				<a href="6jiaoxue-huojiang.html">教学获奖</a>
+			</div>
+		</li>
+		<li>
+			<a href="./getUserTripList" class="navItem">预约</a>
+			
+		</li>
+		<li>
+			<a href="forum" class="navItem">论坛</a>
+		</li>
+		<li>
+			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
+		</li>
+		<li th:if="${session.users}==null">
+			<a class="navItem"  href="login">登录</a>
+		</li>
+		<li th:if="${session.users}!=null">
+			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
+			<div class="dropdown">
+				<a href="personcenter">个人中心</a>
+				<a href="./logout">退出</a>
+			</div>
+		</li>
+		
+	</ul>
+	<!--导航 End!-->
+
+	<!--main Start!-->
+	<div id="main" class="wp clearfix">
+		<div class="leftMenu fl">
+			<dl>
+				<dt>
+					<span>
+						<h4>个人中心</h4>
+					</span>
+				</dt>
+				<dd><a href="personcenter">个人资料</a></dd>
+				<dd><a href="personcenter1">修改个人信息</a></dd>
+				<dd><a href="personcenter2">修改密码</a></dd>
+				<dd class="on"><a href="./getPersonSubsList">我的预约</a></dd>
+			</dl>
+		</div>
+		<div class="rightCon fr">
+			<div class="conTop clearfix">
+				<div class="crumbs">
+					<a href="index">首页</a>
+					<i>-</i>
+					<a href="personcenter">个人中心</a>
+					<i>-</i>
+					<span>我的预约</span>
+				</div>
+				<div class="conTit clearfix">
+					<span>我的预约</span>
+				</div>
+			</div>
+			<div class="conMain">
+				<table>
+				
+				
+				</table>
+               <!--  <div class="tab-pane fade active in" id="home" >
+                <form th:action="@{/updatepwd}" method="post" class="row" >
+                <input type="hidden" name="id" id="id" th:value="${session.users.id}">
+                  <div class="form-group col-md-12">
+                    <label for="oldpwd">原密码</label>
+                    <input type="password" id="password" name="password" class="form-control" >
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="newpwd">新密码</label>
+                    <input type="password" class="form-control" id="newpassword" name="newpassword"/>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="repwd">确认密码</label>
+                    <input type="password" class="form-control" id="repassword" name="repassword"/>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                    <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                  </div>
+                </form>
+                </div> -->
+                </div>
+		</div>
+	</div>
+	<!--main End!-->
+
+	<!--底部 Start!-->
+	<div id="ft">
+		<div class="wp">
+			<p>Copyright © 2020</p>
+		</div>
+	</div>
+	<!--底部 End!-->
+</body>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+</html>

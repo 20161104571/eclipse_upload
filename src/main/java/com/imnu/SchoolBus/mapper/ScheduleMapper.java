@@ -15,7 +15,7 @@ public interface ScheduleMapper {
 	@Select(value = "select * from schedule ORDER BY startTime")
 	List<Schedule> getScheduleList();
 	
-	@Insert(value = "insert into schedule (sId,startTime,startPlace) values (#{sId},#{startTime},#{startPlace})")
+	@Insert(value = "insert into schedule (sId,startTime,endTime,startPlace) values (#{sId},#{startTime},#{endTime},#{startPlace})")
 	void createSchedule(Schedule schedule);
 	
 	@Delete(value = "delete from schedule where sId = #{sId}")

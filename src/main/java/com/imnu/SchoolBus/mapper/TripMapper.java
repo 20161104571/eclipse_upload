@@ -35,4 +35,6 @@ public interface TripMapper {
 	@Update(value = "update trip set remain_seats = remain_seats + 1")
 	void addSeats(Trip trip);
 	
+	@Select(value = "select * from trip between date_format(#{startTime},'yyyy-MM-dd') and date_format(#{endTime},'yyyy-MM-dd')")
+	List<Trip> getTimeTripList();
 }

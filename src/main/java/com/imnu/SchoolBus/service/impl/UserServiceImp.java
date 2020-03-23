@@ -20,24 +20,21 @@ public class UserServiceImp implements UserService{
 	@Autowired
 	private MailService mailService;
 	
+	
 	/**
      * 用户注册，同时发送一封激活邮件
      * @param user
      */
     @Override
     public void register(User user) {
-    	//String code = user.getCode();
-        //System.out.println("code:"+code);
-    	String code = "";
+    	userMapper.register(user);
+    	String code = user.getCode();
+        System.out.println("code:"+code);
         String email = user.getEmail();
         System.out.println("email:"+email);
-        String subject = "来自校车预约中心的激活邮件";
-        //user/checkCode?code=xxx即是我们点击邮件链接之后进行更改状态的
-        String context = "您的验证码是："+code+"请及时输入";
-        //发送激活邮件
+        String subject = "注册激活账号邮件";
+        String context = "<a href=\"http://localhost:8080/schoolbus/checkCode?code="+code+"\">http://localhost:8080/schoolbus/checkCode?code="+code+"</a>";
         mailService.sendHtmlMail (user.getEmail(),subject,context);
-    	userMapper.register(user);
-        
     }
 
     /**

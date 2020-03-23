@@ -6,7 +6,11 @@ import com.imnu.SchoolBus.pojo.Subs;
 
 public interface SubsService {
 	
-	void createOrder(Subs order);
+	Subs createOrder(Subs order);
+	
+	Subs findSubsById(int oId);
 	
 	List<Subs> getOrderList();
+	
+	void createOrder2(Subs order);
 }

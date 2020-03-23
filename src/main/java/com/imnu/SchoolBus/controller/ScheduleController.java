@@ -24,6 +24,14 @@ public class ScheduleController {
 		return "admin/schedule-list";
 	}
 	
+	@RequestMapping(value="getSchedule")
+	public String schedule(Model model) {
+		List<Schedule> schedules = scheduleService.getScheduleList();
+		model.addAttribute("schedules", schedules);
+		System.out.println(schedules);
+		return "user/timeList";
+	}
+	
 	@RequestMapping(value="saveSchedule")
 	public String createSchedules(Schedule schedule) {
 		scheduleService.createSchedule(schedule);

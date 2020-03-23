@@ -12,6 +12,8 @@ public class Subs {
 	
 	private Integer tId;
 	
+	private String name;
+	
 	private String phone;
 	
 	@DateTimeFormat(pattern = "HH:mm")
@@ -46,6 +48,14 @@ public class Subs {
 
 	public void setoId(Integer oId) {
 		this.oId = oId;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPhone() {
@@ -90,10 +100,9 @@ public class Subs {
 
 	@Override
 	public String toString() {
-		return "Subs [oId=" + oId + ", uId=" + uId + ", tId=" + tId + ", phone=" + phone + ", time=" + time + ", place="
-				+ place + ", trainNum=" + trainNum + ", flag=" + flag + "]";
+		return "Subs [oId=" + oId + ", uId=" + uId + ", tId=" + tId + ", name=" + name + ", phone=" + phone + ", time="
+				+ time + ", place=" + place + ", trainNum=" + trainNum + ", flag=" + flag + "]";
 	}
-
 
 
 }

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html class="htmlBg">
+<html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>留言板论坛</title>
@@ -10,42 +10,34 @@
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
 		<a href="index" class="hdLogo fl">
-			<img src="images/logo.png">
+			<img src="user/images/logo.png">
 		</a>
-		<form class="hdSearch fr">
-			<button></button>
-			<input type="text" name="" placeholder="搜索">
+		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
+			<button type="submit" onclick="search()"></button>
+			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
 		</form>
+		
 	</div>
 	<!--头部 End!-->
 	
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
-		<li class="first"><a href="index" class="navItem">首页</a></li>
+		<li class="first active"><a href="index" class="navItem">首页</a></li>
 		<li>
 			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
 			<div class="dropdown">
 				<a href="2gaikuang-jianjie.html">中心简介</a>
-				<a href="2gaikuang-shezhi.html">机构设置</a>
-				<a href="2gaikuang-zhuren.html">中心主任</a>
 			</div>
 		</li>
 		<li>
-			<a href="3xinwen-dongtai.html" class="navItem">新闻公告<i></i></a>
+			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
 			<div class="dropdown">
-				<a href="3xinwen-dongtai.html">新闻动态</a>
-				<a href="3xinwen-tongzhi.html">通知公告</a>
+				<a href="3xinwen-dongtai.html">最新动态</a>
+				<a href="./shownotice">通知公告</a>
 			</div>
 		</li>
 		<li>
-			<a href="4shebei.html" class="navItem">仪器设备</a>
-		</li>
-		<li>
-			<a href="5shizi-zhuanzhi.html" class="navItem">师资力量<i></i></a>
-			<div class="dropdown">
-				<a href="5shizi-zhuanzhi.html">专职教师</a>
-				<a href="5shizi-jianzhi.html">兼职教师</a>
-			</div>
+			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
 		<li>
 			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
@@ -56,22 +48,26 @@
 			</div>
 		</li>
 		<li>
-			<a href="7duiwai-xueshu.html" class="navItem">对外交流<i></i></a>
-			<div class="dropdown">
-				<a href="7duiwai-xueshu.html">学术交流</a>
-				<a href="7duiwai-rongyu.html">中心荣誉</a>
-			</div>
-		</li>
-		<li class="active">
-			<a href="8dangjian.html" class="navItem">党建专栏</a>
+			<a href="./getUserTripList" class="navItem">预约</a>
+			
 		</li>
 		<li>
-			<a href="9xiazai-wendang.html" class="navItem">文档下载<i></i></a>
+			<a href="forum" class="navItem">论坛</a>
+		</li>
+		<li>
+			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
+		</li>
+		<li th:if="${session.users}==null">
+			<a class="navItem"  href="login">登录</a>
+		</li>
+		<li th:if="${session.users}!=null">
+			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
 			<div class="dropdown">
-				<a href="9xiazai-wendang.html">文档下载</a>
-				<a href="9xiazai-guizhang.html">规章制度</a>
+				<a href="personcenter">个人中心</a>
+				<a href="./logout">退出</a>
 			</div>
 		</li>
+		
 	</ul>
 	<!--导航 End!-->
 
@@ -81,7 +77,7 @@
 			<dl>
 				<dt>
 					<span>
-						<h4>留言板专栏</h4>
+						<h4>留言板</h4>
 						<h5>MESSAGE COLUMN</h5>
 					</span>
 				</dt>
@@ -92,11 +88,11 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<span>留言板专栏</span>
+					<span>留言板</span>
 				</div>
 			</div>
 			<div class="conMain">
-				<ul class="newsList">
+				<!-- <ul class="newsList">
 					<li class="clearfix">
 						<a href="6jiaoxue-tixi.html">运动科学院举办“新时代中国特色社会主义思想”主题师生党支部共建组织生活会</a>
 						<span>2017-12-12</span>
@@ -109,7 +105,7 @@
 						<a href="6jiaoxue-tixi.html">运动科学学院多措并举聚合力，抓牢党建迎评估</a>
 						<span>2017-12-12</span>
 					</li>
-				</ul>
+				</ul> -->
 				<div class="pageNum">
 					<span>共14条</span>
 					<span>每页1页</span>

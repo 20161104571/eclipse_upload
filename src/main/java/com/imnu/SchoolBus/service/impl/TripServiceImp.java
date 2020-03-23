@@ -54,5 +54,11 @@ public class TripServiceImp implements TripService{
 		tripMapper.addSeats(trip);
 	}
 
+	@Override
+	public List<Trip> getTimeTripList() {
+		List<Trip> list = tripMapper.getTimeTripList();
+		return list;
+	}
+
 	
 }

@@ -46,23 +46,11 @@ public class AdminController {
 		}
 	}
 	
-	
-//	@RequestMapping(value = "loginOut")
-//	public ModelAndView logout(HttpServletRequest request, 
-//			HttpServletResponse response, 
-//			Map<String, Object> map) {
-//		Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
-//		if(cookie != null) {
-//			
-//		}
-//				return null;
-//		
-//	}
-
-	
-	
-	
-
+	@RequestMapping(value = "logOut",method = RequestMethod.GET)
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "admin/adminLogin";
+    }
 	
 
 }

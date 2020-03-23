@@ -11,13 +11,16 @@ import com.imnu.SchoolBus.pojo.Subs;
 @Mapper
 public interface SubsMapper {
 	
-	//@Insert(value = "insert into subs (oId,uId,tId,name,phone,time,place,trainNum,flag) values (#{oId},null,null,#{name},#{phone},#{time},#{place},#{trainNum},#{flag}")
-	//void createOrder(Subs order);
-	
 	@Select(value = "select * from subs")
 	List<Subs> getOrderList();
 	
-	@Insert(value = "insert into subs (oId,uId,tId,name,phone,time,place,trainNum) values (#{oId},user.id,trip.tId,user.name,#{phone},trip.ctime,trip.start,trip.ccard")
-	void createOrder(Subs order);
+	@Select(value = "selecr * from subs where oId = #{oId}")
+	Subs findSubsById(int oId);
+	
+	@Insert(value = "INSERT INTO subs (oId,phone) values (#{oId},#{phone}) and INSERT INTO subs (uId,name,tId,time,place,trainNum) SELECT * FROM (SELECT id,name,tId,ctime,start,ccard FROM user JOIN trip) AS tb")
+	Subs createOrder(Subs order);
+	
+	@Insert(value = "INSERT INTO subs(tId,time,place,trainNum) SELECT tId,ctime,start,ccard FROM trip")
+	void createOrder2(Subs order);
 	
 }

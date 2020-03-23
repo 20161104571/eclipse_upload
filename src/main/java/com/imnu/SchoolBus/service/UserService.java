@@ -32,5 +32,6 @@ public interface UserService {
 	int changePwd(int id, String newpassword);
 	
 	User updateMsg(int id, String username, String name, String email, String phone);
-	
+
+
 }

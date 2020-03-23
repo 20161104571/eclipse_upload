@@ -15,17 +15,27 @@ import com.imnu.SchoolBus.service.SubsService;
 public class SubsServiceImp implements SubsService{
 
 	@Autowired
-	private SubsMapper orderMapper;
+	private SubsMapper subsMapper;
 	
 	@Override
-	public void createOrder(Subs order) {
-		orderMapper.createOrder(order);
+	public Subs createOrder(Subs order) {
+		return subsMapper.createOrder(order);
+	}
+	
+	@Override
+	public Subs findSubsById(int oId) {
+		return subsMapper.findSubsById(oId);
 	}
 
 	@Override
 	public List<Subs> getOrderList() {
-		List<Subs> list = orderMapper.getOrderList();
+		List<Subs> list = subsMapper.getOrderList();
 		return list;
+	}
+
+	@Override
+	public void createOrder2(Subs order) {
+		subsMapper.createOrder2(order);
 	}
 
 }

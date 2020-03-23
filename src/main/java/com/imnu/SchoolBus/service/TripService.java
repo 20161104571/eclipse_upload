@@ -20,4 +20,6 @@ public interface TripService {
 	void updateSeats(Trip trip);
 
 	void addSeats(Trip trip);
+	
+	List<Trip> getTimeTripList();
 }
