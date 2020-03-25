@@ -6,92 +6,61 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Reply {
 
-	private Integer r_id;
+	private Integer rid;
 	
-	private String r_userid;
+	private String rname;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date r_createtime;
+	private Date rdate;
 	
-	private String r_content;
+	private String rcontent;
 	
-	private String r_otherid;
-	
-	private String r_words;
-	
-	private Integer r_contentid;
-	
-	private Integer r_state;
+	private Integer rpid;
 
-	public Integer getR_id() {
-		return r_id;
+	public Integer getRid() {
+		return rid;
 	}
 
-	public void setR_id(Integer r_id) {
-		this.r_id = r_id;
+	public void setRid(Integer rid) {
+		this.rid = rid;
 	}
 
-	public String getR_userid() {
-		return r_userid;
+	public String getRname() {
+		return rname;
 	}
 
-	public void setR_userid(String r_userid) {
-		this.r_userid = r_userid;
+	public void setRname(String rname) {
+		this.rname = rname;
 	}
 
-	public Date getR_createtime() {
-		return r_createtime;
+	public Date getRdate() {
+		return rdate;
 	}
 
-	public void setR_createtime(Date r_createtime) {
-		this.r_createtime = r_createtime;
+	public void setRdate(Date rdate) {
+		this.rdate = rdate;
 	}
 
-	public String getR_content() {
-		return r_content;
+	public String getRcontent() {
+		return rcontent;
 	}
 
-	public void setR_content(String r_content) {
-		this.r_content = r_content;
+	public void setRcontent(String rcontent) {
+		this.rcontent = rcontent;
 	}
 
-	public String getR_otherid() {
-		return r_otherid;
+	public Integer getRpid() {
+		return rpid;
 	}
 
-	public void setR_otherid(String r_otherid) {
-		this.r_otherid = r_otherid;
-	}
-
-	public String getR_words() {
-		return r_words;
-	}
-
-	public void setR_words(String r_words) {
-		this.r_words = r_words;
-	}
-
-	public Integer getR_contentid() {
-		return r_contentid;
-	}
-
-	public void setR_contentid(Integer r_contentid) {
-		this.r_contentid = r_contentid;
-	}
-
-	public Integer getR_state() {
-		return r_state;
-	}
-
-	public void setR_state(Integer r_state) {
-		this.r_state = r_state;
+	public void setRpid(Integer rpid) {
+		this.rpid = rpid;
 	}
 
 	@Override
 	public String toString() {
-		return "Reply [r_id=" + r_id + ", r_userid=" + r_userid + ", r_createtime=" + r_createtime + ", r_content="
-				+ r_content + ", r_otherid=" + r_otherid + ", r_words=" + r_words + ", r_contentid=" + r_contentid
-				+ ", r_state=" + r_state + "]";
+		return "Reply [rid=" + rid + ", rname=" + rname + ", rdate=" + rdate + ", rcontent=" + rcontent + ", rpid="
+				+ rpid + "]";
 	}
 	
 }

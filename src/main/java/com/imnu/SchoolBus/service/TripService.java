@@ -17,9 +17,10 @@ public interface TripService {
 	
 	Trip findSubsTripById(int tId);
 	
-	void updateSeats(Trip trip);
+	void updateSeats(int tId, Trip trip);
 
-	void addSeats(Trip trip);
+	void addSeats(int tId, Trip trip);
 	
 	List<Trip> getTimeTripList();
+
 }

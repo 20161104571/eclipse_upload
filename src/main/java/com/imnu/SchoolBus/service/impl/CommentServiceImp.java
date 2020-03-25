@@ -8,26 +8,39 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.imnu.SchoolBus.mapper.CommentMapper;
 import com.imnu.SchoolBus.pojo.Comment;
-import com.imnu.SchoolBus.pojo.Comment1;
 import com.imnu.SchoolBus.service.CommentService;
 
 @Service
 @Transactional
 public class CommentServiceImp implements CommentService{
-
+	
 	@Autowired
 	private CommentMapper commentMapper;
-	
+
 	@Override
-	public List<Comment1> getClist() {
-		List<Comment1> list = commentMapper.getCList();
+	public List<Comment> getCommList() {
+		List<Comment> list = commentMapper.getCommList();
 		return list;
 	}
 
 	@Override
-	public List<Comment> selectCommentById(int contentId) {
-		List<Comment> list = commentMapper.selectCommentById(contentId);
-		return list;
+	public void addComment(Comment comment) {
+		commentMapper.addComment(comment);
+	}
+
+	@Override
+	public void updateComment(Comment comment) {
+		commentMapper.updateComment(comment);
+	}
+
+	@Override
+	public int delComment(Integer cid) {
+		return commentMapper.delComment(cid);
+	}
+
+	@Override
+	public Comment findCommentById(int cid) {
+		return commentMapper.findCommentById(cid);
 	}
 
 }

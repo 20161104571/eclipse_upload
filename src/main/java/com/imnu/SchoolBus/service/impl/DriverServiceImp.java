@@ -14,6 +14,7 @@ import com.imnu.SchoolBus.service.DriverService;
 @Service
 @Transactional
 public class DriverServiceImp implements DriverService{
+	
 	@Autowired
 	private DriverMapper driverMapper;
 

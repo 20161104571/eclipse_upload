@@ -17,10 +17,7 @@ public interface SubsMapper {
 	@Select(value = "selecr * from subs where oId = #{oId}")
 	Subs findSubsById(int oId);
 	
-	@Insert(value = "INSERT INTO subs (oId,phone) values (#{oId},#{phone}) and INSERT INTO subs (uId,name,tId,time,place,trainNum) SELECT * FROM (SELECT id,name,tId,ctime,start,ccard FROM user JOIN trip) AS tb")
-	Subs createOrder(Subs order);
-	
-	@Insert(value = "INSERT INTO subs(tId,time,place,trainNum) SELECT tId,ctime,start,ccard FROM trip")
-	void createOrder2(Subs order);
+	@Insert(value = "insert into subs (oId,uId,tId,name,phone,time,place,trainNum) values(#{oId},#{uId},#{tId},#{name},#{phone},#{time},#{place},#{trainNum})")
+	int addOrders(Subs subs);
 	
 }

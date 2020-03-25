@@ -85,12 +85,6 @@ public class UserController {
 		return "user/content";
 	}
 	
-	@RequestMapping(value="getCountUsers")
-	public String countUser(Model model, int count) {
-		userService.countUser(count);
-		return "admin/aindex";
-	}
-	
 	@RequestMapping(value="updatepwd")
 	public String updatePwd(int id, String newpassword, HttpSession session) {
 		int u = userService.changePwd(id, newpassword);

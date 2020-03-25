@@ -25,13 +25,13 @@ public interface UserService {
 
 	void registAdmin(User user);
 	
-	void countUser(int count);
-
 	User adminLogin(String username, String password);
 	
 	int changePwd(int id, String newpassword);
 	
 	User updateMsg(int id, String username, String name, String email, String phone);
 
-
+	List<User> getAdminList();
+	
+	int countUser(Integer count);
 }

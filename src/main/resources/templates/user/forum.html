@@ -5,13 +5,14 @@
 <title>留言板论坛</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
+<link href="css/style.min.css" rel="stylesheet">
 </head>
 <body class="bodyBg">
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
-		<a href="index" class="hdLogo fl">
+		<!-- <a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
-		</a>
+		</a> -->
 		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
 			<button type="submit" onclick="search()"></button>
 			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
@@ -23,12 +24,12 @@
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li class="first active"><a href="index" class="navItem">首页</a></li>
-		<li>
+		<!-- <li>
 			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
 			<div class="dropdown">
 				<a href="2gaikuang-jianjie.html">中心简介</a>
 			</div>
-		</li>
+		</li> -->
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
 			<div class="dropdown">
@@ -39,20 +40,20 @@
 		<li>
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
 			<div class="dropdown">
 				<a href="6jiaoxue-tixi.html">课程体系</a>
 				<a href="6jiaoxue-xiangmu.html">教学项目</a>
 				<a href="6jiaoxue-huojiang.html">教学获奖</a>
 			</div>
-		</li>
+		</li> -->
 		<li>
 			<a href="./getUserTripList" class="navItem">预约</a>
 			
 		</li>
 		<li>
-			<a href="forum" class="navItem">论坛</a>
+			<a href="./getCommentsList" class="navItem">论坛</a>
 		</li>
 		<li>
 			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
@@ -67,6 +68,8 @@
 				<a href="./logout">退出</a>
 			</div>
 		</li>
+		<li></li>
+		<li></li>
 		
 	</ul>
 	<!--导航 End!-->
@@ -91,21 +94,82 @@
 					<span>留言板</span>
 				</div>
 			</div>
-			<div class="conMain">
-				<!-- <ul class="newsList">
-					<li class="clearfix">
-						<a href="6jiaoxue-tixi.html">运动科学院举办“新时代中国特色社会主义思想”主题师生党支部共建组织生活会</a>
-						<span>2017-12-12</span>
+			<!-- <section id="contact">
+                    <h2>Contact</h2>
+                    <form method="post" id="contact-form" action="contact.php">
+                        <p class="name">
+                            <label for="name">Name</label>
+                            <input id="name" type="text" class="required" placeholder="Name" name="name" />
+                        </p>
+                        <p class="sender">
+                            <label for="email">Email</label>
+                            <input id="sender" class="email required" type="text" placeholder="Email address" name="sender" />
+                        </p>
+                        <p class="msg">
+                            <label for="msg">Your message</label>
+                            <textarea id="msg" class="required" placeholder="Your message" name="msg"></textarea>
+                        </p>
+                        <input class="submit-button" type="submit" value="submit" />
+                    </form>
+                    <div class="decor"></div>
+                </section> -->
+			<div  class="newsList">
+			<ol>
+				<li class="single_comment_area" th:each="comment : ${comments}">
+					<div class="comment-wrapper d-flex" >
+                     <!-- Comment Meta -->
+                     	<!-- <div class="comment-author">
+                        	<img src="img/blog-img/19.jpg" th:src="@{/img/blog-img/19.jpg}" alt="">
+                        </div> -->
+                        <!-- Comment Content -->
+                        <div class="comment-content">
+                        	<input id="cid" name="cid" hidden="hidden">
+                        	<span class="comment-date text-muted" th:text="${#dates.format(comment.cdate,'yyyy-MM-dd HH:mm')}"></span>
+                            <h5 th:text="${comment.cname}"></h5>
+                            <p th:text="${comment.ctitle}"></p>
+                            <p th:text="${comment.content}"></p>
+                            <!-- <a class="active" th:attr="data-commentid=${comment.cId},data-commentnickname=${comment.cname}" onclick="reply(this)">Reply</a> -->
+                         </div>
+					</div>
+					<!-- <ol class="children" th:if="${#arrays.length(comment.replyComments)}>0">
+						<li class="single_comment_area" th:each="reply : ${comment.replyComments}">
+							<div class="comment-wrapper d-flex">
+								Comment Meta
+									<div class="comment-author">
+										<img src="img/blog-img/18.jpg" th:src="@{/img/blog-img/18.jpg}" alt="">
+									</div>
+									Comment Content
+									<div class="comment-content">
+										<span class="comment-date text-muted" th:text="${#dates.format(reply.commentCreateTime,'yyyy-MM-dd HH:mm')}">27 Aug 2018</span>
+										<span th:text="|@ ${reply.parentComment.commentator}|" class="m-teal">@ 小白</span><h5 th:text="${reply.commentator}">Brandon Kelley</h5>
+										<p th:text="${reply.commentBody}">Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
+										<a href="#" >Like</a>
+										<a class="active" th:attr="data-commentid=${reply.commentId},data-commentnickname=${reply.commentator}" onclick="reply(this)">Reply</a>
+									</div>
+								 </div>
+							</li>
+						</ol> -->
 					</li>
-					<li class="clearfix">
-						<a href="6jiaoxue-tixi.html">我校王雪强博士团队项目获得首届中国康复医学科技进步二等奖和优秀青年康复治疗师奖 </a>
-						<span>2017-12-12</span>
-					</li>
-					<li class="clearfix">
-						<a href="6jiaoxue-tixi.html">运动科学学院多措并举聚合力，抓牢党建迎评估</a>
-						<span>2017-12-12</span>
-					</li>
-				</ul> -->
+				</ol>
+				
+				<form action="./saveComment" method="post" style="width:80%;">
+					<input name="cname" th:value="${session.users.name}" hidden="hidden"/>
+				    <input name="cdate" value="" hidden="hidden"/>
+				 	<div class="form-group">
+	                    <label class="col-xs-12" for="example-text-input">标题</label>
+	                    <div class="col-xs-12">
+	                      <input class="form-control" type="text" id="ctitle" name="ctitle" placeholder="留言标题">
+	                    </div>
+	                </div>
+                	<div class="form-group col-md-12">
+	                    <label for="seo_description"></label>
+	                    <input name="ctitle" value=""/>	
+	                    <textarea class="form-control" id="content" name="content" rows="5" th:value="${comment_msg}" placeholder="输入你的留言"></textarea>
+	                </div>
+	                <input type="submit" class="btn btn-success m-r-5" value="留言">
+	                <input type="submit" class="btn btn-success m-r-5" value="编辑">
+                </form>
+			
 				<div class="pageNum">
 					<span>共14条</span>
 					<span>每页1页</span>
@@ -137,4 +201,26 @@
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="user/js/jquery.min.js" ></script>
+<script type="text/javascript">
+
+function getNowDateFormat() {
+    var nowDate = new Date();
+    var year = nowDate.getFullYear();
+    var month = filterNum(nowDate.getMonth() + 1);
+    var day = filterNum(nowDate.getDate());
+    var hours = filterNum(nowDate.getHours());
+    var min = filterNum(nowDate.getMinutes());
+    var seconds = filterNum(nowDate.getSeconds());
+    return year + "-" + month + "-" + day + " " + hours + ":" + min + ":" + seconds;
+}
+function filterNum(num) {
+    if (num < 10) {
+        return "0" + num;
+    } else {
+        return num;
+    }
+}
+
+</script>
+
 </html>

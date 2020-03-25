@@ -57,7 +57,7 @@ public class TripController {
 			model.addAttribute("search_result", list);
 			model.addAttribute("result_num", list.size());
 			model.addAttribute("search_key", search_input);
-			return "user/search_result";
+			return "user/searchResult";
 		}
 		else {
 			//model.addAttribute("error_search_fail", "没有找到搜索的内容");

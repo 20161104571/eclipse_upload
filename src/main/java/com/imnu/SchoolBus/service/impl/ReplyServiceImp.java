@@ -18,8 +18,24 @@ public class ReplyServiceImp implements ReplyService{
 	private ReplyMapper replyMapper;
 
 	@Override
-	public List<Reply> selectReply(int contentId) {
-		return null;
+	public void addReply(Reply reply) {
+		replyMapper.addReply(reply);
+	}
+
+	@Override
+	public List<Reply> getReplyList() {
+		List<Reply> list = replyMapper.getReplyList();
+		return list;
+	}
+
+	@Override
+	public Reply findReplyById(int rid) {
+		return replyMapper.findReplyById(rid);
+	}
+
+	@Override
+	public int delReply(Integer rid) {
+		return replyMapper.delReply(rid);
 	}
 
 }

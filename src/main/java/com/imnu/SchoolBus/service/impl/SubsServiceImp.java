@@ -18,11 +18,6 @@ public class SubsServiceImp implements SubsService{
 	private SubsMapper subsMapper;
 	
 	@Override
-	public Subs createOrder(Subs order) {
-		return subsMapper.createOrder(order);
-	}
-	
-	@Override
 	public Subs findSubsById(int oId) {
 		return subsMapper.findSubsById(oId);
 	}
@@ -34,8 +29,9 @@ public class SubsServiceImp implements SubsService{
 	}
 
 	@Override
-	public void createOrder2(Subs order) {
-		subsMapper.createOrder2(order);
+	public int addOrders(Subs subs) {
+		int sub= subsMapper.addOrders(subs);
+		return sub;
 	}
 
 }

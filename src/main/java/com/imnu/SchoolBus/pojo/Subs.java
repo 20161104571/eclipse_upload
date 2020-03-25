@@ -23,9 +23,6 @@ public class Subs {
 	
 	private String trainNum;
 	
-	private String flag;
-	
-
 	public Integer getuId() {
 		return uId;
 	}
@@ -89,20 +86,11 @@ public class Subs {
 	public void setTrainNum(String trainNum) {
 		this.trainNum = trainNum;
 	}
-	
-	public String getFlag() {
-		return flag;
-	}
-
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
 
 	@Override
 	public String toString() {
 		return "Subs [oId=" + oId + ", uId=" + uId + ", tId=" + tId + ", name=" + name + ", phone=" + phone + ", time="
-				+ time + ", place=" + place + ", trainNum=" + trainNum + ", flag=" + flag + "]";
+				+ time + ", place=" + place + ", trainNum=" + trainNum + "]";
 	}
-
-
+	
 }

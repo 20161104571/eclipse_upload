@@ -32,7 +32,7 @@
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
                 <li> <a href="./getUserList">用户信息管理</a> </li>
-                <li> <a href="./getUserList">新增管理员</a> </li>
+                <li> <a href="./getAdminList">新增管理员</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -121,7 +121,7 @@
               <div class="card-body clearfix">
                 <div class="pull-right" onload="sendRequest()">
                   <p class="h6 text-white m-t-0">用户总数</p>
-                  <p class="h3 text-white m-b-0" id="count"></p>
+                  <p class="h3 text-white m-b-0" id="count" th:text="${countuser}"></p>
                 </div>
                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-account fa-1-5x"></i></span> </div>
               </div>
@@ -133,7 +133,7 @@
               <div class="card-body clearfix">
                 <div class="pull-right">
                   <p class="h6 text-white m-t-0">预约人数</p>
-                  <p class="h3 text-white m-b-0">34,005,000</p>
+                  <p class="h3 text-white m-b-0"></p>
                 </div>
                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-arrow-down-bold fa-1-5x"></i></span> </div>
               </div>
@@ -145,7 +145,7 @@
               <div class="card-body clearfix">
                 <div class="pull-right">
                   <p class="h6 text-white m-t-0">新增留言</p>
-                  <p class="h3 text-white m-b-0">153 条</p>
+                  <p class="h3 text-white m-b-0"></p>
                 </div>
                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-comment-outline fa-1-5x"></i></span> </div>
               </div>

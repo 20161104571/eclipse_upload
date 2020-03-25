@@ -29,11 +29,11 @@ public interface TripMapper {
 	@Select(value = "select * from trip where tId = #{tId}")
 	Trip findSubsTripById(int tId);
 	
-	@Update(value = "update trip set remain_seats = remain_seats - 1")
-	void updateSeats(Trip trip);
+	@Update(value = "update trip set remain_seats = remain_seats - 1 where tId=#{tId}")
+	void updateSeats(int tId, Trip trip);
 	
-	@Update(value = "update trip set remain_seats = remain_seats + 1")
-	void addSeats(Trip trip);
+	@Update(value = "update trip set remain_seats = remain_seats + 1 where tId=#{tId}")
+	void addSeats(int tId, Trip trip);
 	
 	@Select(value = "select * from trip between date_format(#{startTime},'yyyy-MM-dd') and date_format(#{endTime},'yyyy-MM-dd')")
 	List<Trip> getTimeTripList();

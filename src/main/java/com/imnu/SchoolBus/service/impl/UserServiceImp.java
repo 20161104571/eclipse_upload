@@ -118,11 +118,6 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public void countUser(int count) {
-		userMapper.countUser(count);
-	}
-
-	@Override
 	public User updateMsg(int id, String username, String name, String email, String phone) {
 		User user = new User();
 		user = userMapper.findUserById(id);
@@ -136,6 +131,21 @@ public class UserServiceImp implements UserService{
 		}else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<User> getAdminList() {
+		List<User> list = userMapper.getAdminList();
+		return list;
+	}
+
+	@Override
+	public int countUser(Integer count) {
+		int c = userMapper.countUser(count);
+		if(c>0) {
+			return c;
+		}
+		return 0;
 	}
 
 		

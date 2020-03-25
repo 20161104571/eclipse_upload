@@ -5,13 +5,14 @@
 <title>搜索结果页</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
+<link href="css/style.min.css" rel="stylesheet">
 </head>
 <body class="bodyBg">
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
-		<a href="index" class="hdLogo fl">
+		<!-- <a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
-		</a>
+		</a> -->
 		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
 			<button type="submit" onclick="search()"></button>
 			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
@@ -23,12 +24,12 @@
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li class="first active"><a href="index" class="navItem">首页</a></li>
-		<li>
+		<!-- <li>
 			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
 			<div class="dropdown">
 				<a href="2gaikuang-jianjie.html">中心简介</a>
 			</div>
-		</li>
+		</li> -->
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
 			<div class="dropdown">
@@ -39,20 +40,20 @@
 		<li>
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
 			<div class="dropdown">
 				<a href="6jiaoxue-tixi.html">课程体系</a>
 				<a href="6jiaoxue-xiangmu.html">教学项目</a>
 				<a href="6jiaoxue-huojiang.html">教学获奖</a>
 			</div>
-		</li>
+		</li> -->
 		<li>
 			<a href="./getUserTripList" class="navItem">预约</a>
 			
 		</li>
 		<li>
-			<a href="forum" class="navItem">论坛</a>
+			<a href="./getCommentsList" class="navItem">论坛</a>
 		</li>
 		<li>
 			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
@@ -91,21 +92,30 @@
 				</div>
 			</div>
 			<div class="conMain">
-				<table>
+				<table class="table table-bordered">
                     <thead>
                       <tr>
                        	<th>车次号</th>
                        	<th>始发时间</th>
 			            <th>始发地</th>
 			            <th>所需时间</th>
+			            <th>剩余座位</th>
+			           <!-- <th width="150px">操作</th> -->
                       </tr>
                     </thead>
                     <tbody>
                       <tr th:each="sc : ${search_result}">
                       	<td th:text="${sc.ccard}"></td>
 			            <td th:text="${#dates.format(sc.ctime, 'HH:mm')}"></td>
-			            <td th:text="${sc.start}"></td>
+			            <td th:if = "${sc.start=='1'}">赛罕校区</td>
+			            <td th:if = "${sc.start=='2'}">盛乐校区</td>
 			            <td th:text="${sc.reqTime} + '小时'"></td>
+			            <td th:text="${sc.remain_seats}"></td>
+			            <!-- <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a>
+                          </div>
+                        </td> -->
                       </tr>
                     </tbody>
                   </table>
@@ -116,7 +126,7 @@
 					</li>
 				</ul>
 				
-				<div class="pageNum">
+				<!-- <div class="pageNum">
 					<span>共14条</span>
 					<span>每页1页</span>
 					<a href="#" class="pagePrev disabled">&lt;</a>
@@ -132,7 +142,7 @@
 						<span>页</span>
 						<button>GO</button>
 					</form>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

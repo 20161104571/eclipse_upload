@@ -11,9 +11,9 @@
 <body class="bodyBg">
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
-		<a href="index" class="hdLogo fl">
+		<!-- <a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
-		</a>
+		</a> -->
 		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
 			<button type="submit" onclick="search()"></button>
 			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
@@ -25,12 +25,12 @@
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li class="first active"><a href="index" class="navItem">首页</a></li>
-		<li>
+		<!-- <li>
 			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
 			<div class="dropdown">
 				<a href="2gaikuang-jianjie.html">中心简介</a>
 			</div>
-		</li>
+		</li> -->
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
 			<div class="dropdown">
@@ -41,20 +41,20 @@
 		<li>
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
 			<div class="dropdown">
 				<a href="6jiaoxue-tixi.html">课程体系</a>
 				<a href="6jiaoxue-xiangmu.html">教学项目</a>
 				<a href="6jiaoxue-huojiang.html">教学获奖</a>
 			</div>
-		</li>
+		</li> -->
 		<li>
 			<a href="./getUserTripList" class="navItem">预约</a>
 			
 		</li>
 		<li>
-			<a href="forum" class="navItem">论坛</a>
+			<a href="./getCommentsList" class="navItem">论坛</a>
 		</li>
 		<li>
 			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
@@ -93,7 +93,41 @@
 				</div>
 				
 			</div>
-			<div class="conMain">
+			<form action="craeteOrder" method="post" class="table table-bordered">
+				<ol>
+				<li class="single_comment_area" th:each="trip:${trip}">
+				<input id="tId" name="tId" th:value="${trip.tId}" type="text" hidden="hidden">
+                  <div class="conMain">
+                  	<input th:text="车次号：+${trip.ccard}">
+                  	<input id="trainNum" name="trainNum" th:value="${trip.ccard}" hidden="hidden">
+                  </div>
+                  <div class="conMain">
+                  	<input th:text="出发时间：+${#dates.format(trip.ctime, 'HH:mm')}">
+                  	<input  id="time" name="time" th:value="${#dates.format(trip.ctime, 'HH:mm')}" hidden="hidden">
+                  </div>
+                  <div class="conMain" th:if = "${trip.start=='1'}">
+                  	<input th:text="出发地：赛罕">
+                  	<input id="place" name="place" th:value="${1}" hidden="hidden">
+                  </div>
+                  <div  class="conMain" th:if = "${trip.start=='2'}">
+                  	<input th:text="出发地：盛乐">
+                  	<input th:value="${2}" id="place" name="place" hidden="hidden">
+                  </div>
+                  <div class="conMain">
+                  	<input th:text="'所需时间：'+${trip.reqTime} + '小时'">
+                  </div>
+                  <div class="conMain">
+                  	<input th:text="'余座：'+${trip.remain_seats}">
+                  </div>
+                  </li>
+                  </ol>
+                  <input id="uId" name="uId" th:value="${session.users.id}" type="text" hidden="hidden">
+                  <input id="name" name="name" th:value="${session.users.name}" type="text" hidden="hidden">
+					<span>输入预约手机号，以便接收预约成功短信</span>
+					<input type="text" name="phone" id="phone">
+					<button>确认提交</button>
+                  </form>
+			<!-- <div class="conMain">
 				<table class="table table-bordered">
                     <thead>
                       <tr>
@@ -115,15 +149,9 @@
                       </tr>
                     </tbody>
                   </table>
-                  <form action="craeteOrder" method="post" class="table table-bordered">
-                  <!-- <input id="uId" name="uId" th:text="${session.users.id}" type="text" style="display:none">
-                  <input id="name" name="name" th:text="${session.users.name}" type="text" style="display:none"> -->
-					<span>输入预约手机号，以便接收预约成功短信</span>
-					<input type="text" name="phone" id="phone">
-					<button>确认提交</button>
-                  </form>
+                  
 				
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<!--main End!-->
