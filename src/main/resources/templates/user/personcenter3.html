@@ -2,7 +2,7 @@
 <html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>修改登录密码</title>
+<title>我的预约</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -101,32 +101,34 @@
 					<span>我的预约</span>
 				</div>
 			</div>
-			<div class="conMain">
-				<table>
-				
-				
-				</table>
-               <!--  <div class="tab-pane fade active in" id="home" >
-                <form th:action="@{/updatepwd}" method="post" class="row" >
-                <input type="hidden" name="id" id="id" th:value="${session.users.id}">
-                  <div class="form-group col-md-12">
-                    <label for="oldpwd">原密码</label>
-                    <input type="password" id="password" name="password" class="form-control" >
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="newpwd">新密码</label>
-                    <input type="password" class="form-control" id="newpassword" name="newpassword"/>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="repwd">确认密码</label>
-                    <input type="password" class="form-control" id="repassword" name="repassword"/>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
-                    <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
-                  </div>
-                </form>
-                </div> -->
+			<div class="table-responsive" >
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>预约人姓名</th>
+                        <th>预约电话</th>
+                       	<th>出发时间</th>
+			            <th>出发地</th>
+			            <th>预约车次</th>
+			            <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="subs:${subs}">
+                        <td th:text="${subs.name}"></td>
+                        <td th:text="${subs.phone}"></td>
+			            <td th:text="${#dates.format(subs.time, 'HH:mm')}"></td>
+			            <td th:if = "${subs.place==1}">赛罕</td>
+			            <td th:if = "${subs.place==2}">盛乐</td>
+			            <td th:text="${subs.trainNum}"></td>
+			            <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:href="@{/deleUserOrder(oId=${subs.oId})}" title="取消预约" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 		</div>
 	</div>

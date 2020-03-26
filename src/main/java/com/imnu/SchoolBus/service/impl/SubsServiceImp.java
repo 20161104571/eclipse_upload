@@ -34,4 +34,9 @@ public class SubsServiceImp implements SubsService{
 		return sub;
 	}
 
+	@Override
+	public int delOrder(Integer oId) {
+		return subsMapper.delOrder(oId);
+	}
+
 }

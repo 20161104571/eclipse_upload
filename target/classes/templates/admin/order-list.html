@@ -143,6 +143,11 @@
 			            <td th:if = "${subs.place==1}">赛罕</td>
 			            <td th:if = "${subs.place==2}">盛乐</td>
 			            <td th:text="${subs.trainNum}"></td>
+			            <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:href="@{/deleOrder(oId=${subs.oId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

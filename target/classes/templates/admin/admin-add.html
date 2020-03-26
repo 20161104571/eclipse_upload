@@ -2,7 +2,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>添加用户信息</title>
+<title>新增管理员</title>
 <link rel="icon" href="favicon.ico" type="image/ico">
 <meta name="author" content="yinqi">
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -88,7 +88,7 @@
               <span class="lyear-toggler-bar"></span>
               <span class="lyear-toggler-bar"></span>
             </div>
-            <span class="navbar-page-title"> 添加用户 </span>
+            <span class="navbar-page-title"> 添加新管理员 </span>
           </div>
           
           <ul class="topbar-right">
@@ -120,26 +120,18 @@
             <div class="card">
               <div class="card-body">
                 
-                <form action="saveUser" method="post" class="row">
+                <form action="addAdmin" method="post" class="row">
                   <div class="form-group col-md-12">
                     <label for="username">用户名</label>
                     <input type="text" id="username" name="username" th:value="${username}" class="form-control" placeholder="请输入用户名">
                   </div>
                   <div class="form-group col-md-12">
                     <label for="name">姓名</label>
-                    <input type="text" class="form-control" id="name" name="name" th:value="${name}" value="" placeholder="请输入真实姓名" />
+                    <input type="text" class="form-control" id="name" name="name" th:value="${name}" placeholder="请输入姓名" />
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="number">学工号</label>
-                    <input type="text" class="form-control" id="number" name="number" th:value="${number}" value="" placeholder="请输入学工号" />
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="email">电子邮箱</label>
-                    <input type="text" class="form-control" id="email" name="email" th:value="${email}" value="" placeholder="请输入电子邮箱" />
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="phone">电话号码</label>
-                    <input type="text" class="form-control" id="phone" name="phone" th:value="${phone}" value="" placeholder="请输入电话号码" />
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="password" name="password" th:value="${password}" placeholder="请输入密码" />
                   </div>
                   <div class="form-group col-md-12">
                     <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>

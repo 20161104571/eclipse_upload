@@ -34,4 +34,8 @@ public interface UserService {
 	List<User> getAdminList();
 	
 	int countUser(Integer count);
+	
+	int countComment(Integer comm);
+
+	int countNewOrder(Integer subs);
 }

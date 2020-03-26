@@ -19,6 +19,8 @@ public class Comment {
 	
 	private Integer pid;
 	
+	private Integer cflag;
+	
 	public Integer getCid() {
 		return cid;
 	}
@@ -67,11 +69,18 @@ public class Comment {
 		this.pid = pid;
 	}
 
+	public Integer getCflag() {
+		return cflag;
+	}
+
+	public void setCflag(Integer cflag) {
+		this.cflag = cflag;
+	}
+
 	@Override
 	public String toString() {
 		return "Comment [cid=" + cid + ", cname=" + cname + ", cdate=" + cdate + ", ctitle=" + ctitle + ", content="
-				+ content + ", pid=" + pid + "]";
+				+ content + ", pid=" + pid + ", cflag=" + cflag + "]";
 	}
-
 
 }

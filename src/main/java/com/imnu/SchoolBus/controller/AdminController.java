@@ -16,16 +16,20 @@ import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.UserService;
 
 @Controller
-@RequestMapping(value="/",method = RequestMethod.POST)
-
 public class AdminController {
 
 	@Autowired
 	private UserService userService;
 	
 	@RequestMapping(value = "addAdmin")
-	public String registAdmin(User user) {
+	public String registAdmin(User user, Integer count, Integer comm, Integer subs, ModelMap modelMap) {
 		userService.registAdmin(user);
+		int c = userService.countUser(count);
+		int com = userService.countComment(comm);
+		int newor = userService.countNewOrder(subs);
+		modelMap.addAttribute("countuser", c);
+		modelMap.addAttribute("com", com);
+		modelMap.addAttribute("newor", newor);
 		return "redirect:/getAdminList";
 	}
 	
@@ -34,16 +38,19 @@ public class AdminController {
 		List<User> users = userService.getAdminList();
 		model.addAttribute("users", users);
 		System.out.print(users);
-		return "admin/adminlist";
+		return "admin/admin-list";
 	}
 	
 	@RequestMapping(value = "loginAdmin")
-	public String login(String username, String password, HttpServletRequest request, Integer count, ModelMap modelMap) {
+	public String login(String username, String password, HttpServletRequest request, Integer count, Integer comm, Integer subs, ModelMap modelMap) {
 		User u = userService.adminLogin(username, password);
 		int c = userService.countUser(count);
+		int com = userService.countComment(comm);
+		int newor = userService.countNewOrder(subs);
 		if(u != null) {
 			modelMap.addAttribute("countuser", c);
-			System.out.println(c);
+			modelMap.addAttribute("com", com);
+			modelMap.addAttribute("newor", newor);
 			request.getSession().setAttribute("user", u);
 			return "admin/aindex";
 		}
@@ -52,8 +59,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "updateAdminPwd")
-	public String updateAdmPwd(int id, String newpassword, HttpSession session) {
+	public String updateAdmPwd(int id, String newpassword, HttpSession session, Integer count, Integer comm, Integer subs, ModelMap modelMap) {
 		int u = userService.changePwd(id, newpassword);
+		int c = userService.countUser(count);
+		int com = userService.countComment(comm);
+		int newor = userService.countNewOrder(subs);
+		modelMap.addAttribute("countuser", c);
+		modelMap.addAttribute("com", com);
+		modelMap.addAttribute("newor", newor);
+		System.out.println(u);
 		if(u>0) {
 			return "admin/aindex";
 		}else {

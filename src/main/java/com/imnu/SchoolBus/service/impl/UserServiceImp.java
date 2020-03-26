@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.imnu.SchoolBus.mapper.CommentMapper;
+import com.imnu.SchoolBus.mapper.SubsMapper;
 import com.imnu.SchoolBus.mapper.UserMapper;
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.MailService;
@@ -14,8 +16,15 @@ import com.imnu.SchoolBus.service.UserService;
 @Service
 @Transactional
 public class UserServiceImp implements UserService{
+	
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private CommentMapper commentMapper;
+	
+	@Autowired
+	private SubsMapper subsMapper;
 	
 	@Autowired
 	private MailService mailService;
@@ -144,6 +153,24 @@ public class UserServiceImp implements UserService{
 		int c = userMapper.countUser(count);
 		if(c>0) {
 			return c;
+		}
+		return 0;
+	}
+
+	@Override
+	public int countComment(Integer comm) {
+		int com = commentMapper.countComment(comm);
+		if(com>0) {
+			return com;
+		}
+		return 0;
+	}
+	
+	@Override
+	public int countNewOrder(Integer subs) {
+		int newor = subsMapper.countNewOrder(subs);
+		if(newor>0) {
+			return newor;
 		}
 		return 0;
 	}

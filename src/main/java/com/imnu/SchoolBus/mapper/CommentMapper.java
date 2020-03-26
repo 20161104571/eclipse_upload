@@ -16,7 +16,7 @@ public interface CommentMapper {
 	@Select(value = "select * from comment")
 	List<Comment> getCommList();
 	
-	@Insert(value = "insert into comment (cid,cname,cdate,ctitle,content,pid) values (#{cid},#{cname},#{cdate},#{ctitle},#{content},#{cid})")
+	@Insert(value = "insert into comment (cid,cname,cdate,ctitle,content,pid,cflag) values (#{cid},#{cname},#{cdate},#{ctitle},#{content},#{cid},1)")
 	void addComment(Comment comment);
 	
 	@Update(value = "update comment set ctitle = #{ctitle},content = #{content} where cid = #{cid}")
@@ -25,8 +25,14 @@ public interface CommentMapper {
 	@Delete(value = "delete from comment where cid = #{cid}")
 	int delComment(Integer cid);
 	
+	@Update(value = "update comment set cflag = 0 where cid = #{cid}") 
+	void updateCommentFlag(Comment comment); //修改已读
+	
 	@Select(value = "select * from comment where cid = #{cid}")
 	Comment findCommentById(int cid);
+	
+	@Select(value = "select count(cid) from comment where cflag = 1")
+	int countComment(Integer comm); //未读留言统计
 	
 	
 }

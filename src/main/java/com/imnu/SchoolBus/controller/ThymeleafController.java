@@ -47,6 +47,11 @@ public class ThymeleafController {
 		return "admin/user-add";
 	}
 	
+	@RequestMapping("admin-add")
+	public String adminAdd() {
+		return "admin/admin-add";
+	}
+	
 	@RequestMapping("notice-add")
 	public String noticeAdd() {
 		return "admin/notice-add";

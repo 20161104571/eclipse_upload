@@ -83,5 +83,16 @@ public class SubsController {
 		
 	}
 	
+	@RequestMapping("deleOrder")
+	public String deleteOrder(Integer oId) {
+		subsService.delOrder(oId);
+		return "redirect:/getOrderList";
+	}
+	
+	@RequestMapping("deleUserOrder")
+	public String deleteUserOrder(Integer oId) {
+		subsService.delOrder(oId);
+		return "redirect:/getPersonSubsList";
+	}
 	
 }

@@ -11,4 +11,6 @@ public interface SubsService {
 	List<Subs> getOrderList();
 	
 	int addOrders(Subs subs);
+	
+	int delOrder(Integer oId);
 }

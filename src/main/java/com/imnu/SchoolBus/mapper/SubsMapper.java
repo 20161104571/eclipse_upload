@@ -2,6 +2,7 @@ package com.imnu.SchoolBus.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -19,5 +20,11 @@ public interface SubsMapper {
 	
 	@Insert(value = "insert into subs (oId,uId,tId,name,phone,time,place,trainNum) values(#{oId},#{uId},#{tId},#{name},#{phone},#{time},#{place},#{trainNum})")
 	int addOrders(Subs subs);
+	
+	@Delete(value = "delete from subs where oId = #{oId}")
+	int delOrder(Integer oId);
+
+	@Select(value = "select count(oId) from subs")
+	int countNewOrder(Integer subs);
 	
 }
