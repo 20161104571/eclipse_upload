@@ -1,6 +1,14 @@
+/**
+* @Title:   MessageUtil.java  
+* @Package: com.imnu.SchoolBus.util
+* @author:  ww 
+* @date:    2020年3月29
+* @version  V1.0
+*/
 package com.imnu.SchoolBus.util;
 
-import com.alibaba.fastjson.JSONObject;
+import java.util.Random;
+
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -10,58 +18,60 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 
+
+/**  
+* @ClassName:   MessageUtil
+* @Description: 手机验证码发送
+* @author: ww
+* @date:   2019年12月11日下午11:24:23
+* "LTAI4FhvhTKqYmZ3qKcPmcPE", "gQZSqwImbYKkiTVk2lbKuHhRrNHzby"
+*/
+
 public class MessageUtil {
+	/**
+	 * @param phone
+	 *            发送到的手机号
+	 * @param code
+	 *            验证码内容
+	 */
+    @SuppressWarnings("deprecation")
+	public static void sendCode(String phone, String code) {
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FhkMdBjzhEMUTK5Vbou", "F5kBypJosqTJoM3twkmoi57o5lxUOA");
+        IAcsClient client = new DefaultAcsClient(profile);
 
-	 DefaultProfile profile = DefaultProfile.getProfile("default", "LTAI4FhkMdBjzhEMUTK5Vbou", "F5kBypJosqTJoM3twkmoi57o5lxUOA");
-     IAcsClient client = new DefaultAcsClient(profile);
-
-     public String SendMessage(String phone){
-         CommonRequest request = new CommonRequest();
-         //request.setSysProtocol(ProtocolType.HTTPS);
-         request.setMethod(MethodType.POST);
-         request.setDomain("dysmsapi.aliyuncs.com");
-         request.setVersion("2017-05-25");
-         request.setAction("SendSms");
-         request.putQueryParameter("phone", phone);//接受验证码的手机号
-         request.putQueryParameter("SignName", "校车座位预约");//签名
-         request.putQueryParameter("TemplateCode", "SMS_186597898");//模板代码
-         request.putQueryParameter("TemplateParam", "{code:"+((int) (Math.random() * 9000 + 1000))+"}");//用户定义的验证码内容
-         try {
-             CommonResponse response = client.getCommonResponse(request);
-             String returnstr = response.getData();
-             System.out.println(returnstr);
-             JSONObject returnjsonstr = JSONObject.parseObject(returnstr);
-             return returnjsonstr.getString("Message");//返回的信息
-         } catch (ServerException e) {
-             return e.getErrMsg();
-         } catch (ClientException e) {
-             return e.getErrMsg();
-         }
-     };
-
-     //查询发送信息
-     public   String QuerySendDetails(String phone,String SendDate,String PageSize,String CurrentPage){
-         CommonRequest request = new CommonRequest();
-         //request.setSysProtocol(ProtocolType.HTTPS);
-         request.setMethod(MethodType.POST);
-         request.setDomain("dysmsapi.aliyuncs.com");
-         request.setVersion("2017-05-25");
-         request.setAction("QuerySendDetails");
-         request.putQueryParameter("PhoneNumber", phone);
-         request.putQueryParameter("SendDate", SendDate);
-         request.putQueryParameter("PageSize", PageSize);
-         request.putQueryParameter("CurrentPage", CurrentPage);
-         try {
-             CommonResponse response = client.getCommonResponse(request);
-             String returnstr = response.getData();
-             System.out.println(returnstr);
-             JSONObject returnjsonstr = JSONObject.parseObject(returnstr);
-             return returnjsonstr.getString("Message");
-         } catch (ServerException e) {
-             return e.getErrMsg();
-         } catch (ClientException e) {
-             return e.getErrMsg();
-         }
-     }
-	
+        CommonRequest request = new CommonRequest();
+        request.setMethod(MethodType.POST);
+        request.setDomain("dysmsapi.aliyuncs.com");
+        request.setVersion("2017-05-25");
+        request.setAction("SendSms");
+        request.putQueryParameter("RegionId", "cn-hangzhou");
+        //此处放接收验证码的手机号
+        request.putQueryParameter("PhoneNumbers", phone);
+        //此处放签名名称
+        request.putQueryParameter("SignName", "校车座位预约");
+        //此处放短信模板
+        request.putQueryParameter("TemplateCode", "SMS_186597898");
+        //此处放验证码的内容（JSON格式\"表示转义。JSON格式：{"code":"666666"}）
+        request.putQueryParameter("TemplateParam", "{\"code\":\"" + code + "\"}");
+        try {
+            CommonResponse response = client.getCommonResponse(request);
+            System.out.println(response.getData());
+        } catch (ServerException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+    }
+    
+	/**
+	 * @return 随机生成的6位验证码
+	 */
+	public static String getCode() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; sb.length() < 6; i++) {
+			int num = new Random().nextInt(10);
+			sb.append(num);
+		}
+		return sb.toString();
+	}
 }

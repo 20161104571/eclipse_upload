@@ -3,6 +3,8 @@ package com.imnu.SchoolBus.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,21 +51,6 @@ public class SubsController {
 		
 	}
 	
-	 @RequestMapping("send")
-	    public String send() {
-	        return "/message";
-	    }
-
-    @RequestMapping(value = "sendcode",method = RequestMethod.POST)
-    public void sendcode(String number, HttpServletResponse response) {
-        MessageUtil messageUtil = new MessageUtil();
-        try {
-            response.getWriter().write(messageUtil.SendMessage(number));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-	
 	@RequestMapping("getPersonSubsList")
 	public String getPersonList(Model model) {
 		List<Subs> subs = subsService.getOrderList();
@@ -94,5 +81,22 @@ public class SubsController {
 		subsService.delOrder(oId);
 		return "redirect:/getPersonSubsList";
 	}
+
+    @RequestMapping(value = "sendcode",method = RequestMethod.POST)
+    public String sendcode(Subs subs, int tId, Trip trip, String number, HttpServletRequest request) {
+    	int s = subsService.addOrders(subs);
+    	String code = MessageUtil.getCode();
+    	String phone = subs.getPhone();
+    	//request.getSession().setAttribute("autoCode", code);
+		if(s > 0) {
+			MessageUtil.sendCode(phone, code);
+			tripService.updateSeats(tId,trip);
+			return "user/index";
+		}else {
+			return "user/subsDetails";
+		}
+    	
+    }
 	
+
 }

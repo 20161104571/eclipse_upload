@@ -58,8 +58,12 @@
 			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
 		</li>
 		<li th:if="${session.users}==null">
+			<a class="navItem"  href="regist">注册</a>
+		</li>
+		<li th:if="${session.users}==null">
 			<a class="navItem"  href="login">登录</a>
 		</li>
+		
 		<li th:if="${session.users}!=null">
 			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
 			<div class="dropdown">
