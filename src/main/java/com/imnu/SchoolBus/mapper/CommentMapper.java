@@ -16,7 +16,7 @@ public interface CommentMapper {
 	@Select(value = "select * from comment")
 	List<Comment> getCommList();
 	
-	@Insert(value = "insert into comment (cid,cname,cdate,ctitle,content,pid,cflag) values (#{cid},#{cname},#{cdate},#{ctitle},#{content},#{cid},1)")
+	@Insert(value = "insert into comment (cid,cname,cdate,ctitle,content,cflag) values (#{cid},#{cname},#{cdate},#{ctitle},#{content},1)")
 	void addComment(Comment comment);
 	
 	@Update(value = "update comment set ctitle = #{ctitle},content = #{content} where cid = #{cid}")

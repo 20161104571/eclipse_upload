@@ -15,4 +15,6 @@ public interface CommentService {
 	int delComment(Integer cid);
 	
 	Comment findCommentById(int cid);
+	
+	public String getTime();
 }

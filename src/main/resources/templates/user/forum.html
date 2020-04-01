@@ -117,11 +117,6 @@
 			<ol>
 				<li class="single_comment_area" th:each="comment : ${comments}">
 					<div class="comment-wrapper d-flex" >
-                     <!-- Comment Meta -->
-                     	<!-- <div class="comment-author">
-                        	<img src="img/blog-img/19.jpg" th:src="@{/img/blog-img/19.jpg}" alt="">
-                        </div> -->
-                        <!-- Comment Content -->
                         <div class="comment-content">
                         	<input id="cid" name="cid" hidden="hidden">
                         	<span class="comment-date text-muted" th:text="${#dates.format(comment.cdate,'yyyy-MM-dd HH:mm')}"></span>
@@ -154,7 +149,7 @@
 				
 				<form action="./saveComment" method="post" style="width:80%;">
 					<input name="cname" th:value="${session.users.name}" hidden="hidden"/>
-				    <input name="cdate" value="" hidden="hidden"/>
+					<input name="cdate" th:value="${ctime}" hidden="hidden"/>
 				 	<div class="form-group">
 	                    <label class="col-xs-12" for="example-text-input">标题</label>
 	                    <div class="col-xs-12">
@@ -201,6 +196,7 @@
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="user/js/jquery.min.js" ></script>
+
 <script type="text/javascript">
 
 function getNowDateFormat() {

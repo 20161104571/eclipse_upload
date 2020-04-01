@@ -1,5 +1,7 @@
 package com.imnu.SchoolBus.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,14 @@ public class CommentServiceImp implements CommentService{
 	@Override
 	public Comment findCommentById(int cid) {
 		return commentMapper.findCommentById(cid);
+	}
+
+	@Override
+	public String getTime() {
+		Date d = new Date();
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm ");
+	    System.out.println("格式化输出：" + sdf.format(d));
+	    return sdf.format(d);
 	}
 
 }

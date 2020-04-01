@@ -15,7 +15,9 @@ public class Reply {
 	
 	private String rcontent;
 	
-	private Integer rpid;
+	private String rcname;
+	
+	private Integer rcid;
 
 	public Integer getRid() {
 		return rid;
@@ -49,18 +51,27 @@ public class Reply {
 		this.rcontent = rcontent;
 	}
 
-	public Integer getRpid() {
-		return rpid;
+	public String getRcname() {
+		return rcname;
 	}
 
-	public void setRpid(Integer rpid) {
-		this.rpid = rpid;
+	public void setRcname(String rcname) {
+		this.rcname = rcname;
+	}
+
+	public Integer getRcid() {
+		return rcid;
+	}
+
+	public void setRcid(Integer rcid) {
+		this.rcid = rcid;
 	}
 
 	@Override
 	public String toString() {
-		return "Reply [rid=" + rid + ", rname=" + rname + ", rdate=" + rdate + ", rcontent=" + rcontent + ", rpid="
-				+ rpid + "]";
+		return "Reply [rid=" + rid + ", rname=" + rname + ", rdate=" + rdate + ", rcontent=" + rcontent + ", rcname="
+				+ rcname + ", rcid=" + rcid + "]";
 	}
+
 	
 }

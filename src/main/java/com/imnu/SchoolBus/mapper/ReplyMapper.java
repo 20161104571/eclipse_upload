@@ -12,7 +12,7 @@ import com.imnu.SchoolBus.pojo.Reply;
 @Mapper
 public interface ReplyMapper {
 	
-	@Insert(value = "insert into reply (rid,rname,rdate,rcontent,rpid) values (#{rid},#{rname},#{rdate},#{rcontent},#{rid})")
+	@Insert(value = "insert into reply (rid,rname,rdate,rcontent,rcname,rcid) values (#{rid},#{rname},#{rdate},#{rcontent},#{rcname},#{rcid})")
 	void addReply(Reply reply);
 	
 	@Select(value = "select * from relpy")

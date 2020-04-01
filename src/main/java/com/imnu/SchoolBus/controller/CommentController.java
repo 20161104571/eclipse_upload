@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.imnu.SchoolBus.pojo.Comment;
@@ -24,14 +25,17 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value="getCommentsList")
-	public String commentsList(Model model) {
+	public String commentsList(Model model, String ctime, ModelMap modelMap) {
 		List<Comment> comment = commentService.getCommList();
+		ctime = commentService.getTime();
+		modelMap.addAttribute("ctime", ctime);
 		model.addAttribute("comments", comment);
 		return "user/forum";
 	}
 	
 	@RequestMapping(value="saveComment")
 	public String createComm(Comment comment) {
+		
 		commentService.addComment(comment);
 		return "redirect:/getCommentsList";
 	}

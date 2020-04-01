@@ -10,14 +10,12 @@ public class Comment {
 	
 	private String cname;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date cdate;
 	
 	private String ctitle;
 	
 	private String content;
-	
-	private Integer pid;
 	
 	private Integer cflag;
 	
@@ -61,14 +59,6 @@ public class Comment {
 		this.content = content;
 	}
 
-	public Integer getPid() {
-		return pid;
-	}
-
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
-
 	public Integer getCflag() {
 		return cflag;
 	}
@@ -80,7 +70,7 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [cid=" + cid + ", cname=" + cname + ", cdate=" + cdate + ", ctitle=" + ctitle + ", content="
-				+ content + ", pid=" + pid + ", cflag=" + cflag + "]";
+				+ content + ", cflag=" + cflag + "]";
 	}
 
 }
