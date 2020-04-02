@@ -33,6 +33,9 @@ public interface CommentMapper {
 	
 	@Select(value = "select count(cid) from comment where cflag = 1")
 	int countComment(Integer comm); //未读留言统计
+
+	@Select(value = "select * from comment")
+	List<Comment> findByComment();
 	
 	
 }

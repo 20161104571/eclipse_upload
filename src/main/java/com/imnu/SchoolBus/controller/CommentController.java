@@ -7,15 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imnu.SchoolBus.pojo.Comment;
+import com.imnu.SchoolBus.pojo.Reply;
 import com.imnu.SchoolBus.service.CommentService;
+import com.imnu.SchoolBus.service.ReplyService;
 
 @Controller
 public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping(value="getCommentList")
 	public String commentList(Model model) {
@@ -57,6 +63,30 @@ public class CommentController {
 	public String edit(Comment comment) {
 		commentService.updateComment(comment);
 		return "redirect:/getCommentsList";
+	}
+	
+	@RequestMapping(value="saveReply")
+	public String saveReply(Reply reply) {
+		if(reply!=null) {
+			replyService.saveReply(reply);
+			Integer rid = reply.getRcid();
+			System.out.println(rid);
+			return "redirect:toArticleView.do?rid=\"+rid";
+		}else {
+			return null;
+		}
+	}
+	
+	private List<Comment> lcList;
+	private List<Reply> lrList;
+	
+	@RequestMapping(value="toArticleView")
+	public String toArticleView(@RequestParam int rid, Model model) {
+		lcList = commentService.findByComment();
+		model.addAttribute("lcList", lcList);
+		lrList = replyService.findByReply();
+		model.addAttribute("lrList", lrList);
+		return null;
 	}
 
 }

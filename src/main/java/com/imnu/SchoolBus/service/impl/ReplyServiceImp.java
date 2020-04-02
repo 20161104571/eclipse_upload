@@ -18,11 +18,6 @@ public class ReplyServiceImp implements ReplyService{
 	private ReplyMapper replyMapper;
 
 	@Override
-	public void addReply(Reply reply) {
-		replyMapper.addReply(reply);
-	}
-
-	@Override
 	public List<Reply> getReplyList() {
 		List<Reply> list = replyMapper.getReplyList();
 		return list;
@@ -36,6 +31,16 @@ public class ReplyServiceImp implements ReplyService{
 	@Override
 	public int delReply(Integer rid) {
 		return replyMapper.delReply(rid);
+	}
+
+	@Override
+	public void saveReply(Reply reply) {
+		replyMapper.addReply(reply);
+	}
+
+	@Override
+	public List<Reply> findByReply() {
+		return replyMapper.findByReply();
 	}
 
 }

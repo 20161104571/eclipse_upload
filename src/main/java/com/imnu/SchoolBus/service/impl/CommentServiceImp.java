@@ -53,4 +53,9 @@ public class CommentServiceImp implements CommentService{
 	    return sdf.format(d);
 	}
 
+	@Override
+	public List<Comment> findByComment() {
+		return commentMapper.findByComment();
+	}
+
 }

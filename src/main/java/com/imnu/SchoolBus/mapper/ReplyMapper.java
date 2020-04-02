@@ -23,4 +23,7 @@ public interface ReplyMapper {
 	
 	@Delete(value = "delete from reply where rid=#{rid}")
 	int delReply(Integer rid);
+	
+	@Select(value = "select * from reply")
+	List<Reply> findByReply();
 }

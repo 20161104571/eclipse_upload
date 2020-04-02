@@ -17,4 +17,6 @@ public interface CommentService {
 	Comment findCommentById(int cid);
 	
 	public String getTime();
+
+	List<Comment> findByComment();
 }
