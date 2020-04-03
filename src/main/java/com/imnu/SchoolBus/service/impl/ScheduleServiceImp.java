@@ -1,5 +1,6 @@
 package com.imnu.SchoolBus.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class ScheduleServiceImp implements ScheduleService{
 	@Override
 	public Schedule findScheduleById(int sId) {
 		return scheduleMapper.findScheduleById(sId);
+	}
+
+	@Override
+	public Schedule findScheduleByTime(Date startTime) {
+		return scheduleMapper.findScheduleByTime(startTime);
 	}
 
 }

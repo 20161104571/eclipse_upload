@@ -14,11 +14,6 @@
 		<!-- <a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a> -->
-		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
-			<button type="submit" onclick="search()"></button>
-			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
-		</form>
-		
 	</div>
 	<!--头部 End!-->
 	
@@ -107,15 +102,18 @@
                       <tr th:each="schedule:${schedules}">
                       <td th:if = "${schedule.startPlace==1}">赛罕</td>
 			            <td th:if = "${schedule.startPlace==2}">盛乐</td>
-			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}"></td>
-			            <td th:text="${#dates.format(schedule.endTime, 'HH:mm')}"></td>
+			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}" id="ctime"></td>
+			            <td th:text="${#dates.format(schedule.endTime, 'HH:mm')}" th:value="${endTime}"></td>
                         <td>
                           <div class="btn-group">
-                            <a class="btn btn-xs btn-default" href="#" title="查看详细" data-toggle="tooltip"><i ><img class="user/images/subs.png"></i></a>
+                          <ol th:each="trip:${trips}">
+                          	<li th:text="${trip.tId}" hidden="hidden"></li>
+							<li th:text="${#dates.format(trip.ctime, 'HH:mm')}" hidden="hidden"></li>
+						  </ol>
+                            <a class="btn btn-xs btn-default" th:href="@{/getTimeList(sId=${schedule.sId})}" title="查看详细" data-toggle="tooltip"><i ><img class="user/images/subs.png"></i></a>
                           </div>
                         </td>
                       </tr>
-                    </tbody>
                     </tbody>
                   </table>
 				

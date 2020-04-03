@@ -1,5 +1,6 @@
 package com.imnu.SchoolBus.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -35,6 +36,9 @@ public interface TripMapper {
 	@Update(value = "update trip set remain_seats = remain_seats + 1 where tId=#{tId}")
 	void addSeats(int tId, Trip trip);
 	
-	@Select(value = "select * from trip between date_format(#{startTime},'yyyy-MM-dd') and date_format(#{endTime},'yyyy-MM-dd')")
+	@Select(value = "select * from trip where ctime = #{schedule.startTime}")
+	Trip findTripByTime(Date ctime);
+	//@Select(value = "select * from trip between date_format(#{schedule.startTime},'yyyy-MM-dd') and date_format(#{schedule.endTime},'yyyy-MM-dd')")
+	@Select(value = "select * from trip where ctime<=#{schedule.startTime}")
 	List<Trip> getTimeTripList();
 }

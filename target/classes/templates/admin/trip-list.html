@@ -40,7 +40,6 @@
                 <li> <a href="./getScheduleList">发车时刻表</a> </li>
                 <li> <a href="./getVehicleList">显示车辆信息</a> </li>
                 <li> <a href="./getTripList">车次信息</a> </li>
-                <li> <a href="searchtrip">查询车次</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -117,6 +116,12 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
+            <div class="card-toolbar clearfix">
+                <form class="hdSearch fr" method="post" name="form1" id="from1" action="getSearchLists">
+					<button class="btn btn-default dropdown-toggle" type="submit" onclick="search()" id="search-btn">搜索</button>
+					<input type="text" id="searchInputTrip" name="tripSearch_header" placeholder="输入要搜索的车次">
+				</form>
+              </div>
               <div class="card-toolbar clearfix">
                 <div class="toolbar-btn-action">
                   <a class="btn btn-primary m-r-5" href="trip-add"><i class="mdi mdi-plus"></i> 新增车次</a>
@@ -198,6 +203,18 @@ $(function(){
         $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
     });
 });
+
+function search() {
+	var searchlist = $("input[name='tripSearch_header']").val();
+	if(searchlist == "" || searchlist == null){
+		//window.alert("请填写要搜索的内容.");
+		window.alert('请填写要搜索的内容');
+		window.location.href="trip-list.html"
+		//return false;
+		//return "admin/trip-list";
+	}
+	
+}
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.imnu.SchoolBus.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -23,5 +24,8 @@ public interface ScheduleMapper {
 	
 	@Select(value = "select * from schedule where sId = #{sId}")
 	Schedule findScheduleById(int sId);
+	
+	@Select(value = "select * from schedule where startTime = #{startTime}")
+	Schedule findScheduleByTime(Date startTime);
 	
 }

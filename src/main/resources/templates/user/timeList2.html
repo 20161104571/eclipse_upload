@@ -2,7 +2,7 @@
 <html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>发车时刻表</title>
+<title>发车详情</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -74,7 +74,7 @@
 			<dl>
 				<dt>
 					<span>
-						<h4>时刻表</h4>
+						<h4>详情</h4>
 					</span>
 				</dt>
 			</dl>
@@ -84,7 +84,7 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<span>车次时刻表</span>
+					<span>发车详情</span>
 				</div>
 				
 			</div>
@@ -92,28 +92,23 @@
 				<table class="table table-bordered">
                     <thead>
                       <tr>
-                       	<th width="150px">出发地点</th>
-                       	<th width="150px">出发时间</th>
-			            <th width="150px">到达时间</th>
-                        <th width="150px">操作</th>
+                       	<th width="150px">车次号</th>
+                       	<th width="150px">始发时间</th>
+			            <th width="150px">始发地</th>
+			            <th width="150px">所需时间</th>
+			            <th width="150px">余座</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="schedule:${schedules}">
-                      <td th:if = "${schedule.startPlace==1}">赛罕</td>
-			            <td th:if = "${schedule.startPlace==2}">盛乐</td>
-			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}" id="ctime"></td>
-			            <td th:text="${#dates.format(schedule.endTime, 'HH:mm')}" th:value="${endTime}"></td>
-                        <td>
-                          <div class="btn-group">
-                          <ol th:each="trip:${trips}">
-                          	<li th:text="${trip.tId}" hidden="hidden"></li>
-							<li th:text="${#dates.format(trip.ctime, 'HH:mm')}" hidden="hidden"></li>
-						  </ol>
-                            <a class="btn btn-xs btn-default" th:href="@{/getTimeList(sId=${schedule.sId})}" title="查看详细" data-toggle="tooltip"><i ><img class="user/images/subs.png"></i></a>
-                          </div>
-                        </td>
+                      <tr th:each="trip:${trip}">
+                      	<td th:text="${trip.ccard}"></td>
+			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
+			            <td th:if = "${trip.start=='1'}">赛罕</td>
+			            <td th:if = "${trip.start=='2'}">盛乐</td>
+			            <td th:text="${trip.reqTime} + '小时'"></td>
+			            <td th:text="${trip.remain_seats}"></td>
                       </tr>
+                    </tbody>
                     </tbody>
                   </table>
 				

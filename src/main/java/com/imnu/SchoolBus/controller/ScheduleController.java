@@ -8,13 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.imnu.SchoolBus.pojo.Schedule;
+import com.imnu.SchoolBus.pojo.Trip;
 import com.imnu.SchoolBus.service.ScheduleService;
+import com.imnu.SchoolBus.service.TripService;
 
 @Controller
 public class ScheduleController {
 	
 	@Autowired
 	private ScheduleService scheduleService;
+	
+	@Autowired
+	private TripService tripService;
 	
 	@RequestMapping(value="getScheduleList")
 	public String scheduleList(Model model) {
@@ -27,6 +32,9 @@ public class ScheduleController {
 	@RequestMapping(value="getSchedule")
 	public String schedule(Model model) {
 		List<Schedule> schedules = scheduleService.getScheduleList();
+		List<Trip> trips = tripService.getTripList();
+		model.addAttribute("trips", trips);
+		System.out.println(trips);
 		model.addAttribute("schedules", schedules);
 		System.out.println(schedules);
 		return "user/timeList";

@@ -1,7 +1,7 @@
 package com.imnu.SchoolBus.service;
 
+import java.util.Date;
 import java.util.List;
-
 
 import com.imnu.SchoolBus.pojo.Trip;
 
@@ -22,5 +22,7 @@ public interface TripService {
 	void addSeats(int tId, Trip trip);
 	
 	List<Trip> getTimeTripList();
-
+	
+	Trip findTripByTime(Date ctime);
+	
 }

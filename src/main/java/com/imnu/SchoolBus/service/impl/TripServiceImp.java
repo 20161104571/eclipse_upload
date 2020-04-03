@@ -1,5 +1,6 @@
 package com.imnu.SchoolBus.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class TripServiceImp implements TripService{
 	@Override
 	public void createTrip(Trip trip) {
 		tripMapper.createTrip(trip);
-		
 	}
 
 	@Override
@@ -58,6 +58,11 @@ public class TripServiceImp implements TripService{
 	public List<Trip> getTimeTripList() {
 		List<Trip> list = tripMapper.getTimeTripList();
 		return list;
+	}
+
+	@Override
+	public Trip findTripByTime(Date ctime) {
+		return tripMapper.findTripByTime(ctime);
 	}
 
 	
