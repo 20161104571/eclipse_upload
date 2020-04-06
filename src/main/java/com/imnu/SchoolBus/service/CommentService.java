@@ -16,7 +16,8 @@ public interface CommentService {
 	
 	Comment findCommentById(int cid);
 	
+	void updateCommentFlag(Comment comment, int cid);
+	
 	public String getTime();
 
-	List<Comment> findByComment();
 }

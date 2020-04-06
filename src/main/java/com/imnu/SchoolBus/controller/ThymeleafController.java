@@ -1,11 +1,19 @@
 package com.imnu.SchoolBus.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.imnu.SchoolBus.pojo.User;
+import com.imnu.SchoolBus.service.UserService;
 
 @Controller
 @RequestMapping("/")
 public class ThymeleafController {
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("regist")
 	public String regist() {
@@ -28,7 +36,13 @@ public class ThymeleafController {
 	}
 	
 	@RequestMapping("aindex")
-	public String adminIndex() {
+	public String adminIndex(User user, Integer count, Integer comm, Integer subs, ModelMap modelMap) {
+		int c = userService.countUser(count);
+		int com = userService.countComment(comm);
+		int newor = userService.countNewOrder(subs);
+		modelMap.addAttribute("countuser", c);
+		modelMap.addAttribute("com", com);
+		modelMap.addAttribute("newor", newor);
 		return "admin/aindex";
 	}
 	

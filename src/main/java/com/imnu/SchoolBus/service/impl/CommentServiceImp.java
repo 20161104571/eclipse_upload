@@ -54,8 +54,8 @@ public class CommentServiceImp implements CommentService{
 	}
 
 	@Override
-	public List<Comment> findByComment() {
-		return commentMapper.findByComment();
+	public void updateCommentFlag(Comment comment, int cid) {
+		commentMapper.updateCommentFlag(comment, cid);
 	}
 
 }

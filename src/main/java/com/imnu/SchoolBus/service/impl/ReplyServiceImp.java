@@ -38,9 +38,5 @@ public class ReplyServiceImp implements ReplyService{
 		replyMapper.addReply(reply);
 	}
 
-	@Override
-	public List<Reply> findByReply() {
-		return replyMapper.findByReply();
-	}
 
 }

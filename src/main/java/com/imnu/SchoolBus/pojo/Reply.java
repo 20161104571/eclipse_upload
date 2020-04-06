@@ -10,7 +10,7 @@ public class Reply {
 	
 	private String rname;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date rdate;
 	
 	private String rcontent;

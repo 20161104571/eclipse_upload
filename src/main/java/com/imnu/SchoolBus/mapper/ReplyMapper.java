@@ -15,7 +15,7 @@ public interface ReplyMapper {
 	@Insert(value = "insert into reply (rid,rname,rdate,rcontent,rcname,rcid) values (#{rid},#{rname},#{rdate},#{rcontent},#{rcname},#{rcid})")
 	void addReply(Reply reply);
 	
-	@Select(value = "select * from relpy")
+	@Select(value = "select * from reply")
 	List<Reply> getReplyList();
 	
 	@Select(value = "select * from reply where rid=#{rid}")
@@ -23,7 +23,4 @@ public interface ReplyMapper {
 	
 	@Delete(value = "delete from reply where rid=#{rid}")
 	int delReply(Integer rid);
-	
-	@Select(value = "select * from reply")
-	List<Reply> findByReply();
 }

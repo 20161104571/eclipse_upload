@@ -36,7 +36,7 @@ public class UserController {
 //	}
 	public String UserList(Model model, 
 			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
-			@RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize) {
+			@RequestParam(value = "pageSize",defaultValue = "3")Integer pageSize) {
 		if(pageNum == null) {
 			pageNum = 1;
 		}

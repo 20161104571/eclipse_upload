@@ -14,5 +14,4 @@ public interface ReplyService {
 
 	void saveReply(Reply reply);
 	
-	List<Reply> findByReply();
 }

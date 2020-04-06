@@ -71,6 +71,7 @@ public class MessageUtil {
 		for (int i = 0; sb.length() < 6; i++) {
 			int num = new Random().nextInt(10);
 			sb.append(num);
+			System.out.println(i);
 		}
 		return sb.toString();
 	}

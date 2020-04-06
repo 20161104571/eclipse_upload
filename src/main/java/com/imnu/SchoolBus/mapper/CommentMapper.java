@@ -22,11 +22,11 @@ public interface CommentMapper {
 	@Update(value = "update comment set ctitle = #{ctitle},content = #{content} where cid = #{cid}")
 	void updateComment(Comment comment);
 	
-	@Delete(value = "delete from comment where cid = #{cid}")
+	@Delete(value = "delete from comment,reply where (comment.cid=reply.rcid) comment.cid = #{cid}")
 	int delComment(Integer cid);
-	
+
 	@Update(value = "update comment set cflag = 0 where cid = #{cid}") 
-	void updateCommentFlag(Comment comment); //修改已读
+	void updateCommentFlag(Comment comment, int cid); //修改已读
 	
 	@Select(value = "select * from comment where cid = #{cid}")
 	Comment findCommentById(int cid);
@@ -34,8 +34,5 @@ public interface CommentMapper {
 	@Select(value = "select count(cid) from comment where cflag = 1")
 	int countComment(Integer comm); //未读留言统计
 
-	@Select(value = "select * from comment")
-	List<Comment> findByComment();
-	
 	
 }
