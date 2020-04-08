@@ -39,6 +39,7 @@ public interface TripMapper {
 	@Select(value = "select * from trip where ctime = #{schedule.startTime}")
 	Trip findTripByTime(Date ctime);
 	//@Select(value = "select * from trip between date_format(#{schedule.startTime},'yyyy-MM-dd') and date_format(#{schedule.endTime},'yyyy-MM-dd')")
-	@Select(value = "select * from trip where ctime<=#{schedule.startTime}")
+	@Select(value = "select * from trip where ctime between date_format(#{startTime},'%y%m%d') and date_fromat(#{endTime},'%y%m%d')")
 	List<Trip> getTimeTripList();
+
 }

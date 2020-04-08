@@ -102,8 +102,8 @@
                       <tr th:each="schedule:${schedules}">
                       <td th:if = "${schedule.startPlace==1}">赛罕</td>
 			            <td th:if = "${schedule.startPlace==2}">盛乐</td>
-			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}" id="ctime"></td>
-			            <td th:text="${#dates.format(schedule.endTime, 'HH:mm')}" th:value="${endTime}"></td>
+			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}" id="startTime"></td>
+			            <td th:text="${#dates.format(schedule.endTime, 'HH:mm')}" id="endTime" th:value="${endTime}"></td>
                         <td>
                           <div class="btn-group">
                           <ol th:each="trip:${trips}">
