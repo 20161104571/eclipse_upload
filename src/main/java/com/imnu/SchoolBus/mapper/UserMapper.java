@@ -40,6 +40,9 @@ public interface UserMapper {
 	@Select(value = "select * from user where status = 1")
 	List<User> getUserList();
 	
+	@Select(value = "select * from user where status = 3")
+	List<User> getTeacherList();
+	
 	@Select(value = "select * from user where id = #{id}")
 	User findUserById(int id);
 	
@@ -52,7 +55,7 @@ public interface UserMapper {
 	@Select(value = "select * from user where status = 2")
 	List<User> getAdminList();
 
-	@Select(value = "SELECT COUNT(id) FROM user WHERE status = 1")
+	@Select(value = "SELECT COUNT(id) FROM user WHERE status = 1 AND status = 3")
 	int countUser(Integer count);
 	
 }

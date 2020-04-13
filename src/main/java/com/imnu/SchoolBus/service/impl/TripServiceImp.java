@@ -55,15 +55,21 @@ public class TripServiceImp implements TripService{
 	}
 
 	@Override
-	public List<Trip> getTimeTripList() {
-		List<Trip> list = tripMapper.getTimeTripList();
+	public List<Trip> getTimeTripList(Date startTime, Date endTime) {
+		List<Trip> list = tripMapper.getTimeTripList(startTime, endTime);
 		return list;
 	}
 
 	@Override
-	public Trip findTripByTime(Date ctime) {
-		return tripMapper.findTripByTime(ctime);
+	public Trip findTripByTime(Date startTime, Date endTime) {
+		return tripMapper.findTripByTime(startTime, endTime);
 	}
+
+	@Override
+	public Trip findTripsByTime(Date ctime) {
+		return tripMapper.findTripsByTime(ctime);
+	}
+
 
 	
 }

@@ -128,9 +128,9 @@
                                <span ></span>
                                &nbsp;&nbsp;&nbsp;&nbsp;
                            </div>
-							<div class="btn-group" th:if="${comment.cname eq session.users.name}">
+							<!-- <div class="btn-group" th:if="${comment.cname eq session.users.name}">
 								<button class="btn btn-xs btn-default" th:href="@{/deleteComm(cid=${comment.cid})}" title="删除本条回复" data-toggle="tooltip"><i class="mdi mdi-window-close"></i>删除</button>
-							</div>
+							</div> -->
                         </div>
                         <th:each th:each="reply:${replys}">
                             <th:if th:if="${reply.rcid eq comment.cid}">

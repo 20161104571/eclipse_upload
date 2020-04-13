@@ -13,7 +13,7 @@ import com.imnu.SchoolBus.pojo.Comment;
 @Mapper
 public interface CommentMapper {
 	
-	@Select(value = "select * from comment")
+	@Select(value = "select * from comment order by cdate DESC")
 	List<Comment> getCommList();
 	
 	@Insert(value = "insert into comment (cid,cname,cdate,ctitle,content,cflag) values (#{cid},#{cname},#{cdate},#{ctitle},#{content},1)")

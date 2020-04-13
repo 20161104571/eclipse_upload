@@ -21,8 +21,10 @@ public interface TripService {
 
 	void addSeats(int tId, Trip trip);
 	
-	List<Trip> getTimeTripList();
+	List<Trip> getTimeTripList(Date startTime, Date endTime);
 	
-	Trip findTripByTime(Date ctime);
-	
+	Trip findTripByTime(Date startTime, Date endTime);
+
+	Trip findTripsByTime(Date ctime);
+
 }

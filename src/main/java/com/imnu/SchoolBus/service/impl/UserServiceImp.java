@@ -175,5 +175,11 @@ public class UserServiceImp implements UserService{
 		return 0;
 	}
 
+	@Override
+	public List<User> getTeacherList() {
+		List<User> list = userMapper.getTeacherList();
+		return list;
+	}
+
 		
 }

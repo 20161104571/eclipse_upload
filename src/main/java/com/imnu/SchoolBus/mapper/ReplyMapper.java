@@ -15,7 +15,7 @@ public interface ReplyMapper {
 	@Insert(value = "insert into reply (rid,rname,rdate,rcontent,rcname,rcid) values (#{rid},#{rname},#{rdate},#{rcontent},#{rcname},#{rcid})")
 	void addReply(Reply reply);
 	
-	@Select(value = "select * from reply")
+	@Select(value = "select * from reply order by rdate DESC")
 	List<Reply> getReplyList();
 	
 	@Select(value = "select * from reply where rid=#{rid}")

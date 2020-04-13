@@ -24,7 +24,7 @@ public interface TripMapper {
 	@Select(value = "select * from trip")
 	List<Trip> getTripList();
 	
-	@Select(value = "select * from trip where ccard REGEXP #{arg0}")
+	@Select(value = "select * from trip where ccard like CONCAT('%',#{search_input},'%') is not null")
 	List<Trip> searchList(String search_input);
 	
 	@Select(value = "select * from trip where tId = #{tId}")
@@ -36,10 +36,14 @@ public interface TripMapper {
 	@Update(value = "update trip set remain_seats = remain_seats + 1 where tId=#{tId}")
 	void addSeats(int tId, Trip trip);
 	
-	@Select(value = "select * from trip where ctime = #{schedule.startTime}")
-	Trip findTripByTime(Date ctime);
+	@Select(value = "select * from trip where ctime = #{ctime}")
+	Trip findTripsByTime(Date ctime);
+	
+	@Select(value = "select ctime from trip where ctime between #{startTime} and #{endTime}")
+	Trip findTripByTime(Date startTime, Date endTime);
 	//@Select(value = "select * from trip between date_format(#{schedule.startTime},'yyyy-MM-dd') and date_format(#{schedule.endTime},'yyyy-MM-dd')")
-	@Select(value = "select * from trip where ctime between date_format(#{startTime},'%y%m%d') and date_fromat(#{endTime},'%y%m%d')")
-	List<Trip> getTimeTripList();
+	@Select(value = "select * from trip where ctime between #{startTime} and #{endTime}")
+	//@Select(value = "select * from trip where ctime >= #{startTime} and ctime <= #{endTime}")
+	List<Trip> getTimeTripList(Date startTime, Date endTime);
 
 }

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.imnu.SchoolBus.pojo.Notice;
 import com.imnu.SchoolBus.pojo.User;
-import com.imnu.SchoolBus.service.NoticeService;
 import com.imnu.SchoolBus.service.UserService;
 
 @Controller
@@ -24,17 +22,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private NoticeService noticeService;
-	
 	@RequestMapping(value="getUserList")
-//	public String userList(Model model) {
-//		List<User> users = userService.getUserList();
-//		model.addAttribute("users", users);
-//		System.out.print(users);
-//		return "admin/user-list";
-//	}
-	public String UserList(Model model, 
+	public String userList(Model model, 
 			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
 			@RequestParam(value = "pageSize",defaultValue = "3")Integer pageSize) {
 		if(pageNum == null) {
@@ -59,6 +48,31 @@ public class UserController {
 		return "admin/user-list";
 	}
 	
+	@RequestMapping("getTeacherList")
+	public String teacherList(Model model, @RequestParam(required = false, value = "pageNum", defaultValue = "1")Integer pageNum,
+							@RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize) {
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		System.out.println("当前页是:"+pageNum+"显示的条数是:"+pageSize);
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<User> tl = userService.getTeacherList();
+			System.out.println("分页数据:"+tl);
+			PageInfo<User> pl = new PageInfo<User>(tl, pageSize);
+			model.addAttribute("pageInfo", pl);
+		}finally {
+			PageHelper.clearPage();
+		}
+		return "admin/teacher-list";
+	}
+	
 	@RequestMapping(value="deleteUser")
 	public String deleteUser(Integer id) {
 		userService.deleteUser(id);
@@ -69,20 +83,6 @@ public class UserController {
 	public String createUser(User user) {
 		userService.createUser(user);
 		return "redirect:/getUserList";
-	}
-	
-	@RequestMapping(value="shownotice")
-	public String showNotice(Model model) {
-		List<Notice> notices = noticeService.getNoticeList();
-		model.addAttribute("notices", notices);
-		return "user/notice";
-	}
-	
-	@RequestMapping(value="getContent")
-	public String getContent(Model model,int nId) {
-		Notice notice = noticeService.findNoticeById(nId);
-		model.addAttribute("notice", notice);
-		return "user/content";
 	}
 	
 	@RequestMapping(value="updatepwd")

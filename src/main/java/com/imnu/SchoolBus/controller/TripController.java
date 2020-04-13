@@ -1,5 +1,7 @@
 package com.imnu.SchoolBus.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +58,7 @@ public class TripController {
 	}
 	
 	@RequestMapping(value="getSearchList")
-	public String seachList(HttpServletRequest request, HttpSession httpSession, Model model) {
+	public String seachList(HttpServletRequest request, Model model) {
 		String search_input = request.getParameter("index_none_header_sysc");//获取搜索框输入
 		List<Trip> list = tripService.searchList(search_input);
 		//System.out.println(list);
@@ -75,7 +77,7 @@ public class TripController {
 	}
 	
 	@RequestMapping(value="getSearchLists")
-	public String seachLists(HttpServletRequest request, HttpSession httpSession, Model model) {
+	public String seachLists(HttpServletRequest request, Model model) {
 		String searchInputTrip = request.getParameter("tripSearch_header");//获取搜索框输入
 		List<Trip> list = tripService.searchList(searchInputTrip);
 		System.out.println(list);
@@ -93,48 +95,42 @@ public class TripController {
 		}
 	}
 	
-//	@RequestMapping(value="getTimeList")
-//	public String getTimeTripList(Model model, int sId, Date ctime) {
-//		Schedule schedule = scheduledService.findScheduleById(sId);
-//		Date n = schedule.getStartTime();
-//		System.out.println("n:"+n);
-//		//Trip trips = tripService.findSubsTripById(tId);
-//		Trip trips = tripService.findTripByTime(ctime);
-//		//Date t = trips.getCtime();
-////		if(t.getTime()<=n.getTime()) {
-////			System.out.println("sss");
-////		}
-//		System.out.println(trips);
-//		List<Trip> trip = tripService.getTimeTripList();
-//		model.addAttribute("trip", trip);
-//		System.out.println(trip);
-//		return "user/timeList2";
-//	}
 	@RequestMapping(value="getTimeList")
 	public String getTimeList(HttpServletRequest request, Model model, @RequestParam(required = false) Integer sId, 
 							@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate,
-							@RequestParam(required = false) String cno) {
-		try {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("sId", sId);
-			if(null != endDate && !"".equals(endDate)) {
-				String startTime = startDate.replace("-", "");
-				String endTime = endDate.replace("-", "");
-				System.out.println("开始时间是:"+startTime);
-				System.out.println("结束时间是:"+endTime);
-				map.put("startTime", startTime);
-				map.put("endTime", endTime);
-			}
+							@RequestParam(required = false) Date ctime){
+//		try {
+//			HashMap<String, Object> map = new HashMap<String, Object>();
+//			map.put("sId", sId);
+//			if(null != endDate && !"".equals(endDate)) {
+//				String startTime = startDate.replace("-", "");
+//				String endTime = endDate.replace("-", "");
+//				System.out.println("开始时间是:"+startTime);
+//				System.out.println("结束时间是:"+endTime);
+//				map.put("startTime", startTime);
+//				map.put("endTime", endTime);
+//			}
+			
 			Schedule schedule = scheduledService.findScheduleById(sId);
-			System.out.println("cccc:"+schedule);
-			map.put("cno", cno);
-			 List<Trip> list = tripService.getTimeTripList();
-			 model.addAttribute("list", list);
-			 System.out.println("取到的符合的内容："+list);
-			 return "user/timeList2";
-		}finally {
-			return "user/timeList";
-		}
+			System.out.println("sid:"+sId);
+			Date startTime = schedule.getStartTime();
+			Date endTime = schedule.getEndTime();
+			model.addAttribute("schedule", schedule);
+			System.out.println("开始时间是："+startTime);
+			System.out.println("结束时间是："+endTime);
+			List<Trip> trip = tripService.getTripList();
+			System.out.println(trip);
+			//List<Trip> lists = tripService.getTimeTripList(startTime, endTime);
+			Trip lists = tripService.findTripByTime(startTime, endTime);
+			System.out.println(lists);
+			//Trip trips = tripService.findTripsByTime(ctime);
+			model.addAttribute("list", lists);
+			
+			//System.out.println("取到的符合的内容："+lists);
+			return "user/timeList2";
+//		}finally {
+//			return "user/timeList";
+//		}
 	}
 	
 }

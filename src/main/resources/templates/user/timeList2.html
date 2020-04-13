@@ -100,7 +100,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${list}">
+                      <tr th:each="trip:${lists}">
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>

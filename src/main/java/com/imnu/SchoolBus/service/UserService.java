@@ -21,6 +21,8 @@ public interface UserService {
 	
 	List<User> getUserList();
 	
+	List<User> getTeacherList();
+	
 	User findUserById(int id);
 
 	void registAdmin(User user);

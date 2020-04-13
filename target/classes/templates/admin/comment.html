@@ -18,7 +18,7 @@
       
       <!-- logo -->
       <div id="logo" class="sidebar-header">
-        <a href="aindex"></a><!-- <img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /> -->
+        <a href="aindex"><img src="images/logo-sidebar.png" title="校园通勤车管理"/></a>
       </div>
       <div class="lyear-layout-sidebar-scroll"> 
         
@@ -31,6 +31,7 @@
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
                 <li> <a href="./getUserList">用户信息管理</a> </li>
+                <li> <a href="./getTeacherList">教师信息</a> </li>
                 <li> <a href="./getUserList">新增管理员</a> </li>
               </ul>
             </li>
@@ -122,7 +123,7 @@
 			<th:each th:each="comment : ${pageInfo.list}">
                 <!-- 如果留言信息是在本文章下的才显示 -->
                     <li style="border-top: 1px dotted #01AAED">
- 						
+ 						<th:if th:if="${comment.cflag}==1">未读</th:if>
                         <div style="text-align:left;color:#444">
                             <div style="color:#01AAED" th:text="${comment.cname}"></div>
  							<div th:text="${comment.ctitle}"></div>

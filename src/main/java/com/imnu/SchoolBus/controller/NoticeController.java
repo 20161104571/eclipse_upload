@@ -47,4 +47,18 @@ public class NoticeController {
 		noticeService.updateNotice(notice);
 		return "redirect:/getNoticeList";
 	}
+	
+	@RequestMapping(value="shownotice")
+	public String showNotice(Model model) {
+		List<Notice> notices = noticeService.getNoticeList();
+		model.addAttribute("notices", notices);
+		return "user/notice";
+	}
+	
+	@RequestMapping(value="getContent")
+	public String getContent(Model model,int nId) {
+		Notice notice = noticeService.findNoticeById(nId);
+		model.addAttribute("notice", notice);
+		return "user/content";
+	}
 }
