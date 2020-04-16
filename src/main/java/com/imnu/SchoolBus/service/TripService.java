@@ -3,8 +3,10 @@ package com.imnu.SchoolBus.service;
 import java.util.Date;
 import java.util.List;
 
-import com.imnu.SchoolBus.pojo.Trip;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.imnu.SchoolBus.pojo.Trip;
+@Transactional
 public interface TripService {
 	
 	void createTrip(Trip trip);

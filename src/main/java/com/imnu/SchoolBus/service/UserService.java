@@ -3,8 +3,10 @@ package com.imnu.SchoolBus.service;
 
 import java.util.List;
 
-import com.imnu.SchoolBus.pojo.User;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.imnu.SchoolBus.pojo.User;
+@Transactional
 public interface UserService {
 
 	void register(User user);
@@ -24,6 +26,16 @@ public interface UserService {
 	List<User> getTeacherList();
 	
 	User findUserById(int id);
+	
+	boolean findUserByUsername(String username);
+	
+	boolean findStuByNumber(String number);
+	
+	boolean findStuByNameAndNum(String stuname, String stunum);
+	
+	boolean findUserByPhone(String phone);
+	
+	boolean findUserByEmail(String email);
 
 	void registAdmin(User user);
 	

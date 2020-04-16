@@ -82,7 +82,7 @@
 					</span>
 				</dt>
 				<dd><a href="3xinwen-dongtai.html">新闻动态</a></dd>
-				<dd class="on"><a href="3xinwen-tongzhi.html">通知公告</a></dd>
+				<dd class="on"><a href="./shownotice">通知公告</a></dd>
 			</dl>
 		</div>
 		<div class="rightCon fr">
@@ -97,29 +97,56 @@
 				</div>
 			</div>
 			<div class="conMain">
-				<ul class="newsList" th:each="notice:${notices}">
+				<ul class="newsList" th:each="notice:${pageInfo.list}">
 					<li class="clearfix">
 						<a th:href="@{/getContent(nId=${notice.nId})}" th:text="${notice.title}"></a>
 						<span th:text="${#dates.format(notice.releaseTime, 'yyyy-MM-dd')}"></span>
 					</li>
 					
 				</ul>
+				<!-- <div class="modal-footer no-margin-top">
+                <div class="col-md-6">
+                当前第 [[${pageInfo.pageNum}]]页，共 [[${pageInfo.pages}]] 页，一共 [[${pageInfo.total}]] 条记录
+                </div>
+               <ul class="pagination pull-right no-margin">
+			        <li th:if="${pageInfo.hasPreviousPage}">
+			            <a th:href="@{/getUserList?pageNum=1}">首页</a>
+			        </li>
+			
+			        <li class="prev" th:if="${pageInfo.hasPreviousPage}">
+			            <a th:href="@{/getUserList(pageNum=${pageInfo.prePage})}">
+			                <i>[上一页]</i>
+			            </a>
+			        </li>
+			        遍历条数
+		            <li th:each="nav:${pageInfo.navigatepageNums}">
+		                <a th:href="@{/getUserList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+		                <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+		            </li>
+			        <li class="next" th:if="${pageInfo.hasNextPage}">
+			            <a th:href="@{/getUserList(pageNum=${pageInfo.nextPage})}">
+			                <i>[下一页]</i>
+			            </a>
+			        </li>
+			
+			        <li>
+			            <a th:href="@{/getUserList(pageNum=${pageInfo.pages})}">尾页</a>
+			        </li>
+			    </ul>
+			    </div> -->
 				<div class="pageNum">
-					<span>共14条</span>
-					<span>每页1页</span>
-					<a href="#" class="pagePrev disabled">&lt;</a>
-					<a href="#" class="active">1</a>
+					<span>共 [[${pageInfo.pages}]] 页</span>
+					<span>共 [[${pageInfo.total}]] 条</span>
+					<span>每页 [[${pageInfo.pageSize}]] 条</span>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/shownotice?pageNum=1}">首页</a></th:if>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/shownotice(pageNum=${pageInfo.prePage})}" class="pagePrev disabled">&lt;</a></th:if>
+					<!-- <a href="#" class="active">1</a>
 					<a href="#">2</a>
 					<a href="#">3</a>
 					<span>...</span>
-					<a href="#">14</a>
-					<a href="#" class="pageNext">&gt;</a>
-					<form>
-						<span>转到第</span>
-						<input type="text" name="">
-						<span>页</span>
-						<button>GO</button>
-					</form>
+					<a href="#">14</a> -->
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/shownotice(pageNum=${pageInfo.nextPage})}" class="pageNext">&gt;</a></th:if>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/shownotice(pageNum=${pageInfo.pages})}">尾页</a></th:if>
 				</div>
 			</div>
 		</div>

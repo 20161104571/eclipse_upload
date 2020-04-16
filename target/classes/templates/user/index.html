@@ -146,15 +146,16 @@
 			<div class="item col2">
 				<div class="itemTit">
 					<h3>通知公告</h3>
-					<a href="notice" class="itemMore">MORE+</a>
+					<a href="./shownotice" class="itemMore">MORE+</a>
 				</div>
-				<!-- <div class="itemCon notice">
-					<ul class="listStyle">
+				<div class="itemCon notice">
+					<!-- <ul class="listStyle" th:text="n:${modelNotice}">
 						<li class="clearfix">
-							<a href="#">关于上报2017年工作总结和2018年工作…</a>
-							<span>06-18</span>
-						</li>
-						<li class="clearfix">
+							<input id="nId" name="nId" th:value="${n.nId}" hidden="hidden">
+							<a href="#" th:text="${n.title}">关于上报2017年工作总结和2018年工作…</a>
+							<span th:text="${#dates.format(n.releaseTime, 'yyyy-MM-dd')}">06-18</span>
+						</li> -->
+						<!-- <li class="clearfix">
 							<a href="#">关于开展学习钟扬同志先进事迹的通知</a>
 							<span>06-18</span>
 						</li>
@@ -182,8 +183,8 @@
 							<a href="#">关于申报2017年校级示范性全英语…</a>
 							<span>06-18</span>
 						</li>
-					</ul>
-				</div> -->
+					</ul> -->
+				</div>
 			</div>
 		</div>
 

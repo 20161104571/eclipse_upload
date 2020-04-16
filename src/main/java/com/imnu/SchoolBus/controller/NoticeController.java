@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Notice;
 import com.imnu.SchoolBus.service.NoticeService;
 
@@ -49,9 +52,26 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="shownotice")
-	public String showNotice(Model model) {
-		List<Notice> notices = noticeService.getNoticeList();
-		model.addAttribute("notices", notices);
+	public String showNotice(Model model, 
+			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum,
+			@RequestParam(value = "pageSize",defaultValue = "1")Integer pageSize) {
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<Notice> notices = noticeService.getNoticeList();
+			PageInfo<Notice> pageInfo = new PageInfo<Notice>(notices, pageSize);
+			model.addAttribute("pageInfo", pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
 		return "user/notice";
 	}
 	

@@ -1,89 +1,209 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>欢迎注册内蒙古师范大学通勤车管理</title>
+<link href="css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/jQuery1.7.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+<!-- <script type="text/javascript" src=js/jquery-3.3.1.js></script> -->
+<script type="text/javascript" th:inline="javascript">
+$(function(){
+	$(".screenbg ul li").each(function(){
+		$(this).css("opacity","0");
+	});
+	$(".screenbg ul li:first").css("opacity","1");
+	var index = 0;
+	var t;
+	var li = $(".screenbg ul li");	
+	var number = li.size();
+	function change(index){
+		li.css("visibility","visible");
+		li.eq(index).siblings().animate({opacity:0},3000);
+		li.eq(index).animate({opacity:1},3000);
+	}
+	function show(){
+		index = index + 1;
+		if(index<=number-1){
+			change(index);
+		}else{
+			index = 0;
+			change(index);
+		}
+	}
+	t = setInterval(show,8000);
+	//根据窗口宽度生成图片宽度
+	var width = $(window).width();
+	$(".screenbg ul img").css("width",width+"px");
+	
+	$("input[name='username']").blur(function(){
+		if($("#unsp").val() == ""){
+			alert("用户名不能为空！");
+		}else{
+			$.ajax({
+				type : 'post',
+				url:'./checkUserName',
+				data:{"username":this.value},
+				dataType:'application/json;charset=UTF-8',
+				success:function(result){
+					$("#unsp").empty();
+					if(result.isExist==true){
+						alert("用户名已被占用");
+						//$("#unsp").append("<font color='red'>用户名已被占用</font>");
+					}else{
+						alert("用户名可用");
+						//$("#unsp").append("<font color='green'>用户名可用</font>");
+					}
+				},
+				dataType:"json"
+			});
+		}
+		
+	});
+	/* $("input[name='name']").blur(function(){
+		$.ajax({
+			type:'post',
+			url:'./checkStuName',
+			data:{"stuname":this.value},
+			dataType:'application/json;charset=UTF-8',
+			success:function(result){
+				$("#namesp").empty();
+				if(result.isExist==true){
+					$("#namesp").append("<font color='green'>校内学生</font>");
+				}else{
+					$("#namesp").append("<font color='red'>校外人员</font>")
+				}
+			},
+			dataType:"json"
+		});
+		//console.log(this.value);
+	}); */
+	$("input[name='number']").blur(function(){
+		var realname = $("#realname").val();
+		var num = $("#num").val();
+		$.ajax({
+			type:'post',
+			url:'./checkStuNum',
+			data:{"stuname":realname,"stunum":num},
+			dataType:'application/json;charset=UTF-8',
+			success:function(result){
+				$("#realname").empty();
+				//$("#num").empty();
+				if(result.isFindMeg==true){
+					alert("是校内学生");
+					console.log("fanhui true");
+				}else{
+					alert("校外人员");
+				}
+				
+			},
+			dateType:"json"
+		});
+	});
+	$("input[name='phone']").blur(function(){
+		if($("#psp").val() == ""){
+			alert("手机号码不能为空！");
+		}else if(!$("#psp").val().match(/^1[3456789]\d{9}$/)) {
+			alert("手机号码格式不正确！");
+		}else {
+			$.ajax({
+				type:'post',
+				url:'./checkPhone',
+				data:{"phone":this.value},
+				dataType:'application/json;charset=UTF-8',
+				success:function(result){
+					$("#psp").empty();
+					if(result.isPhone==true){
+						alert("该手机号已存在");
+						//$("#psp").append("<font color='red'>该手机号已存在</font>");
+					}else{
+						alert("该手机号码可用");
+						//$("#psp").append("<font color='green'>该手机号码可用</font>");
+					}
+				},
+				dataType:"json"
+			});
+		}
+		
+	});
+	$("input[name='email']").blur(function(){
+		if($("#emailx").val()==""){
+			alert("邮箱不能为空！");
+		}else if(!$("#emailx").val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)){
+			alert("邮箱格式不正确！");
+		}else{
+			$.ajax({
+				type:'post',
+				url:'./checkEmail',
+				data:{"phone":this.value},
+				dataType:'application/json;charset=UTF-8',
+				success:function(result){
+					$("#emailx").empty();
+					if(result.isEmail==true){
+						alert("邮箱已被注册");
+						//$("#emailx").append("<font color='red'>邮箱已被注册</font>");
+					}else{
+						//$("#emailx").append("<font color='green'>邮箱可用</font>");
+						alert("邮箱可用");
+					}
+				},
+				dataType:"json"
+			});
+		}
+	});
+	
+});
+</script>
+</head>
 
-    <head>
-
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>欢迎注册校园通勤车管理系统</title>
-
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="assets/css/form-elements.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-
-        <link rel="shortcut icon" href="assets/ico/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
-    </head>
-
-    <body>
-        <div class="top-content">
-        	
-            <div class="inner-bg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>注册</strong></h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3 form-box">
-                        	<div class="form-top">
-                        		<div class="form-top-left">
-                        			<h3> </h3>
-                            		<p>填入你的基本信息来加入我们:</p>
-                        		</div>
-                            </div>
-                            <div class="form-bottom">
-			                    <form role="form" action="./registerUser" method="post" class="login-form">
-			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">用户名:</label>
-			                        	<input type="text" name="username" placeholder="用户名..." class="form-username form-control" id="username">
-			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">密码:</label>
-			                        	<input type="password" name="password" placeholder="密码..." class="form-password form-control" id="password">
-			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-realname">真实姓名:</label>
-			                        	<input type="text" name="name" placeholder="真实姓名..." class="form-realname form-control" id="name">
-			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-number">学号（工号）:</label>
-			                        	<input type="text" name="number" placeholder="学工号..." class="form-number form-control" id="number">
-			                        </div>
-		                        	<div class="form-group">
-		                        		<label class="sr-only" for="form-email">电子邮箱:</label>
-		                        		<input type="text" name="email" placeholder="电子邮箱..." class="form-email form-control" id="email">
-		                        	</div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-phone">手机号:</label>
-			                        	<input type="text" name="phone" placeholder="手机号..." class="form-phone form-control" id="phone">
-			                        </div>
-			                        <button class="btn">注册</button>
-			                        <div class="form-group">
-										<p>Already registered? <a href="login">登 录</a></p>
-									</div>
-			                    </form>
-		                    </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-        </div>
-
-<script src="assets/js/jquery.backstretch.min.js"></script>
-<script src="assets/js/jquery-1.11.1.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/scripts.js"></script>
-    </body>
-
+<body >
+<div id="tab">
+  <div class="tab_box"> 
+    <div>
+      <div class="stu_error_box"></div>
+      <h1>注册</h1>
+      	<form action="./registerUser" method="post" class="stu_login_error">
+	    	<div class="form-group">
+	    		<label class="sr-only" for="form-username">用户名:</label>
+	        	<input type="text" name="username" placeholder="用户名..." id="unsp">
+	        </div>
+	        <div class="form-group">
+	        	<label class="sr-only" for="form-password">密码:</label>
+	        	<input type="password" name="password" placeholder="密码..." class="form-password form-control" id="password">
+	        </div>
+	        <div class="form-group">
+	        	<label class="sr-only" for="form-realname">真实姓名:</label>
+	        	<input type="text" name="name" placeholder="请填写你的真实姓名，不可修改" class="form-realname form-control" id="realname">
+	        </div>
+	        <div class="form-group">
+	        	<label class="sr-only" for="form-number">学号:</label>
+	        	<input type="text" name="number" placeholder="学工号..." class="form-number form-control" id="num">
+	        </div>
+	       	<div class="form-group">
+	       		<label class="sr-only" for="form-email">电子邮箱:</label>
+	       		<input type="text" name="email" placeholder="电子邮箱..." class="form-email form-control" id="emailx">
+	       	</div>
+	        <div class="form-group">
+	        	<label class="sr-only" for="form-phone">手机号:</label>
+	        	<input type="text" name="phone" placeholder="手机号..." class="form-phone form-control" id="psp">
+	        </div>
+	        <button class="btn" id="button">注册</button>
+	        <div class="form-group">
+				<p>Already registered? <a href="login">登 录</a></p>
+			</div>
+    	</form>
+    </div>
+  </div>
+</div>
+<div class="bottom">©2020届 <a href="javascript:;" target="_blank"></a> <span>毕业设计</span></div>
+<div class="screenbg">
+  <ul>
+    <li><a href="javascript:;"><img src="images/0.jpg"></a></li>
+    <li><a href="javascript:;"><img src="images/1.jpg"></a></li>
+  </ul>
+</div>
+</body>
 </html>

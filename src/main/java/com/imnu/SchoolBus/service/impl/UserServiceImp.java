@@ -181,5 +181,37 @@ public class UserServiceImp implements UserService{
 		return list;
 	}
 
+	@Override
+	public boolean findUserByUsername(String username) {
+		List<User> list = userMapper.findUserByUsername(username);
+		return list.size()==0?false:true;
+	}
+	
+	@Override
+	public boolean findStuByNumber(String number) {
+		List<User> list = userMapper.findStuByNumber(number);
+		return list.size()==0?false:true;
+	}
+
+	@Override
+	public boolean findUserByPhone(String phone) {
+		List<User> list = userMapper.findUserByPhone(phone);
+		return list.size()==0?false:true;
+	}
+
+	@Override
+	public boolean findUserByEmail(String email) {
+		List<User> list = userMapper.findUserByEmail(email);
+		return list.size()==0?false:true;
+	}
+
+	@Override
+	public boolean findStuByNameAndNum(String stuname, String stunum) {
+		List<User> list = userMapper.findStuByNameAndNum(stuname, stunum);
+		return list.size()==0?false:true;
+	}
+
+	
+
 		
 }

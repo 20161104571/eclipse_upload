@@ -31,7 +31,7 @@ public interface CommentMapper {
 	@Select(value = "select * from comment where cid = #{cid}")
 	Comment findCommentById(int cid);
 	
-	@Select(value = "select count(cid) from comment where cflag = 1")
+	@Select(value = "select count(cid is not null) from comment where cflag = 1")
 	int countComment(Integer comm); //未读留言统计
 
 	

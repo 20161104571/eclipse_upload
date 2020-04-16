@@ -24,7 +24,7 @@ public interface SubsMapper {
 	@Delete(value = "delete from subs where oId = #{oId}")
 	int delOrder(Integer oId);
 
-	@Select(value = "select count(oId) from subs")
+	@Select(value = "select count(oId is not null) from subs")
 	int countNewOrder(Integer subs);
 	
 }

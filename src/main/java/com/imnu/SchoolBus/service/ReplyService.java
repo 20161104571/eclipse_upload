@@ -2,8 +2,10 @@ package com.imnu.SchoolBus.service;
 
 import java.util.List;
 
-import com.imnu.SchoolBus.pojo.Reply;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.imnu.SchoolBus.pojo.Reply;
+@Transactional
 public interface ReplyService {
 
 	List<Reply> getReplyList();

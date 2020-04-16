@@ -46,6 +46,21 @@ public interface UserMapper {
 	@Select(value = "select * from user where id = #{id}")
 	User findUserById(int id);
 	
+	@Select(value = "select * from user where username = #{username} and status = 1")
+	List<User> findUserByUsername(String username);
+	
+	@Select(value = "select * from user where number = #{number}")
+	List<User> findStuByNumber(String number);
+	
+	@Select(value = "select * from sel_meg where stu_name = #{stuname} and stu_num = #{stunum}")
+	List<User> findStuByNameAndNum(String stuname, String stunum);
+	
+	@Select(value = "select * from user where phone = #{phone}")
+	List<User> findUserByPhone(String phone);
+	
+	@Select(value = "select * from user where email = #{email}")
+	List<User> findUserByEmail(String email);
+	
 	@Update(value = "update user set username = #{username},name = #{name},email = #{email},phone = #{phone} where id=#{id}")
 	int updateMsg(int id, String username, String name, String email, String phone);
 	
@@ -55,7 +70,10 @@ public interface UserMapper {
 	@Select(value = "select * from user where status = 2")
 	List<User> getAdminList();
 
-	@Select(value = "SELECT COUNT(id) FROM user WHERE status = 1 AND status = 3")
+	@Select(value = "SELECT COUNT(id is not null) FROM user WHERE status = 1")
 	int countUser(Integer count);
+	
+	@Select(value = "SELECT COUNT(id) FROM user WHERE status = 3")
+	int countTeUser(Integer counts);
 	
 }

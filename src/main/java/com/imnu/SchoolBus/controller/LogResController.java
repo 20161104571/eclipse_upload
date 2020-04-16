@@ -1,13 +1,12 @@
 package com.imnu.SchoolBus.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.UserService;
@@ -61,6 +60,33 @@ public class LogResController {
         return "user/index";
     }
     
+    @RequestMapping("/checkUserName")
+	@ResponseBody //返回类型是json数据
+	public String checkUserName(String username) {
+		boolean isExist = userService.findUserByUsername(username);
+		return "{\"isExist\":"+isExist+"}";
+		
+	}
     
-
+    @RequestMapping("/checkPhone")
+    @ResponseBody
+    public String checkPhone(String phone) {
+    	boolean isPhone = userService.findUserByPhone(phone);
+    	return "{\"isPhone\":"+isPhone+"}";
+    }
+    
+    @RequestMapping("/checkEmail")
+    @ResponseBody
+    public String checkEmail(String email) {
+    	boolean isEmail = userService.findUserByEmail(email);
+    	return "{\"isEmail\":"+isEmail+"}";
+    }
+    
+    @RequestMapping("/checkStuNum")
+    @ResponseBody
+    public String checkStuNum(String stuname, String stunum) {
+    	boolean isFindMeg = userService.findStuByNameAndNum(stuname, stunum);
+    	//boolean isFindNumAndName = userService.findStuByNumber(number);
+    	return "{\"isFindMeg\":"+isFindMeg+"}";
+    }
 }

@@ -33,21 +33,6 @@ public class SubsController {
 		return "admin/order-list";
 	}
 	
-	@RequestMapping("subsTrip")
-	public String findSubsTripById(Model model, int tId, Integer remain_seats) {
-		Trip trip = tripService.findSubsTripById(tId);
-		System.out.println(trip);
-		int seats = trip.getRemain_seats();
-		System.out.println(seats);
-		if(seats!=0) {
-			model.addAttribute("trip", trip);
-			return "user/subsDetails";
-		}else {
-			return "user/index";
-		}
-		
-	}
-	
 	@RequestMapping("getPersonSubsList")
 	public String getPersonList(Model model) {
 		List<Subs> subs = subsService.getOrderList();
@@ -70,13 +55,30 @@ public class SubsController {
 	@RequestMapping("deleOrder")
 	public String deleteOrder(Integer oId) {
 		subsService.delOrder(oId);
+		
 		return "redirect:/getOrderList";
 	}
 	
 	@RequestMapping("deleUserOrder")
 	public String deleteUserOrder(Integer oId) {
 		subsService.delOrder(oId);
+		
 		return "redirect:/getPersonSubsList";
+	}
+	
+	@RequestMapping("subsTrip")
+	public String findSubsTripById(Model model, int tId, Integer remain_seats) {
+		Trip trip = tripService.findSubsTripById(tId);
+		System.out.println(trip);
+		int seats = trip.getRemain_seats();
+		System.out.println(seats);
+		if(seats!=0) {
+			model.addAttribute("trip", trip);
+			return "user/subsDetails";
+		}else {
+			return "user/index";
+		}
+		
 	}
 
     @RequestMapping(value = "sendcode",method = RequestMethod.POST)

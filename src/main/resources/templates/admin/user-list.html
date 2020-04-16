@@ -159,12 +159,6 @@
                 <div class="col-md-6">
                 当前第 [[${pageInfo.pageNum}]]页，共 [[${pageInfo.pages}]] 页，一共 [[${pageInfo.total}]] 条记录
                 </div>
-               <!-- <ul class="pager">
-                  <li><a th:href="@{/getUserList?pageNum=1}">[首  页]</a></li>
-                  <li><a th:href="@{/getUserList?pageNum-1}">[上一页]</a></li>
-                  <li><a th:href="@{/getUserList?pageInfo.pageNum+1}">[下一页]</a></li>
-                  <li><a th:href="@{/getUserList(pageNum=${pageInfo.pages})}">[末  页]</a></li>
-               </ul> -->
                <ul class="pagination pull-right no-margin">
 			        <li th:if="${pageInfo.hasPreviousPage}">
 			            <a th:href="@{/getUserList?pageNum=1}">首页</a>

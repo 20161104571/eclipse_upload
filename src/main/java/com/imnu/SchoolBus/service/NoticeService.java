@@ -2,8 +2,10 @@ package com.imnu.SchoolBus.service;
 
 import java.util.List;
 
-import com.imnu.SchoolBus.pojo.Notice;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.imnu.SchoolBus.pojo.Notice;
+@Transactional
 public interface NoticeService {
 	
 	List<Notice> getNoticeList();

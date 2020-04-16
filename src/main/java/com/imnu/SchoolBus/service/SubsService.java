@@ -2,8 +2,10 @@ package com.imnu.SchoolBus.service;
 
 import java.util.List;
 
-import com.imnu.SchoolBus.pojo.Subs;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.imnu.SchoolBus.pojo.Subs;
+@Transactional
 public interface SubsService {
 	
 	Subs findSubsById(int oId);

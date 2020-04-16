@@ -2,8 +2,10 @@ package com.imnu.SchoolBus.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
 import com.imnu.SchoolBus.pojo.Comment;
 
+@Transactional
 public interface CommentService {
 
 	List<Comment> getCommList();
