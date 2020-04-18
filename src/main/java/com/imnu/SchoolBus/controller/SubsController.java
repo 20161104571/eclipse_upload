@@ -55,15 +55,17 @@ public class SubsController {
 	@RequestMapping("deleOrder")
 	public String deleteOrder(Integer oId) {
 		subsService.delOrder(oId);
-		
 		return "redirect:/getOrderList";
 	}
 	
 	@RequestMapping("deleUserOrder")
-	public String deleteUserOrder(Integer oId) {
+	public String deleteUserOrder(Integer oId, Trip trip) {
+		Subs subs = subsService.findSubsById(oId);
+		int tid = subs.gettId();
+		tripService.findSubsTripById(tid);
 		subsService.delOrder(oId);
-		
-		return "redirect:/getPersonSubsList";
+		tripService.addSeats(tid, trip);
+		return "redirect:/getUserTripList";
 	}
 	
 	@RequestMapping("subsTrip")

@@ -104,18 +104,18 @@
 			<div class="conMain">
                 <div class="tab-pane fade active in" id="home" >
                 <form th:action="@{/updatepwd}" method="post" class="row" >
-                <input type="hidden" name="id" id="id" th:value="${session.users.id}">
+                <input type="hidden" name="id" id="uid" th:value="${session.users.id}">
                   <div class="form-group col-md-12">
                     <label for="oldpwd">原密码</label>
-                    <input type="password" id="password" name="password" class="form-control" >
+                    <input type="password" id="opwd" name="password" class="form-control" >
                   </div>
                   <div class="form-group col-md-12">
                     <label for="newpwd">新密码</label>
-                    <input type="password" class="form-control" id="newpassword" name="newpassword"/>
+                    <input type="password" class="form-control" id="npwd" name="newpassword"/>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="repwd">确认密码</label>
-                    <input type="password" class="form-control" id="repassword" name="repassword"/>
+                    <input type="password" class="form-control" id="rpwd" name="repassword"/>
                   </div>
                   <div class="form-group col-md-12">
                     <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
@@ -137,4 +137,34 @@
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" th:line="javascript">
+$(function(){
+	$("input[name='password']").blur(function(){
+		var id = $("#uid").val();
+		var opwd = $("#opwd").val();
+		if(opwd == ""){
+			alert("请先输入初始密码");
+		}else{
+			$.ajax({
+				type:'post',
+				url:'./checkOldPwd',
+				data:{"id":id,"password":opwd},
+				dataType:'application/json;charset=UTF-8',
+				success:function(result){
+					$("#opwd").empty();
+					if(result.isOldPwd==true){
+						alert("初始密码正确");
+						console.log("正确");
+					}else{
+						alert("初始密码错误");
+					}
+				}
+			});
+		}
+		console.log(opwd);
+	});	
+});
+
+
+</script>
 </html>

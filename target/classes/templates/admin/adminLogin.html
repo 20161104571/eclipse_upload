@@ -58,12 +58,12 @@
       <form action="loginAdmin" method="post">
       	<input type="hidden" name="id" id="id" style="none">
         <div class="form-group has-feedback feedback-left">
-          <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" />
-          <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
+          <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="amdinUsername" />
+          <span class="mdi mdi-account form-control-feedback" aria-hidden="true" id='ausp'></span>
         </div>
         <div class="form-group has-feedback feedback-left">
-          <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" />
-          <span class="mdi mdi-lock form-control-feedback" aria-hidden="true"></span>
+          <input type="password" placeholder="请输入密码" class="form-control" name="password" id="adminPwd" />
+          <span class="mdi mdi-lock form-control-feedback" aria-hidden="true" id='pwdsp'></span>
         </div>
         
         <div class="form-group">
@@ -79,6 +79,37 @@
 </div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript">;</script>
+<script type="text/javascript" th:inline="javascript">
+$(function(){
+	/* $("input[name='username']").blur(function(){
+		if($("#ausp").val() == ""){
+			alert("请输入用户名！");
+		}
+	}); */
+	$("input[name='password']").blur(function(){
+		var uname = $("#adminUsername").val();
+		var pwd = $("#adminPwd").val();
+			$.ajax({
+				type:'post',
+				url:'./loginAdmin',
+				data:{"username":uname,"password":pwd},
+				dataType:'application/json;charset=UTF-8',
+				success:function(data){
+					/* if(data == 1){
+						alert("用户名或密码为空！请重新输入");
+					}else if(data == 2){
+						alert("用户名或密码错误！");
+					}else{
+						alert("登录成功！");
+					} */
+				},
+				//error:function(){
+					//window.console.log('失败回调函数');
+				//}
+			});
+		
+	});
+});
+</script>
 </body>
 </html>

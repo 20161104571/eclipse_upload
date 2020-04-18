@@ -8,8 +8,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -105,8 +109,41 @@ public class UserController {
 		}else {
 			return "user/personcenter";
 		}
-		
 	}
 	
+//	@RequestMapping(value="import", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String excelImport(@RequestParam(value = "filename")MultipartFile file, HttpSession session) {
+//		boolean a = false;
+//		String fileName = file.getOriginalFilename();
+//		try {
+//			a = userService.batchImport(fileName, file);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "1";
+//	}
+	@RequestMapping(value = "import")
+	@ResponseBody
+	public String excelImport(@RequestParam(value="filename")MultipartFile file,HttpSession session){
+		
+		String fileName = file.getOriginalFilename();
+		
+		boolean result = false;
+		
+		try {
+			result = userService.batchImport(fileName, file);
+		} catch (Exception e) {
+ 
+			e.printStackTrace();
+		}
+		
+		if(result = true){
+			return "excel文件数据导入成功！";
+		}else{
+			return "excel数据导入失败！";
+		}
+		
+	}
 	
 }

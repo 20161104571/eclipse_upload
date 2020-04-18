@@ -160,13 +160,13 @@ var fristpwdBool = false;
 var newpwdBool = false;
 	$(function(){
 		$("input[name='confirmpwd']").blur(function(){
-			var newpwd = $("input[name='newpassword']").val();
-			var repwd = $("input[name='confirmpwd']").val();
+			var newpwd = $("#newpassword").val();
+			var repwd = $("#confirmpwd").val();
 			$("#password").empty();
 			if(newpwd != repwd || newpwd != null || newpwd != ""){
-				$("#password").append("<font color = 'green'>密码一致</font>");
+				alert("密码一致");
 			}else{
-				$("#password").append("<font color = 'red'>密码不一致</font>");
+				alert("密码不一致");
 				newpwdBool = false;
 			}
 		});
@@ -174,11 +174,11 @@ var newpwdBool = false;
 	$(function(){
 		$("input[name='newpassword']").blur(function(){
 			$.ajax({
-				url:"/updateAdminPwd",
+				url:"./updateAdminPwd",
 				type:"post",
 				data:{
-					"newpwd":$("input[name='newpassword']").val(),
-					"userid":id,
+					"newpassword":$("input[name='newpassword']").val(),
+					"id":id
 				},
 				dataType:"json",
 				cache:false,

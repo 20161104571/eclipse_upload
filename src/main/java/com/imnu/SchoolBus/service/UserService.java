@@ -4,6 +4,7 @@ package com.imnu.SchoolBus.service;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.imnu.SchoolBus.pojo.User;
 @Transactional
@@ -27,6 +28,8 @@ public interface UserService {
 	
 	User findUserById(int id);
 	
+	boolean findUserPwd(int id, String password);
+	
 	boolean findUserByUsername(String username);
 	
 	boolean findStuByNumber(String number);
@@ -45,11 +48,13 @@ public interface UserService {
 	
 	User updateMsg(int id, String username, String name, String email, String phone);
 
-	List<User> getAdminList();
-	
 	int countUser(Integer count);
 	
 	int countComment(Integer comm);
 
 	int countNewOrder(Integer subs);
+	
+	boolean batchImport(String fileName, MultipartFile file) throws Exception;
+
+	boolean checkUser(User user);
 }

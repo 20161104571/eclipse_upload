@@ -82,6 +82,13 @@ public class LogResController {
     	return "{\"isEmail\":"+isEmail+"}";
     }
     
+    @RequestMapping("/checkOldPwd")
+    @ResponseBody
+    public String checkOldPwd(int id, String password) {
+    	boolean isOldPwd = userService.findUserPwd(id,password);
+    	return "{\"isOldPwd\":"+isOldPwd+"}";
+    }
+    
     @RequestMapping("/checkStuNum")
     @ResponseBody
     public String checkStuNum(String stuname, String stunum) {

@@ -15,7 +15,7 @@ public interface SubsMapper {
 	@Select(value = "select * from subs")
 	List<Subs> getOrderList();
 	
-	@Select(value = "selecr * from subs where oId = #{oId}")
+	@Select(value = "select * from subs where oId = #{oId}")
 	Subs findSubsById(int oId);
 	
 	@Insert(value = "insert into subs (oId,uId,tId,name,phone,time,place,trainNum) values(#{oId},#{uId},#{tId},#{name},#{phone},#{time},#{place},#{trainNum})")

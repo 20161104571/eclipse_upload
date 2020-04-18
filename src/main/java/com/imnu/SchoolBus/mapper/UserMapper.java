@@ -46,6 +46,9 @@ public interface UserMapper {
 	@Select(value = "select * from user where id = #{id}")
 	User findUserById(int id);
 	
+	@Select(value = "select * from user where password = #{password} and id = #{id}")
+	List<User> findUserPwd(int id, String password);
+	
 	@Select(value = "select * from user where username = #{username} and status = 1")
 	List<User> findUserByUsername(String username);
 	
@@ -61,19 +64,27 @@ public interface UserMapper {
 	@Select(value = "select * from user where email = #{email}")
 	List<User> findUserByEmail(String email);
 	
+	@Select(value = "select * from user where number=#{number} and password=#{password} and status=2")
+	List<User> checkUser(User user);
+	
 	@Update(value = "update user set username = #{username},name = #{name},email = #{email},phone = #{phone} where id=#{id}")
 	int updateMsg(int id, String username, String name, String email, String phone);
 	
 	@Update(value = "update user set password = #{newpassword} where id = #{id}")
 	int changePwd(int id, String newpassword);
 
-	@Select(value = "select * from user where status = 2")
-	List<User> getAdminList();
-
 	@Select(value = "SELECT COUNT(id is not null) FROM user WHERE status = 1")
 	int countUser(Integer count);
 	
-	@Select(value = "SELECT COUNT(id) FROM user WHERE status = 3")
+	@Select(value = "SELECT COUNT(id is not null) FROM user WHERE status = 3")
 	int countTeUser(Integer counts);
 	
+	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status) values (#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status})")
+	int insertTeachersByExcel(User user);
+	
+	@Update(value = "update user set username = #{username},name = #{name},email = #{email},phone = #{phone} where number = #{number}")
+	int updateByNum(User user);
+	
+	@Select(value = "select * from user where number = #{number}")
+	List<User> selectByNumber(String number);
 }
