@@ -1,6 +1,5 @@
 package com.imnu.SchoolBus.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +12,10 @@ public interface TripService {
 	
 	int deleteTrip(Integer tId);
 	
-	List<Trip> getTripList();
+	List<Trip> getTripList(String nowDate);
 	
+	List<Trip> getTripsList();
+			
 	List<Trip> searchList(String search_input);
 	
 	Trip findSubsTripById(int tId);
@@ -23,10 +24,12 @@ public interface TripService {
 
 	void addSeats(int tId, Trip trip);
 	
-	List<Trip> getTimeTripList(Date startTime, Date endTime);
+	public List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo);
 	
-	Trip findTripByTime(Date startTime, Date endTime);
-
-	Trip findTripsByTime(Date ctime);
+	List<Trip> getTimeTripList(String nowDate, String startTime, String endTime);
+	
+	Trip findTripsByTime(String ctime);
+	
+	List<Trip> getTripByNowtime(String NowTime);
 
 }

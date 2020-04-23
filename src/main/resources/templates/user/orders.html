@@ -14,10 +14,10 @@
 		<!-- <a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a> -->
-		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
+		<!-- <form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
 			<button type="submit" onclick="search()"></button>
 			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
-		</form>
+		</form> -->
 		
 	</div>
 	<!--头部 End!-->
@@ -93,6 +93,15 @@
 				</div>
 				
 			</div>
+			<div>
+				<form class="conMain" action="" method="post" >
+				<input type="text" id="inputOne">
+				<input type="text" id="inputTwo" name="inputTwo" placeholder="点击选择出发日期">
+				<!-- <input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索"> -->
+				<!-- <input type="text" id="nowDate" th:vlaue="${nowDate}" th:text="${nowDate}"> -->
+				<button type="submit" id="btn_select">查询</button>
+			</form>
+			</div>
 			<div class="conMain">
 				<table class="table table-bordered">
                     <thead>
@@ -102,17 +111,19 @@
 			            <th width="150px">始发地</th>
 			            <th width="150px">所需时间</th>
 			            <th width="150px">余座</th>
-                        <th width="150px">操作</th>
+                        <th width="150px">出发日期</th>
+                        <th width="150px">预约</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${trips}">
+                      <tr th:each="trip:${list}">
                       	<td th:text="${trip.ccard}"></td>
-			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
+			            <td th:text="${trip.ctime}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>
 			            <td th:if = "${trip.start=='2'}">盛乐</td>
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
+			            <td th:text="${trip.start_Date}"></td>
                         <td>
                           <div class="btn-group">
                             <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a>
@@ -152,14 +163,47 @@
 	</div>
 	<!--底部 End!-->
 </body>
+<script src="laydate/laydate.js"></script>
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#inputTwo'
+  ,min: 0
+  ,max: 7
+});
+</script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 function seatscount(){
 	var seats = "${trip.remain_seats}".val();
 	if(seats=0){
 		return "user/index";
 	}
 }
-
 </script>
-</html>
+<script type="text/javascript" th:inline="javascript">
+$(function(){
+	$("#btn_select").click(function(){
+		var testInputOne = $("#inputOne").val();
+		if(testInputOne=="赛罕"){
+			testInputOne="1";
+		}else{
+			testInputOne="2";
+		}
+		console.log(testInputOne);
+		var testInputTwo = $("#inputTwo").val();
+		var a1 = testInputOne == '' || testInputOne == undefined || testInputOne == null;
+		var a2 = testInputTwo == '' || testInputTwo == undefined || testInputTwo == null;
+		if(a1 && a2){
+			alert("输入出发地点和出发时期进行查询！");
+		}else{
+			$.ajax({
+				type:'post',
+				url:'findResultByStartAndDate',
+				data:{"testInputOne":testInputOne,"testInputTwo":testInputTwo},
+				dataType:'application/json;charset=UTF-8',
+			});
+		}
+	});
+});
+</script>

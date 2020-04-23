@@ -1,11 +1,11 @@
 package com.imnu.SchoolBus.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.imnu.SchoolBus.pojo.Schedule;
+
 @Transactional
 public interface ScheduleService {
 	
@@ -17,6 +17,6 @@ public interface ScheduleService {
 	
 	Schedule findScheduleById(int sId);
 	
-	Schedule findScheduleByTime(Date startTime);
+	Schedule findScheduleByTime(String startTime);
 	
 }

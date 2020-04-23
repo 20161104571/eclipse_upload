@@ -14,11 +14,6 @@
 		<!-- <a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a> -->
-		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
-			<button type="submit" onclick="search()"></button>
-			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
-		</form>
-		
 	</div>
 	<!--头部 End!-->
 	
@@ -102,8 +97,8 @@
                   	<input id="trainNum" name="trainNum" th:value="${trip.ccard}" hidden="hidden">
                   </div>
                   <div class="conMain">
-                  	<input th:text="出发时间：+${#dates.format(trip.ctime, 'HH:mm')}">
-                  	<input  id="time" name="time" th:value="${#dates.format(trip.ctime, 'HH:mm')}" hidden="hidden">
+                  	<input th:text="出发时间：+${trip.ctime}">
+                  	<input  id="time" name="time" th:value="${trip.ctime}" hidden="hidden"><!--${#dates.format(trip.ctime, 'HH:mm')} -->
                   </div>
                   <div class="conMain" th:if = "${trip.start=='1'}">
                   	<input th:text="出发地：赛罕">
@@ -124,7 +119,7 @@
                   <input id="uId" name="uId" th:value="${session.users.id}" type="text" hidden="hidden">
                   <input id="name" name="name" th:value="${session.users.name}" type="text" hidden="hidden">
                   <span>选择预约日期</span>
-                  <input id="">
+                  <input type="text" class="form-control" id="test2" name="" value="" placeholder="点击选择时间">
 					<span>输入预约手机号，以便接收预约成功短信：</span>
 					<input type="text" name="phone" id="phone">
 					<!-- <input type="submit" name="send" class="btn" id="verify_refresh" value="获取验证码" onclick="getMsgNum(this)">
@@ -145,6 +140,13 @@
 	</div>
 	<!--底部 End!-->
 </body>
+<script src="laydate/laydate.js"></script> 
 <script type="text/javascript" src="js/jquery.min.js" ></script>
-<script src="js/phoneCode.js"></script>
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#test2' //指定元素
+  ,type: 'date'
+});
+</script>
 </html>

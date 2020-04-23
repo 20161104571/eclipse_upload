@@ -1,6 +1,5 @@
 package com.imnu.SchoolBus.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +28,8 @@ public class TripServiceImp implements TripService{
 	}
 
 	@Override
-	public List<Trip> getTripList() {
-		List<Trip> list = tripMapper.getTripList();
+	public List<Trip> getTripList(String nowDate) {
+		List<Trip> list = tripMapper.getTripList(nowDate);
 		return list;
 	}
 
@@ -55,20 +54,32 @@ public class TripServiceImp implements TripService{
 	}
 
 	@Override
-	public List<Trip> getTimeTripList(Date startTime, Date endTime) {
-		List<Trip> list = tripMapper.getTimeTripList(startTime, endTime);
+	public List<Trip> getTimeTripList(String nowDate, String startTime, String endTime) {
+		List<Trip> list = tripMapper.getTimeTripList(nowDate, startTime, endTime);
 		return list;
 	}
 
 	@Override
-	public Trip findTripByTime(Date startTime, Date endTime) {
-		return tripMapper.findTripByTime(startTime, endTime);
+	public Trip findTripsByTime(String ctime) {
+		return tripMapper.findTripsByTime(ctime);
 	}
 
 	@Override
-	public Trip findTripsByTime(Date ctime) {
-		return tripMapper.findTripsByTime(ctime);
+	public List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo) {
+		return tripMapper.findResultByStartAndDate("%"+testInputOne+"%", "%"+testInputTwo+"%");
 	}
+
+	@Override
+	public List<Trip> getTripByNowtime(String NowTime) {
+		return tripMapper.getTripByNowtime(NowTime);
+	}
+
+	@Override
+	public List<Trip> getTripsList() {
+		List<Trip> list = tripMapper.getTripsList();
+		return list;
+	}
+
 
 
 	

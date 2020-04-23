@@ -99,16 +99,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="schedule:${schedules}">
+                      <tr th:each="schedule:${pageInfo.list}">
                       <td th:if = "${schedule.startPlace==1}">赛罕</td>
 			            <td th:if = "${schedule.startPlace==2}">盛乐</td>
-			            <td th:text="${#dates.format(schedule.startTime, 'HH:mm')}" id="startTime" th:value="${startTime}"></td>
-			            <td th:text="${#dates.format(schedule.endTime, 'HH:mm')}" id="endTime" th:value="${endTime}"></td>
+			            <td th:text="${schedule.startTime}" id="startTime" th:value="${startTime}"></td>
+			            <td th:text="${schedule.endTime}" id="endTime" th:value="${endTime}"></td>
                         <td>
                           <div class="btn-group">
                           <ol th:each="trip:${trips}">
                           	<li th:text="${trip.tId}" hidden="hidden"></li>
-							<li th:text="${#dates.format(trip.ctime, 'HH:mm')}" hidden="hidden"></li>
+							<li th:text="${trip.ctime}" hidden="hidden"></li>
 						  </ol>
                             <a class="btn btn-xs btn-default" th:href="@{/getTimeList(sId=${schedule.sId})}" title="查看详细" data-toggle="tooltip"><i ><img class="user/images/subs.png"></i></a>
                           </div>
@@ -118,21 +118,17 @@
                   </table>
 				
 				<div class="pageNum">
-					<span>共14条</span>
-					<span>每页1页</span>
-					<a href="#" class="pagePrev disabled">&lt;</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<span>...</span>
-					<a href="#">14</a>
-					<a href="#" class="pageNext">&gt;</a>
-					<form>
-						<span>转到第</span>
-						<input type="text" name="">
-						<span>页</span>
-						<button>GO</button>
-					</form>
+					<span>共 [[${pageInfo.pages}]] 页</span>
+					<span>共 [[${pageInfo.total}]] 条</span>
+					<span>每页 [[${pageInfo.pageSize}]] 条</span>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getSchedule?pageNum=1}">首页</a></th:if>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getSchedule(pageNum=${pageInfo.prePage})}" style="font-weight: bold;">上一页</a></th:if>
+					<th:each th:each="nav:${pageInfo.navigatepageNums}">
+		                <a th:href="@{/getSchedule(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+		                <span style="font-weight: bold;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+		            </th:each>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getSchedule(pageNum=${pageInfo.nextPage})}" style="font-weight: bold;">下一页</a></th:if>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getSchedule(pageNum=${pageInfo.pages})}">尾页</a></th:if>
 				</div>
 			</div>
 		</div>

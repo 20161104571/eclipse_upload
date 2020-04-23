@@ -1,11 +1,11 @@
 package com.imnu.SchoolBus.mapper;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -15,16 +15,19 @@ import com.imnu.SchoolBus.pojo.Trip;
 @Mapper
 public interface TripMapper {
 	
-	@Insert(value = "insert into trip (tId,ccard,ctime,start,reqTime,seats,remain_seats) values (#{tId},#{ccard},#{ctime},#{start},#{reqTime},#{seats},#{seats})")
+	@Insert(value = "insert into trip (tId,ccard,ctime,start,reqTime,seats,remain_seats,start_Date) values (#{tId},#{ccard},#{ctime},#{start},#{reqTime},#{seats},#{seats},#{start_Date})")
 	void createTrip(Trip trip);
 	
 	@Delete(value = "delete from trip where tId = #{tId}")
 	int deleteTrip(Integer tId);
 	
-	@Select(value = "select * from trip")
-	List<Trip> getTripList();
+	@Select(value = "select * from trip where start_Date >= #{nowDate}")
+	List<Trip> getTripList(String nowDate);
 	
-	@Select(value = "select * from trip where ccard like CONCAT('%',#{search_input},'%') is not null")
+	@Select(value = "select * from trip")
+	List<Trip> getTripsList();
+	
+	@Select(value = "select * from trip where ccard like CONCAT('%',#{search_input},'%')")
 	List<Trip> searchList(String search_input);
 	
 	@Select(value = "select * from trip where tId = #{tId}")
@@ -37,13 +40,15 @@ public interface TripMapper {
 	void addSeats(int tId, Trip trip);
 	
 	@Select(value = "select * from trip where ctime = #{ctime}")
-	Trip findTripsByTime(Date ctime);
+	Trip findTripsByTime(String ctime);
 	
-	@Select(value = "select ctime from trip where ctime between #{startTime} and #{endTime}")
-	Trip findTripByTime(Date startTime, Date endTime);
-	//@Select(value = "select * from trip between date_format(#{schedule.startTime},'yyyy-MM-dd') and date_format(#{schedule.endTime},'yyyy-MM-dd')")
-	@Select(value = "select * from trip where ctime between #{startTime} and #{endTime}")
-	//@Select(value = "select * from trip where ctime >= #{startTime} and ctime <= #{endTime}")
-	List<Trip> getTimeTripList(Date startTime, Date endTime);
+	@Select(value = "select * from trip where start like #{start} and start_Date like #{start_Date}")
+	List<Trip> findResultByStartAndDate(@Param("start")String start, @Param("start_Date")String start_Date);
+	
+	@Select(value = "select * from trip where start_Date >= #{nowDate} and ctime between #{startTime} and #{endTime}")
+	List<Trip> getTimeTripList(String nowDate, String startTime, String endTime);
+	
+	@Select(value = "select * from trip where ctime < NowTime")
+	List<Trip> getTripByNowtime(String NowTime);
 
 }

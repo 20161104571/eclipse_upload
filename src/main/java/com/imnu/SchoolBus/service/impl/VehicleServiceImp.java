@@ -32,4 +32,10 @@ public class VehicleServiceImp implements VehicleService{
 		List<Vehicle> list = vehicleMapper.getVehiclList();
 		return list;
 	}
+
+	@Override
+	public List<Vehicle> getCardList() {
+		List<Vehicle> list = vehicleMapper.getCardList();
+		return list;
+	}
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Driver;
-import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.DriverService;
 
 @Controller

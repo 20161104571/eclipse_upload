@@ -30,9 +30,8 @@
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
-                <li> <a href="./getUserList">用户信息管理</a> </li>
-                <li> <a href="./getTeacherList">教师信息</a> </li>
-                <li> <a href="./getUserList">新增管理员</a> </li>
+                <li> <a href="./getUserList">学生信息管理</a> </li>
+                <li> <a href="./getTeacherList">教师信息管理</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -67,7 +66,7 @@
         </nav>
         
         <div class="sidebar-footer">
-          <p class="copyright">@2020</p>
+          <p class="copyright">魏炜@2020届毕业设计</p>
         </div>
       </div>
       
@@ -149,7 +148,7 @@
                           <div class="btn-group">
                             <!-- <a class="btn btn-xs btn-default" th:href="@{/toEdit(dId=${driver.dId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a> -->
                             <a class="btn btn-xs btn-default" th:href="@{/deleteUser(id=${c.id})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
-                          </div><!-- '/delete/'+${driver.dId} -->
+                          </div>
                         </td>
                       </tr>
                     </tbody>

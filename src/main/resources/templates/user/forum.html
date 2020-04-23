@@ -14,10 +14,6 @@
 		<!-- <a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a> -->
-		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
-			<button type="submit" onclick="search()"></button>
-			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
-		</form>
 		
 	</div>
 	<!--头部 End!-->
@@ -115,12 +111,12 @@
 				<th:each th:each="comment : ${pageInfo.list}">
                     <li style="border-top: 1px dotted #01AAED">
  						
-                        <div style="text-align:left;color:#444">
+                        <div style="text-align:left;margin-left:40px;color:#444;font-size:16px">
                             <div style="color:#01AAED" th:text="${comment.cname}"></div>
- 							<div th:text="${comment.ctitle}"></div>
-                            <div th:text="${comment.content}"></div>
-  							&nbsp;&nbsp;&nbsp;&nbsp;
  							<div th:text="${#dates.format(comment.cdate,'yyyy-MM-dd HH:mm')}"></div>
+ 							<div th:text="${comment.ctitle}"></div>
+                            <div style="margin-left:10px" th:text="${comment.content}"></div>
+  							&nbsp;&nbsp;&nbsp;&nbsp;
  							<input th:value="${comment.cid}" hidden="hidden">
                         </div>
                         <div>
@@ -134,17 +130,18 @@
                         </div>
                         <th:each th:each="reply:${replys}">
                             <th:if th:if="${reply.rcid eq comment.cid}">
-                                <div style="text-align: left;margin-left:61px;color: #444">
-                                    <div style="color:#5FB878" th:text="${reply.rname}">
+                                <div style="text-align: left;margin-left:80px;color: #444;font-size:16px">
+                                    <div style="color:#0000FF" th:text="${reply.rname}+'回复@'+${comment.cname}">
                                         <span>&nbsp;&nbsp;</span>
                                     </div>
-                                    <div style="text-align: left;" th:text="${reply.rcontent}">
- 										<span>&nbsp;&nbsp;</span>
- 									</div>
  									<div style="text-align: left;" th:text="${#dates.format(reply.rdate,'yyyy-MM-dd HH:mm')}">
                                         <span>&nbsp;&nbsp;</span>
                                         <hr style="margin-top: 7px;"/>
                                     </div>
+                                    <div style="text-align: left;margin-left:10px" th:text="${reply.rcontent}">
+ 										<span>&nbsp;&nbsp;</span>
+ 									</div>
+ 									
                                 </div>
                             </th:if>
                         </th:each>
@@ -152,37 +149,17 @@
  			</th:each>
 		</ul>
 				<div class="pageNum">
-					<span>当前第 [[${pageInfo.pageNum}]]页</span>
-					<span>一共 [[${pageInfo.total}]] 条记录</span>
 					<span>共 [[${pageInfo.pages}]] 页</span>
-					<ul class="pager">
-			        <li th:if="${pageInfo.hasPreviousPage}">
-			            <a th:href="@{/getCommentsList?pageNum=1}">首页</a>
-			        </li>
-			
-			        <li class="prev" th:if="${pageInfo.hasPreviousPage}">
-			            <a th:href="@{/getCommentsList(pageNum=${pageInfo.prePage})}">
-			                <i>[上一页]</i>
-			            </a>
-			        </li>
-			        <!--遍历条数-->
-		            <li th:each="nav:${pageInfo.navigatepageNums}">
+					<span>共 [[${pageInfo.total}]] 条</span>
+					<span>每页 [[${pageInfo.pageSize}]] 条</span>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getCommentsList?pageNum=1}">首页</a></th:if>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getCommentsList(pageNum=${pageInfo.prePage})}" style="font-weight: bold;">上一页</a></th:if>
+					<th:each th:each="nav:${pageInfo.navigatepageNums}">
 		                <a th:href="@{/getCommentsList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
-		                <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
-		            </li>
-		            <th:each >
-		            <li class="next" th:if="${pageInfo.hasNextPage}">
-			            <a th:href="@{/getCommentsList(pageNum=${pageInfo.nextPage})}">
-			                <i>[下一页]</i>
-			            </a>
-			        </li>
+		                <span style="font-weight: bold;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
 		            </th:each>
-			        
-			
-			        <li>
-			            <a th:href="@{/getCommentsList(pageNum=${pageInfo.pages})}">尾页</a>
-			        </li>
-			    </ul>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getCommentsList(pageNum=${pageInfo.nextPage})}" style="font-weight: bold;">下一页</a></th:if>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getCommentsList(pageNum=${pageInfo.pages})}">尾页</a></th:if>
 				</div>
 			</div>
 		</div>

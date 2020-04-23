@@ -1,12 +1,16 @@
 package com.imnu.SchoolBus.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.imnu.SchoolBus.pojo.User;
+import com.imnu.SchoolBus.pojo.Vehicle;
 import com.imnu.SchoolBus.service.UserService;
+import com.imnu.SchoolBus.service.VehicleService;
 
 @Controller
 @RequestMapping("/")
@@ -14,6 +18,9 @@ public class ThymeleafController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 	
 	@RequestMapping("regist")
 	public String regist() {
@@ -61,11 +68,6 @@ public class ThymeleafController {
 		return "admin/user-add";
 	}
 	
-	@RequestMapping("admin-add")
-	public String adminAdd() {
-		return "admin/admin-add";
-	}
-	
 	@RequestMapping("notice-add")
 	public String noticeAdd() {
 		return "admin/notice-add";
@@ -92,13 +94,20 @@ public class ThymeleafController {
 	}
 	
 	@RequestMapping("trip-add")
-	public String tripAdd() {
+	public String tripAdd(ModelMap modelMap) {
+		List<Vehicle> cardList = vehicleService.getCardList();
+		modelMap.addAttribute("cardList", cardList);
 		return "admin/trip-add";
 	}
 	
 	@RequestMapping("notice")
 	public String Notice() {
 		return "user/notice";
+	}
+	
+	@RequestMapping("orders")
+	public String Order() {
+		return "user/orders";
 	}
 	
 	@RequestMapping("content")

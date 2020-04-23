@@ -1,7 +1,5 @@
 package com.imnu.SchoolBus.pojo;
 
-import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Schedule {
@@ -9,10 +7,10 @@ public class Schedule {
 	private Integer sId;
 	
 	@DateTimeFormat(pattern = "HH:mm")
-	private Date startTime;
+	private String startTime;
 	
 	@DateTimeFormat(pattern = "HH:mm")
-	private Date endTime;
+	private String endTime;
 	
 	private Integer startPlace;
 
@@ -24,19 +22,19 @@ public class Schedule {
 		this.sId = sId;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -53,6 +51,7 @@ public class Schedule {
 		return "Schedule [sId=" + sId + ", startTime=" + startTime + ", endTime=" + endTime + ", startPlace="
 				+ startPlace + "]";
 	}
+
 
 	
 }

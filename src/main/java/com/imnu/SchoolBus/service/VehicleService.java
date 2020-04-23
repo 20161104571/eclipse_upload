@@ -13,4 +13,6 @@ public interface VehicleService {
 	int deleteVehicle(Integer vId);
 	
 	List<Vehicle> getVehiclList();
+	
+	List<Vehicle> getCardList();
 }

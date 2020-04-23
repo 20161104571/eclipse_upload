@@ -97,37 +97,38 @@
 			            <th width="150px">始发地</th>
 			            <th width="150px">所需时间</th>
 			            <th width="150px">余座</th>
+						<th width="150px">出发日期</th>
+						<th width="150px">状态</th>			            
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${lists}">
+                      <tr th:each="trip:${pageInfo.list}">
                       	<td th:text="${trip.ccard}"></td>
-			            <td th:text="${#dates.format(trip.ctime, 'HH:mm')}"></td>
+			            <td th:text="${trip.ctime}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>
 			            <td th:if = "${trip.start=='2'}">盛乐</td>
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
+			            <td th:text="${trip.start_Date}"></td>
+			            <td th:if="${nowTime}>${trip.ctime}" th:text="已发车"></td>
+			            <td th:if="${nowTime}<${trip.ctime}" th:text="侯车"></td>
                       </tr>
                     </tbody>
                     </tbody>
                   </table>
 				
 				<div class="pageNum">
-					<span>共14条</span>
-					<span>每页1页</span>
-					<a href="#" class="pagePrev disabled">&lt;</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<span>...</span>
-					<a href="#">14</a>
-					<a href="#" class="pageNext">&gt;</a>
-					<form>
-						<span>转到第</span>
-						<input type="text" name="">
-						<span>页</span>
-						<button>GO</button>
-					</form>
+					<span>共 [[${pageInfo.pages}]] 页</span>
+					<span>共 [[${pageInfo.total}]] 条</span>
+					<span>每页 [[${pageInfo.pageSize}]] 条</span>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getTimeList?pageNum=1}">首页</a></th:if>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getTimeList(pageNum=${pageInfo.prePage})}" style="font-weight: bold;">上一页</a></th:if>
+					<th:each th:each="nav:${pageInfo.navigatepageNums}">
+		                <a th:href="@{/getTimeList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+		                <span style="font-weight: bold;" th:if="${nav == pageInfo.pageNum}" th:text="'当前第'+${nav}+'页'" ></span>
+		            </th:each>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getTimeList(pageNum=${pageInfo.nextPage})}" style="font-weight: bold;">下一页</a></th:if>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getTimeList(pageNum=${pageInfo.pages})}">尾页</a></th:if>
 				</div>
 			</div>
 		</div>

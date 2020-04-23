@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Subs;
 import com.imnu.SchoolBus.pojo.Trip;
 import com.imnu.SchoolBus.service.SubsService;
@@ -27,9 +30,26 @@ public class SubsController {
 	private TripService tripService;
 	
 	@RequestMapping("getOrderList")
-	public String orderList(Model model) {
-		List<Subs> subss = subsService.getOrderList();
-		model.addAttribute("subss",subss);
+	public String orderList(Model model,
+			@RequestParam(required = false, value = "pageNum", defaultValue = "1")Integer pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize) {
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<Subs> subss = subsService.getOrderList();
+			PageInfo<Subs> pageInfo = new PageInfo<Subs>(subss, pageSize);
+			model.addAttribute("pageInfo",pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
 		return "admin/order-list";
 	}
 	

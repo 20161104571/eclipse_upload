@@ -40,7 +40,7 @@ public interface UserMapper {
 	@Select(value = "select * from user where status = 1")
 	List<User> getUserList();
 	
-	@Select(value = "select * from user where status = 3")
+	@Select(value = "select * from user where status = 3 order by number ASC")
 	List<User> getTeacherList();
 	
 	@Select(value = "select * from user where id = #{id}")

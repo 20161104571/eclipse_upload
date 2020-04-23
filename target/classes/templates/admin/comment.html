@@ -30,9 +30,8 @@
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
-                <li> <a href="./getUserList">用户信息管理</a> </li>
-                <li> <a href="./getTeacherList">教师信息</a> </li>
-                <li> <a href="./getUserList">新增管理员</a> </li>
+                <li> <a href="./getUserList">学生信息管理</a> </li>
+                <li> <a href="./getTeacherList">教师信息管理</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -67,7 +66,7 @@
         </nav>
         
         <div class="sidebar-footer">
-          <p class="copyright">@2020</p>
+          <p class="copyright">魏炜@2020届毕业设计</p>
         </div>
       </div>
       
@@ -122,14 +121,16 @@
         	<ul>
 			<th:each th:each="comment : ${pageInfo.list}">
                 <!-- 如果留言信息是在本文章下的才显示 -->
-                    <li style="border-top: 1px dotted #01AAED">
+                    <li style="border-top: 1px dotted #930093">
  						<th:if th:if="${comment.cflag}==1">未读</th:if>
-                        <div style="text-align:left;color:#444">
-                            <div style="color:#01AAED" th:text="${comment.cname}"></div>
- 							<div th:text="${comment.ctitle}"></div>
-                            <div th:text="${comment.content}"></div>
-  							&nbsp;&nbsp;&nbsp;&nbsp;
+ 						<th:if th:if="${comment.cflag}==0">已读</th:if>
+                        <div style="text-align:left;color:#444;font-size:16px">
+                            <div style="color:#01AAED" th:text="${comment.cname}"><span></span></div>
  							<div th:text="${#dates.format(comment.cdate,'yyyy-MM-dd HH:mm')}"></div>
+ 							<div th:text="${comment.ctitle}"></div>
+                            <div style="margin-left:10px" th:text="${comment.content}"></div>
+  							&nbsp;&nbsp;&nbsp;&nbsp;
+ 							
  							<input th:value="${comment.cid}" hidden="hidden">
                         </div>
                         <div>
@@ -142,15 +143,15 @@
  						 <div>
                              <div class="replycontainer layui-hide" style="margin-left: 61px;">
                                 <form action="saveReply" method="post" class="layui-form">
+                                    <div class="layui-form-item">
+                                        <textarea name="rcontent" id="rcontent" lay-verify="replyContent" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;"></textarea>
+                                    </div>
  									<input name="cid" th:value="${comment.cid}" hidden="hidden">
                                     <input name="rcid" id="rcid" th:value="${comment.cid}" hidden="hidden"/>
                                     <input name="rname" id="rname" th:value="${session.user.username}" hidden="hidden"/>
                                     <input name="rdate" id="rdate" th:value="${rtime}" hidden="hidden"/>
                                     <input name="rcname" id="rcname" th:value="${comment.cname}" hidden="hidden"/>
                                     <input name="rid" id="rid" hidden="hidden"/>
-                                    <div class="layui-form-item">
-                                        <textarea name="rcontent" id="rcontent" lay-verify="replyContent" placeholder="请输入回复内容" class="layui-textarea" style="min-height:80px;"></textarea>
-                                    </div>
                                     <div class="layui-form-item">
                                         <button id="replyBtn" class="layui-btn layui-btn-mini" lay-submit="formReply" lay-filter="formReply">提交</button>
                                     </div>
@@ -162,17 +163,18 @@
                         <th:each th:each="reply:${reply}">
                             <!-- 每次遍历出来的留言下存在回复信息才展示（本条回复信息是本条留言下的就显示在当前留言下） -->
                             <th:if th:if="${reply.rcid eq comment.cid}">
-                                <div style="text-align: left;margin-left:61px;color: #444">
-                                    <div style="color:#5FB878" th:text="${reply.rname}">
+                                <div style="text-align: left;margin-left:61px;color: #444;font-size:16px">
+                                    <div style="color:#6F00D2" th:text="${reply.rname}+'回复@'+${comment.cname}">
                                         <span>&nbsp;&nbsp;</span>
                                     </div>
-                                    <div style="text-align: left;" th:text="${reply.rcontent}">
+ 									<div style="text-align: left;" th:text="${#dates.format(reply.rdate,'yyyy-MM-dd HH:mm')}">
+                                        <!-- <span>&nbsp;&nbsp;</span> -->
+                                        <!-- <hr style="margin-top: 7px;"/> -->
+                                    </div>
+                                    <div style="text-align: left;margin-left:10px" th:text="${reply.rcontent}">
  										<span>&nbsp;&nbsp;</span>
  									</div>
- 									<div style="text-align: left;" th:text="${#dates.format(reply.rdate,'yyyy-MM-dd HH:mm')}">
-                                        <span>&nbsp;&nbsp;</span>
-                                        <hr style="margin-top: 7px;"/>
-                                    </div>
+ 									
  									<div class="btn-group" th:if="${reply.rname==session.user.username}">
  										<a class="btn btn-xs btn-default" th:href="@{/delReply(rid=${reply.rid})}" title="删除本条回复" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
  									</div>
@@ -196,7 +198,7 @@
 			
 			        <li class="prev" th:if="${pageInfo.hasPreviousPage}">
 			            <a th:href="@{/getCommentList(pageNum=${pageInfo.prePage})}">
-			                <i><-</i>
+			                <i>[上一页]</i>
 			            </a>
 			        </li>
 			        <!--遍历条数-->
@@ -206,7 +208,7 @@
 		            </li>
 		            <li class="next" th:if="${pageInfo.hasNextPage}">
 			            <a th:href="@{/getCommentList(pageNum=${pageInfo.nextPage})}">
-			                <i>-></i>
+			                <i>[下一页]</i>
 			            </a>
 			        </li>
 			        

@@ -36,7 +36,9 @@ public class MessageUtil {
 	 */
     @SuppressWarnings("deprecation")
 	public static void sendCode(String phone, String code) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FhkMdBjzhEMUTK5Vbou", "F5kBypJosqTJoM3twkmoi57o5lxUOA");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", 
+        		"LTAI4FhkMdBjzhEMUTK5Vbou", 
+        		"F5kBypJosqTJoM3twkmoi57o5lxUOA");
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();

@@ -31,9 +31,8 @@
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
-                <li> <a href="./getUserList">用户信息管理</a> </li>
-                <li> <a href="./getTeacherList">教师信息</a> </li>
-                <li> <a href="admin-list">新增管理员</a> </li>
+                <li> <a href="./getUserList">学生信息管理</a> </li>
+                <li> <a href="./getTeacherList">教师信息管理</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -68,7 +67,7 @@
         </nav>
         
         <div class="sidebar-footer">
-          <p class="copyright">@2020</p>
+         <p class="copyright">魏炜@2020届毕业设计</p>
         </div>
       </div>
       
@@ -120,7 +119,7 @@
             <div class="card bg-danger">
               <div class="card-body clearfix">
                 <div class="pull-right" onload="sendRequest()">
-                  <p class="h6 text-white m-t-0">用户总数</p>
+                  <p class="h6 text-white m-t-0">学生注册总数</p>
                   <p class="h3 text-white m-b-0" id="count" th:text="${countuser}"></p>
                 </div>
                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-account fa-1-5x"></i></span> </div>
@@ -141,6 +140,18 @@
           </div>
           
           <div class="col-sm-6 col-lg-3">
+            <div class="card bg-danger">
+              <div class="card-body clearfix">
+                <div class="pull-right" onload="sendRequest()">
+                  <p class="h6 text-white m-t-0">教师总数</p>
+                  <p class="h3 text-white m-b-0" id="count" th:text="${countuser}"></p>
+                </div>
+                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-account fa-1-5x"></i></span> </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-6 col-lg-3">
             <div class="card bg-purple">
               <div class="card-body clearfix">
                 <div class="pull-right">
@@ -151,6 +162,32 @@
               </div>
             </div>
           </div>
+        </div>
+        
+        <div class="row">
+          
+          <div class="col-lg-6"> 
+            <div class="card">
+              <div class="card-header">
+                <h4>每周用户</h4>
+              </div>
+              <div class="card-body">
+                <canvas class="js-chartjs-bars"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-6"> 
+            <div class="card">
+              <div class="card-header">
+                <h4>预约历史记录</h4>
+              </div>
+              <div class="card-body">
+                <canvas class="js-chartjs-lines"></canvas>
+              </div>
+            </div>
+          </div>
+           
         </div>
         
       </div>
@@ -209,7 +246,7 @@ function DisplayHot() {
     document.getElementById("count").innerHTML = count;
 }
 
-/* $(document).ready(function(e) {
+ $(document).ready(function(e) {
     var $dashChartBarsCnt  = jQuery( '.js-chartjs-bars' )[0].getContext( '2d' ),
         $dashChartLinesCnt = jQuery( '.js-chartjs-lines' )[0].getContext( '2d' );
     
@@ -251,7 +288,7 @@ function DisplayHot() {
         type: 'line',
         data: $dashChartLinesData,
     });
-}); */
+});
 </script>
 </body>
 </html>

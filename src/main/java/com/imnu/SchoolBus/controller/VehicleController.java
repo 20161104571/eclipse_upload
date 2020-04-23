@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Vehicle;
 import com.imnu.SchoolBus.service.VehicleService;
 
@@ -17,9 +20,26 @@ public class VehicleController {
 	private VehicleService vehicleService;
 	
 	@RequestMapping(value="getVehicleList")
-	public String vehicleList(Model model) {
-		List<Vehicle> vehicles = vehicleService.getVehiclList();
-		model.addAttribute("vehicles", vehicles);
+	public String vehicleList(Model model,
+			@RequestParam(required = false, value = "pageNum", defaultValue = "1")Integer pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize) {
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<Vehicle> vehicles = vehicleService.getVehiclList();
+			PageInfo<Vehicle> pageInfo = new PageInfo<Vehicle>(vehicles, pageSize);
+			model.addAttribute("pageInfo", pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
 		return "admin/vehicle-list";
 	}
 	

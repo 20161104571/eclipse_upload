@@ -1,7 +1,5 @@
 package com.imnu.SchoolBus.pojo;
 
-import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Trip {
@@ -11,7 +9,7 @@ public class Trip {
 	private String ccard;
 	
 	@DateTimeFormat(pattern = "HH:mm")
-	private Date ctime;
+	private String ctime;
 	
 	private String start;
 	
@@ -21,6 +19,9 @@ public class Trip {
 	
 	private Integer remain_seats;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private String start_Date;
+
 	public Integer gettId() {
 		return tId;
 	}
@@ -37,11 +38,11 @@ public class Trip {
 		this.ccard = ccard;
 	}
 
-	public Date getCtime() {
+	public String getCtime() {
 		return ctime;
 	}
 
-	public void setCtime(Date ctime) {
+	public void setCtime(String ctime) {
 		this.ctime = ctime;
 	}
 
@@ -52,7 +53,7 @@ public class Trip {
 	public void setStart(String start) {
 		this.start = start;
 	}
-	
+
 	public String getReqTime() {
 		return reqTime;
 	}
@@ -77,13 +78,18 @@ public class Trip {
 		this.remain_seats = remain_seats;
 	}
 
+	public String getStart_Date() {
+		return start_Date;
+	}
+
+	public void setStart_Date(String start_Date) {
+		this.start_Date = start_Date;
+	}
+
 	@Override
 	public String toString() {
 		return "Trip [tId=" + tId + ", ccard=" + ccard + ", ctime=" + ctime + ", start=" + start + ", reqTime="
-				+ reqTime + ", seats=" + seats + ", remain_seats=" + remain_seats + "]";
+				+ reqTime + ", seats=" + seats + ", remain_seats=" + remain_seats + ", start_Date=" + start_Date + "]";
 	}
 
-	
-
-	
 }

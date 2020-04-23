@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="js/jquery-tags-input/jquery.tagsinput.min.css">
 <link href="css/style.min.css" rel="stylesheet">
 </head>
-  
 <body>
 <div class="lyear-layout-web">
   <div class="lyear-layout-container">
@@ -32,9 +31,8 @@
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
-                <li> <a href="./getUserList">用户信息管理</a> </li>
-                <li> <a href="./getTeacherList">教师信息</a> </li>
-                <li> <a href="./getUserList">新增管理员</a> </li>
+                <li> <a href="./getUserList">学生信息管理</a> </li>
+                <li> <a href="./getTeacherList">教师信息管理</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -69,7 +67,7 @@
         </nav>
         
         <div class="sidebar-footer">
-          <p class="copyright">@2020</p>
+          <p class="copyright">魏炜@2020届毕业设计</p>
         </div>
       </div>
       
@@ -121,10 +119,21 @@
               <div class="card-body">
                 
                 <form action="saveTrip" method="post" class="row">
-                  <div class="form-group col-md-12">
+                <div class="form-group">
+                    <label class="col-xs-12" for="example-select">车次号</label>
+                    <div class="col-xs-12">
+                      <select class="form-control" id="example-select" name="ccard" size="1">
+                      <option value="0">请选择</option>
+                      	<th:each th:each="cardList:${cardList}">
+                      		<option th:text=${cardList.card}></option>
+                      	</th:each>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group col-md-12">
                     <label for="ccard">车次号</label>
                     <input type="text" id="ccard" name="ccard" th:value="${ccard}" class="form-control" placeholder="请输入车次号">
-                  </div>
+                  </div> -->
                   <div class="form-group col-md-12">
                     <label for="ctime">始发时间</label>
                     <input type="text" class="form-control" id="test4" name="ctime" th:value="${ctime}" placeholder="点击选择时间" />
@@ -147,6 +156,10 @@
                   <div class="form-group col-md-12">
                     <label for="seats">座位</label>
                     <input type="text" id="seats" name="seats" th:value="${seats}" class="form-control" placeholder="请输入座位量">
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="start_Date">出发日期</label>
+                    <input type="text" id="test11" name="start_Date" th:value="${start_Date}" class="form-control" placeholder="请选择出发日期">
                   </div>
                   <div class="form-group col-md-12">
                     <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
@@ -179,6 +192,13 @@
 laydate.render({
   elem: '#test4' //指定元素
   ,type: 'time'
+  
+});
+laydate.render({
+  elem: '#test11' //指定元素
+  ,min: 0
+  ,max: 7
+  ,trigger: 'click'
 });
 </script>
 </body>

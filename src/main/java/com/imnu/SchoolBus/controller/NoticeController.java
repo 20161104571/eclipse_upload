@@ -20,9 +20,26 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping(value="getNoticeList")
-	public String noticeList(Model model) {
-		List<Notice> notices = noticeService.getNoticeList();
-		model.addAttribute("notices", notices);
+	public String noticeList(Model model,
+			@RequestParam(required = false, value = "pageNum", defaultValue = "1")Integer pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize) {
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<Notice> notices = noticeService.getNoticeList();
+			PageInfo<Notice> pageInfo = new PageInfo<Notice>(notices, pageSize);
+			model.addAttribute("pageInfo", pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
 		return "admin/notice-list";
 	}
 	

@@ -5,6 +5,7 @@
 <title>搜索结果页</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.min.css" rel="stylesheet">
 </head>
 <body class="bodyBg">
@@ -95,36 +96,33 @@
 				<table class="table table-bordered">
                     <thead>
                       <tr>
-                       	<th>车次号</th>
-                       	<th>始发时间</th>
-			            <th>始发地</th>
-			            <th>所需时间</th>
-			            <th>剩余座位</th>
-			           <!-- <th width="150px">操作</th> -->
+                       	<th width="150px">车次号</th>
+                       	<th width="150px">始发时间</th>
+			            <th width="150px">始发地</th>
+			            <th width="150px">所需时间</th>
+			            <th width="150px">剩余座位</th>
+			            <th width="150px">出发日期</th>
+			            <th width="150px">操作</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr th:each="sc : ${search_result}">
                       	<td th:text="${sc.ccard}"></td>
-			            <td th:text="${#dates.format(sc.ctime, 'HH:mm')}"></td>
+			            <td th:text="${sc.ctime}"></td>
 			            <td th:if = "${sc.start=='1'}">赛罕校区</td>
 			            <td th:if = "${sc.start=='2'}">盛乐校区</td>
 			            <td th:text="${sc.reqTime} + '小时'"></td>
 			            <td th:text="${sc.remain_seats}"></td>
-			            <!-- <td>
+			            <td th:text="${sc.start_Date}"></td>
+			            
+			            <td>
                           <div class="btn-group">
-                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a>
+                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${sc.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a>
                           </div>
-                        </td> -->
+                        </td>
                       </tr>
                     </tbody>
                   </table>
-				<ul class="newsList" >
-					<li class="clearfix">
-						<a href="6jiaoxue-tixi.html"></a>
-						<span></span>
-					</li>
-				</ul>
 				
 				<!-- <div class="pageNum">
 					<span>共14条</span>

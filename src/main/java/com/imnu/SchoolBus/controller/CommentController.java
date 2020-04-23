@@ -28,7 +28,7 @@ public class CommentController {
 	@RequestMapping(value="getCommentList")
 	public String commentList(Model model, String rtime, ModelMap modelMap,
 							  @RequestParam(required = false,defaultValue = "1",value= "pageNum")Integer pageNum,
-							  @RequestParam(defaultValue = "2",value = "pageSize")Integer pageSize) {
+							  @RequestParam(defaultValue = "3",value = "pageSize")Integer pageSize) {
 		List<Reply> reply = replyService.getReplyList();
 		if(pageNum == null) {
 			pageNum = 1;
@@ -58,7 +58,7 @@ public class CommentController {
 	@RequestMapping(value="getCommentsList")
 	public String commentsList(Model model, String ctime, ModelMap modelMap,
 							   @RequestParam(required = false,defaultValue = "1",value= "pageNum")Integer pageNum,
-			                   @RequestParam(defaultValue = "2",value = "pageSize")Integer pageSize) {
+			                   @RequestParam(defaultValue = "3",value = "pageSize")Integer pageSize) {
 		List<Reply> reply = replyService.getReplyList();
 		if(pageNum == null) {
 			pageNum = 1;
@@ -87,7 +87,6 @@ public class CommentController {
 	
 	@RequestMapping(value="saveComment")
 	public String createComm(Comment comment) {
-		
 		commentService.addComment(comment);
 		return "redirect:/getCommentsList";
 	}

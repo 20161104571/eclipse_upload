@@ -8,11 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
@@ -83,6 +80,12 @@ public class UserController {
 		return "redirect:/getUserList";
 	}
 	
+	@RequestMapping(value="deleteTeacher")
+	public String deleteTeacher(Integer id) {
+		userService.deleteUser(id);
+		return "redirect:/getTeacherList";
+	}
+	
 	@RequestMapping(value="saveUser")
 	public String createUser(User user) {
 		userService.createUser(user);
@@ -111,35 +114,19 @@ public class UserController {
 		}
 	}
 	
-//	@RequestMapping(value="import", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String excelImport(@RequestParam(value = "filename")MultipartFile file, HttpSession session) {
-//		boolean a = false;
-//		String fileName = file.getOriginalFilename();
-//		try {
-//			a = userService.batchImport(fileName, file);
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return "1";
-//	}
 	@RequestMapping(value = "import")
-	@ResponseBody
 	public String excelImport(@RequestParam(value="filename")MultipartFile file,HttpSession session){
-		
 		String fileName = file.getOriginalFilename();
-		
 		boolean result = false;
-		
+		System.out.println(result);
 		try {
 			result = userService.batchImport(fileName, file);
 		} catch (Exception e) {
  
 			e.printStackTrace();
 		}
-		
 		if(result = true){
-			return "excel文件数据导入成功！";
+			return "redirect:/getTeacherList";
 		}else{
 			return "excel数据导入失败！";
 		}

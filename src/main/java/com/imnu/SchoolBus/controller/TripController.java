@@ -1,20 +1,21 @@
 package com.imnu.SchoolBus.controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Schedule;
 import com.imnu.SchoolBus.pojo.Trip;
 import com.imnu.SchoolBus.service.ScheduleService;
@@ -32,15 +33,35 @@ public class TripController {
 	private ScheduleService scheduledService;
 	
 	@RequestMapping(value="getTripList")
-	public String tripList(Model model) {
-		List<Trip> trips = tripService.getTripList();
-		model.addAttribute("trips", trips);
+	public String tripList(Model model, String nowDate,
+			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
+			@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);  //获取当前日期
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<Trip> trips = tripService.getTripsList();
+			PageInfo<Trip> pageInfo = new PageInfo<Trip>(trips, pageSize);
+			model.addAttribute("pageInfo", pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
 		return "admin/trip-list";
 	}
 	
 	@RequestMapping(value="getUserTripList")
 	public String userTripList(Model model) {
-		List<Trip> trips = tripService.getTripList();
+		List<Trip> trips = tripService.getTripsList();
 		model.addAttribute("trips", trips);
 		return "user/orders";
 	}
@@ -65,8 +86,8 @@ public class TripController {
 		if(list != null) {
 			/*将搜索结果集合、集合元素个数(结果商品个数)、搜索关键字添加到model的属性中返回前端页面*/
 			model.addAttribute("search_result", list);
-			model.addAttribute("result_num", list.size());
-			model.addAttribute("search_key", search_input);
+			//model.addAttribute("result_num", list.size());
+			//model.addAttribute("search_key", search_input);
 			return "user/searchResult";
 		}
 		else {
@@ -78,14 +99,14 @@ public class TripController {
 	
 	@RequestMapping(value="getSearchLists")
 	public String seachLists(HttpServletRequest request, Model model) {
-		String searchInputTrip = request.getParameter("tripSearch_header");//获取搜索框输入
-		List<Trip> list = tripService.searchList(searchInputTrip);
+		String search_input = request.getParameter("tripSearch_header");//获取搜索框输入
+		List<Trip> list = tripService.searchList(search_input);
 		System.out.println(list);
 		if(list != null) {
 			/*将搜索结果集合、集合元素个数(结果商品个数)、搜索关键字添加到model的属性中返回前端页面*/
 			model.addAttribute("search_results", list);
-			model.addAttribute("result_nums", list.size());
-			model.addAttribute("search_keys", searchInputTrip);
+			//model.addAttribute("result_nums", list.size());
+			//model.addAttribute("search_keys", search_input);
 			return "admin/searchTrip";
 		}
 		else {
@@ -95,42 +116,53 @@ public class TripController {
 		}
 	}
 	
+	@RequestMapping("findResultByStartAndDate")
+	//@ResponseBody
+	public String findResultByStartAndDate(HttpServletRequest request, Model model){
+		String testInputOne = request.getParameter("testInputOne");
+		String testInputTwo = request.getParameter("testInputTwo");
+		//logger.info("findResultByStartAndDate===="+testInputOne);
+		List<Trip> list = tripService.findResultByStartAndDate(testInputOne, testInputTwo);
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "user/orders";/* "redirect:/getUserTripList" */
+	}
+	
 	@RequestMapping(value="getTimeList")
 	public String getTimeList(HttpServletRequest request, Model model, @RequestParam(required = false) Integer sId, 
-							@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate,
-							@RequestParam(required = false) Date ctime){
-//		try {
-//			HashMap<String, Object> map = new HashMap<String, Object>();
-//			map.put("sId", sId);
-//			if(null != endDate && !"".equals(endDate)) {
-//				String startTime = startDate.replace("-", "");
-//				String endTime = endDate.replace("-", "");
-//				System.out.println("开始时间是:"+startTime);
-//				System.out.println("结束时间是:"+endTime);
-//				map.put("startTime", startTime);
-//				map.put("endTime", endTime);
-//			}
-			
-			Schedule schedule = scheduledService.findScheduleById(sId);
-			System.out.println("sid:"+sId);
-			Date startTime = schedule.getStartTime();
-			Date endTime = schedule.getEndTime();
-			model.addAttribute("schedule", schedule);
-			System.out.println("开始时间是："+startTime);
-			System.out.println("结束时间是："+endTime);
-			List<Trip> trip = tripService.getTripList();
-			System.out.println(trip);
-			//List<Trip> lists = tripService.getTimeTripList(startTime, endTime);
-			Trip lists = tripService.findTripByTime(startTime, endTime);
-			System.out.println(lists);
-			//Trip trips = tripService.findTripsByTime(ctime);
-			model.addAttribute("list", lists);
-			
-			//System.out.println("取到的符合的内容："+lists);
-			return "user/timeList2";
-//		}finally {
-//			return "user/timeList";
-//		}
+			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
+			@RequestParam(value = "pageSize",defaultValue = "1")Integer pageSize,
+			@RequestParam(required = false) String ctime, ModelMap modelMap){
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String nowDate = (String)format1.format(date);  //获取当前日期
+		System.out.println("当前日期字符串：" + nowDate + "。");
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+		String NowTime = (String)format2.format(date);  //获取当前时间
+		System.out.println("当前时间字符串：" + NowTime + "。");
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
+		Schedule schedule = scheduledService.findScheduleById(sId);
+		String startTime = schedule.getStartTime();
+		String endTime = schedule.getEndTime();
+		model.addAttribute("schedule", schedule);
+		modelMap.addAttribute("nowTime", NowTime);
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<Trip> lists = tripService.getTimeTripList(nowDate, startTime, endTime);
+			PageInfo<Trip> pageInfo = new PageInfo<Trip>(lists, pageSize);
+			model.addAttribute("pageInfo", pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
+		return "user/timeList2";
 	}
 	
 }

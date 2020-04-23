@@ -20,4 +20,7 @@ public interface VehicleMapper {
 	
 	@Select(value = "select * from vehicle")
 	List<Vehicle> getVehiclList();
+	
+	@Select(value = "SELECT * FROM vehicle WHERE Maintenance=\"无维修\" AND insurance=\"有\"")
+	List<Vehicle> getCardList();
 }
