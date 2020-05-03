@@ -11,41 +11,26 @@
 <body class="bodyBg">
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
-		<!-- <a href="index" class="hdLogo fl">
+		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
-		</a> -->
+		</a>
 	</div>
 	<!--头部 End!-->
 	
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
-		<li class="first active"><a href="index" class="navItem">首页</a></li>
+		<li><a href="index" class="navItem">首页</a></li>
 		<!-- <li>
-			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
-			<div class="dropdown">
-				<a href="2gaikuang-jianjie.html">中心简介</a>
-			</div>
+			<a href="test" class="navItem">中心概况<i></i></a>
 		</li> -->
 		<li>
-			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
-			<div class="dropdown">
-				<a href="3xinwen-dongtai.html">最新动态</a>
-				<a href="./shownotice">通知公告</a>
-			</div>
+			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
-		<li>
+		<li class="first active">
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<!-- <li>
-			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
-			<div class="dropdown">
-				<a href="6jiaoxue-tixi.html">课程体系</a>
-				<a href="6jiaoxue-xiangmu.html">教学项目</a>
-				<a href="6jiaoxue-huojiang.html">教学获奖</a>
-			</div>
-		</li> -->
 		<li>
-			<a href="./getUserTripList" class="navItem">预约</a>
+			<a href="orders" class="navItem">预约</a>
 			
 		</li>
 		<li>
@@ -55,16 +40,29 @@
 			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
 		</li>
 		<li th:if="${session.users}==null">
-			<a class="navItem"  href="login">登录</a>
+			<a class="navItem"  href="regist">注册</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
 			</div>
 		</li>
-		
+		<li th:if="${session.users}==null">
+			<a class="navItem"  href="login">登录</a>
+		</li>
+		<th:if th:if="${session.users}!=null">
+			<li th:if="${session.users.status}==1">
+				<a class="navItem">当前登录：学生</a>
+			</li>
+			<li th:if="${session.users.status}==2">
+				<a class="navItem">当前登录：管理员</a>
+			</li>
+			<li th:if="${session.users.status}==3">
+				<a class="navItem">当前登录：教师</a>
+			</li>
+		</th:if>
 	</ul>
 	<!--导航 End!-->
 
@@ -84,6 +82,8 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
+					<a href="./getSchedule">车次时刻表</a>
+					<i>-</i>
 					<span>发车详情</span>
 				</div>
 				
@@ -102,7 +102,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${pageInfo.list}">
+                      <tr th:each="trip:${lists}">
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${trip.ctime}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>
@@ -110,26 +110,12 @@
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
 			            <td th:text="${trip.start_Date}"></td>
-			            <td th:if="${nowTime}>${trip.ctime}" th:text="已发车"></td>
-			            <td th:if="${nowTime}<${trip.ctime}" th:text="侯车"></td>
+			            <td th:if="${nowDate}==${trip.start_Date} and ${nowTime}>${trip.ctime}" th:text="已发车"></td>
+			            <td th:if="${nowDate}!=${trip.start_Date}" th:href="@{/subsTrip(tId=${trip.tId})}">预约</td>
                       </tr>
                     </tbody>
                     </tbody>
                   </table>
-				
-				<div class="pageNum">
-					<span>共 [[${pageInfo.pages}]] 页</span>
-					<span>共 [[${pageInfo.total}]] 条</span>
-					<span>每页 [[${pageInfo.pageSize}]] 条</span>
-					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getTimeList?pageNum=1}">首页</a></th:if>
-					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getTimeList(pageNum=${pageInfo.prePage})}" style="font-weight: bold;">上一页</a></th:if>
-					<th:each th:each="nav:${pageInfo.navigatepageNums}">
-		                <a th:href="@{/getTimeList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
-		                <span style="font-weight: bold;" th:if="${nav == pageInfo.pageNum}" th:text="'当前第'+${nav}+'页'" ></span>
-		            </th:each>
-					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getTimeList(pageNum=${pageInfo.nextPage})}" style="font-weight: bold;">下一页</a></th:if>
-					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getTimeList(pageNum=${pageInfo.pages})}">尾页</a></th:if>
-				</div>
 			</div>
 		</div>
 	</div>

@@ -25,7 +25,7 @@ public interface UserMapper {
 	@Update(value = "update user set status = 1,code = null where id=#{id}")
     void updateUserStatus(User user);
 
-	@Select(value = "select * from user where number=#{number} and password=#{password} and status=1")
+	@Select(value = "select * from user where number=#{number} and password=#{password}")
     User loginUser(User user);
     
 	@Select(value = "select * from user where username=#{username} and password=#{password} and status=2")

@@ -19,7 +19,7 @@ public interface NoticeMapper {
 	@Delete(value = "delete from notice where nId = #{nId}")
 	int deleteNotice(Integer nId);
 	
-	@Select(value = "select * from notice")
+	@Select(value = "select * from notice order by releaseTime DESC")
 	List<Notice> getNoticeList();
 	
 	@Update(value = "update notice set title = #{title},releaseTime = #{releaseTime},noticeText = #{noticeText},author = #{author} where nId = #{nId}")
@@ -28,5 +28,7 @@ public interface NoticeMapper {
 	@Select(value = "select * from notice where nId = #{nId}")
 	Notice findNoticeById(int nId);
 	
+	@Select(value = "select count(nId is not null) from notice")
+	int countNotice(Integer nId);
 	
 }

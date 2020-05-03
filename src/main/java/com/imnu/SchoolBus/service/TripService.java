@@ -26,10 +26,8 @@ public interface TripService {
 	
 	public List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo);
 	
-	List<Trip> getTimeTripList(String nowDate, String startTime, String endTime);
+	List<Trip> getTimeTripList(Integer start, String nowDate, String startTime, String endTime);
 	
 	Trip findTripsByTime(String ctime);
 	
-	List<Trip> getTripByNowtime(String NowTime);
-
 }

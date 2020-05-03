@@ -1,7 +1,5 @@
 package com.imnu.SchoolBus.pojo;
 
-import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Subs {
@@ -17,12 +15,22 @@ public class Subs {
 	private String phone;
 	
 	@DateTimeFormat(pattern = "HH:mm")
-	private Date time;
+	private String time;
+	
+	private String date;
 	
 	private Integer place;
 	
 	private String trainNum;
-	
+
+	public Integer getoId() {
+		return oId;
+	}
+
+	public void setoId(Integer oId) {
+		this.oId = oId;
+	}
+
 	public Integer getuId() {
 		return uId;
 	}
@@ -39,14 +47,6 @@ public class Subs {
 		this.tId = tId;
 	}
 
-	public Integer getoId() {
-		return oId;
-	}
-
-	public void setoId(Integer oId) {
-		this.oId = oId;
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -63,14 +63,22 @@ public class Subs {
 		this.phone = phone;
 	}
 
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
-	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public Integer getPlace() {
 		return place;
 	}
@@ -90,7 +98,7 @@ public class Subs {
 	@Override
 	public String toString() {
 		return "Subs [oId=" + oId + ", uId=" + uId + ", tId=" + tId + ", name=" + name + ", phone=" + phone + ", time="
-				+ time + ", place=" + place + ", trainNum=" + trainNum + "]";
+				+ time + ", date=" + date + ", place=" + place + ", trainNum=" + trainNum + "]";
 	}
-	
+
 }

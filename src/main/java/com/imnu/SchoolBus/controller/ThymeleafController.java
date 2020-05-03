@@ -1,14 +1,21 @@
 package com.imnu.SchoolBus.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.imnu.SchoolBus.pojo.Notice;
+import com.imnu.SchoolBus.pojo.Trip;
 import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.pojo.Vehicle;
+import com.imnu.SchoolBus.service.NoticeService;
+import com.imnu.SchoolBus.service.TripService;
 import com.imnu.SchoolBus.service.UserService;
 import com.imnu.SchoolBus.service.VehicleService;
 
@@ -21,6 +28,12 @@ public class ThymeleafController {
 	
 	@Autowired
 	private VehicleService vehicleService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
+	@Autowired
+	private TripService tripService;
 	
 	@RequestMapping("regist")
 	public String regist() {
@@ -38,7 +51,20 @@ public class ThymeleafController {
 	}
 	
 	@RequestMapping("index")
-	public String index() {
+	public String index(Model model, Integer nId, ModelMap modelMap, String nowDate, String nowTime) {
+		//int n = noticeService.countNotice(nId);
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);  //获取当前日期
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+		nowTime = (String)format2.format(date);
+		List<Notice> notice = noticeService.getNoticeList();
+		List<Trip> trip = tripService.getTripsList();
+		model.addAttribute("notice", notice);
+		model.addAttribute("trip", trip);
+		model.addAttribute("nowDate", nowDate);
+		model.addAttribute("nowTime", nowTime);
+		//modelMap.addAttribute("n", n);
 		return "user/index";
 	}
 	
@@ -76,6 +102,16 @@ public class ThymeleafController {
 	@RequestMapping("notice-edit")
 	public String noticeEdit() {
 		return "admin/notice-edit";
+	}
+	
+	@RequestMapping("dongtai-add")
+	public String dongtaiAdd() {
+		return "admin/dongtai-add";
+	}
+	
+	@RequestMapping("dongtai-edit")
+	public String dongtaiEdit() {
+		return "admin/dongtai-edit";
 	}
 	
 	@RequestMapping("schedule-edit")

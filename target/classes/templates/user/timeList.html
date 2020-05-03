@@ -11,41 +11,26 @@
 <body class="bodyBg">
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
-		<!-- <a href="index" class="hdLogo fl">
+		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
-		</a> -->
+		</a>
 	</div>
 	<!--头部 End!-->
 	
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
-		<li class="first active"><a href="index" class="navItem">首页</a></li>
+		<li><a href="index" class="navItem">首页</a></li>
 		<!-- <li>
-			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
-			<div class="dropdown">
-				<a href="2gaikuang-jianjie.html">中心简介</a>
-			</div>
+			<a href="test" class="navItem">中心概况<i></i></a>
 		</li> -->
 		<li>
-			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
-			<div class="dropdown">
-				<a href="3xinwen-dongtai.html">最新动态</a>
-				<a href="./shownotice">通知公告</a>
-			</div>
+			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
-		<li>
+		<li class="first active">
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<!-- <li>
-			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
-			<div class="dropdown">
-				<a href="6jiaoxue-tixi.html">课程体系</a>
-				<a href="6jiaoxue-xiangmu.html">教学项目</a>
-				<a href="6jiaoxue-huojiang.html">教学获奖</a>
-			</div>
-		</li> -->
 		<li>
-			<a href="./getUserTripList" class="navItem">预约</a>
+			<a href="orders" class="navItem">预约</a>
 			
 		</li>
 		<li>
@@ -55,16 +40,29 @@
 			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
 		</li>
 		<li th:if="${session.users}==null">
-			<a class="navItem"  href="login">登录</a>
+			<a class="navItem"  href="regist">注册</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
 			</div>
 		</li>
-		
+		<li th:if="${session.users}==null">
+			<a class="navItem"  href="login">登录</a>
+		</li>
+		<th:if th:if="${session.users}!=null">
+			<li th:if="${session.users.status}==1">
+				<a class="navItem">当前登录：学生</a>
+			</li>
+			<li th:if="${session.users.status}==2">
+				<a class="navItem">当前登录：管理员</a>
+			</li>
+			<li th:if="${session.users.status}==3">
+				<a class="navItem">当前登录：教师</a>
+			</li>
+		</th:if>
 	</ul>
 	<!--导航 End!-->
 
@@ -110,7 +108,7 @@
                           	<li th:text="${trip.tId}" hidden="hidden"></li>
 							<li th:text="${trip.ctime}" hidden="hidden"></li>
 						  </ol>
-                            <a class="btn btn-xs btn-default" th:href="@{/getTimeList(sId=${schedule.sId})}" title="查看详细" data-toggle="tooltip"><i ><img class="user/images/subs.png"></i></a>
+                            <a class="btn btn-xs btn-default" th:href="@{/getTimeList(sId=${schedule.sId})}" title="查看详细" data-toggle="tooltip" onclick="xq()"><i ><img class="user/images/subs.png"></i></a>
                           </div>
                         </td>
                       </tr>
@@ -144,4 +142,20 @@
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" th:inline="javascript">
+function xq(){
+	$.ajax({
+		type:"post",
+		url:"getTimeList",
+		dataType:"text",
+		success:function(data){
+			
+		}
+	});
+	/* var seats = "${trip.remain_seats}".val();
+	if(seats=0){
+		return "user/index";
+	} */
+}
+</script>
 </html>

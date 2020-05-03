@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -24,7 +23,7 @@ public interface TripMapper {
 	@Select(value = "select * from trip where start_Date >= #{nowDate}")
 	List<Trip> getTripList(String nowDate);
 	
-	@Select(value = "select * from trip")
+	@Select(value = "select * from trip order by start_Date DESC")
 	List<Trip> getTripsList();
 	
 	@Select(value = "select * from trip where ccard like CONCAT('%',#{search_input},'%')")
@@ -42,13 +41,10 @@ public interface TripMapper {
 	@Select(value = "select * from trip where ctime = #{ctime}")
 	Trip findTripsByTime(String ctime);
 	
-	@Select(value = "select * from trip where start like #{start} and start_Date like #{start_Date}")
-	List<Trip> findResultByStartAndDate(@Param("start")String start, @Param("start_Date")String start_Date);
+	@Select(value = "select * from trip where start like concat('%',#{testInputOne},'%') and start_Date like concat('%',#{testInputTwo},'%')")
+	List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo);
 	
-	@Select(value = "select * from trip where start_Date >= #{nowDate} and ctime between #{startTime} and #{endTime}")
-	List<Trip> getTimeTripList(String nowDate, String startTime, String endTime);
+	@Select(value = "select * from trip where start = #{start} and start_Date >= #{nowDate} and ctime between #{startTime} and #{endTime}")
+	List<Trip> getTimeTripList(Integer start, String nowDate, String startTime, String endTime);
 	
-	@Select(value = "select * from trip where ctime < NowTime")
-	List<Trip> getTripByNowtime(String NowTime);
-
 }

@@ -7,7 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.LocaleResolver;
 import org.thymeleaf.util.StringUtils;
-
+/**
+ * 
+ * @author ww
+ * 国际化配置
+ *
+ */
 public class MyLocaleResolver implements LocaleResolver{
 
 	@Override

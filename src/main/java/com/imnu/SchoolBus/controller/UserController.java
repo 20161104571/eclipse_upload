@@ -80,6 +80,13 @@ public class UserController {
 		return "redirect:/getUserList";
 	}
 	
+	@RequestMapping(value="deleteThisUser")
+	public String deleteTUser(Integer id, HttpServletRequest request) {
+		userService.deleteUser(id);
+		request.getSession().invalidate();
+		return "user/index";
+	}
+	
 	@RequestMapping(value="deleteTeacher")
 	public String deleteTeacher(Integer id) {
 		userService.deleteUser(id);

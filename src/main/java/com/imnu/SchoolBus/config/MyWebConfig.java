@@ -20,14 +20,9 @@ public class MyWebConfig implements WebMvcConfigurer{
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 registry.addInterceptor(new LoginHandlerInterceptor()).
-                        addPathPatterns(
-                        		"/personcenter.html",
-                                "/personcenter1.html",
-                                "/personcenter2.html",
-                                "/personcenter3.html",
-                                "/aindex.html").
-                        excludePathPatterns("/","/adminLogin.html",
-                                
+                        addPathPatterns("getCommentsList"
+                        		).
+                        excludePathPatterns("/","adminLogin.html",
                                 "/user/login",
                                 "/user/regist",
                                 "/index.html",
@@ -44,5 +39,5 @@ public class MyWebConfig implements WebMvcConfigurer{
     public LocaleResolver localeResolver() {
         return new MyLocaleResolver();
     }
-
+    
 }

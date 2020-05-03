@@ -17,4 +17,7 @@ public interface NoticeService {
 	Notice findNoticeById(int nId);
 	
 	void updateNotice(Notice notice);
+	
+	int countNotice(Integer nId);
+	
 }

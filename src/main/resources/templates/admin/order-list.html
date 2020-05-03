@@ -128,6 +128,7 @@
                         <th>预约人姓名</th>
                         <th>预约电话</th>
                        	<th>出发时间</th>
+                       	<th>出发日期</th>
 			            <th>出发地</th>
 			            <th>预约车次</th>
 			            <th>操作</th>
@@ -138,7 +139,8 @@
                         <td th:text="${subs.oId}"></td>
                         <td th:text="${subs.name}"></td>
                         <td th:text="${subs.phone}"></td>
-			            <td th:text="${#dates.format(subs.time, 'HH:mm')}"></td>
+			            <td th:text="${subs.time}"></td>
+			            <td th:text="${subs.date}"></td>
 			            <td th:if = "${subs.place==1}">赛罕</td>
 			            <td th:if = "${subs.place==2}">盛乐</td>
 			            <td th:text="${subs.trainNum}"></td>

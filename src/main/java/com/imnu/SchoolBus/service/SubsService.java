@@ -8,7 +8,7 @@ import com.imnu.SchoolBus.pojo.Subs;
 @Transactional
 public interface SubsService {
 	
-	Subs findSubsById(int oId);
+	Subs findSubsById(Integer uId);
 	
 	List<Subs> getOrderList();
 	

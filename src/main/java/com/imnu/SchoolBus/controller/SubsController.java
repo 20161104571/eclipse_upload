@@ -1,5 +1,6 @@
 package com.imnu.SchoolBus.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Subs;
 import com.imnu.SchoolBus.pojo.Trip;
+import com.imnu.SchoolBus.pojo.User;
 import com.imnu.SchoolBus.service.SubsService;
 import com.imnu.SchoolBus.service.TripService;
 import com.imnu.SchoolBus.util.MessageUtil;
@@ -54,22 +56,12 @@ public class SubsController {
 	}
 	
 	@RequestMapping("getPersonSubsList")
-	public String getPersonList(Model model) {
-		List<Subs> subs = subsService.getOrderList();
+	public String getPersonList(Model model, Integer uId, HttpServletRequest request) throws ParseException {
+		User user = (User) request.getSession().getAttribute("users");
+		uId = user.getId();
+		Subs subs = subsService.findSubsById(uId);
 		model.addAttribute("subs", subs);
 		return "user/personcenter3";
-	}
-	
-	@RequestMapping("craeteOrder")
-	public String addOrder(Subs subs, int tId, Trip trip) {
-		int s = subsService.addOrders(subs);
-		if(s > 0) {
-			tripService.updateSeats(tId,trip);
-			return "user/index";
-		}else {
-			return "user/subsDetails";
-		}
-		
 	}
 	
 	@RequestMapping("deleOrder")
@@ -91,7 +83,6 @@ public class SubsController {
 	@RequestMapping("subsTrip")
 	public String findSubsTripById(Model model, int tId, Integer remain_seats) {
 		Trip trip = tripService.findSubsTripById(tId);
-		System.out.println(trip);
 		int seats = trip.getRemain_seats();
 		System.out.println(seats);
 		if(seats!=0) {
@@ -104,11 +95,10 @@ public class SubsController {
 	}
 
     @RequestMapping(value = "sendcode",method = RequestMethod.POST)
-    public String sendcode(Subs subs, int tId, Trip trip, String number, HttpServletRequest request) {
+    public String sendcode(Subs subs, int tId, Trip trip, String number) {
     	int s = subsService.addOrders(subs);
     	String code = MessageUtil.getCode();
     	String phone = subs.getPhone();
-    	//request.getSession().setAttribute("autoCode", code);
 		if(s > 0) {
 			MessageUtil.sendCode(phone, code);
 			tripService.updateSeats(tId,trip);

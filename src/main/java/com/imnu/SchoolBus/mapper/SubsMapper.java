@@ -15,10 +15,10 @@ public interface SubsMapper {
 	@Select(value = "select * from subs")
 	List<Subs> getOrderList();
 	
-	@Select(value = "select * from subs where oId = #{oId}")
-	Subs findSubsById(int oId);
+	@Select(value = "select * from subs where uId = #{uId}")
+	Subs findSubsById(Integer uId);
 	
-	@Insert(value = "insert into subs (oId,uId,tId,name,phone,time,place,trainNum) values(#{oId},#{uId},#{tId},#{name},#{phone},#{time},#{place},#{trainNum})")
+	@Insert(value = "insert into subs (oId,uId,tId,name,phone,time,date,place,trainNum) values(#{oId},#{uId},#{tId},#{name},#{phone},#{time},#{date},#{place},#{trainNum})")
 	int addOrders(Subs subs);
 	
 	@Delete(value = "delete from subs where oId = #{oId}")

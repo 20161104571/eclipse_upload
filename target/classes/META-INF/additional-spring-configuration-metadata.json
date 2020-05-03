@@ -1,5 +1,17 @@
-{"properties": [{
-  "name": "spring.mail.from",
-  "type": "java.lang.String",
-  "description": "A description for 'spring.mail.from'"
-}]}
+{"properties": [
+  {
+    "name": "spring.mail.from",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.mail.from'"
+  },
+  {
+    "name": "file.upload.path.relative",
+    "type": "java.lang.String",
+    "description": "A description for 'file.upload.path.relative'"
+  },
+  {
+    "name": "file.upload.path",
+    "type": "java.lang.String",
+    "description": "A description for 'file.upload.path'"
+  }
+]}

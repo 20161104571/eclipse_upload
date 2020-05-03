@@ -11,9 +11,9 @@
 <body class="bodyBg">
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
-		<!-- <a href="index" class="hdLogo fl">
+		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
-		</a> -->
+		</a>
 		<!-- <form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
 			<button type="submit" onclick="search()"></button>
 			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
@@ -24,7 +24,7 @@
 	
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
-		<li class="first active"><a href="index" class="navItem">首页</a></li>
+		<li><a href="index" class="navItem">首页</a></li>
 		<!-- <li>
 			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
 			<div class="dropdown">
@@ -32,14 +32,10 @@
 			</div>
 		</li> -->
 		<li>
-			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
-			<div class="dropdown">
-				<a href="3xinwen-dongtai.html">最新动态</a>
-				<a href="./shownotice">通知公告</a>
-			</div>
+			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
 		<li>
-			<a href="forum" class="navItem">显示时刻表</a>
+			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
 		<!-- <li>
 			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
@@ -49,7 +45,7 @@
 				<a href="6jiaoxue-huojiang.html">教学获奖</a>
 			</div>
 		</li> -->
-		<li>
+		<li class="first active">
 			<a href="./getUserTripList" class="navItem">预约</a>
 			
 		</li>
@@ -63,7 +59,7 @@
 			<a class="navItem"  href="login">登录</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
@@ -103,6 +99,7 @@
 			</form>
 			</div>
 			<div class="conMain">
+				<div th:fragment="table_re" id="table_re">
 				<table class="table table-bordered">
                     <thead>
                       <tr>
@@ -116,7 +113,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${list}">
+                      <tr th:each="trip:${result}">
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${trip.ctime}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>
@@ -131,9 +128,9 @@
                         </td>
                       </tr>
                     </tbody>
-                    </tbody>
                   </table>
-				<div class="pageNum">
+                  </div>
+				<!-- <div class="pageNum">
 					<span>共14条</span>
 					<span>每页1页</span>
 					<a href="#" class="pagePrev disabled">&lt;</a>
@@ -149,7 +146,7 @@
 						<span>页</span>
 						<button>GO</button>
 					</form>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -187,7 +184,7 @@ $(function(){
 		var testInputOne = $("#inputOne").val();
 		if(testInputOne=="赛罕"){
 			testInputOne="1";
-		}else{
+		}else if(testInputOne=="盛乐"){
 			testInputOne="2";
 		}
 		console.log(testInputOne);
@@ -198,10 +195,17 @@ $(function(){
 			alert("输入出发地点和出发时期进行查询！");
 		}else{
 			$.ajax({
-				type:'post',
-				url:'findResultByStartAndDate',
-				data:{"testInputOne":testInputOne,"testInputTwo":testInputTwo},
-				dataType:'application/json;charset=UTF-8',
+				type:"post",
+				url:"findResultByStartAndDate",
+				data:{"testInputOne":testInputOne,
+					"testInputTwo":testInputTwo,},
+				dataType:"text",
+				async:true,
+				success:function(result){
+					var s = "";
+					$("#table_re").empty(s);
+					$("#table_re").append(result);
+				}
 			});
 		}
 	});

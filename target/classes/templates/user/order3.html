@@ -26,10 +26,10 @@
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
-		<li class="first active">
+		<li>
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<li>
+		<li class="first active">
 			<a href="orders" class="navItem">预约</a>
 			
 		</li>
@@ -82,13 +82,20 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<a href="./getSchedule">车次时刻表</a>
-					<i>-</i>
 					<span>发车详情</span>
 				</div>
-				
+			</div>
+			<div>
+				<form class="conMain" action="" method="post" >
+					<input type="text" id="inputOne">
+					<input type="text" id="inputTwo" name="inputTwo" placeholder="点击选择出发日期">
+					<!-- <input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索"> -->
+					<!-- <input type="text" id="nowDate" th:vlaue="${nowDate}" th:text="${nowDate}"> -->
+					<button type="submit" id="btn_select">查询</button>
+				</form>
 			</div>
 			<div class="conMain">
+				<div th:fragment="table_re" id="table_re">
 				<table class="table table-bordered">
                     <thead>
                       <tr>
@@ -102,7 +109,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${lists}">
+                      <tr th:each="trip:${trips}">
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${trip.ctime}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>
@@ -110,12 +117,12 @@
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
 			            <td th:text="${trip.start_Date}"></td>
-			            <td th:if="${nowDate}==${trip.start_Date} and ${nowTime}>${trip.ctime}" th:text="已发车"></td>
-			            <td th:if="${nowDate}!=${trip.start_Date}" th:href="@{/subsTrip(tId=${trip.tId})}">预约</td>
+			            <td th:if="${nowTime}>${trip.ctime} and ${nowDate}==${trip.start_Date}" th:text="已发车"></td>
+			            <td th:if="${nowDate}<=${trip.start_Date}"><a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a></td>
                       </tr>
                     </tbody>
-                    </tbody>
                   </table>
+                  </div>
 			</div>
 		</div>
 	</div>
@@ -129,5 +136,56 @@
 	</div>
 	<!--底部 End!-->
 </body>
+<script src="laydate/laydate.js"></script>
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#inputTwo'
+  ,min: 0
+  ,max: 7
+});
+</script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" th:inline="javascript">
+function seatscount(){
+	var seats = "${trip.remain_seats}".val();
+	if(seats=0){
+		return "user/index";
+	}
+}
+</script>
+<script type="text/javascript" th:inline="javascript">
+$(function(){
+	$("#btn_select").click(function(){
+		var testInputOne = $("#inputOne").val();
+		if(testInputOne=="赛罕"){
+			testInputOne="1";
+		}else if(testInputOne=="盛乐"){
+			testInputOne="2";
+		}
+		console.log(testInputOne);
+		var testInputTwo = $("#inputTwo").val();
+		var a1 = testInputOne == '' || testInputOne == undefined || testInputOne == null;
+		var a2 = testInputTwo == '' || testInputTwo == undefined || testInputTwo == null;
+		if(a1 && a2){
+			alert("输入出发地点和出发时期进行查询！");
+		}else{
+			$.ajax({
+				type:"post",
+				url:"findResultByStartAndDate",
+				data:{"testInputOne":testInputOne,
+					"testInputTwo":testInputTwo,},
+				dataType:"text",
+				async:true,
+				success:function(trips){
+					console.log("-------------------");
+					var s = "";
+					$("#table_re").empty(s);
+					$("#table_re").append(trips);
+				}
+			});
+		}
+	});
+});
+</script>
 </html>

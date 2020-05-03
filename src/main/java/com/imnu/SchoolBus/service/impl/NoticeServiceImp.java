@@ -44,4 +44,14 @@ public class NoticeServiceImp implements NoticeService{
 		noticeMapper.updateNotice(notice);
 	}
 
+	@Override
+	public int countNotice(Integer nId) {
+		int n = noticeMapper.countNotice(nId);
+		if(n>0) {
+			return n;
+		}
+		return 0;
+	}
+
+
 }

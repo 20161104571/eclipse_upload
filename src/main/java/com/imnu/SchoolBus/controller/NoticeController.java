@@ -71,7 +71,7 @@ public class NoticeController {
 	@RequestMapping(value="shownotice")
 	public String showNotice(Model model, 
 			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum,
-			@RequestParam(value = "pageSize",defaultValue = "1")Integer pageSize) {
+			@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
 		if(pageNum == null) {
 			pageNum = 1;
 		}
@@ -98,4 +98,5 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		return "user/content";
 	}
+	
 }

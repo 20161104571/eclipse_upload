@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -33,12 +32,9 @@ public class TripController {
 	private ScheduleService scheduledService;
 	
 	@RequestMapping(value="getTripList")
-	public String tripList(Model model, String nowDate,
-			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
-			@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		nowDate = (String)format1.format(date);  //获取当前日期
+	public String tripList(Model model,
+			@RequestParam(required = false, value = "pageNum", defaultValue = "1")Integer pageNum, 
+			@RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize) {
 		if(pageNum == null) {
 			pageNum = 1;
 		}
@@ -60,10 +56,17 @@ public class TripController {
 	}
 	
 	@RequestMapping(value="getUserTripList")
-	public String userTripList(Model model) {
-		List<Trip> trips = tripService.getTripsList();
+	public String userTripList(Model model, String nowDate, String nowTime) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);  //获取当前日期
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+		nowTime = (String)format2.format(date);  //获取当前时间
+		List<Trip> trips = tripService.getTripList(nowDate);
 		model.addAttribute("trips", trips);
-		return "user/orders";
+		model.addAttribute("nowTime", nowTime);
+		model.addAttribute("nowDate", nowDate);
+		return "user/order3";
 	}
 	
 	@RequestMapping(value="saveTrip")
@@ -121,48 +124,35 @@ public class TripController {
 	public String findResultByStartAndDate(HttpServletRequest request, Model model){
 		String testInputOne = request.getParameter("testInputOne");
 		String testInputTwo = request.getParameter("testInputTwo");
-		//logger.info("findResultByStartAndDate===="+testInputOne);
-		List<Trip> list = tripService.findResultByStartAndDate(testInputOne, testInputTwo);
-		model.addAttribute("list", list);
-		System.out.println(list);
-		return "user/orders";/* "redirect:/getUserTripList" */
+		List<Trip> trips = tripService.findResultByStartAndDate(testInputOne, testInputTwo);
+		model.addAttribute("trips", trips);
+		return "user/order3::table_re";
 	}
 	
 	@RequestMapping(value="getTimeList")
 	public String getTimeList(HttpServletRequest request, Model model, @RequestParam(required = false) Integer sId, 
-			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
-			@RequestParam(value = "pageSize",defaultValue = "1")Integer pageSize,
-			@RequestParam(required = false) String ctime, ModelMap modelMap){
+			@RequestParam(required = false) String ctime, ModelMap modelMap, String startTime, String endTime, Integer start){
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		String nowDate = (String)format1.format(date);  //获取当前日期
-		System.out.println("当前日期字符串：" + nowDate + "。");
+		String nowDate = (String)format1.format(date);
 		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
-		String NowTime = (String)format2.format(date);  //获取当前时间
-		System.out.println("当前时间字符串：" + NowTime + "。");
-		if(pageNum == null) {
-			pageNum = 1;
-		}
-		if(pageNum <= 0) {
-			pageNum = 1;
-		}
-		if(pageSize == null) {
-			pageSize = 5;
-		}
+		String NowTime = (String)format2.format(date);
 		Schedule schedule = scheduledService.findScheduleById(sId);
-		String startTime = schedule.getStartTime();
-		String endTime = schedule.getEndTime();
+		startTime = schedule.getStartTime();
+		endTime = schedule.getEndTime();
+		start = schedule.getStartPlace();
 		model.addAttribute("schedule", schedule);
 		modelMap.addAttribute("nowTime", NowTime);
-		PageHelper.startPage(pageNum, pageSize);
-		try {
-			List<Trip> lists = tripService.getTimeTripList(nowDate, startTime, endTime);
-			PageInfo<Trip> pageInfo = new PageInfo<Trip>(lists, pageSize);
-			model.addAttribute("pageInfo", pageInfo);
-		}finally {
-			PageHelper.clearPage();
-		}
+		modelMap.addAttribute("nowDate", nowDate);
+		List<Trip> lists = tripService.getTimeTripList(start, nowDate, startTime, endTime);
+		model.addAttribute("lists", lists);
 		return "user/timeList2";
 	}
 	
+	@RequestMapping(value="ckxq")
+	public String ckxq(int tId, Model model) {
+		Trip trip = tripService.findSubsTripById(tId);
+		model.addAttribute("trip", trip);
+		return "user/subsDetails";
+	}
 }

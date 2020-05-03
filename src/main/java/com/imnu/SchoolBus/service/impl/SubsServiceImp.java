@@ -18,8 +18,8 @@ public class SubsServiceImp implements SubsService{
 	private SubsMapper subsMapper;
 	
 	@Override
-	public Subs findSubsById(int oId) {
-		return subsMapper.findSubsById(oId);
+	public Subs findSubsById(Integer uId) {
+		return subsMapper.findSubsById(uId);
 	}
 
 	@Override

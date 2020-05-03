@@ -11,41 +11,26 @@
 <body class="bodyBg">
 	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
-		<!-- <a href="index" class="hdLogo fl">
+		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
-		</a> -->
+		</a>
 	</div>
 	<!--头部 End!-->
 	
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
-		<li class="first active"><a href="index" class="navItem">首页</a></li>
+		<li><a href="index" class="navItem">首页</a></li>
 		<!-- <li>
-			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
-			<div class="dropdown">
-				<a href="2gaikuang-jianjie.html">中心简介</a>
-			</div>
+			<a href="test" class="navItem">中心概况<i></i></a>
 		</li> -->
 		<li>
-			<a href="./shownotice" class="navItem">新闻公告<i></i></a>
-			<div class="dropdown">
-				<a href="3xinwen-dongtai.html">最新动态</a>
-				<a href="./shownotice">通知公告</a>
-			</div>
+			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
 		<li>
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<!-- <li>
-			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
-			<div class="dropdown">
-				<a href="6jiaoxue-tixi.html">课程体系</a>
-				<a href="6jiaoxue-xiangmu.html">教学项目</a>
-				<a href="6jiaoxue-huojiang.html">教学获奖</a>
-			</div>
-		</li> -->
-		<li>
-			<a href="./getUserTripList" class="navItem">预约</a>
+		<li class="first active">
+			<a href="orders" class="navItem">预约</a>
 			
 		</li>
 		<li>
@@ -55,16 +40,29 @@
 			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
 		</li>
 		<li th:if="${session.users}==null">
-			<a class="navItem"  href="login">登录</a>
+			<a class="navItem"  href="regist">注册</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎 + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
 			</div>
 		</li>
-		
+		<li th:if="${session.users}==null">
+			<a class="navItem"  href="login">登录</a>
+		</li>
+		<th:if th:if="${session.users}!=null">
+			<li th:if="${session.users.status}==1">
+				<a class="navItem">当前登录：学生</a>
+			</li>
+			<li th:if="${session.users.status}==2">
+				<a class="navItem">当前登录：管理员</a>
+			</li>
+			<li th:if="${session.users.status}==3">
+				<a class="navItem">当前登录：教师</a>
+			</li>
+		</th:if>
 	</ul>
 	<!--导航 End!-->
 
@@ -100,6 +98,10 @@
                   	<input th:text="出发时间：+${trip.ctime}">
                   	<input  id="time" name="time" th:value="${trip.ctime}" hidden="hidden"><!--${#dates.format(trip.ctime, 'HH:mm')} -->
                   </div>
+                  <div class="conMain">
+                  	<input th:text="出发日期：+${trip.start_Date}">
+                  	<input  id="date" name="date" th:value="${trip.start_Date}" hidden="hidden"><!--${#dates.format(trip.ctime, 'HH:mm')} -->
+                  </div>
                   <div class="conMain" th:if = "${trip.start=='1'}">
                   	<input th:text="出发地：赛罕">
                   	<input id="place" name="place" th:value="${1}" hidden="hidden">
@@ -118,8 +120,8 @@
                   </ol>
                   <input id="uId" name="uId" th:value="${session.users.id}" type="text" hidden="hidden">
                   <input id="name" name="name" th:value="${session.users.name}" type="text" hidden="hidden">
-                  <span>选择预约日期</span>
-                  <input type="text" class="form-control" id="test2" name="" value="" placeholder="点击选择时间">
+                  <!-- <span>选择预约日期</span>
+                  <input type="text" class="form-control" id="test2" name="" value="" placeholder="点击选择时间"> -->
 					<span>输入预约手机号，以便接收预约成功短信：</span>
 					<input type="text" name="phone" id="phone">
 					<!-- <input type="submit" name="send" class="btn" id="verify_refresh" value="获取验证码" onclick="getMsgNum(this)">

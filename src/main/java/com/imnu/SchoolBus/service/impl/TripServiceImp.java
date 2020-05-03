@@ -54,8 +54,8 @@ public class TripServiceImp implements TripService{
 	}
 
 	@Override
-	public List<Trip> getTimeTripList(String nowDate, String startTime, String endTime) {
-		List<Trip> list = tripMapper.getTimeTripList(nowDate, startTime, endTime);
+	public List<Trip> getTimeTripList(Integer start, String nowDate, String startTime, String endTime) {
+		List<Trip> list = tripMapper.getTimeTripList(start, nowDate, startTime, endTime);
 		return list;
 	}
 
@@ -66,12 +66,7 @@ public class TripServiceImp implements TripService{
 
 	@Override
 	public List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo) {
-		return tripMapper.findResultByStartAndDate("%"+testInputOne+"%", "%"+testInputTwo+"%");
-	}
-
-	@Override
-	public List<Trip> getTripByNowtime(String NowTime) {
-		return tripMapper.getTripByNowtime(NowTime);
+		return tripMapper.findResultByStartAndDate(testInputOne, testInputTwo);
 	}
 
 	@Override
@@ -79,8 +74,6 @@ public class TripServiceImp implements TripService{
 		List<Trip> list = tripMapper.getTripsList();
 		return list;
 	}
-
-
 
 	
 }
