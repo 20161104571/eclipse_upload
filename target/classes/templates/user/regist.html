@@ -63,24 +63,6 @@ $(function(){
 		}
 		
 	});
-	/* $("input[name='name']").blur(function(){
-		$.ajax({
-			type:'post',
-			url:'./checkStuName',
-			data:{"stuname":this.value},
-			dataType:'application/json;charset=UTF-8',
-			success:function(result){
-				$("#namesp").empty();
-				if(result.isExist==true){
-					$("#namesp").append("<font color='green'>校内学生</font>");
-				}else{
-					$("#namesp").append("<font color='red'>校外人员</font>")
-				}
-			},
-			dataType:"json"
-		});
-		//console.log(this.value);
-	}); */
 	$("input[name='number']").blur(function(){
 		var realname = $("#realname").val();
 		var num = $("#num").val();
@@ -89,14 +71,13 @@ $(function(){
 			url:'./checkStuNum',
 			data:{"stuname":realname,"stunum":num},
 			dataType:'application/json;charset=UTF-8',
-			success:function(result){
-				$("#realname").empty();
+			success:function(responseContent){
+				//$("#realname").empty();
 				//$("#num").empty();
-				if(result.isFindMeg==true){
-					alert("是校内学生");
-					console.log("fanhui true");
-				}else{
-					alert("校外人员");
+				if(responseContent=='1'){
+					window.alert("校内学生");
+				}else if(responseContent=='2'){
+					window.alert("校外人员");
 				}
 				
 			},
@@ -104,9 +85,7 @@ $(function(){
 		});
 	});
 	$("input[name='phone']").blur(function(){
-		if($("#psp").val() == ""){
-			alert("手机号码不能为空！");
-		}else if(!$("#psp").val().match(/^1[3456789]\d{9}$/)) {
+		 if(!$("#psp").val().match(/^1[3456789]\d{9}$/)) {
 			alert("手机号码格式不正确！");
 		}else {
 			$.ajax({
@@ -127,7 +106,9 @@ $(function(){
 				dataType:"json"
 			});
 		}
-		
+		/*  if($("#psp").val() == ""){
+				alert("手机号码不能为空！");
+			}else */
 	});
 	$("input[name='email']").blur(function(){
 		if($("#emailx").val()==""){

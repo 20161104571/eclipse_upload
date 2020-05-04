@@ -2,7 +2,7 @@
 <html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>预约</title>
+<title>发车详情</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,37 +14,18 @@
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
-		<!-- <form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
-			<button type="submit" onclick="search()"></button>
-			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
-		</form> -->
-		
 	</div>
 	<!--头部 End!-->
 	
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
-		<!-- <li>
-			<a href="2gaikuang-jianjie.html" class="navItem">中心概况<i></i></a>
-			<div class="dropdown">
-				<a href="2gaikuang-jianjie.html">中心简介</a>
-			</div>
-		</li> -->
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
 		<li>
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
-		<!-- <li>
-			<a href="6jiaoxue-tixi.html" class="navItem">实验教学<i></i></a>
-			<div class="dropdown">
-				<a href="6jiaoxue-tixi.html">课程体系</a>
-				<a href="6jiaoxue-xiangmu.html">教学项目</a>
-				<a href="6jiaoxue-huojiang.html">教学获奖</a>
-			</div>
-		</li> -->
 		<li class="first active">
 			<a href="./getUserTripList" class="navItem">预约</a>
 			
@@ -52,11 +33,8 @@
 		<li>
 			<a href="./getCommentsList" class="navItem">论坛</a>
 		</li>
-		<li>
-			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
-		</li>
 		<li th:if="${session.users}==null">
-			<a class="navItem"  href="login">登录</a>
+			<a class="navItem"  href="regist">注册</a>
 		</li>
 		<li th:if="${session.users}!=null">
 			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
@@ -65,7 +43,20 @@
 				<a href="./logout">退出</a>
 			</div>
 		</li>
-		
+		<li th:if="${session.users}==null">
+			<a class="navItem"  href="login">登录</a>
+		</li>
+		<th:if th:if="${session.users}!=null">
+			<li th:if="${session.users.status}==1">
+				<a class="navItem">当前登录：学生</a>
+			</li>
+			<li th:if="${session.users.status}==2">
+				<a class="navItem">当前登录：管理员</a>
+			</li>
+			<li th:if="${session.users.status}==3">
+				<a class="navItem">当前登录：教师</a>
+			</li>
+		</th:if>
 	</ul>
 	<!--导航 End!-->
 
@@ -75,7 +66,7 @@
 			<dl>
 				<dt>
 					<span>
-						<h4>预约</h4>
+						<h4>详情</h4>
 					</span>
 				</dt>
 			</dl>
@@ -85,18 +76,17 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<span>预约车次</span>
+					<span>发车详情</span>
 				</div>
-				
 			</div>
 			<div>
 				<form class="conMain" action="" method="post" >
-				<input type="text" id="inputOne">
-				<input type="text" id="inputTwo" name="inputTwo" placeholder="点击选择出发日期">
-				<!-- <input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索"> -->
-				<!-- <input type="text" id="nowDate" th:vlaue="${nowDate}" th:text="${nowDate}"> -->
-				<button type="submit" id="btn_select">查询</button>
-			</form>
+					<input type="text" id="inputOne">
+					<input type="text" id="inputTwo" name="inputTwo" placeholder="点击选择出发日期">
+					<!-- <input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索"> -->
+					<!-- <input type="text" id="nowDate" th:vlaue="${nowDate}" th:text="${nowDate}"> -->
+					<button type="submit" id="btn_select">查询</button>
+				</form>
 			</div>
 			<div class="conMain">
 				<div th:fragment="table_re" id="table_re">
@@ -108,12 +98,12 @@
 			            <th width="150px">始发地</th>
 			            <th width="150px">所需时间</th>
 			            <th width="150px">余座</th>
-                        <th width="150px">出发日期</th>
-                        <th width="150px">预约</th>
+						<th width="150px">出发日期</th>
+						<th width="150px">状态</th>			            
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${result}">
+                      <tr th:each="trip:${trips}">
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${trip.ctime}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>
@@ -121,32 +111,12 @@
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
 			            <td th:text="${trip.start_Date}"></td>
-                        <td>
-                          <div class="btn-group">
-                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a>
-                          </div>
-                        </td>
+			            <td th:if="${nowTime}>${trip.ctime} and ${nowDate}==${trip.start_Date}" th:text="已发车"></td>
+			            <td th:if="${nowDate}<=${trip.start_Date}"><a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a></td>
                       </tr>
                     </tbody>
                   </table>
                   </div>
-				<!-- <div class="pageNum">
-					<span>共14条</span>
-					<span>每页1页</span>
-					<a href="#" class="pagePrev disabled">&lt;</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<span>...</span>
-					<a href="#">14</a>
-					<a href="#" class="pageNext">&gt;</a>
-					<form>
-						<span>转到第</span>
-						<input type="text" name="">
-						<span>页</span>
-						<button>GO</button>
-					</form>
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -201,13 +171,15 @@ $(function(){
 					"testInputTwo":testInputTwo,},
 				dataType:"text",
 				async:true,
-				success:function(result){
+				success:function(trips){
+					console.log("-------------------");
 					var s = "";
 					$("#table_re").empty(s);
-					$("#table_re").append(result);
+					$("#table_re").append(trips);
 				}
 			});
 		}
 	});
 });
 </script>
+</html>

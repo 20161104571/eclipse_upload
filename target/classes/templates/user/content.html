@@ -5,12 +5,6 @@
 <title>正文</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
-<script th:inline="javascript">
-        function load(){
-            var count = [[${count}]];
-            document.getElementById("visit").innerHTML = count.toString();
-        }
-    </script>
 </head>
 <body class="bodyBg">
 	<!--头部 Start!-->
@@ -39,14 +33,11 @@
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
 		<li>
-			<a href="orders" class="navItem">预约</a>
+			<a href="./getUserTripList" class="navItem">预约</a>
 			
 		</li>
 		<li>
 			<a href="./getCommentsList" class="navItem">论坛</a>
-		</li>
-		<li>
-			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
 		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>
@@ -104,8 +95,6 @@
 					<h2 th:text="${notice.title}"></h2>
 					<div class="textInfo">
 						<p>发布时间：<span th:text="${#dates.format(notice.releaseTime, 'yyyy-MM-dd')}"></span>
-						<i>|</i>
-						浏览次数：<span id="visit"></span>
 						</p>
 					</div>
 					<p th:text="${notice.noticeText}"></p>

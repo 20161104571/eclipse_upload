@@ -25,9 +25,6 @@
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
-		<!-- <li>
-			<a href="test" class="navItem">中心概况<i></i></a>
-		</li> -->
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
@@ -35,14 +32,11 @@
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
 		<li>
-			<a href="orders" class="navItem">预约</a>
+			<a href="./getUserTripList" class="navItem">预约</a>
 			
 		</li>
 		<li>
 			<a href="./getCommentsList" class="navItem">论坛</a>
-		</li>
-		<li>
-			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
 		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>

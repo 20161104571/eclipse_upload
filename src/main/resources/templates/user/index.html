@@ -42,9 +42,6 @@
 		<li>
 			<a href="./getCommentsList" class="navItem">论坛</a>
 		</li>
-		<li>
-			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
-		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>
 		</li>
@@ -87,7 +84,7 @@
 						<th:if th:if="${noticeStat.count} le 7">
 						<li class="clearfix">
 							<input id="nId" name="nId" th:value="${notice.nId}" hidden="hidden">
-							<a th:href="@{/ckxq(nId=${notice.nId})}" th:text="${notice.title}"></a>
+							<a th:href="@{/getContent(nId=${notice.nId})}" th:text="${notice.title}"></a>
 							<span th:text="${#dates.format(notice.releaseTime, 'MM-dd')}"></span>
 						</li>						
 						</th:if>
@@ -96,10 +93,11 @@
 			</div>
 			<div class="item col2">
 				<div class="itemTit">
-					<h3>最新车次</h3>
+					<h3>今日车次</h3>
+					<a href="./getUserTripList" class="itemMore">MORE+</a>
 				</div>
 				<div class="itemCon rules">
-					<ul class="listStyle" th:each="trip,tripStat:${trip}">
+					<ul class="listStyle" th:each="trip,tripStat:${t}">
 						<th:if th:if="${tripStat.count} le 7 and ${nowDate}<=${trip.start_Date}">
 						<li class="clearfix">
 							<input id="tId" name="tId" th:value="${trip.tId}" hidden="hidden">

@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.imnu.SchoolBus.pojo.Notice;
 import com.imnu.SchoolBus.pojo.Schedule;
 import com.imnu.SchoolBus.pojo.Trip;
+import com.imnu.SchoolBus.service.NoticeService;
 import com.imnu.SchoolBus.service.ScheduleService;
 import com.imnu.SchoolBus.service.TripService;
 /*
@@ -30,6 +32,9 @@ public class TripController {
 	
 	@Autowired
 	private ScheduleService scheduledService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	@RequestMapping(value="getTripList")
 	public String tripList(Model model,
@@ -66,7 +71,7 @@ public class TripController {
 		model.addAttribute("trips", trips);
 		model.addAttribute("nowTime", nowTime);
 		model.addAttribute("nowDate", nowDate);
-		return "user/order3";
+		return "user/order";
 	}
 	
 	@RequestMapping(value="saveTrip")
@@ -82,10 +87,14 @@ public class TripController {
 	}
 	
 	@RequestMapping(value="getSearchList")
-	public String seachList(HttpServletRequest request, Model model) {
+	public String seachList(HttpServletRequest request, Model model, String nowDate) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);
+		List<Notice> notice = noticeService.getNoticeList();
+		List<Trip> t = tripService.getTripsList();
 		String search_input = request.getParameter("index_none_header_sysc");//获取搜索框输入
 		List<Trip> list = tripService.searchList(search_input);
-		//System.out.println(list);
 		if(list != null) {
 			/*将搜索结果集合、集合元素个数(结果商品个数)、搜索关键字添加到model的属性中返回前端页面*/
 			model.addAttribute("search_result", list);
@@ -96,6 +105,9 @@ public class TripController {
 		else {
 			model.addAttribute("error_search_fail", "没有找到搜索的内容");
 			System.out.println("没有找到搜索的内容");
+			model.addAttribute("notice", notice);
+			model.addAttribute("t", t);
+			model.addAttribute("nowDate", nowDate);
 			return "user/index";
 		}
 	}

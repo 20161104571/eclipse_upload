@@ -51,20 +51,18 @@ public class ThymeleafController {
 	}
 	
 	@RequestMapping("index")
-	public String index(Model model, Integer nId, ModelMap modelMap, String nowDate, String nowTime) {
-		//int n = noticeService.countNotice(nId);
+	public String index(Model model, String nowDate, String nowTime) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		nowDate = (String)format1.format(date);  //获取当前日期
 		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
 		nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
-		List<Trip> trip = tripService.getTripsList();
+		List<Trip> t = tripService.getTripsList();
 		model.addAttribute("notice", notice);
-		model.addAttribute("trip", trip);
+		model.addAttribute("t", t);
 		model.addAttribute("nowDate", nowDate);
 		model.addAttribute("nowTime", nowTime);
-		//modelMap.addAttribute("n", n);
 		return "user/index";
 	}
 	
@@ -141,19 +139,14 @@ public class ThymeleafController {
 		return "user/notice";
 	}
 	
-	@RequestMapping("orders")
+	@RequestMapping("order")
 	public String Order() {
-		return "user/orders";
+		return "user/order";
 	}
 	
 	@RequestMapping("content")
 	public String Content() {
 		return "user/content";
-	}
-	
-	@RequestMapping("test")
-	public String test() {
-		return "user/test";
 	}
 	
 	@RequestMapping("personcenter")

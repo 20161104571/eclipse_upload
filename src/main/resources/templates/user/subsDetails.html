@@ -20,9 +20,6 @@
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
-		<!-- <li>
-			<a href="test" class="navItem">中心概况<i></i></a>
-		</li> -->
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
@@ -30,14 +27,11 @@
 			<a href="./getSchedule" class="navItem">显示时刻表</a>
 		</li>
 		<li class="first active">
-			<a href="orders" class="navItem">预约</a>
+			<a href="./getUserTripList" class="navItem">预约</a>
 			
 		</li>
 		<li>
 			<a href="./getCommentsList" class="navItem">论坛</a>
-		</li>
-		<li>
-			<a href="9xiazai-wendang.html" class="navItem">联系我们</a>
 		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>
@@ -120,14 +114,9 @@
                   </ol>
                   <input id="uId" name="uId" th:value="${session.users.id}" type="text" hidden="hidden">
                   <input id="name" name="name" th:value="${session.users.name}" type="text" hidden="hidden">
-                  <!-- <span>选择预约日期</span>
-                  <input type="text" class="form-control" id="test2" name="" value="" placeholder="点击选择时间"> -->
+                  
 					<span>输入预约手机号，以便接收预约成功短信：</span>
 					<input type="text" name="phone" id="phone">
-					<!-- <input type="submit" name="send" class="btn" id="verify_refresh" value="获取验证码" onclick="getMsgNum(this)">
-					<span>输入短信验证码：</span>
-					<input type="text" name="send" id="send">
-					<input type="button" value="确认提交" onclick="validateNum()"> -->
 					<button type="submit" >预约</button>
                   </form>
 		</div>
@@ -142,13 +131,5 @@
 	</div>
 	<!--底部 End!-->
 </body>
-<script src="laydate/laydate.js"></script> 
 <script type="text/javascript" src="js/jquery.min.js" ></script>
-<script>
-//执行一个laydate实例
-laydate.render({
-  elem: '#test2' //指定元素
-  ,type: 'date'
-});
-</script>
 </html>

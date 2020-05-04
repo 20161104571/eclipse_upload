@@ -1,5 +1,7 @@
 package com.imnu.SchoolBus.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.imnu.SchoolBus.pojo.Notice;
+import com.imnu.SchoolBus.pojo.Trip;
 import com.imnu.SchoolBus.pojo.User;
+import com.imnu.SchoolBus.service.NoticeService;
+import com.imnu.SchoolBus.service.TripService;
 import com.imnu.SchoolBus.service.UserService;
 
 @Controller
@@ -22,6 +28,12 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
+	@Autowired
+	private TripService tripService;
 	
 	@RequestMapping(value="getUserList")
 	public String userList(Model model, 
@@ -100,9 +112,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="updatepwd")
-	public String updatePwd(int id, String newpassword, HttpSession session) {
+	public String updatePwd(int id, String newpassword, HttpSession session, String nowDate, Model model) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);
+		List<Notice> notice = noticeService.getNoticeList();
+		List<Trip> t = tripService.getTripsList();
 		int u = userService.changePwd(id, newpassword);
 		if(u>0) {
+			model.addAttribute("t", t);
+			model.addAttribute("notice", notice);
 			return "user/index";
 		}else {
 			return "user/personcenter2";
@@ -110,10 +129,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="editUser")
-	public String updateMsg(int id, String username, String name, String email, String phone, HttpServletRequest request) {
+	public String updateMsg(int id, String username, String name, String email, String phone, HttpServletRequest request, String nowDate, Model model) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);
+		List<Notice> notice = noticeService.getNoticeList();
+		List<Trip> t = tripService.getTripsList();
 		User user = userService.updateMsg(id, username, name, email, phone);
 		System.out.println("修改的用户信息是："+user);
 		if(user != null) {
+			model.addAttribute("t", t);
+			model.addAttribute("notice", notice);
 			request.getSession().setAttribute("users", user);
 			return "user/index";
 		}else {
@@ -129,7 +155,6 @@ public class UserController {
 		try {
 			result = userService.batchImport(fileName, file);
 		} catch (Exception e) {
- 
 			e.printStackTrace();
 		}
 		if(result = true){

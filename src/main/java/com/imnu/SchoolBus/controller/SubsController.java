@@ -1,6 +1,8 @@
 package com.imnu.SchoolBus.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.imnu.SchoolBus.pojo.Notice;
 import com.imnu.SchoolBus.pojo.Subs;
 import com.imnu.SchoolBus.pojo.Trip;
 import com.imnu.SchoolBus.pojo.User;
+import com.imnu.SchoolBus.service.NoticeService;
 import com.imnu.SchoolBus.service.SubsService;
 import com.imnu.SchoolBus.service.TripService;
 import com.imnu.SchoolBus.util.MessageUtil;
@@ -30,6 +34,9 @@ public class SubsController {
 	
 	@Autowired
 	private TripService tripService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	@RequestMapping("getOrderList")
 	public String orderList(Model model,
@@ -81,7 +88,12 @@ public class SubsController {
 	}
 	
 	@RequestMapping("subsTrip")
-	public String findSubsTripById(Model model, int tId, Integer remain_seats) {
+	public String findSubsTripById(Model model, int tId, Integer remain_seats, Integer nId, String nowDate) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);
+		List<Notice> notice = noticeService.getNoticeList();
+		List<Trip> t = tripService.getTripsList();
 		Trip trip = tripService.findSubsTripById(tId);
 		int seats = trip.getRemain_seats();
 		System.out.println(seats);
@@ -89,19 +101,30 @@ public class SubsController {
 			model.addAttribute("trip", trip);
 			return "user/subsDetails";
 		}else {
+			model.addAttribute("notice", notice);
+			model.addAttribute("t", t);
+			model.addAttribute("nowDate", nowDate);
 			return "user/index";
 		}
 		
 	}
 
     @RequestMapping(value = "sendcode",method = RequestMethod.POST)
-    public String sendcode(Subs subs, int tId, Trip trip, String number) {
+    public String sendcode(Subs subs, int tId, Trip trip, String number, String nowDate, Model model) {
+    	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date);
+		List<Notice> notice = noticeService.getNoticeList();
+		List<Trip> t = tripService.getTripsList();
     	int s = subsService.addOrders(subs);
     	String code = MessageUtil.getCode();
     	String phone = subs.getPhone();
 		if(s > 0) {
 			MessageUtil.sendCode(phone, code);
 			tripService.updateSeats(tId,trip);
+			model.addAttribute("notice", notice);
+			model.addAttribute("t", t);
+			model.addAttribute("nowDate", nowDate);
 			return "user/index";
 		}else {
 			return "user/subsDetails";

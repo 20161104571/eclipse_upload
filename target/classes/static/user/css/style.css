@@ -16,8 +16,8 @@ body{min-width: 1200px;}
 #hd .hdSearch input{float: left;width: 136px;height: 20px;line-height: 20px;color: #999;}
 
 #nav{height: 50px;background: #137ccd;box-shadow: 0 0 10px #106cb4;position: relative;z-index: 13;}
-#nav li{float: left;width: 151px;height: 50px;position: relative;}
-#nav li.first{width: 140px;}
+#nav li{float: left;width: 171.3px;height: 50px;position: relative;}
+#nav li.first{width: 172px;}
 #nav li a.navItem{display: block;line-height: 50px;text-align: center;color: #fff;font-size: 16px;}
 #nav li:hover a.navItem,
 #nav li.active a.navItem{background: #4296d7;}

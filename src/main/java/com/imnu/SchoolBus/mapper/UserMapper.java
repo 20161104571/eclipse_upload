@@ -49,7 +49,7 @@ public interface UserMapper {
 	@Select(value = "select * from user where password = #{password} and id = #{id}")
 	List<User> findUserPwd(int id, String password);
 	
-	@Select(value = "select * from user where username = #{username} and status = 1")
+	@Select(value = "select * from user where username = #{username}")
 	List<User> findUserByUsername(String username);
 	
 	@Select(value = "select * from user where number = #{number}")
