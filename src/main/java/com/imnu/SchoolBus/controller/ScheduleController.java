@@ -56,7 +56,7 @@ public class ScheduleController {
 			@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		nowDate = (String)format1.format(date);  //获取当前日期
+		nowDate = (String)format1.format(date); 
 		if(pageNum == null) {
 			pageNum = 1;
 		}

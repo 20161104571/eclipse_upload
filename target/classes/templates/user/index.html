@@ -12,10 +12,6 @@
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
-		<!-- <form class="hdSearch fr"  method="post" name="form1" id="from1">
-			<button type="submit" onclick="search()"></button>
-			<input type="text" id="searchInput"  placeholder="搜索">
-		</form> -->
 		<form class="hdSearch fr" method="post" name="form1" id="from1" action="getSearchList">
 			<button class="btn btn-default dropdown-toggle" type="submit" onclick="search()" id="search-btn"></button>
 			<input type="text" id="searchInputTrip" name="index_none_header_sysc" placeholder="输入要搜索的车次">
@@ -26,9 +22,6 @@
 	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li class="first active"><a href="index" class="navItem">首页</a></li>
-		<!-- <li>
-			<a href="test" class="navItem">中心概况<i></i></a>
-		</li> -->
 		<li>
 			<a href="./shownotice" class="navItem">新闻公告</a>
 		</li>
@@ -40,7 +33,12 @@
 			
 		</li>
 		<li>
-			<a href="./getCommentsList" class="navItem">论坛</a>
+		<a class="navItem">
+		<form th:action="@{./getCommentsList}" id="commentslist" method="post" >
+			<input type="text" hidden="hidden" id="getcomment" th:value="${session.users}" class="navItem">
+			<input type="submit" value="论坛" id='sgetcomment' class="navItem" style="color:#fff;font-size:16px;"> 	
+		</form>
+		</a>
 		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>
@@ -50,7 +48,7 @@
 		</li>
 		
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text=" ${session.users}? '欢迎：'+${session.users.username}:'未登录'"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
@@ -93,7 +91,7 @@
 			</div>
 			<div class="item col2">
 				<div class="itemTit">
-					<h3>今日车次</h3>
+					<h3>最新车次</h3>
 					<a href="./getUserTripList" class="itemMore">MORE+</a>
 				</div>
 				<div class="itemCon rules">
@@ -101,8 +99,12 @@
 						<th:if th:if="${tripStat.count} le 7 and ${nowDate}<=${trip.start_Date}">
 						<li class="clearfix">
 							<input id="tId" name="tId" th:value="${trip.tId}" hidden="hidden">
-							<a th:href="@{/subsTrip(tId=${trip.tId})}" th:text="${trip.ccard}"></a>
+							<input id="gettrip" th:value="${session.users}" hidden="hidden" type="text">
+							<form th:action="@{/subsTrip(tId=${trip.tId})}" id="subslist" method="post">
+							<input type="text" hidden="hidden" id="gettrip" th:value="${session.users}">
+							<input type="submit" th:value="${trip.ccard}" id="sgettrip">
 							<span th:text="${trip.ctime}"></span>
+							</form>
 						</li>
 						</th:if>
 					</ul>
@@ -116,19 +118,40 @@
 	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
-			<p>Copyright © 2020</p>
+			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script th:inline="javascript">
+$(document).ready(function(){
+	$("#sgetcomment").click(function(){
+		var loginuser = $("#getcomment").val();
+		//alert("当前登录用户："+loginuser);	
+		if(loginuser===''){
+			alert("还未登录，前往登录！");
+			window.location.href='login';
+			return false;
+		}
+	});
+});
+$(document).ready(function(){
+	$("#sgettrip").click(function(){
+		var loginu = $("#gettrip").val();
+		//alert("当前登录用户："+loginuser);	
+		if(loginu===''){
+			alert("还未登录，前往登录！");
+			window.location.href='login';
+			return false;
+		}else if("${nowTime}>${trip.ctime} and ${nowDate}>${trip.start_Date}"){
+			alert("此车已发，请预约其它车次！");
+			window.location.href='index';
+			return false;
+		}
+	});
+});
 function search() {
-	/* var searchlist = $("input[name='index_none_header_sysc']").val();
-	if(searchlist == "" || searchlist == null){
-		window.alert("请填写要搜索的内容.");
-		
-	} */
 	if (document.form1.index_none_header_sysc.value==null){
 		window.alert("请填写要搜索的内容.")
 		return false;
@@ -136,36 +159,6 @@ function search() {
 }
 
 </script>
-<script type="text/javascript">
-	$(function(){
-
-		//动态新闻焦点图片
-		var focus = $('.focus');
-		var focusLi = $('.focus').find('li');
-		var fCount = focusLi.length;
-		var fNum = 0;
-		var timer = null;
-
-		for(var i=0;i<fCount;i++){
-			var dot = '<span></span>';
-			$('.dots').append(dot);
-		}
-		function focusMove(){
-			focusLi.eq(fNum).fadeIn().siblings().fadeOut();
-			$('.dots').find('span').eq(fNum).addClass('active').siblings().removeClass('active');
-		}
-		focusMove();
-		$('.dots').on('click','span',function(){
-			fNum = $(this).index();
-			focusMove();
-		});
-		timer = setInterval(function(){
-			fNum++;
-			fNum%= fCount;
-			focusMove();
-		},5000);
-	});
 	
-</script>
 
 </html>

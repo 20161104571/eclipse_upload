@@ -61,36 +61,42 @@ public class LogResController {
     }
 
     @RequestMapping(value = "loginUser")
-    public String login(User user, HttpServletRequest request, Model model, String nowDate){
+    public String login(User user, HttpServletRequest request, Model model, String nowDate, String nowTime){
     	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+    	SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
     	Date date = new Date();
     	nowDate = (String)format1.format(date);
+    	nowTime = (String)format2.format(date);
     	List<Notice> notice = noticeService.getNoticeList();
     	List<Trip> t = tripService.getTripsList();
     	User u = userService.loginUser(user);
         if (u !=null){
         	request.getSession().setAttribute("users", u);
         	System.out.println("登录的信息是"+u);
-        	u.setId(u.getId());
+        	//u.setId(u.getId());
         	model.addAttribute("notice", notice);
         	model.addAttribute("t", t);
         	model.addAttribute("nowDate", nowDate);
+        	model.addAttribute("nowTime", nowTime);
             return "user/index";
         }
         return "user/login";
     }
     
     @RequestMapping(value = "logout",method = RequestMethod.GET)
-    public String logout(HttpServletRequest request, Model model, Integer nId, String nowDate){
+    public String logout(HttpServletRequest request, Model model, Integer nId, String nowDate, String nowTime){
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
 		Date date = new Date();
 		nowDate = (String)format1.format(date); 
+		nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
 		List<Trip> trip = tripService.getTripsList();
+		request.getSession().invalidate();
 		model.addAttribute("notice", notice);
-		model.addAttribute("trip", trip);
+		model.addAttribute("t", trip);
 		model.addAttribute("nowDate", nowDate);
-    	request.getSession().invalidate();
+		model.addAttribute("nowTime", nowTime);
         return "user/index";
     }
     
@@ -118,9 +124,14 @@ public class LogResController {
     
     @RequestMapping("checkOldPwd")
     @ResponseBody
-    public String checkOldPwd(int id, String password) {
+    public void checkOldPwd(int id, String password, HttpServletResponse response) throws IOException {
     	boolean isOldPwd = userService.findUserPwd(id,password);
-    	return "{\"isOldPwd\":"+isOldPwd+"}";
+    	PrintWriter out = response.getWriter();
+    	if(isOldPwd==true) {
+    		out.print(1);
+    	}else if(isOldPwd==false) {
+    		out.print(2);
+    	}
     }
     
     @RequestMapping("checkStuNum")
@@ -133,7 +144,5 @@ public class LogResController {
     	}else if(u==false){
     		out.print(2);
     	}
-    	System.out.println("111111111111111111111111111111111111hjkgg"+u);
-    	//return null;
     }
 }

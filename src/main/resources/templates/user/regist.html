@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>欢迎注册内蒙古师范大学通勤车管理</title>
+<title>欢迎注册校园通勤车管理</title>
 <link href="css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="js/jQuery1.7.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
@@ -39,102 +39,97 @@ $(function(){
 	var width = $(window).width();
 	$(".screenbg ul img").css("width",width+"px");
 	
-	$("input[name='username']").blur(function(){
-		if($("#unsp").val() == ""){
-			alert("用户名不能为空！");
-		}else{
-			$.ajax({
-				type : 'post',
-				url:'./checkUserName',
-				data:{"username":this.value},
-				dataType:'application/json;charset=UTF-8',
-				success:function(result){
-					$("#unsp").empty();
-					if(result.isExist==true){
-						alert("用户名已被占用");
-						//$("#unsp").append("<font color='red'>用户名已被占用</font>");
-					}else{
-						alert("用户名可用");
-						//$("#unsp").append("<font color='green'>用户名可用</font>");
-					}
-				},
-				dataType:"json"
-			});
-		}
-		
+$("input[name='username']").blur(function(){
+	if($("#unsp").val() == ""){
+		alert("用户名不能为空！");
+	}else{
+		$.ajax({
+			type : 'post',
+			url:'./checkUserName',
+			data:{"username":this.value},
+			dataType:'application/json;charset=UTF-8',
+			success:function(result){
+				$("#unsp").empty();
+				if(result.isExist==true){
+					alert("用户名已被占用");
+				}else{
+					alert("用户名可用");
+				}
+			},
+			dataType:"json"
+		});
+	}
+	
+});
+$("input[name='number']").blur(function(){
+	var realname = $("#realname").val();
+	var num = $("#num").val();
+	$.ajax({
+		type:'post',
+		url:'./checkStuNum',
+		data:{"stuname":realname,"stunum":num},
+		dataType:'application/json;charset=UTF-8',
+		success:function(responseContent){
+			if(responseContent=='1'){
+				window.alert("校内学生");
+			}else if(responseContent=='2'){
+				window.alert("校外人员");
+				document.getElementById("realname").value = '';
+				document.getElementById("num").value = '';
+			}
+			
+		},
+		dateType:"json"
 	});
-	$("input[name='number']").blur(function(){
-		var realname = $("#realname").val();
-		var num = $("#num").val();
+});
+$("input[name='phone']").blur(function(){
+	if($("#psp").val()=="" || $("#psp").val()==null){
+		alert("手机号码不能为空！");
+	}else if(!$("#psp").val().match(/^1[3456789]\d{9}$/)) {
+		alert("手机号码格式不正确！");
+		document.getElementById("psp").value = '';
+	}else {
 		$.ajax({
 			type:'post',
-			url:'./checkStuNum',
-			data:{"stuname":realname,"stunum":num},
+			url:'./checkPhone',
+			data:{"phone":this.value},
 			dataType:'application/json;charset=UTF-8',
-			success:function(responseContent){
-				//$("#realname").empty();
-				//$("#num").empty();
-				if(responseContent=='1'){
-					window.alert("校内学生");
-				}else if(responseContent=='2'){
-					window.alert("校外人员");
+			success:function(result){
+				$("#psp").empty();
+				if(result.isPhone==true){
+					alert("该手机号已存在");
+				}else{
+					alert("该手机号码可用");
 				}
-				
 			},
-			dateType:"json"
+			dataType:"json"
 		});
-	});
-	$("input[name='phone']").blur(function(){
-		 if(!$("#psp").val().match(/^1[3456789]\d{9}$/)) {
-			alert("手机号码格式不正确！");
-		}else {
-			$.ajax({
-				type:'post',
-				url:'./checkPhone',
-				data:{"phone":this.value},
-				dataType:'application/json;charset=UTF-8',
-				success:function(result){
-					$("#psp").empty();
-					if(result.isPhone==true){
-						alert("该手机号已存在");
-						//$("#psp").append("<font color='red'>该手机号已存在</font>");
-					}else{
-						alert("该手机号码可用");
-						//$("#psp").append("<font color='green'>该手机号码可用</font>");
-					}
-				},
-				dataType:"json"
-			});
-		}
-		/*  if($("#psp").val() == ""){
-				alert("手机号码不能为空！");
-			}else */
-	});
-	$("input[name='email']").blur(function(){
-		if($("#emailx").val()==""){
-			alert("邮箱不能为空！");
-		}else if(!$("#emailx").val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)){
-			alert("邮箱格式不正确！");
-		}else{
-			$.ajax({
-				type:'post',
-				url:'./checkEmail',
-				data:{"phone":this.value},
-				dataType:'application/json;charset=UTF-8',
-				success:function(result){
-					$("#emailx").empty();
-					if(result.isEmail==true){
-						alert("邮箱已被注册");
-						//$("#emailx").append("<font color='red'>邮箱已被注册</font>");
-					}else{
-						//$("#emailx").append("<font color='green'>邮箱可用</font>");
-						alert("邮箱可用");
-					}
-				},
-				dataType:"json"
-			});
-		}
-	});
+	}
+});
+$("input[name='email']").blur(function(){
+	if($("#emailx").val()==""){
+		alert("邮箱不能为空！");
+	}else if(!$("#emailx").val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)){
+		alert("邮箱格式不正确！");
+		document.getElementById("emailx").value = '';
+	}else{
+		$.ajax({
+			type:'post',
+			url:'./checkEmail',
+			data:{"phone":this.value},
+			dataType:'application/json;charset=UTF-8',
+			success:function(result){
+				$("#emailx").empty();
+				if(result.isEmail==true){
+					alert("邮箱已被注册");
+				}else{
+					alert("邮箱可用");
+				}
+			},
+			dataType:"json"
+		});
+	}
+});
 	
 });
 </script>
@@ -174,12 +169,13 @@ $(function(){
 	        <button class="btn" id="button">注册</button>
 	        <div class="form-group">
 				<p>Already registered? <a href="login">登 录</a></p>
+				<p><a href="index">返回主页</a></p>
 			</div>
     	</form>
     </div>
   </div>
 </div>
-<div class="bottom">©2020届 <a href="javascript:;" target="_blank"></a> <span>毕业设计</span></div>
+<div class="bottom"><p>魏炜©2020届</p><a href="javascript:;" target="_blank"></a> <span>毕业设计</span></div>
 <div class="screenbg">
   <ul>
     <li><a href="javascript:;"><img src="images/0.jpg"></a></li>

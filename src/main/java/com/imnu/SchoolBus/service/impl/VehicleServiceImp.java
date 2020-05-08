@@ -38,4 +38,14 @@ public class VehicleServiceImp implements VehicleService{
 		List<Vehicle> list = vehicleMapper.getCardList();
 		return list;
 	}
+
+	@Override
+	public Vehicle findVehicleById(int vId) {
+		return vehicleMapper.findVehicleById(vId);
+	}
+
+	@Override
+	public void updateVehicle(Vehicle vehicle) {
+		vehicleMapper.updateVehicle(vehicle);
+	}
 }

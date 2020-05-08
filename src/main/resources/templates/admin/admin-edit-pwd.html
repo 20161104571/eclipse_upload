@@ -123,15 +123,15 @@
                 <input type="hidden" name="id" id="id" th:value="${session.user.id}">
                   <div class="form-group">
                     <label for="old-password">旧密码</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="输入账号的原登录密码">
+                    <input type="password" class="form-control" name="password" id="opwd" placeholder="输入账号的原登录密码">
                   </div>
                   <div class="form-group">
                     <label for="new-password">新密码</label>
-                    <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="输入新的密码">
+                    <input type="password" class="form-control" name="newpassword" id="npwd" placeholder="输入新的密码">
                   </div>
                   <div class="form-group">
                     <label for="confirm-password">确认新密码</label>
-                    <input type="password" class="form-control" name="confirmpwd" id="confirmpwd" placeholder="请再次输入新密码">
+                    <input type="password" class="form-control" name="repassword" id="rpwd" placeholder="请再次输入新密码">
                   	<span id="pwd"></span>
                   </div>
                   <button type="submit" class="btn btn-primary">修改密码</button>
@@ -155,42 +155,45 @@
 <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="js/main.min.js"></script>
 <script th:inline="javascript">
-var fristpwdBool = false;
-var newpwdBool = false;
-	$(function(){
-		$("input[name='confirmpwd']").blur(function(){
-			var newpwd = $("#newpassword").val();
-			var repwd = $("#confirmpwd").val();
-			$("#password").empty();
-			if(newpwd != repwd || newpwd != null || newpwd != ""){
-				alert("密码一致");
-			}else{
-				alert("密码不一致");
-				newpwdBool = false;
-			}
-		});
-	});
-	$(function(){
-		$("input[name='newpassword']").blur(function(){
+$(function(){
+	$("input[name='password']").blur(function(){
+		var id = $("#id").val();
+		var opwd = $("#opwd").val();
+		//alert(opwd);
+		if(opwd == ""){
+			alert("请先输入初始密码");
+		}else{
 			$.ajax({
-				url:"./updateAdminPwd",
-				type:"post",
-				data:{
-					"newpassword":$("input[name='newpassword']").val(),
-					"id":id
-				},
-				dataType:"json",
-				cache:false,
-				success:function(msg){
-					if(msg){
-						alert("成功");
-					}else{
-						alert("失败");
+				type:'post',
+				url:'./checkOldPwd',
+				data:{"id":id,"password":opwd},
+				dataType:'application/json;charset=UTF-8',
+				success:function(responseContent){
+					if(responseContent=='1'){
+						alert("初始密码正确");
+					}else if(responseContent=='2'){
+						alert("初始密码错误");
 					}
-				}
+				},
+				dataType:"json"
 			});
-		});
+		}
+	});	
+	$("input[name='repassword']").blur(function(){
+		var npwd = $("#npwd").val();
+		var rpwd = $("#rpwd").val();
+		if(npwd == "" || rpwd == ""){
+			alert("新密码或重复密码为空");
+		}else if(npwd!=rpwd){
+			alert("两次输入不同，请重新输入。");
+			document.getElementById("npwd").value = '';
+			document.getElementById("rpwd").value = '';
+		}else if(npwd==rpwd){
+			alert("两次输入相同。");
+		}
+		
 	});
+});
 </script>
 </body>
 </html>

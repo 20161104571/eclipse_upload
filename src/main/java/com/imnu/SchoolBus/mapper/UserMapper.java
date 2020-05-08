@@ -16,9 +16,6 @@ public interface UserMapper {
 	@Insert(value = "insert into user (id,username,password,name,number,email,phone,status,code) values(#{id},#{username},#{password},#{name},#{number},#{email},#{phone},#{status},#{code})")
     void register(User user);
 	
-	@Insert(value = "insert into user(id,username,password,name,number,email,phone,status) values(#{id},#{username},#{password},#{name},null,null,null,2)")
-	void registAdmin(User user);
-
 	@Select(value = "select * from user where code = #{code}")
     User checkCode(String code);
    

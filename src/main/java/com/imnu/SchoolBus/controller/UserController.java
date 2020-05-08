@@ -93,8 +93,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="deleteThisUser")
-	public String deleteTUser(Integer id, HttpServletRequest request) {
+	public String deleteTUser(Integer id, HttpServletRequest request, HttpSession session, String nowDate, String nowTime, Model model) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+    	Date date = new Date();
+    	nowDate = (String)format1.format(date);
+    	nowTime = (String)format2.format(date);
+		List<Notice> notice = noticeService.getNoticeList();
+		List<Trip> t = tripService.getTripsList();
 		userService.deleteUser(id);
+		model.addAttribute("nowDate", nowDate);
+		model.addAttribute("nowTime", nowTime);
+		model.addAttribute("t", t);
+		model.addAttribute("notice", notice);
 		request.getSession().invalidate();
 		return "user/index";
 	}
@@ -112,14 +123,18 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="updatepwd")
-	public String updatePwd(int id, String newpassword, HttpSession session, String nowDate, Model model) {
+	public String updatePwd(int id, String newpassword, HttpSession session, String nowDate, String nowTime, Model model) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		nowDate = (String)format1.format(date);
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+    	Date date = new Date();
+    	nowDate = (String)format1.format(date);
+    	nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
 		List<Trip> t = tripService.getTripsList();
 		int u = userService.changePwd(id, newpassword);
 		if(u>0) {
+			model.addAttribute("nowDate", nowDate);
+			model.addAttribute("nowTime", nowTime);
 			model.addAttribute("t", t);
 			model.addAttribute("notice", notice);
 			return "user/index";
@@ -129,15 +144,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="editUser")
-	public String updateMsg(int id, String username, String name, String email, String phone, HttpServletRequest request, String nowDate, Model model) {
+	public String updateMsg(int id, String username, String name, String email, String phone, HttpServletRequest request, String nowDate, String nowTime, Model model) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		nowDate = (String)format1.format(date);
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+    	Date date = new Date();
+    	nowDate = (String)format1.format(date);
+    	nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
 		List<Trip> t = tripService.getTripsList();
 		User user = userService.updateMsg(id, username, name, email, phone);
 		System.out.println("修改的用户信息是："+user);
 		if(user != null) {
+			model.addAttribute("nowDate", nowDate);
+			model.addAttribute("nowTime", nowTime);
 			model.addAttribute("t", t);
 			model.addAttribute("notice", notice);
 			request.getSession().setAttribute("users", user);

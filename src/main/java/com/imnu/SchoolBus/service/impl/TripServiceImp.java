@@ -75,5 +75,10 @@ public class TripServiceImp implements TripService{
 		return list;
 	}
 
+	@Override
+	public void updateTrip(Trip trip) {
+		tripMapper.updateTrip(trip);
+	}
+
 	
 }

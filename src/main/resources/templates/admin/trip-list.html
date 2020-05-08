@@ -157,6 +157,7 @@
 			            <td th:text="${trip.start_Date}"></td>
                         <td>
                           <div class="btn-group">
+                          <a class="btn btn-xs btn-default" th:href="@{/toEditTrip(tId=${trip.tId})}" title="修改" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
                             <a class="btn btn-xs btn-default" th:href="@{/deleteTrip(tId=${trip.tId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                           </div>
                         </td>

@@ -88,9 +88,11 @@ public class SubsController {
 	}
 	
 	@RequestMapping("subsTrip")
-	public String findSubsTripById(Model model, int tId, Integer remain_seats, Integer nId, String nowDate) {
+	public String findSubsTripById(Model model, int tId, Integer remain_seats, Integer nId, String nowDate, String nowTime) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+    	Date date = new Date();
+    	nowTime = (String)format2.format(date);
 		nowDate = (String)format1.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
 		List<Trip> t = tripService.getTripsList();
@@ -104,16 +106,19 @@ public class SubsController {
 			model.addAttribute("notice", notice);
 			model.addAttribute("t", t);
 			model.addAttribute("nowDate", nowDate);
+			model.addAttribute("nowTime", nowTime);
 			return "user/index";
 		}
 		
 	}
 
     @RequestMapping(value = "sendcode",method = RequestMethod.POST)
-    public String sendcode(Subs subs, int tId, Trip trip, String number, String nowDate, Model model) {
+    public String sendcode(Subs subs, int tId, Trip trip, String number, String nowDate, String nowTime, Model model) {
     	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		nowDate = (String)format1.format(date);
+    	SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+    	Date date = new Date();
+    	nowDate = (String)format1.format(date);
+    	nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
 		List<Trip> t = tripService.getTripsList();
     	int s = subsService.addOrders(subs);
@@ -125,6 +130,7 @@ public class SubsController {
 			model.addAttribute("notice", notice);
 			model.addAttribute("t", t);
 			model.addAttribute("nowDate", nowDate);
+			model.addAttribute("nowTime", nowTime);
 			return "user/index";
 		}else {
 			return "user/subsDetails";

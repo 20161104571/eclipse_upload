@@ -30,4 +30,6 @@ public interface TripService {
 	
 	Trip findTripsByTime(String ctime);
 	
+	void updateTrip(Trip trip);
+	
 }

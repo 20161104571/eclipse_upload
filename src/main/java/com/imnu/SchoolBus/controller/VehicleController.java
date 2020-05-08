@@ -54,4 +54,17 @@ public class VehicleController {
 		vehicleService.deleteVehicle(vId);
 		return "redirect:/getVehicleList";
 	}
+	
+	@RequestMapping(value="toEditVehicle")
+	public String updateVehicle(Model model, int vId) {
+		Vehicle vehicle = vehicleService.findVehicleById(vId);
+		model.addAttribute("vehicle", vehicle);
+		return "admin/vehicle-edit";
+	}
+	
+	@RequestMapping(value="editVehicle")
+	public String editVehicle(Vehicle vehicle) {
+		vehicleService.updateVehicle(vehicle);
+		return "redirect:/getVehicleList";
+	}
 }

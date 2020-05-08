@@ -14,11 +14,6 @@
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
-		<form class="hdSearch fr" action="getSearchList" method="post" name="form1" id="from1">
-			<button type="submit" onclick="search()"></button>
-			<input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索">
-		</form>
-		
 	</div>
 	<!--头部 End!-->
 	
@@ -36,13 +31,18 @@
 			
 		</li>
 		<li>
-			<a href="./getCommentsList" class="navItem">论坛</a>
+			<a class="navItem">
+			<form th:action="@{./getCommentsList}" id="commentslist" method="post" >
+				<input type="text" hidden="hidden" id="getcomment" th:value="${session.users}">
+				<input type="submit" value="论坛" id='sgetcomment' class="navItem" style="color:#fff;font-size:16px;"> 	
+			</form>
+			</a>
 		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text=" ${session.users}? '欢迎：'+${session.users.username}:'未登录'"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
@@ -98,41 +98,29 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="sc : ${search_result}">
-                      	<td th:text="${sc.ccard}"></td>
-			            <td th:text="${sc.ctime}"></td>
-			            <td th:if = "${sc.start=='1'}">赛罕校区</td>
-			            <td th:if = "${sc.start=='2'}">盛乐校区</td>
-			            <td th:text="${sc.reqTime} + '小时'"></td>
-			            <td th:text="${sc.remain_seats}"></td>
-			            <td th:text="${sc.start_Date}"></td>
-			            
+                      <tr th:each="trip:${search_result}">
+                      	<td th:text="${trip.ccard}"></td>
+			            <td th:text="${trip.ctime}"></td>
+			            <td th:if = "${trip.start=='1'}">赛罕校区</td>
+			            <td th:if = "${trip.start=='2'}">盛乐校区</td>
+			            <td th:text="${trip.reqTime} + '小时'"></td>
+			            <td th:text="${trip.remain_seats}"></td>
+			            <td th:text="${trip.start_Date}"></td>
+			            <!-- <td th:text="${nowTime}"></td>
+			            <td th:text="${nowDate}"></td> -->
 			            <td>
                           <div class="btn-group">
-                            <a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${sc.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a>
+                           <form th:action="@{/subsTrip(tId=${trip.tId})}" id="subsbtn" method="post">
+                           
+                           <input type="text" hidden="hidden" id="getsubs" th:value="${session.users}">
+                           <input type="submit" value="预约" id='sgetsubs'>
+                          	</form>
                           </div>
                         </td>
                       </tr>
                     </tbody>
                   </table>
 				
-				<!-- <div class="pageNum">
-					<span>共14条</span>
-					<span>每页1页</span>
-					<a href="#" class="pagePrev disabled">&lt;</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<span>...</span>
-					<a href="#">14</a>
-					<a href="#" class="pageNext">&gt;</a>
-					<form>
-						<span>转到第</span>
-						<input type="text" name="">
-						<span>页</span>
-						<button>GO</button>
-					</form>
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -141,10 +129,38 @@
 	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
-			<p>Copyright © 2020</p>
+			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="user/js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<script th:inline="javascript">
+	$(document).ready(function(){
+		$("#sgetcomment").click(function(){
+			var loginuser = $("#getcomment").val();
+			//alert("当前登录用户："+loginuser);	
+			if(loginuser===''){
+				alert("还未登录，前往登录！");
+				window.location.href='login';
+				return false;
+			}
+		});
+	});
+	$(document).ready(function(){
+		$("#sgetsubs").click(function(){
+			var loginu = $("#getsubs").val();
+			if(loginu==''){
+				alert("请先登录，再进行预约！");
+				window.location.href='login';
+				return false;
+			}else if("${nowTime}>${trip.ctime} and ${nowDate}>${trip.start_Date}"){
+				alert("此车已发，请预约其它车次！");
+				window.location.href='index';
+				return false;
+			}
+		});
+	});
+</script>
 </html>

@@ -39,11 +39,6 @@ public class UserServiceImp implements UserService{
 	@Autowired
 	private MailService mailService;
 	
-	
-	/**
-     * 用户注册，同时发送一封激活邮件
-     * @param user
-     */
     @Override
     public void register(User user) {
     	userMapper.register(user);
@@ -56,31 +51,16 @@ public class UserServiceImp implements UserService{
         mailService.sendHtmlMail (user.getEmail(),subject,context);
     }
 
-    /**
-     * 根据激活码code进行查询用户，之后再进行修改状态
-     * @param code
-     * @return
-     */
     @Override
     public User checkCode(String code) {
-
         return userMapper.checkCode(code);
     }
 
-    /**
-     * 激活账户，修改用户状态
-     * @param user
-     */
     @Override
     public void updateUserStatus(User user) {
     	userMapper.updateUserStatus(user);
     }
 
-    /**
-     * 登录
-     * @param user
-     * @return
-     */
     @Override
     public User loginUser(User user) {
         User user1 = userMapper.loginUser(user);
@@ -109,11 +89,6 @@ public class UserServiceImp implements UserService{
 	@Override
 	public void createUser(User user) {
 		userMapper.createUser(user);
-	}
-
-	@Override
-	public void registAdmin(User user) {
-		userMapper.registAdmin(user);
 	}
 
 	@Override
@@ -155,6 +130,15 @@ public class UserServiceImp implements UserService{
 		int c = userMapper.countUser(count);
 		if(c>0) {
 			return c;
+		}
+		return 0;
+	}
+	
+	@Override
+	public int countTeUser(Integer counts) {
+		int tea = userMapper.countTeUser(counts);
+		if(tea>0) {
+			return tea;
 		}
 		return 0;
 	}

@@ -18,9 +18,11 @@ import com.github.pagehelper.PageInfo;
 import com.imnu.SchoolBus.pojo.Notice;
 import com.imnu.SchoolBus.pojo.Schedule;
 import com.imnu.SchoolBus.pojo.Trip;
+import com.imnu.SchoolBus.pojo.Vehicle;
 import com.imnu.SchoolBus.service.NoticeService;
 import com.imnu.SchoolBus.service.ScheduleService;
 import com.imnu.SchoolBus.service.TripService;
+import com.imnu.SchoolBus.service.VehicleService;
 /*
  * checi
  */
@@ -35,6 +37,9 @@ public class TripController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 	
 	@RequestMapping(value="getTripList")
 	public String tripList(Model model,
@@ -61,16 +66,33 @@ public class TripController {
 	}
 	
 	@RequestMapping(value="getUserTripList")
-	public String userTripList(Model model, String nowDate, String nowTime) {
+	public String userTripList(Model model, String nowDate, String nowTime,
+			@RequestParam(required = false, value = "pageNum", defaultValue = "1")Integer pageNum, 
+			@RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize) {
+		if(pageNum == null) {
+			pageNum = 1;
+		}
+		if(pageNum <= 0) {
+			pageNum = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 5;
+		}
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		nowDate = (String)format1.format(date);  //获取当前日期
+		nowDate = (String)format1.format(date);
 		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
-		nowTime = (String)format2.format(date);  //获取当前时间
-		List<Trip> trips = tripService.getTripList(nowDate);
-		model.addAttribute("trips", trips);
+		nowTime = (String)format2.format(date);
 		model.addAttribute("nowTime", nowTime);
 		model.addAttribute("nowDate", nowDate);
+		PageHelper.startPage(pageNum, pageSize);
+		try {
+			List<Trip> trips = tripService.getTripList(nowDate);
+			PageInfo<Trip> pageInfo = new PageInfo<Trip>(trips, pageSize);
+			model.addAttribute("pageInfo", pageInfo);
+		}finally {
+			PageHelper.clearPage();
+		}
 		return "user/order";
 	}
 	
@@ -86,20 +108,36 @@ public class TripController {
 		return "redirect:/getTripList";
 	}
 	
+	@RequestMapping(value="toEditTrip")
+	public String updateTrip(Model model, int tId, ModelMap modelMap) {
+		List<Vehicle> cardList = vehicleService.getCardList();
+		Trip trip = tripService.findSubsTripById(tId);
+		modelMap.addAttribute("cardList", cardList);
+		model.addAttribute("trip", trip);
+		return "admin/trip-edit";
+	}
+	
+	@RequestMapping(value="editTrip")
+	public String editTrip(Trip trip) {
+		tripService.updateTrip(trip);
+		return "redirect:/getTripList";
+	}
+	
 	@RequestMapping(value="getSearchList")
-	public String seachList(HttpServletRequest request, Model model, String nowDate) {
+	public String seachList(HttpServletRequest request, Model model, String nowDate, String nowTime) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
 		Date date = new Date();
 		nowDate = (String)format1.format(date);
+		nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
 		List<Trip> t = tripService.getTripsList();
 		String search_input = request.getParameter("index_none_header_sysc");//获取搜索框输入
 		List<Trip> list = tripService.searchList(search_input);
 		if(list != null) {
-			/*将搜索结果集合、集合元素个数(结果商品个数)、搜索关键字添加到model的属性中返回前端页面*/
 			model.addAttribute("search_result", list);
-			//model.addAttribute("result_num", list.size());
-			//model.addAttribute("search_key", search_input);
+			model.addAttribute("nowDate", nowDate);
+			model.addAttribute("nowTime", nowTime);
 			return "user/searchResult";
 		}
 		else {
@@ -108,6 +146,7 @@ public class TripController {
 			model.addAttribute("notice", notice);
 			model.addAttribute("t", t);
 			model.addAttribute("nowDate", nowDate);
+			model.addAttribute("nowTime", nowTime);
 			return "user/index";
 		}
 	}
@@ -118,10 +157,7 @@ public class TripController {
 		List<Trip> list = tripService.searchList(search_input);
 		System.out.println(list);
 		if(list != null) {
-			/*将搜索结果集合、集合元素个数(结果商品个数)、搜索关键字添加到model的属性中返回前端页面*/
 			model.addAttribute("search_results", list);
-			//model.addAttribute("result_nums", list.size());
-			//model.addAttribute("search_keys", search_input);
 			return "admin/searchTrip";
 		}
 		else {
@@ -161,10 +197,4 @@ public class TripController {
 		return "user/timeList2";
 	}
 	
-	@RequestMapping(value="ckxq")
-	public String ckxq(int tId, Model model) {
-		Trip trip = tripService.findSubsTripById(tId);
-		model.addAttribute("trip", trip);
-		return "user/subsDetails";
-	}
 }

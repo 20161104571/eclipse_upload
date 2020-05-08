@@ -2,7 +2,7 @@
 <html class="htmlBg" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>发车详情</title>
+<title>预约</title>
 <link rel="stylesheet" type="text/css" href="user/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -31,13 +31,18 @@
 			
 		</li>
 		<li>
-			<a href="./getCommentsList" class="navItem">论坛</a>
+			<a class="navItem">
+			<form th:action="@{./getCommentsList}" id="commentslist" method="post" >
+				<input type="text" hidden="hidden" id="getcomment" th:value="${session.users}" class="navItem">
+				<input type="submit" value="论坛" id='sgetcomment' class="navItem" style="color:#fff;font-size:16px;"> 	
+			</form>
+			</a>
 		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text=" ${session.users}? '欢迎：'+${session.users.username}:'未登录'"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
@@ -66,7 +71,7 @@
 			<dl>
 				<dt>
 					<span>
-						<h4>详情</h4>
+						<h4>预约</h4>
 					</span>
 				</dt>
 			</dl>
@@ -76,18 +81,17 @@
 				<div class="crumbs">
 					<a href="index">首页</a>
 					<i>-</i>
-					<span>发车详情</span>
+					<span>预约</span>
 				</div>
 			</div>
-			<div>
+			<!-- <div>
 				<form class="conMain" action="" method="post" >
 					<input type="text" id="inputOne">
 					<input type="text" id="inputTwo" name="inputTwo" placeholder="点击选择出发日期">
-					<!-- <input type="text" id="searchInput" name="index_none_header_sysc" placeholder="搜索"> -->
-					<!-- <input type="text" id="nowDate" th:vlaue="${nowDate}" th:text="${nowDate}"> -->
+					<input type="text" id="nowDate" th:vlaue="${nowDate}" th:text="${nowDate}" class="hidden">
 					<button type="submit" id="btn_select">查询</button>
 				</form>
-			</div>
+			</div> -->
 			<div class="conMain">
 				<div th:fragment="table_re" id="table_re">
 				<table class="table table-bordered">
@@ -99,11 +103,11 @@
 			            <th width="150px">所需时间</th>
 			            <th width="150px">余座</th>
 						<th width="150px">出发日期</th>
-						<th width="150px">状态</th>			            
+						<th width="150px">操作</th>		
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="trip:${trips}">
+                      <tr th:each="trip:${pageInfo.list}">
                       	<td th:text="${trip.ccard}"></td>
 			            <td th:text="${trip.ctime}"></td>
 			            <td th:if = "${trip.start=='1'}">赛罕</td>
@@ -111,11 +115,30 @@
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
 			            <td th:text="${trip.start_Date}"></td>
-			            <td th:if="${nowTime}>${trip.ctime} and ${nowDate}==${trip.start_Date}" th:text="已发车"></td>
-			            <td th:if="${nowDate}<=${trip.start_Date}"><a class="btn btn-xs btn-default" th:href="@{/subsTrip(tId=${trip.tId})}" title="预约" data-toggle="tooltip" onclick="seatscount()"><i ><img class="user/images/subs.png"></i></a></td>
+			            <td>
+                          <div class="btn-group">
+                           <form th:action="@{/subsTrip(tId=${trip.tId})}" id="subsbtn" method="post">
+                           <input type="text" hidden="hidden" id="getsubs" th:value="${session.users}">
+                           <a><input type="submit" value="预约" id='sgetsubs'></a>
+                          	</form>
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
+                  <div class="pageNum">
+					<span>共 [[${pageInfo.pages}]] 页</span>
+					<span>共 [[${pageInfo.total}]] 条</span>
+					<span>每页 [[${pageInfo.pageSize}]] 条</span>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getUserTripList?pageNum=1}">首页</a></th:if>
+					<th:if th:if="${pageInfo.hasPreviousPage}"><a th:href="@{/getUserTripList(pageNum=${pageInfo.prePage})}" style="font-weight: bold;">上一页</a></th:if>
+					<th:each th:each="nav:${pageInfo.navigatepageNums}">
+		                <a th:href="@{/getUserTripList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+		                <span style="font-weight: bold;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+		            </th:each>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getUserTripList(pageNum=${pageInfo.nextPage})}" style="font-weight: bold;">下一页</a></th:if>
+					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getUserTripList(pageNum=${pageInfo.pages})}">尾页</a></th:if>
+				</div>
                   </div>
 			</div>
 		</div>
@@ -125,7 +148,7 @@
 	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
-			<p>Copyright © 2020</p>
+			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
 	<!--底部 End!-->
@@ -144,9 +167,36 @@ laydate.render({
 function seatscount(){
 	var seats = "${trip.remain_seats}".val();
 	if(seats=0){
-		return "user/index";
+		alert("车次无剩余座位，不可预约");
+		//return "user/index";
+		window.location.href='index';
 	}
 }
+$(document).ready(function(){
+	$("#sgetcomment").click(function(){
+		var loginuser = $("#getcomment").val();
+		//alert("当前登录用户："+loginuser);	
+		if(loginuser===''){
+			alert("还未登录，前往登录！");
+			window.location.href='login';
+			return false;
+		}
+	});
+});
+$(document).ready(function(){
+	$("#sgetsubs").click(function(){
+		var loginu = $("#getsubs").val();
+		if(loginu==''){
+			alert("请先登录，再进行预约！");
+			window.location.href='login';
+			return false;
+		}else if("${nowTime}>${trip.ctime} and ${nowDate}>${trip.start_Date}"){
+			alert("此车已发，请预约其它车次！");
+			window.location="http://localhost:8080/schoolbus/getUserTripList";
+			return false;
+		}
+	});
+});
 </script>
 <script type="text/javascript" th:inline="javascript">
 $(function(){

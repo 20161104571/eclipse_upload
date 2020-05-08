@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.imnu.SchoolBus.pojo.Vehicle;
 
@@ -20,6 +21,12 @@ public interface VehicleMapper {
 	
 	@Select(value = "select * from vehicle")
 	List<Vehicle> getVehiclList();
+	
+	@Select(value = "select * from vehicle where vId = #{vId}")
+	Vehicle findVehicleById(int vId);
+	
+	@Update(value = "update vehicle set card = #{card},Maintenance = #{Maintenance},insurance = #{insurance} where vId = #{vId}")
+	void updateVehicle(Vehicle vehicle);
 	
 	@Select(value = "SELECT * FROM vehicle WHERE Maintenance=\"无维修\" AND insurance=\"有\"")
 	List<Vehicle> getCardList();

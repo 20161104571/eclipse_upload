@@ -26,6 +26,9 @@ public interface TripMapper {
 	@Select(value = "select * from trip order by start_Date DESC")
 	List<Trip> getTripsList();
 	
+	@Update(value = "update trip set ccard = #{ccard},ctime = #{ctime},start = #{start},reqTime = #{reqTime},seats = #{seats},remain_seats = #{seats},start_Date = #{start_Date} where tId = #{tId}")
+	void updateTrip(Trip trip);
+	
 	@Select(value = "select * from trip where ccard like CONCAT('%',#{search_input},'%')")
 	List<Trip> searchList(String search_input);
 	

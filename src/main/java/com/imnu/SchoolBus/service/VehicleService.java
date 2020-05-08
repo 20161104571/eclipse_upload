@@ -15,4 +15,8 @@ public interface VehicleService {
 	List<Vehicle> getVehiclList();
 	
 	List<Vehicle> getCardList();
+	
+	Vehicle findVehicleById(int vId);
+	
+	void updateVehicle(Vehicle vehicle);
 }

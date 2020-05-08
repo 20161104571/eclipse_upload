@@ -54,7 +54,7 @@ public class ThymeleafController {
 	public String index(Model model, String nowDate, String nowTime) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		nowDate = (String)format1.format(date);  //获取当前日期
+		nowDate = (String)format1.format(date);
 		SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
 		nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
@@ -67,11 +67,13 @@ public class ThymeleafController {
 	}
 	
 	@RequestMapping("aindex")
-	public String adminIndex(User user, Integer count, Integer comm, Integer subs, ModelMap modelMap) {
+	public String adminIndex(User user, Integer count, Integer counts, Integer comm, Integer subs, ModelMap modelMap) {
 		int c = userService.countUser(count);
+		int tea = userService.countTeUser(counts);
 		int com = userService.countComment(comm);
 		int newor = userService.countNewOrder(subs);
-		modelMap.addAttribute("countuser", c);
+		int ct = c + tea;
+		modelMap.addAttribute("countuser", ct);
 		modelMap.addAttribute("com", com);
 		modelMap.addAttribute("newor", newor);
 		return "admin/aindex";
@@ -102,16 +104,6 @@ public class ThymeleafController {
 		return "admin/notice-edit";
 	}
 	
-	@RequestMapping("dongtai-add")
-	public String dongtaiAdd() {
-		return "admin/dongtai-add";
-	}
-	
-	@RequestMapping("dongtai-edit")
-	public String dongtaiEdit() {
-		return "admin/dongtai-edit";
-	}
-	
 	@RequestMapping("schedule-edit")
 	public String scheduleEdit() {
 		return "admin/schedule-edit";
@@ -132,6 +124,16 @@ public class ThymeleafController {
 		List<Vehicle> cardList = vehicleService.getCardList();
 		modelMap.addAttribute("cardList", cardList);
 		return "admin/trip-add";
+	}
+	
+	@RequestMapping("tripEdit")
+	public String tripEdit() {
+		return "admin/trip-edit";
+	}
+	
+	@RequestMapping("vehicle-edit")
+	public String vehicleEdit() {
+		return "admin/vehicle-edit";
 	}
 	
 	@RequestMapping("notice")

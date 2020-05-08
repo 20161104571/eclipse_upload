@@ -31,13 +31,18 @@
 			
 		</li>
 		<li>
-			<a href="./getCommentsList" class="navItem">论坛</a>
+			<a class="navItem">
+			<form th:action="@{./getCommentsList}" id="commentslist" method="post" >
+				<input type="text" hidden="hidden" id="getcomment" th:value="${session.users}" class="navItem">
+				<input type="submit" value="论坛" id='sgetcomment' class="navItem" style="color:#fff;font-size:16px;"> 	
+			</form>
+			</a>
 		</li>
 		<li th:if="${session.users}==null">
 			<a class="navItem"  href="regist">注册</a>
 		</li>
 		<li th:if="${session.users}!=null">
-			<a class="navItem"  th:text="欢迎： + ${session.users.username}"><i></i></a>
+			<a class="navItem"  th:text=" ${session.users}? '欢迎：'+${session.users.username}:'未登录'"><i></i></a>
 			<div class="dropdown">
 				<a href="personcenter">个人中心</a>
 				<a href="./logout">退出</a>
@@ -102,7 +107,7 @@
                           	<li th:text="${trip.tId}" hidden="hidden"></li>
 							<li th:text="${trip.ctime}" hidden="hidden"></li>
 						  </ol>
-                            <a class="btn btn-xs btn-default" th:href="@{/getTimeList(sId=${schedule.sId})}" title="查看详细" data-toggle="tooltip" onclick="xq()"><i ><img class="user/images/subs.png"></i></a>
+                            <a class="btn btn-xs btn-default" th:href="@{/getTimeList(sId=${schedule.sId})}" title="查看详细" data-toggle="tooltip" style="font-size=18px;"><i></i>查看详细</a>
                           </div>
                         </td>
                       </tr>
@@ -130,26 +135,27 @@
 	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
-			<p>Copyright © 2020</p>
+			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
 	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" th:inline="javascript">
-function xq(){
-	$.ajax({
-		type:"post",
-		url:"getTimeList",
-		dataType:"text",
-		success:function(data){
-			
+$(document).ready(function(){
+	$("#sgetcomment").click(function(){
+		var loginuser = $("#getcomment").val();
+		//alert("当前登录用户："+loginuser);	
+		if(loginuser===''){
+			alert("还未登录，前往登录！");
+			window.location.href='login';
+			return false;
+		} else{
+			/* alert("进来了？")
+			$("#commentslist").submit(); */
 		}
 	});
-	/* var seats = "${trip.remain_seats}".val();
-	if(seats=0){
-		return "user/index";
-	} */
-}
+});
+
 </script>
 </html>

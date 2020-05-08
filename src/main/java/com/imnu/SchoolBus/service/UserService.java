@@ -39,8 +39,6 @@ public interface UserService {
 	boolean findUserByPhone(String phone);
 	
 	boolean findUserByEmail(String email);
-
-	void registAdmin(User user);
 	
 	User adminLogin(String username, String password);
 	
@@ -49,6 +47,8 @@ public interface UserService {
 	User updateMsg(int id, String username, String name, String email, String phone);
 
 	int countUser(Integer count);
+	
+	int countTeUser(Integer counts);
 	
 	int countComment(Integer comm);
 
