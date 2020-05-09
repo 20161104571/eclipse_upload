@@ -51,34 +51,39 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="getSchedule")
-	public String schedule(Model model, String nowDate,
-			@RequestParam(required = false,value = "pageNum",defaultValue = "1")Integer pageNum, 
-			@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
+	public String getScheduleList(Model model, String nowDate) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		nowDate = (String)format1.format(date); 
-		if(pageNum == null) {
-			pageNum = 1;
-		}
-		if(pageNum <= 0) {
-			pageNum = 1;
-		}
-		if(pageSize == null) {
-			pageSize = 5;
-		}
-		PageHelper.startPage(pageNum, pageSize);
-		try {
-			List<Schedule> schedule = scheduleService.getScheduleList();
-			PageInfo<Schedule> pageInfo = new PageInfo<Schedule>(schedule,pageSize);
-			model.addAttribute("pageInfo", pageInfo);
-		}finally {
-			PageHelper.clearPage();
-		}
+		List<Schedule> schedule = scheduleService.getTimeList();
 		List<Trip> trips = tripService.getTripList(nowDate);
+		model.addAttribute("schedule", schedule);
 		model.addAttribute("trips", trips);
-		System.out.println(trips);
-		
 		return "user/timeList";
+	}
+	
+	@RequestMapping(value="getSchedule1")
+	public String getScheduleList1(Model model, String nowDate) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date); 
+		List<Schedule> schedule = scheduleService.getTimeList();
+		List<Trip> trips = tripService.getTripList(nowDate);
+		model.addAttribute("schedule", schedule);
+		model.addAttribute("trips", trips);
+		return "user/timeList::table_re";
+	}
+	
+	@RequestMapping(value="getSchedule2")
+	public String getScheduleList2(Model model, String nowDate) {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		nowDate = (String)format1.format(date); 
+		List<Schedule> schedule = scheduleService.getTimeList2();
+		List<Trip> trips = tripService.getTripList(nowDate);
+		model.addAttribute("schedule", schedule);
+		model.addAttribute("trips", trips);
+		return "user/timeList::table_re"; 
 	}
 	
 	@RequestMapping(value="saveSchedule")

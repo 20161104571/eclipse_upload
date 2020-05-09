@@ -19,4 +19,8 @@ public interface ScheduleService {
 	
 	Schedule findScheduleByTime(String startTime);
 	
+	List<Schedule> getTimeList();
+	
+	List<Schedule> getTimeList2();
+	
 }

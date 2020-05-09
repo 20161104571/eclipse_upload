@@ -9,15 +9,12 @@
 <link href="css/style.min.css" rel="stylesheet">
 </head>
 <body class="bodyBg">
-	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
 	</div>
-	<!--头部 End!-->
 	
-	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
 		<li>
@@ -63,9 +60,7 @@
 			</li>
 		</th:if>
 	</ul>
-	<!--导航 End!-->
 
-	<!--main Start!-->
 	<div id="main" class="wp clearfix">
 		<div class="leftMenu fl">
 			<dl>
@@ -117,7 +112,7 @@
 			            <td th:text="${subs.trainNum}"></td>
 			            <td>
                           <div class="btn-group">
-                            <a class="btn btn-xs btn-default" th:href="@{/deleUserOrder(oId=${subs.oId})}" title="取消预约" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                            <a th:href="@{/deleUserOrder(oId=${subs.oId})}" title="取消预约" data-toggle="tooltip">取消预约</a>
                           </div>
                         </td>
                       </tr>
@@ -126,15 +121,12 @@
                 </div>
 		</div>
 	</div>
-	<!--main End!-->
 
-	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
 			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
-	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
@@ -142,15 +134,11 @@
 	$(document).ready(function(){
 		$("#sgetcomment").click(function(){
 			var loginuser = $("#getcomment").val();
-			//alert("当前登录用户："+loginuser);	
 			if(loginuser===''){
 				alert("还未登录，前往登录！");
 				window.location.href='login';
 				return false;
-			} else{
-				/* alert("进来了？")
-				$("#commentslist").submit(); */
-			}
+			} 
 		});
 	});
 </script>

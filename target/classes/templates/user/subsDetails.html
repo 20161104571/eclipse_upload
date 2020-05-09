@@ -9,15 +9,12 @@
 <link href="css/style.min.css" rel="stylesheet">
 </head>
 <body class="bodyBg">
-	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
 	</div>
-	<!--头部 End!-->
 	
-	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
 		<li>
@@ -63,9 +60,7 @@
 			</li>
 		</th:if>
 	</ul>
-	<!--导航 End!-->
 
-	<!--main Start!-->
 	<div id="main" class="wp clearfix">
 		<div class="leftMenu fl">
 			<dl>
@@ -85,7 +80,7 @@
 				</div>
 				
 			</div>
-			<form action="sendcode" method="post" class="table table-bordered">
+			<form th:action="@{sendcode}" method="post" class="table table-bordered" id="forms">
 				<ol>
 				<li class="single_comment_area" th:each="trip:${trip}">
 				<input id="tId" name="tId" th:value="${trip.tId}" type="text" hidden="hidden">
@@ -122,32 +117,41 @@
                   
 					<span>输入预约手机号，以便接收预约成功短信：</span>
 					<input type="text" name="phone" id="phone">
-					<button type="submit" >预约</button>
-                  </form>
+					<button id="butp" type="submit">预约</button>
+					</form>
+					
+                  
 		</div>
 	</div>
-	<!--main End!-->
 
-	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
 			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
-	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script th:inline="javascript">
-	$(document).ready(function(){
-		$("#sgetcomment").click(function(){
-			var loginuser = $("#getcomment").val();
-			if(loginuser===''){
-				alert("还未登录，前往登录！");
-				window.location.href='login';
-				return false;
-			} 
-		});
+$(document).ready(function(){
+	$("#sgetcomment").click(function(){
+		var loginuser = $("#getcomment").val();
+		if(loginuser===''){
+			alert("还未登录，前往登录！");
+			window.location.href='login';
+			return false;
+		} 
 	});
+});
+$("input[name='phone']").blur(function(){
+	var phone = $("#phone").val();
+	if(phone=="" || phone==null){
+		alert("手机号码不能为空！");
+	}else if(!phone.match(/^1[3456789]\d{9}$/)) {
+		alert("手机号码格式不正确，请重新输入！");
+		document.getElementById("phone").value = '';
+	}
+});
+
 </script>
 </html>

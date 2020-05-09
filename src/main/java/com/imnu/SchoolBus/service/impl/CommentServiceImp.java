@@ -49,7 +49,6 @@ public class CommentServiceImp implements CommentService{
 	public String getTime() {
 		Date d = new Date();
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm ");
-	    System.out.println("格式化输出：" + sdf.format(d));
 	    return sdf.format(d);
 	}
 

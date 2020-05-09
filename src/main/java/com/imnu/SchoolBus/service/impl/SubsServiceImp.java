@@ -18,8 +18,9 @@ public class SubsServiceImp implements SubsService{
 	private SubsMapper subsMapper;
 	
 	@Override
-	public Subs findSubsById(Integer uId) {
-		return subsMapper.findSubsById(uId);
+	public List<Subs> findSubsById(Integer uId) {
+		List<Subs> list = subsMapper.findSubsById(uId);
+		return list;
 	}
 
 	@Override
@@ -37,6 +38,11 @@ public class SubsServiceImp implements SubsService{
 	@Override
 	public int delOrder(Integer oId) {
 		return subsMapper.delOrder(oId);
+	}
+
+	@Override
+	public Subs findSubsByoId(Integer oId) {
+		return subsMapper.findSubsByoId(oId);
 	}
 
 }

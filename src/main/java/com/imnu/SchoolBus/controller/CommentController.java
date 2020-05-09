@@ -46,7 +46,6 @@ public class CommentController {
 		PageHelper.startPage(pageNum, pageSize);
 		try {
 			List<Comment> comment = commentService.getCommList();
-			System.out.println("分页的数据："+comment);
 			PageInfo<Comment> pageInfo = new PageInfo<Comment>(comment,pageSize);
 			model.addAttribute("pageInfo", pageInfo);
 		}finally {
@@ -76,7 +75,6 @@ public class CommentController {
 		PageHelper.startPage(pageNum, pageSize);
 		try {
 			List<Comment> comment = commentService.getCommList();
-			System.out.println("分页的数据："+comment);
 			PageInfo<Comment> pageInfo = new PageInfo<Comment>(comment,pageSize);
 			model.addAttribute("pageInfo", pageInfo);
 		}finally {

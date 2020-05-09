@@ -19,7 +19,6 @@ public class VehicleServiceImp implements VehicleService{
 	@Override
 	public void createVehicle(Vehicle vehicle) {
 		vehicleMapper.createVehicle(vehicle);
-		
 	}
 
 	@Override

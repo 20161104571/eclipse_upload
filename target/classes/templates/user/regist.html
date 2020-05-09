@@ -9,7 +9,6 @@
 <script type="text/javascript" src="js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
 <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
-<!-- <script type="text/javascript" src=js/jquery-3.3.1.js></script> -->
 <script type="text/javascript" th:inline="javascript">
 $(function(){
 	$(".screenbg ul li").each(function(){
@@ -35,7 +34,6 @@ $(function(){
 		}
 	}
 	t = setInterval(show,8000);
-	//根据窗口宽度生成图片宽度
 	var width = $(window).width();
 	$(".screenbg ul img").css("width",width+"px");
 	

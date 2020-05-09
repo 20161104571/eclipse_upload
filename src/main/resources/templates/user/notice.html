@@ -7,15 +7,12 @@
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 </head>
 <body class="bodyBg">
-	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
 	</div>
-	<!--头部 End!-->
 	
-	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
 		<li class="first active">
@@ -61,9 +58,7 @@
 			</li>
 		</th:if>
 	</ul>
-	<!--导航 End!-->
 
-	<!--main Start!-->
 	<div id="main" class="wp clearfix">
 		<div class="leftMenu fl">
 			<dl>
@@ -109,15 +104,12 @@
 			</div>
 		</div>
 	</div>
-	<!--main End!-->
 
-	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
 			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
-	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="user/js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
@@ -125,17 +117,11 @@
 	$(document).ready(function(){
 		$("#sgetcomment").click(function(){
 			var loginuser = $("#getcomment").val();
-			//alert("当前登录用户："+loginuser);	
 			if(loginuser===''){
 				alert("还未登录，前往登录！");
 				window.location.href='login';
 				return false;
-				//window.location.href='user/login.html';
-				//return "user/login";
-			} else{
-				/* alert("进来了？")
-				$("#commentslist").submit(); */
-			}
+			} 
 		});
 	});
 </script>

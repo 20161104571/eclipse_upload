@@ -9,15 +9,12 @@
 <link href="css/style.min.css" rel="stylesheet">
 </head>
 <body class="bodyBg">
-	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
 	</div>
-	<!--头部 End!-->
 	
-	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
 		<li>
@@ -63,9 +60,7 @@
 			</li>
 		</th:if>
 	</ul>
-	<!--导航 End!-->
 
-	<!--main Start!-->
 	<div id="main" class="wp clearfix">
 		<div class="leftMenu fl">
 			<dl>
@@ -106,14 +101,11 @@
 			            <td th:text="${trip.reqTime} + '小时'"></td>
 			            <td th:text="${trip.remain_seats}"></td>
 			            <td th:text="${trip.start_Date}"></td>
-			            <!-- <td th:text="${nowTime}"></td>
-			            <td th:text="${nowDate}"></td> -->
 			            <td>
                           <div class="btn-group">
-                           <form th:action="@{/subsTrip(tId=${trip.tId})}" id="subsbtn" method="post">
-                           
-                           <input type="text" hidden="hidden" id="getsubs" th:value="${session.users}">
-                           <input type="submit" value="预约" id='sgetsubs'>
+                           <form th:action="@{/subsTrip(tId=${trip.tId})}" name="subsbtn" method="post">
+                           <input type="text" hidden="hidden" name="getsubs" th:value="${session.users}">
+                           <a name='sgetsubs'>预约</a>
                           	</form>
                           </div>
                         </td>
@@ -124,15 +116,12 @@
 			</div>
 		</div>
 	</div>
-	<!--main End!-->
 
-	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
 			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
-	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="user/js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
@@ -140,25 +129,20 @@
 	$(document).ready(function(){
 		$("#sgetcomment").click(function(){
 			var loginuser = $("#getcomment").val();
-			//alert("当前登录用户："+loginuser);	
 			if(loginuser===''){
 				alert("还未登录，前往登录！");
 				window.location.href='login';
 				return false;
 			}
 		});
-	});
-	$(document).ready(function(){
-		$("#sgetsubs").click(function(){
-			var loginu = $("#getsubs").val();
+		$("a[name='sgetsubs']").click(function(){
+			var loginu = $("input[name='getsubs']").val();
 			if(loginu==''){
 				alert("请先登录，再进行预约！");
 				window.location.href='login';
 				return false;
-			}else if("${nowTime}>${trip.ctime} and ${nowDate}>${trip.start_Date}"){
-				alert("此车已发，请预约其它车次！");
-				window.location.href='index';
-				return false;
+			} else{
+				$("form[name='subsbtn']").submit();
 			}
 		});
 	});

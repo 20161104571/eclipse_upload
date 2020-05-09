@@ -7,7 +7,6 @@
 <meta name="author" content="yinqi">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/materialdesignicons.min.css" rel="stylesheet">
-<!--标签插件-->
 <link rel="stylesheet" href="js/jquery-tags-input/jquery.tagsinput.min.css">
 <link href="css/style.min.css" rel="stylesheet">
 </head>
@@ -15,10 +14,7 @@
 <body>
 <div class="lyear-layout-web">
   <div class="lyear-layout-container">
-    <!--左侧导航-->
     <aside class="lyear-layout-sidebar">
-      
-      <!-- logo -->
       <div id="logo" class="sidebar-header">
         <a href="aindex"><img src="images/logo-sidebar.png" title="校园通勤车管理"/></a>
       </div>
@@ -26,7 +22,7 @@
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item active"> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
             
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
@@ -44,7 +40,7 @@
                 <li> <a href="./getTripList">车次信息</a> </li>
               </ul>
             </li>
-            <li class="nav-item nav-item-has-subnav">
+            <li class="nav-item active">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 公告信息管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getNoticeList">公告管理</a> </li>
@@ -73,9 +69,7 @@
       </div>
       
     </aside>
-    <!--End 左侧导航-->
     
-    <!--头部信息-->
     <header class="lyear-layout-header">
       
       <nav class="navbar navbar-default">
@@ -107,9 +101,7 @@
         </div>
       </nav>
     </header>
-    <!--End 头部信息-->
     
-    <!--页面主要内容-->
     <main class="lyear-layout-content">
       
       <div class="container-fluid">
@@ -152,20 +144,17 @@
       </div>
       
     </main>
-    <!--End 页面主要内容-->
   </div>
 </div>
 <script src="laydate/laydate.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
-<!--标签插件-->
 <script src="js/jquery-tags-input/jquery.tagsinput.min.js"></script>
 <script type="text/javascript" src="js/main.min.js"></script>
 <script>
-//执行一个laydate实例
 laydate.render({
-  elem: '#test1' //指定元素
+  elem: '#test1'
 });
 </script>
 

@@ -79,37 +79,5 @@
 </div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" th:inline="javascript">
-$(function(){
-	/* $("input[name='username']").blur(function(){
-		if($("#ausp").val() == ""){
-			alert("请输入用户名！");
-		}
-	}); */
-	$("input[name='password']").blur(function(){
-		var uname = $("#adminUsername").val();
-		var pwd = $("#adminPwd").val();
-			$.ajax({
-				type:'post',
-				url:'./loginAdmin',
-				data:{"username":uname,"password":pwd},
-				dataType:'application/json;charset=UTF-8',
-				success:function(data){
-					/* if(data == 1){
-						alert("用户名或密码为空！请重新输入");
-					}else if(data == 2){
-						alert("用户名或密码错误！");
-					}else{
-						alert("登录成功！");
-					} */
-				},
-				//error:function(){
-					//window.console.log('失败回调函数');
-				//}
-			});
-		
-	});
-});
-</script>
 </body>
 </html>

@@ -9,15 +9,12 @@
 <link href="css/style.min.css" rel="stylesheet">
 </head>
 <body class="bodyBg">
-	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
 		</a>
 	</div>
-	<!--头部 End!-->
 	
-	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li><a href="index" class="navItem">首页</a></li>
 		<li>
@@ -63,9 +60,7 @@
 			</li>
 		</th:if>
 	</ul>
-	<!--导航 End!-->
 
-	<!--main Start!-->
 	<div id="main" class="wp clearfix">
 		<div class="leftMenu fl">
 			<dl>
@@ -84,16 +79,8 @@
 					<span>预约</span>
 				</div>
 			</div>
-			<!-- <div>
-				<form class="conMain" action="" method="post" >
-					<input type="text" id="inputOne">
-					<input type="text" id="inputTwo" name="inputTwo" placeholder="点击选择出发日期">
-					<input type="text" id="nowDate" th:vlaue="${nowDate}" th:text="${nowDate}" class="hidden">
-					<button type="submit" id="btn_select">查询</button>
-				</form>
-			</div> -->
 			<div class="conMain">
-				<div th:fragment="table_re" id="table_re">
+			<div th:fragment="table_re" id="table_re">
 				<table class="table table-bordered">
                     <thead>
                       <tr>
@@ -103,7 +90,7 @@
 			            <th width="150px">所需时间</th>
 			            <th width="150px">余座</th>
 						<th width="150px">出发日期</th>
-						<th width="150px">操作</th>		
+						<th width="150px">操作</th>			            
                       </tr>
                     </thead>
                     <tbody>
@@ -116,16 +103,18 @@
 			            <td th:text="${trip.remain_seats}"></td>
 			            <td th:text="${trip.start_Date}"></td>
 			            <td>
-                          <div class="btn-group">
-                           <form th:action="@{/subsTrip(tId=${trip.tId})}" id="subsbtn" method="post">
-                           <input type="text" hidden="hidden" id="getsubs" th:value="${session.users}">
-                           <a><input type="submit" value="预约" id='sgetsubs'></a>
-                          	</form>
-                          </div>
+                           <div class="btn-group">
+                           <form th:action="@{/subsTrip(tId=${trip.tId})}" name="subsbtn" method="post">
+                           <input type="text" hidden="hidden" name="getsubs" th:value="${session.users}">
+                           <a name='sgetsubs'>预约</a>
+                           </form>
+                           </div>
                         </td>
                       </tr>
                     </tbody>
+                    </tbody>
                   </table>
+                  </div>
                   <div class="pageNum">
 					<span>共 [[${pageInfo.pages}]] 页</span>
 					<span>共 [[${pageInfo.total}]] 条</span>
@@ -139,13 +128,10 @@
 					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getUserTripList(pageNum=${pageInfo.nextPage})}" style="font-weight: bold;">下一页</a></th:if>
 					<th:if th:if="${pageInfo.hasNextPage}"><a th:href="@{/getUserTripList(pageNum=${pageInfo.pages})}">尾页</a></th:if>
 				</div>
-                  </div>
 			</div>
 		</div>
 	</div>
-	<!--main End!-->
 
-	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
 			<p>魏炜©2020届毕业设计</p>
@@ -155,7 +141,6 @@
 </body>
 <script src="laydate/laydate.js"></script>
 <script>
-//执行一个laydate实例
 laydate.render({
   elem: '#inputTwo'
   ,min: 0
@@ -163,71 +148,25 @@ laydate.render({
 });
 </script>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
-<script type="text/javascript" th:inline="javascript">
-function seatscount(){
-	var seats = "${trip.remain_seats}".val();
-	if(seats=0){
-		alert("车次无剩余座位，不可预约");
-		//return "user/index";
-		window.location.href='index';
-	}
-}
+<script th:inline="javascript">
 $(document).ready(function(){
 	$("#sgetcomment").click(function(){
 		var loginuser = $("#getcomment").val();
-		//alert("当前登录用户："+loginuser);	
 		if(loginuser===''){
 			alert("还未登录，前往登录！");
 			window.location.href='login';
 			return false;
-		}
+		} 
 	});
-});
-$(document).ready(function(){
-	$("#sgetsubs").click(function(){
-		var loginu = $("#getsubs").val();
+
+	$("a[name='sgetsubs']").click(function(){
+		var loginu = $("input[name='getsubs']").val();
 		if(loginu==''){
 			alert("请先登录，再进行预约！");
 			window.location.href='login';
 			return false;
-		}else if("${nowTime}>${trip.ctime} and ${nowDate}>${trip.start_Date}"){
-			alert("此车已发，请预约其它车次！");
-			window.location="http://localhost:8080/schoolbus/getUserTripList";
-			return false;
-		}
-	});
-});
-</script>
-<script type="text/javascript" th:inline="javascript">
-$(function(){
-	$("#btn_select").click(function(){
-		var testInputOne = $("#inputOne").val();
-		if(testInputOne=="赛罕"){
-			testInputOne="1";
-		}else if(testInputOne=="盛乐"){
-			testInputOne="2";
-		}
-		console.log(testInputOne);
-		var testInputTwo = $("#inputTwo").val();
-		var a1 = testInputOne == '' || testInputOne == undefined || testInputOne == null;
-		var a2 = testInputTwo == '' || testInputTwo == undefined || testInputTwo == null;
-		if(a1 && a2){
-			alert("输入出发地点和出发时期进行查询！");
-		}else{
-			$.ajax({
-				type:"post",
-				url:"findResultByStartAndDate",
-				data:{"testInputOne":testInputOne,
-					"testInputTwo":testInputTwo,},
-				dataType:"text",
-				async:true,
-				success:function(trips){
-					console.log("-------------------");
-					var s = "";
-					$("#table_re").empty(s);
-					$("#table_re").append(trips);
-				}
-			});
+		} else{
+			$("form[name='subsbtn']").submit();
 		}
 	});
 });

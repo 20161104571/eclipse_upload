@@ -66,7 +66,7 @@ public class SubsController {
 	public String getPersonList(Model model, Integer uId, HttpServletRequest request) throws ParseException {
 		User user = (User) request.getSession().getAttribute("users");
 		uId = user.getId();
-		Subs subs = subsService.findSubsById(uId);
+		List<Subs> subs = subsService.findSubsById(uId);
 		model.addAttribute("subs", subs);
 		return "user/personcenter3";
 	}
@@ -79,12 +79,12 @@ public class SubsController {
 	
 	@RequestMapping("deleUserOrder")
 	public String deleteUserOrder(Integer oId, Trip trip) {
-		Subs subs = subsService.findSubsById(oId);
+		Subs subs = subsService.findSubsByoId(oId);
 		int tid = subs.gettId();
 		tripService.findSubsTripById(tid);
 		subsService.delOrder(oId);
 		tripService.addSeats(tid, trip);
-		return "redirect:/getUserTripList";
+		return "redirect:/getPersonSubsList";
 	}
 	
 	@RequestMapping("subsTrip")
@@ -100,6 +100,8 @@ public class SubsController {
 		int seats = trip.getRemain_seats();
 		System.out.println(seats);
 		if(seats!=0) {
+			model.addAttribute("nowDate", nowDate);
+			model.addAttribute("nowTime", nowTime);
 			model.addAttribute("trip", trip);
 			return "user/subsDetails";
 		}else {

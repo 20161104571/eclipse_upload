@@ -87,11 +87,6 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public void createUser(User user) {
-		userMapper.createUser(user);
-	}
-
-	@Override
 	public User adminLogin(String username, String password) {
 		User u = userMapper.adminLogin(username, password);
 		if(u != null) {
@@ -239,11 +234,6 @@ public class UserServiceImp implements UserService{
 			if(row == null) {
 				continue;
 			}
-			/**
-	             * 获取单元格 row.getCell(0)
-	             * 设置单元格类型 row.getCell(0).setCellType(CellType.STRING)
-	             * 获取单元格数据 String cellValue = row.getCell(0).getStringCellValue();
-             */
 			user = new User();
 			if(row.getCell(0).getCellType() != 1) {
 				throw new MyException("导入失败(第"+(r+1)+"行，请设为文本格式)");
@@ -290,9 +280,4 @@ public class UserServiceImp implements UserService{
 		
 		return notNull;
 	}
-
-	
-	
-
-		
 }

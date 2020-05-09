@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="user/css/style.css" />
 </head>
 <body class="bodyBg">
-	<!--头部 Start!-->
 	<div id="hd" class="wp clearfix">
 		<a href="index" class="hdLogo fl">
 			<img src="user/images/logo.png">
@@ -17,9 +16,7 @@
 			<input type="text" id="searchInputTrip" name="index_none_header_sysc" placeholder="输入要搜索的车次">
 		</form>
 	</div>
-	<!--头部 End!-->
 	
-	<!--导航 Start!-->
 	<ul id="nav" class="clearfix wp">
 		<li class="first active"><a href="index" class="navItem">首页</a></li>
 		<li>
@@ -66,9 +63,7 @@
 			</li>
 		</th:if>
 	</ul>
-	<!--导航 End!-->
 
-	<!--main Start!-->
 	<div id="main" class="wp">
 		<div class="container clearfix">
 			<!--通知公告-->
@@ -99,10 +94,9 @@
 						<th:if th:if="${tripStat.count} le 7 and ${nowDate}<=${trip.start_Date}">
 						<li class="clearfix">
 							<input id="tId" name="tId" th:value="${trip.tId}" hidden="hidden">
-							<input id="gettrip" th:value="${session.users}" hidden="hidden" type="text">
-							<form th:action="@{/subsTrip(tId=${trip.tId})}" id="subslist" method="post">
-							<input type="text" hidden="hidden" id="gettrip" th:value="${session.users}">
-							<input type="submit" th:value="${trip.ccard}" id="sgettrip">
+							<form th:action="@{/subsTrip(tId=${trip.tId})}" name="subslist" method="post">
+							<input type="text" hidden="hidden" name="gettrip" th:value="${session.users}">
+							<input type="submit" th:value="${trip.ccard}" name="sgettrip">
 							<span th:text="${trip.ctime}"></span>
 							</form>
 						</li>
@@ -113,52 +107,40 @@
 		</div>
 
 	</div>
-	<!--main End!-->
 
-	<!--底部 Start!-->
 	<div id="ft">
 		<div class="wp">
 			<p>魏炜©2020届毕业设计</p>
 		</div>
 	</div>
-	<!--底部 End!-->
 </body>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
 <script th:inline="javascript">
 $(document).ready(function(){
 	$("#sgetcomment").click(function(){
 		var loginuser = $("#getcomment").val();
-		//alert("当前登录用户："+loginuser);	
 		if(loginuser===''){
 			alert("还未登录，前往登录！");
 			window.location.href='login';
 			return false;
 		}
 	});
-});
-$(document).ready(function(){
-	$("#sgettrip").click(function(){
-		var loginu = $("#gettrip").val();
-		//alert("当前登录用户："+loginuser);	
-		if(loginu===''){
-			alert("还未登录，前往登录！");
+	$("input[name='sgettrip']").click(function(){
+		var loginu = $("input[name='gettrip']").val();
+		if(loginu==''){
+			alert("请登录后查看！");
 			window.location.href='login';
 			return false;
-		}else if("${nowTime}>${trip.ctime} and ${nowDate}>${trip.start_Date}"){
-			alert("此车已发，请预约其它车次！");
-			window.location.href='index';
-			return false;
+		} else{
+			$("form[name='subslist']").submit();
 		}
 	});
 });
 function search() {
 	if (document.form1.index_none_header_sysc.value==null){
-		window.alert("请填写要搜索的内容.")
+		window.alert("请填写要搜索的内容")
 		return false;
 	}
 }
-
 </script>
-	
-
 </html>

@@ -44,12 +44,12 @@ public class TripServiceImp implements TripService{
 	}
 
 	@Override
-	public void updateSeats(int tId, Trip trip) { //预约减少1座位
+	public void updateSeats(int tId, Trip trip) {
 		tripMapper.updateSeats(tId,trip);
 	}
 
 	@Override
-	public void addSeats(int tId, Trip trip) {  //取消增加1座位
+	public void addSeats(int tId, Trip trip) {
 		tripMapper.addSeats(tId,trip);
 	}
 
@@ -62,11 +62,6 @@ public class TripServiceImp implements TripService{
 	@Override
 	public Trip findTripsByTime(String ctime) {
 		return tripMapper.findTripsByTime(ctime);
-	}
-
-	@Override
-	public List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo) {
-		return tripMapper.findResultByStartAndDate(testInputOne, testInputTwo);
 	}
 
 	@Override

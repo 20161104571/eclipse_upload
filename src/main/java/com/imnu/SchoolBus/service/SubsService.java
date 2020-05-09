@@ -8,9 +8,11 @@ import com.imnu.SchoolBus.pojo.Subs;
 @Transactional
 public interface SubsService {
 	
-	Subs findSubsById(Integer uId);
+	List<Subs> findSubsById(Integer uId);
 	
 	List<Subs> getOrderList();
+	
+	Subs findSubsByoId(Integer oId);
 	
 	int addOrders(Subs subs);
 	

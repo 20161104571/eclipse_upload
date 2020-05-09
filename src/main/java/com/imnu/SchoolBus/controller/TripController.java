@@ -23,9 +23,7 @@ import com.imnu.SchoolBus.service.NoticeService;
 import com.imnu.SchoolBus.service.ScheduleService;
 import com.imnu.SchoolBus.service.TripService;
 import com.imnu.SchoolBus.service.VehicleService;
-/*
- * checi
- */
+
 @Controller
 public class TripController {
 	
@@ -93,7 +91,7 @@ public class TripController {
 		}finally {
 			PageHelper.clearPage();
 		}
-		return "user/order";
+		return "user/orderlist";
 	}
 	
 	@RequestMapping(value="saveTrip")
@@ -132,7 +130,7 @@ public class TripController {
 		nowTime = (String)format2.format(date);
 		List<Notice> notice = noticeService.getNoticeList();
 		List<Trip> t = tripService.getTripsList();
-		String search_input = request.getParameter("index_none_header_sysc");//获取搜索框输入
+		String search_input = request.getParameter("index_none_header_sysc");
 		List<Trip> list = tripService.searchList(search_input);
 		if(list != null) {
 			model.addAttribute("search_result", list);
@@ -153,7 +151,7 @@ public class TripController {
 	
 	@RequestMapping(value="getSearchLists")
 	public String seachLists(HttpServletRequest request, Model model) {
-		String search_input = request.getParameter("tripSearch_header");//获取搜索框输入
+		String search_input = request.getParameter("tripSearch_header");
 		List<Trip> list = tripService.searchList(search_input);
 		System.out.println(list);
 		if(list != null) {
@@ -165,16 +163,6 @@ public class TripController {
 			System.out.println("没有找到搜索的内容");
 			return "admin/trip-list";
 		}
-	}
-	
-	@RequestMapping("findResultByStartAndDate")
-	//@ResponseBody
-	public String findResultByStartAndDate(HttpServletRequest request, Model model){
-		String testInputOne = request.getParameter("testInputOne");
-		String testInputTwo = request.getParameter("testInputTwo");
-		List<Trip> trips = tripService.findResultByStartAndDate(testInputOne, testInputTwo);
-		model.addAttribute("trips", trips);
-		return "user/order3::table_re";
 	}
 	
 	@RequestMapping(value="getTimeList")

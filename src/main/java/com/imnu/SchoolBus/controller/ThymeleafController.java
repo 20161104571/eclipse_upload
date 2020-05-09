@@ -141,9 +141,9 @@ public class ThymeleafController {
 		return "user/notice";
 	}
 	
-	@RequestMapping("order")
+	@RequestMapping("orderlist")
 	public String Order() {
-		return "user/order";
+		return "user/orderlist";
 	}
 	
 	@RequestMapping("content")

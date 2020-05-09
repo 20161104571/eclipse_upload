@@ -13,10 +13,8 @@
 <body>
 <div class="lyear-layout-web">
   <div class="lyear-layout-container">
-    <!--左侧导航-->
     <aside class="lyear-layout-sidebar">
       
-      <!-- logo -->
       <div id="logo" class="sidebar-header">
         <a href="aindex"><img src="images/logo-sidebar.png" title="校园通勤车管理"/></a>
       </div>
@@ -24,7 +22,7 @@
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item active"> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
             
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
@@ -55,10 +53,10 @@
                 
               </ul>
             </li>
-            <li class="nav-item nav-item-has-subnav">
+            <li class="nav-item nav-item-has-subnav active open">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 留言管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="./getCommentList">论坛</a> </li>
+                <li class="active"> <a href="./getCommentList">论坛</a> </li>
               </ul>
             </li>
            
@@ -71,9 +69,7 @@
       </div>
       
     </aside>
-    <!--End 左侧导航-->
     
-    <!--头部信息-->
     <header class="lyear-layout-header">
       
       <nav class="navbar navbar-default">
@@ -106,9 +102,7 @@
       </nav>
       
     </header>
-    <!--End 头部信息-->
     
-    <!--页面主要内容-->
     <main class="lyear-layout-content">
       
       <div class="container-fluid">
@@ -120,7 +114,6 @@
 				<div>
         	<ul>
 			<th:each th:each="comment : ${pageInfo.list}">
-                <!-- 如果留言信息是在本文章下的才显示 -->
                     <li style="border-top: 1px dotted #930093">
  						<th:if th:if="${comment.cflag}==1">未读</th:if>
  						<th:if th:if="${comment.cflag}==0">已读</th:if>
@@ -159,17 +152,13 @@
                             </div>
                                 </div>
 ​
-                        <!-- 以下是回复信息 -->
                         <th:each th:each="reply:${reply}">
-                            <!-- 每次遍历出来的留言下存在回复信息才展示（本条回复信息是本条留言下的就显示在当前留言下） -->
                             <th:if th:if="${reply.rcid eq comment.cid}">
                                 <div style="text-align: left;margin-left:61px;color: #444;font-size:16px">
                                     <div style="color:#6F00D2" th:text="${reply.rname}+'回复@'+${comment.cname}">
                                         <span>&nbsp;&nbsp;</span>
                                     </div>
  									<div style="text-align: left;" th:text="${#dates.format(reply.rdate,'yyyy-MM-dd HH:mm')}">
-                                        <!-- <span>&nbsp;&nbsp;</span> -->
-                                        <!-- <hr style="margin-top: 7px;"/> -->
                                     </div>
                                     <div style="text-align: left;margin-left:10px" th:text="${reply.rcontent}">
  										<span>&nbsp;&nbsp;</span>
@@ -201,7 +190,6 @@
 			                <i>[上一页]</i>
 			            </a>
 			        </li>
-			        <!--遍历条数-->
 		            <li th:each="nav:${pageInfo.navigatepageNums}">
 		                <a th:href="@{/getCommentList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
 		                <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
@@ -227,7 +215,6 @@
       </div>
       
     </main>
-    <!--End 页面主要内容-->
   </div>
 </div>
 

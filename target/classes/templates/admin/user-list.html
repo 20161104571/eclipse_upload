@@ -13,10 +13,8 @@
 <body>
 <div class="lyear-layout-web">
   <div class="lyear-layout-container">
-    <!--左侧导航-->
     <aside class="lyear-layout-sidebar">
       
-      <!-- logo -->
       <div id="logo" class="sidebar-header">
         <a href="aindex"><img src="images/logo-sidebar.png" title="校园通勤车管理"/></a> 
       </div>
@@ -24,13 +22,13 @@
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item active"> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li class="nav-item"> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
             
-            <li class="nav-item nav-item-has-subnav">
+            <li class="nav-item nav-item-has-subnav active open">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getDriverList">司机信息管理</a> </li>
-                <li> <a href="./getUserList">学生信息管理</a> </li>
+                <li class="active"> <a href="./getUserList">学生信息管理</a> </li>
                 <li> <a href="./getTeacherList">教师信息管理</a> </li>
               </ul>
             </li>
@@ -71,9 +69,7 @@
       </div>
       
     </aside>
-    <!--End 左侧导航-->
     
-    <!--头部信息-->
     <header class="lyear-layout-header">
       
       <nav class="navbar navbar-default">
@@ -106,9 +102,7 @@
       </nav>
       
     </header>
-    <!--End 头部信息-->
     
-    <!--页面主要内容-->
     <main class="lyear-layout-content">
       
       <div class="container-fluid">
@@ -117,9 +111,6 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-toolbar clearfix">
-                <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="user-add"><i class="mdi mdi-plus"></i> 新增</a>
-                </div>
               </div>
               <div class="card-body">
                 
@@ -146,7 +137,6 @@
                         <td th:text="${c.phone}"></td>
                         <td>
                           <div class="btn-group">
-                            <!-- <a class="btn btn-xs btn-default" th:href="@{/toEdit(dId=${driver.dId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a> -->
                             <a class="btn btn-xs btn-default" th:href="@{/deleteUser(id=${c.id})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                           </div>
                         </td>
@@ -168,7 +158,6 @@
 			                <i>[上一页]</i>
 			            </a>
 			        </li>
-			        <!--遍历条数-->
 		            <li th:each="nav:${pageInfo.navigatepageNums}">
 		                <a th:href="@{/getUserList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
 		                <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
@@ -185,17 +174,6 @@
 			    </ul>
 			    </div>
 
-               <!-- <div>当前页号：<span th:text="${pageInfo.pageNum}"></span></div>
-				<div>每页条数：<span th:text="${pageInfo.pageSize}"></span></div>
-				<div>起始行号：<span th:text="${pageInfo.startRow}"></span></div>
-				<div>终止行号：<span th:text="${pageInfo.endRow}"></span></div>
-				<div>总结果数：<span th:text="${pageInfo.total}"></span></div>
-				<div>总页数：<span th:text="${pageInfo.pages}"></span></div>
-				<hr />
-				<div>是否为第一页：<span th:text="${pageInfo.isFirstPage}"></span></div>
-				<div>是否为最后一页：<span th:text="${pageInfo.isLastPage}"></span></div>
-				<div>是否有前一页：<span th:text="${pageInfo.hasPreviousPage}"></span></div>
-				<div>是否有下一页：<span th:text="${pageInfo.hasNextPage}"></span></div> -->
               </div>
             </div>
           </div>
@@ -205,7 +183,6 @@
       </div>
       
     </main>
-    <!--End 页面主要内容-->
   </div>
 </div>
 

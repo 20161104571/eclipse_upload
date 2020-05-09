@@ -116,12 +116,6 @@ public class UserController {
 		return "redirect:/getTeacherList";
 	}
 	
-	@RequestMapping(value="saveUser")
-	public String createUser(User user) {
-		userService.createUser(user);
-		return "redirect:/getUserList";
-	}
-	
 	@RequestMapping(value="updatepwd")
 	public String updatePwd(int id, String newpassword, HttpSession session, String nowDate, String nowTime, Model model) {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -167,7 +161,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "import")
-	public String excelImport(@RequestParam(value="filename")MultipartFile file,HttpSession session){
+	public String excelImport(@RequestParam(value="filename")MultipartFile file){
 		String fileName = file.getOriginalFilename();
 		boolean result = false;
 		System.out.println(result);

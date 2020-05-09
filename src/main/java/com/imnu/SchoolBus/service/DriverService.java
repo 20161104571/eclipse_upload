@@ -9,8 +9,6 @@ import com.imnu.SchoolBus.pojo.Driver;
 @Transactional
 public interface DriverService {
 
-	//List<Driver> findDiverByPage(int page);
-
 	List<Driver> getDriverList();
 
 	void createDriver(Driver driver);

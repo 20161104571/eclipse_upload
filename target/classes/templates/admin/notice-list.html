@@ -13,10 +13,8 @@
 <body>
 <div class="lyear-layout-web">
   <div class="lyear-layout-container">
-    <!--左侧导航-->
     <aside class="lyear-layout-sidebar">
       
-      <!-- logo -->
       <div id="logo" class="sidebar-header">
         <a href="aindex"><img src="images/logo-sidebar.png" title="校园通勤车管理"/></a>
       </div>
@@ -24,7 +22,7 @@
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item active"> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li> <a href="aindex"><i class="mdi mdi-home"></i> 后台首页</a> </li>
             
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 用户管理</a>
@@ -42,7 +40,7 @@
                 <li> <a href="./getTripList">车次信息</a> </li>
               </ul>
             </li>
-            <li class="nav-item nav-item-has-subnav">
+            <li class="nav-item active">
               <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 公告信息管理</a>
               <ul class="nav nav-subnav">
                 <li> <a href="./getNoticeList">公告管理</a> </li>
@@ -71,9 +69,7 @@
       </div>
       
     </aside>
-    <!--End 左侧导航-->
     
-    <!--头部信息-->
     <header class="lyear-layout-header">
       
       <nav class="navbar navbar-default">
@@ -106,9 +102,7 @@
       </nav>
       
     </header>
-    <!--End 头部信息-->
     
-    <!--页面主要内容-->
     <main class="lyear-layout-content">
       
       <div class="container-fluid">
@@ -176,7 +170,6 @@
 			                <i>[上一页]</i>
 			            </a>
 			        </li>
-			        <!--遍历条数-->
 		            <li th:each="nav:${pageInfo.navigatepageNums}">
 		                <a th:href="@{/getNoticeList(pageNum=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
 		                <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
@@ -202,7 +195,6 @@
       </div>
       
     </main>
-    <!--End 页面主要内容-->
   </div>
 </div>
 

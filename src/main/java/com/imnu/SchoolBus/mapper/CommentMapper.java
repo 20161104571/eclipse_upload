@@ -26,13 +26,13 @@ public interface CommentMapper {
 	int delComment(Integer cid);
 
 	@Update(value = "update comment set cflag = 0 where cid = #{cid}") 
-	void updateCommentFlag(Comment comment, int cid); //修改已读
+	void updateCommentFlag(Comment comment, int cid);
 	
 	@Select(value = "select * from comment where cid = #{cid}")
 	Comment findCommentById(int cid);
 	
 	@Select(value = "select count(cid is not null) from comment where cflag = 1")
-	int countComment(Integer comm); //未读留言统计
+	int countComment(Integer comm);
 
 	
 }

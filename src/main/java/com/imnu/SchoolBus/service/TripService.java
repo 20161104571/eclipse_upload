@@ -24,8 +24,6 @@ public interface TripService {
 
 	void addSeats(int tId, Trip trip);
 	
-	public List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo);
-	
 	List<Trip> getTimeTripList(Integer start, String nowDate, String startTime, String endTime);
 	
 	Trip findTripsByTime(String ctime);

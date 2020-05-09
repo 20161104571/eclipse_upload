@@ -73,7 +73,6 @@ public class LogResController {
         if (u !=null){
         	request.getSession().setAttribute("users", u);
         	System.out.println("登录的信息是"+u);
-        	//u.setId(u.getId());
         	model.addAttribute("notice", notice);
         	model.addAttribute("t", t);
         	model.addAttribute("nowDate", nowDate);

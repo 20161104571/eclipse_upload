@@ -33,7 +33,6 @@ public class DriverController {
 		PageHelper.startPage(pageNum, pageSize);
 		try {
 			List<Driver> dl = driverService.getDriverList();
-			System.out.println("分页数据:"+dl);
 			PageInfo<Driver> pl = new PageInfo<Driver>(dl, pageSize);
 			model.addAttribute("pageInfo", pl);
 		}finally {

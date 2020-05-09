@@ -44,4 +44,16 @@ public class ScheduleServiceImp implements ScheduleService{
 		return scheduleMapper.findScheduleByTime(startTime);
 	}
 
+	@Override
+	public List<Schedule> getTimeList() {
+		List<Schedule> list = scheduleMapper.getTimeList();
+		return list;
+	}
+
+	@Override
+	public List<Schedule> getTimeList2() {
+		List<Schedule> list = scheduleMapper.getTimeList2();
+		return list;
+	}
+
 }

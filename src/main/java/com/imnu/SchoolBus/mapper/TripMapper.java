@@ -20,10 +20,10 @@ public interface TripMapper {
 	@Delete(value = "delete from trip where tId = #{tId}")
 	int deleteTrip(Integer tId);
 	
-	@Select(value = "select * from trip where start_Date >= #{nowDate}")
+	@Select(value = "select * from trip where start_Date >= #{nowDate} order by start_Date,ctime ASC")
 	List<Trip> getTripList(String nowDate);
 	
-	@Select(value = "select * from trip order by start_Date DESC")
+	@Select(value = "select * from trip order by start_Date,ctime ASC")
 	List<Trip> getTripsList();
 	
 	@Update(value = "update trip set ccard = #{ccard},ctime = #{ctime},start = #{start},reqTime = #{reqTime},seats = #{seats},remain_seats = #{seats},start_Date = #{start_Date} where tId = #{tId}")
@@ -44,10 +44,7 @@ public interface TripMapper {
 	@Select(value = "select * from trip where ctime = #{ctime}")
 	Trip findTripsByTime(String ctime);
 	
-	@Select(value = "select * from trip where start like concat('%',#{testInputOne},'%') and start_Date like concat('%',#{testInputTwo},'%')")
-	List<Trip> findResultByStartAndDate(String testInputOne, String testInputTwo);
-	
-	@Select(value = "select * from trip where start = #{start} and start_Date >= #{nowDate} and ctime between #{startTime} and #{endTime}")
+	@Select(value = "select * from trip where start = #{start} and start_Date >= #{nowDate} and ctime between #{startTime} and #{endTime} order by start_Date,ctime ASC")
 	List<Trip> getTimeTripList(Integer start, String nowDate, String startTime, String endTime);
 	
 }

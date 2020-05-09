@@ -1,6 +1,5 @@
 package com.imnu.SchoolBus.service;
 
-
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +16,6 @@ public interface UserService {
 	void updateUserStatus(User user);
 
 	User loginUser(User user);
-	
-	void createUser(User user);
 	
 	int deleteUser(Integer id);
 	
