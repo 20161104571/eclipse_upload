@@ -126,7 +126,6 @@
 			            <th>工号</th>
 			            <th>手机</th>
 			            <th>司机驾龄</th>
-                        <th>状态</th>
                         <th>操作</th>
                       </tr>
                     </thead>
@@ -137,7 +136,6 @@
 			            <td th:text="${driver.dnumber}"></td>
 			            <td th:text="${driver.dphone}"></td>
 			            <td th:text="${driver.driverTime}"></td>
-                        <td><font class="text-success">正常</font></td>
                         <td>
                           <div class="btn-group">
                             <a class="btn btn-xs btn-default" th:href="@{/toEdit(dId=${driver.dId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
